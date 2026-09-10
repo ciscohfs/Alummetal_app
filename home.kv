@@ -1,0 +1,159 @@
+#:kivy 2.2.0
+<Label>:
+    font_name: app.font_name
+<Button>:
+    font_name: app.font_name
+<GlassButton>:
+    background_normal: ""
+    background_down: ""
+    background_disabled_normal: ""
+    background_color: 0,0,0,0
+    color: 1,1,1,1
+    bold: True
+    font_size: dp(15)
+    text_size: self.size
+    halign: "right"
+    valign: "middle"
+    padding: dp(18),0
+    canvas.before:
+        Color:
+            rgba: self.card_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(18),dp(18),dp(18),dp(18)]
+    canvas.after:
+        Color:
+            rgba: 1,1,1,.22
+        Line:
+            rounded_rectangle: self.x,self.y,self.width,self.height,dp(18)
+            width: 1.1
+<HomeScreen>:
+    name: "home"
+    canvas.before:
+        Color:
+            rgba: .035,.08,.14,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ScrollView:
+        do_scroll_x: False
+        bar_width: 0
+        BoxLayout:
+            orientation: "vertical"
+            padding: dp(18),dp(16),dp(18),dp(18)
+            spacing: dp(14)
+            size_hint_y: None
+            height: self.minimum_height
+            BoxLayout:
+                size_hint_y: None
+                height: dp(55)
+                Image:
+                    source: "logo1.png"
+                    size_hint_x: None
+                    width: dp(92)
+                    fit_mode: "contain"
+                Widget:
+                Button:
+                    text: app.is_english and app.rtl("فارسی") or "EN"
+                    size_hint_x: None
+                    width: dp(58)
+                    background_normal: ""
+                    background_color: .93,.43,.09,1
+                    color: 1,1,1,1
+                    bold: True
+                    on_release: app.toggle_language()
+            Label:
+                text: app.is_english and "Welcome to Alum Metal" or app.rtl("به آلوم متال خوش آمدید")
+                color: 1,1,1,1
+                font_size: dp(25)
+                bold: True
+                halign: "right" if not app.is_english else "left"
+                text_size: self.size
+                size_hint_y: None
+                height: dp(42)
+            Label:
+                text: app.is_english and "Aluminum products, prices and services in one place" or app.rtl("محصولات، قیمت‌ها و خدمات آلومینیوم در یکجا")
+                color: .72,.79,.85,1
+                font_size: dp(12)
+                halign: "right" if not app.is_english else "left"
+                text_size: self.size
+                size_hint_y: None
+                height: dp(26)
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: dp(142)
+                padding: dp(20)
+                canvas.before:
+                    Color:
+                        rgba: .12,.25,.35,.72
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(22),dp(22),dp(22),dp(22)]
+                Label:
+                    text: app.is_english and "Quality aluminum\nfor every industry" or app.rtl("آلومینیوم باکیفیت\nبرای هر صنعت")
+                    color: 1,1,1,1
+                    font_size: dp(23)
+                    bold: True
+                    halign: "right" if not app.is_english else "left"
+                    text_size: self.size
+                Label:
+                    text: app.is_english and "Quality • Innovation • Trust" or app.rtl("کیفیت • نوآوری • اعتماد")
+                    color: .98,.62,.24,1
+                    font_size: dp(12)
+                    halign: "right" if not app.is_english else "left"
+                    text_size: self.size
+            Label:
+                text: app.is_english and "Services" or app.rtl("خدمات")
+                color: 1,1,1,1
+                font_size: dp(18)
+                bold: True
+                halign: "right" if not app.is_english else "left"
+                text_size: self.size
+                size_hint_y: None
+                height: dp(28)
+            GlassButton:
+                text: app.is_english and "Weight Calculator" or app.rtl("محاسبه وزن آلومینیوم")
+                card_color: .12,.25,.35,.72
+                size_hint_y: None
+                height: dp(62)
+            GlassButton:
+                text: app.is_english and "Aluminum Prices" or app.rtl("قیمت روز آلومینیوم")
+                card_color: .18,.40,.52,.66
+                size_hint_y: None
+                height: dp(62)
+            GlassButton:
+                text: app.is_english and "Products Catalog" or app.rtl("کاتالوگ محصولات")
+                card_color: .86,.40,.16,.78
+                size_hint_y: None
+                height: dp(62)
+            GlassButton:
+                text: app.is_english and "Alloys Database" or app.rtl("بانک آلیاژها")
+                card_color: .20,.30,.37,.70
+                size_hint_y: None
+                height: dp(62)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(52)
+                padding: dp(8),dp(5)
+                canvas.before:
+                    Color:
+                        rgba: .98,1,1,.16
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(18),dp(18),dp(18),dp(18)]
+                Label:
+                    text: app.is_english and "Home" or app.rtl("خانه")
+                    color: .98,.67,.32,1
+                    bold: True
+                Label:
+                    text: app.is_english and "Services" or app.rtl("خدمات")
+                    color: .72,.79,.85,1
+                Label:
+                    text: app.is_english and "Settings" or app.rtl("تنظیمات")
+                    color: .72,.79,.85,1
+ScreenManager:
+    HomeScreen:
