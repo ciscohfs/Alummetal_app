@@ -1,0 +1,34 @@
+{
+  "catalogs": [
+    {"name":"قیمت مقاطع صنعتی","type":"تصویر","url":"http://alustry.ir/list%26price/Price-list-industrial-sections.jpg"},
+    {"name":"لیست گرد","type":"تصویر","url":"http://alustry.ir/list%26price/list-rod-aluminium.jpg"},
+    {"name":"فرمول محاسبه شمش آلومینیوم","type":"تصویر","url":"http://alummetal.com/price/Aluminum-ingot-calculation-formula.jpg"},
+    {"name":"کاتالوگ پروفیل آلومینیوم شیاردار","type":"PDF","url":"https://alummetal.com/download/sigma%20aluminium%20profiles.pdf"},
+    {"name":"لیست پروفیل شیاردار","type":"تصویر","url":"https://alummetal.com/download/Aluminium-sigma-Catalogue-alummetal.jpg"},
+    {"name":"کاتالوگ مقاطع صنعتی","type":"PDF","url":"https://alummetal.com/download/Industrial-Aluminum-Catalogue-alummetal.pdf"},
+    {"name":"گرد آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-round-Catalogue-alummetal.jpg"},
+    {"name":"لوله آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-pipe-Catalogue-alummetal.jpg"},
+    {"name":"تسمه و چهارپهلو ۱","type":"تصویر","url":"https://alummetal.com/download/Aluminium-strip%26square-Catalogue-alummetal-1.jpg"},
+    {"name":"تسمه و چهارپهلو ۲","type":"تصویر","url":"https://alummetal.com/download/Aluminium-strip%26square-Catalogue-alummetal-2.jpg"},
+    {"name":"شش‌پر آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-hexagon-Catalogue-alummetal.jpg"},
+    {"name":"پروفیل آلومینیوم شیاردار","type":"تصویر","url":"https://alummetal.com/wp-content/uploads/2026/07/Screenshot-from-2026-07-02-09-50-07.png"},
+    {"name":"لوله عمومی","type":"تصویر","url":"https://alummetal.com/download/Aluminium-pipe-General-Catalogue-alummetal.jpg"},
+    {"name":"نبشی آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-angle-Catalogue-alummetal.jpg"},
+    {"name":"قوطی آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-Channel-Catalogue-alummetal.jpg"},
+    {"name":"گرده‌ماهی آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-baseboards-Catalogue-alummetal.jpg"},
+    {"name":"ورق آلومینیوم","type":"تصویر","url":"https://alummetal.com/download/Aluminium-sheet-Catalogue-alummetal.jpg"},
+    {"name":"مبنای محاسبه قیمت شمش","type":"تصویر","url":"https://alummetal.com/download/Aluminium-base-price.jpg"},
+    {"name":"آنالیز شمش آلیاژی","type":"تصویر","url":"https://alummetal.com/download/Aluminum-alloy-ingots.jpg"},
+    {"name":"پروفیل نصیرزاده","type":"PDF","url":"https://alummetal.com/download/aluminum-profile.pdf"},
+    {"name":"پروفیل قوطی کابینت","type":"تصویر","url":"https://alummetal.com/download/Aluminium-profile-cabinet.jpg"}
+  ],
+  "price_pages": [
+    {"name":"قیمت ورق آلومینیوم","url":"https://alummetal.com/aluminum-sheet-price/"},
+    {"name":"قیمت شمش و بیلت","url":"https://alummetal.com/aluminum-ingots-billets-price/"},
+    {"name":"قیمت گرد آلومینیوم","url":"https://alummetal.com/aluminum-round-price/"},
+    {"name":"قیمت چهارپهلو آلومینیوم","url":"https://alummetal.com/aluminum-square-bar-price/"},
+    {"name":"قیمت لوله آلومینیوم","url":"https://alummetal.com/aluminum-pipe-price/"},
+    {"name":"قیمت پروفیل مستطیلی","url":"https://alummetal.com/aluminum-rectangle-tube-profile-price/"},
+    {"name":"قیمت نبشی آلومینیوم","url":"https://alummetal.com/aluminum-products-aluminum-angle/"}
+  ]
+}

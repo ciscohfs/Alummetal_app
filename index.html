@@ -7,7 +7,7 @@
   <meta name="description" content="آلوم متال آراک؛ تولید و تأمین مقاطع و محصولات آلومینیومی" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="logo1.png" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <title>آلوم متال آراک</title>
 </head>
 <body>
@@ -71,6 +71,7 @@
           <button class="service-card orange" data-route="catalog"><span class="service-icon">▦</span><span>کاتالوگ محصولات</span><small>راهکارهای صنعتی و ساختمانی</small><b>←</b></button>
           <button class="service-card slate" data-route="alloys"><span class="service-icon">◌</span><span>بانک آلیاژها</span><small>انتخاب آلیاژ مناسب</small><b>←</b></button>
         </div>
+        <div class="home-price-preview glass-card"><div><p class="eyebrow">LIVE PRICE BOARD</p><h3>آخرین قیمت‌های بازار</h3><p id="homePriceNote">قیمت‌ها از منابع ثبت‌شده نمایش داده می‌شوند.</p></div><button class="text-link" data-route="prices">مشاهده همه ←</button></div>
         <div class="factory-strip glass-card"><img src="factory-banner.jpg" alt="کارخانه آلوم متال آراک" /><div><p class="eyebrow">FROM FACTORY TO INDUSTRY</p><h3>از تولید تا عرضه، کنار صنعت</h3><button class="text-link" data-route="quote">دریافت مشاوره تخصصی ←</button></div></div>
       </section>
 
@@ -78,13 +79,13 @@
 
       <section class="screen" id="prices" data-screen><div class="page-head"><p class="eyebrow">MARKET DESK</p><h1>قیمت روز آلومینیوم</h1><p>قیمت‌ها از منابع سالم فایل شما خوانده می‌شوند.</p></div><div class="price-sources" id="priceSources"><p class="muted-note">در حال دریافت قیمت‌ها...</p></div><p class="muted-note" id="pricesUpdated"></p></section>
 
-      <section class="screen" id="catalog" data-screen><div class="page-head"><p class="eyebrow">PRODUCT SYSTEM</p><h1>کاتالوگ محصولات</h1><p>راهکارهای آلومینیومی برای پروژه‌های شما</p></div><div class="product-grid"><article class="product-card glass-card"><div class="product-number">01</div><h3>پروفیل‌های ساختمانی</h3><p>مقاطع سبک و مقاوم برای در، پنجره و نما</p></article><article class="product-card glass-card"><div class="product-number">02</div><h3>پروفیل صنعتی</h3><p>مقاطع سفارشی با دقت بالا برای صنایع مختلف</p></article><article class="product-card glass-card"><div class="product-number">03</div><h3>ورق و کویل</h3><p>آلیاژهای متنوع با امکان برش و بسته‌بندی</p></article><article class="product-card glass-card"><div class="product-number">04</div><h3>شمش و بیلت</h3><p>تأمین مواد اولیه خالص و آلیاژی</p></article></div><button class="primary-button" data-route="quote">دریافت مشاوره و پیش‌فاکتور ←</button></section>
+      <section class="screen" id="catalog" data-screen><div class="page-head"><p class="eyebrow">PRODUCT LIBRARY</p><h1>کاتالوگ و لیست قیمت</h1><p>کاتالوگ‌ها و صفحات قیمت رسمی برای مشاهده و دانلود</p></div><div class="catalog-tabs"><button class="catalog-tab active" data-catalog-tab="catalogs">کاتالوگ‌ها</button><button class="catalog-tab" data-catalog-tab="price-pages">صفحات قیمت</button></div><div class="catalog-list" id="catalogList"><p class="muted-note">در حال دریافت فهرست...</p></div></section>
 
       <section class="screen" id="alloys" data-screen><div class="page-head"><p class="eyebrow">MATERIAL LAB</p><h1>بانک آلیاژها</h1><p>انتخاب سریع آلیاژ برای کاربردهای رایج</p></div><div class="alloy-list"><article class="alloy-row glass-card"><strong>6063</strong><div><h3>اکسترود و معماری</h3><p>مناسب برای پروفیل‌های ساختمانی و دکوراتیو</p></div></article><article class="alloy-row glass-card"><strong>6061</strong><div><h3>قطعات صنعتی و سازه‌ای</h3><p>استحکام مناسب و قابلیت ماشین‌کاری خوب</p></div></article><article class="alloy-row glass-card"><strong>5052</strong><div><h3>ورق‌کاری و محیط مرطوب</h3><p>مقاومت خوردگی بالا و فرم‌پذیری مناسب</p></div></article><article class="alloy-row glass-card"><strong>7075</strong><div><h3>قطعات با استحکام بالا</h3><p>انتخاب مناسب برای کاربردهای مهندسی</p></div></article></div></section>
 
       <section class="screen" id="quote" data-screen><div class="page-head"><p class="eyebrow">DIRECT CONTACT</p><h1>درخواست پیش‌فاکتور</h1><p>مشخصات پروژه را بفرستید تا راهنمایی‌تان کنیم.</p></div><form class="form-card glass-card" id="quoteForm"><label>نام و نام خانوادگی<input id="quoteName" required placeholder="نام شما" /></label><label>شماره تماس<input id="quotePhone" required inputmode="tel" placeholder="۰۹۱۲..." /></label><label>شرح محصول یا پروژه<textarea id="quoteDetails" required rows="5" placeholder="نوع محصول، آلیاژ، ابعاد و تعداد"></textarea></label><button class="primary-button" type="submit">ثبت درخواست <span>←</span></button><output class="result-box" id="quoteResult"></output></form></section>
 
-      <section class="screen" id="contact" data-screen><div class="page-head"><p class="eyebrow">LET'S CONNECT</p><h1>تماس با ما</h1><p>برای مشاوره و استعلام قیمت کنار شما هستیم.</p></div><div class="contact-grid"><a class="contact-card glass-card" href="tel:08633257316"><span>☎</span><small>تلفن فروش</small><strong>۰۸۶-۳۳۲۵۷۳۱۶</strong></a><a class="contact-card glass-card" href="tel:09904652053"><span>✆</span><small>همراه</small><strong>۰۹۹۰۴۶۵۲۰۵۳</strong></a><div class="contact-card glass-card"><span>⌖</span><small>نشانی</small><strong>اراک، خیابان دانشگاه، ساختمان هاتف، طبقه سوم</strong></div></div><a class="primary-button link-button" href="https://alummetal.com" target="_blank" rel="noreferrer">مشاهده سایت رسمی ←</a></section>
+      <section class="screen" id="contact" data-screen><div class="page-head"><p class="eyebrow">LET'S CONNECT</p><h1>ارتباط با آلوم متال</h1><p>اطلاعات تماس رسمی از سایت alummetal.com</p></div><div class="contact-grid"><a class="contact-card glass-card" href="tel:08633257316"><span>☎</span><small>تلفن فروش</small><strong>۰۸۶-۳۳۲۵۷۳۱۶</strong></a><a class="contact-card glass-card" href="tel:09904652053"><span>✆</span><small>همراه اول</small><strong>۰۹۹۰۴۶۵۲۰۵۳</strong></a><a class="contact-card glass-card" href="tel:09904652054"><span>✆</span><small>همراه دوم</small><strong>۰۹۹۰۴۶۵۲۰۵۴</strong></a><div class="contact-card glass-card"><span>⌖</span><small>آدرس</small><strong>اراک، خیابان دانشگاه، ساختمان هاتف، طبقه سوم، واحد ۴<br /><br />اراک، شهرک صنعتی خیرآباد</strong></div></div><div class="social-links glass-card"><p class="eyebrow">SOCIAL</p><div><a href="https://t.me/Alummetal" target="_blank" rel="noreferrer">تلگرام</a><a href="https://ble.ir/alummetalarak" target="_blank" rel="noreferrer">بله</a><a href="https://eitaa.com/alummetalarak" target="_blank" rel="noreferrer">ایتا</a><a href="https://rubika.ir/alumetal" target="_blank" rel="noreferrer">روبیکا</a></div></div><a class="primary-button link-button" href="https://alummetal.com" target="_blank" rel="noreferrer">مشاهده سایت رسمی ←</a></section>
 
       <section class="screen" id="settings" data-screen><div class="page-head"><p class="eyebrow">APP CONTROL</p><h1>تنظیمات</h1><p>ظاهر و زبان برنامه را شخصی‌سازی کنید.</p></div><div class="settings-list glass-card"><button id="languageToggle"><span>زبان برنامه</span><strong>فارسی / English</strong></button><button id="settingsTheme"><span>حالت شب</span><strong id="themeStatus">فعال</strong></button><button id="installButton" hidden><span>نصب اپ</span><strong>افزودن به صفحه اصلی</strong></button></div></section>
     </main>
@@ -92,6 +93,6 @@
     <nav class="bottom-nav" aria-label="ناوبری اصلی"><a href="#home" data-route="home" class="active"><span>⌂</span>خانه</a><a href="#catalog" data-route="catalog"><span>▦</span>خدمات</a><a href="#contact" data-route="contact"><span>⌁</span>تماس</a></nav>
     <div class="toast" id="toast" role="status"></div>
   </div>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
