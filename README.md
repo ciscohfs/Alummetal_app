@@ -31,6 +31,7 @@ The app uses `Yekan.ttf` and `logo1.png`; both files must remain beside `app.py`
 - `app.py` — Kivy application bootstrap, navigation, localization, theme state and form/calculator logic
 - `home.kv` — UI layout, reusable components and all application screens
 - `Yekan.ttf` — Persian UI font
+- `BYekan.ttf` — B Yekan web font used by the standalone web app
 - `logo1.png` — Alum Metal logo
 - `site-hero.png` — branded industrial hero banner adapted from the public website visual language
 - `factory-banner.jpg` — factory banner reserved for the catalog/about experience

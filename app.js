@@ -167,8 +167,9 @@ function renderAlloys() {
     const haystack = `${alloy.code} ${alloy.series} ${alloy.family} ${alloy.title} ${alloy.use}`.toLowerCase();
     return matchesSeries && (!query || haystack.includes(query));
   });
-  $('#alloySummary').textContent = `${items.length} آلیاژ پیدا شد — چگالی‌ها تقریبی و برحسب g/cm³ هستند.`;
-  list.innerHTML = items.length ? items.map((alloy) => `<article class="alloy-row glass-card"><strong>${alloy.code}</strong><div class="alloy-main"><div class="alloy-title"><h3>${alloy.title}</h3><span>سری ${alloy.series}</span></div><p>${alloy.family} · ${alloy.use}</p><small>چگالی تقریبی: ${alloy.density} g/cm³</small></div></article>`).join('') : '<div class="result-box">آلیاژی با این جست‌وجو پیدا نشد.</div>';
+  $('#alloySummary').textContent = `${items.length} آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.`;
+  const seriesLabel = {1000:'سری ۱۰۰۰ — آلومینیوم خالص',2000:'سری ۲۰۰۰ — آلومینیوم-مس',3000:'سری ۳۰۰۰ — آلومینیوم-منگنز',4000:'سری ۴۰۰۰ — آلومینیوم-سیلیسیم',5000:'سری ۵۰۰۰ — آلومینیوم-منیزیم',6000:'سری ۶۰۰۰ — آلومینیوم-منیزیم-سیلیسیم',7000:'سری ۷۰۰۰ — آلومینیوم-روی',8000:'سری ۸۰۰۰ — آلیاژهای ویژه'};
+  list.innerHTML = items.length ? items.map((alloy) => `<article class="alloy-row glass-card"><strong>${alloy.code}</strong><div class="alloy-main"><div class="alloy-title"><h3>${alloy.title}</h3><span>${seriesLabel[alloy.series] || 'آلیاژ آلومینیوم'}</span></div><p>${alloy.family} · ${alloy.use}</p><small>چگالی تقریبی: ${alloy.density} گرم بر سانتی‌متر مکعب</small></div></article>`).join('') : '<div class="result-box">آلیاژی با این جست‌وجو پیدا نشد.</div>';
 }
 async function loadAlloys() {
   try {
