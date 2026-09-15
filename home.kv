@@ -1,20 +1,32 @@
-#:kivy 2.2.0
+#:kivy 2.3.0
+#:import dp kivy.metrics.dp
+
 <Label>:
     font_name: app.font_name
+    color: app.dark_mode and (0.94,0.97,1,1) or (0.10,0.16,0.21,1)
+
 <Button>:
     font_name: app.font_name
+
+<TextInput>:
+    font_name: app.font_name
+    foreground_color: app.dark_mode and (0.94,0.97,1,1) or (0.10,0.16,0.21,1)
+    hint_text_color: app.dark_mode and (0.52,0.62,0.70,1) or (0.40,0.47,0.52,1)
+    background_color: app.dark_mode and (0.08,0.14,0.19,1) or (0.95,0.97,0.98,1)
+    padding: dp(14), dp(12)
+    cursor_color: 0.95,0.48,0.14,1
+
 <GlassButton>:
-    background_normal: ""
-    background_down: ""
-    background_disabled_normal: ""
+    background_normal: ''
+    background_down: ''
     background_color: 0,0,0,0
     color: 1,1,1,1
     bold: True
-    font_size: dp(15)
+    font_size: dp(14)
     text_size: self.size
-    halign: "right"
-    valign: "middle"
-    padding: dp(18),0
+    halign: 'right' if not app.is_english else 'left'
+    valign: 'middle'
+    padding: dp(18), 0
     canvas.before:
         Color:
             rgba: self.card_color
@@ -24,136 +36,636 @@
             radius: [dp(18),dp(18),dp(18),dp(18)]
     canvas.after:
         Color:
-            rgba: 1,1,1,.22
+            rgba: 1,1,1,.16
         Line:
             rounded_rectangle: self.x,self.y,self.width,self.height,dp(18)
-            width: 1.1
-<HomeScreen>:
-    name: "home"
+            width: 1.0
+
+<AppScreen>:
     canvas.before:
         Color:
-            rgba: .035,.08,.14,1
+            rgba: app.dark_mode and (0.025,0.055,0.09,1) or (0.94,0.96,0.97,1)
         Rectangle:
             pos: self.pos
             size: self.size
-    ScrollView:
-        do_scroll_x: False
-        bar_width: 0
-        BoxLayout:
-            orientation: "vertical"
-            padding: dp(18),dp(16),dp(18),dp(18)
-            spacing: dp(14)
+
+<Header@BoxLayout>:
+    size_hint_y: None
+    height: dp(62)
+    spacing: dp(10)
+    padding: 0,dp(2)
+    Widget:
+    Image:
+        source: 'logo1.png'
+        size_hint_x: None
+        width: dp(108)
+        fit_mode: 'contain'
+    Button:
+        size_hint_x: None
+        width: dp(50)
+        background_normal: ''
+        background_color: 0,0,0,0
+        on_release: app.toggle_drawer()
+        canvas:
+            Color:
+                rgba: .95,.48,.14,1
+            Line:
+                points: self.x+dp(12),self.center_y+dp(8),self.right-dp(12),self.center_y+dp(8)
+                width: 2
+            Line:
+                points: self.x+dp(12),self.center_y,self.right-dp(12),self.center_y
+                width: 2
+            Line:
+                points: self.x+dp(12),self.center_y-dp(8),self.right-dp(12),self.center_y-dp(8)
+                width: 2
+
+<TitleBlock@BoxLayout>:
+    title: ''
+    subtitle: ''
+    orientation: 'vertical'
+    size_hint_y: None
+    height: dp(76)
+    Label:
+        text: root.title
+        font_size: dp(22)
+        bold: True
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+    Label:
+        text: root.subtitle
+        font_size: dp(12)
+        color: .55,.66,.72,1
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+
+<Field@TextInput>:
+    hint: ""
+    hint_text: root.hint
+    multiline: False
+    size_hint_y: None
+    height: dp(52)
+    halign: 'right' if not app.is_english else 'left'
+
+<ResultCard@BoxLayout>:
+    size_hint_y: None
+    height: dp(62)
+    padding: dp(14)
+    canvas.before:
+        Color:
+            rgba: .12,.28,.30,1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(16),dp(16),dp(16),dp(16)]
+    Label:
+        text: app.result_text if app.result_text else app.tr('نتیجه اینجا نمایش داده می‌شود','Your result will appear here')
+        color: .75,.93,.82,1
+        font_size: dp(13)
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+
+<PriceRow@BoxLayout>:
+    product: ''
+    price: ''
+    size_hint_y: None
+    height: dp(68)
+    padding: dp(16),dp(8)
+    canvas.before:
+        Color:
+            rgba: app.dark_mode and (.08,.15,.20,1) or (.88,.92,.94,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(16),dp(16),dp(16),dp(16)]
+    Label:
+        text: root.product
+        bold: True
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+    Label:
+        text: root.price
+        color: .98,.58,.22,1
+        font_size: dp(12)
+        halign: 'left' if not app.is_english else 'right'
+        text_size: self.size
+
+<ProductCard@BoxLayout>:
+    title: ''
+    desc: ''
+    tint: .1,.2,.3,1
+    orientation: 'vertical'
+    size_hint_y: None
+    height: dp(112)
+    padding: dp(18),dp(12)
+    canvas.before:
+        Color:
+            rgba: root.tint
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(18),dp(18),dp(18),dp(18)]
+    Label:
+        text: root.title
+        bold: True
+        font_size: dp(16)
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+    Label:
+        text: root.desc
+        font_size: dp(12)
+        color: .78,.86,.89,1
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+
+<AlloyRow@BoxLayout>:
+    code: ''
+    name: ''
+    color_value: ''
+    size_hint_y: None
+    height: dp(82)
+    spacing: dp(10)
+    padding: dp(14),dp(8)
+    canvas.before:
+        Color:
+            rgba: app.dark_mode and (.08,.15,.20,1) or (.88,.92,.94,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(16),dp(16),dp(16),dp(16)]
+    Label:
+        text: root.code
+        color: .98,.58,.22,1
+        font_size: dp(18)
+        bold: True
+        size_hint_x: None
+        width: dp(65)
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: root.name
+            bold: True
+            halign: 'right' if not app.is_english else 'left'
+            text_size: self.size
+        Label:
+            text: root.color_value
+            color: .55,.68,.73,1
+            font_size: dp(11)
+            halign: 'right' if not app.is_english else 'left'
+            text_size: self.size
+
+<ContactCard@BoxLayout>:
+    label: ''
+    value: ''
+    orientation: 'vertical'
+    size_hint_y: None
+    height: dp(86)
+    padding: dp(16),dp(10)
+    canvas.before:
+        Color:
+            rgba: app.dark_mode and (.08,.15,.20,1) or (.88,.92,.94,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(16),dp(16),dp(16),dp(16)]
+    Label:
+        text: root.label
+        color: .55,.68,.73,1
+        font_size: dp(11)
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+    Label:
+        text: root.value
+        bold: True
+        halign: 'right' if not app.is_english else 'left'
+        text_size: self.size
+
+<SettingRow@Button>:
+    label: ''
+    value: ''
+    background_normal: ''
+    background_color: 0,0,0,0
+    color: 1,1,1,1
+    size_hint_y: None
+    height: dp(62)
+    text: root.label + '    ' + root.value
+    halign: 'right' if not app.is_english else 'left'
+    text_size: self.size
+    padding: dp(18),0
+    canvas.before:
+        Color:
+            rgba: app.dark_mode and (.08,.15,.20,1) or (.88,.92,.94,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(16),dp(16),dp(16),dp(16)]
+
+<BottomNav@BoxLayout>:
+    size_hint_y: None
+    height: dp(56)
+    spacing: dp(6)
+    padding: dp(8),dp(5)
+    canvas.before:
+        Color:
+            rgba: app.dark_mode and (.07,.12,.16,1) or (.84,.89,.91,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(18),dp(18),dp(18),dp(18)]
+    Button:
+        text: app.tr('خانه','Home')
+        background_normal: ''
+        background_color: 0,0,0,0
+        color: .98,.67,.32,1
+        on_release: app.show_screen('home')
+    Button:
+        text: app.tr('خدمات','Services')
+        background_normal: ''
+        background_color: 0,0,0,0
+        color: .65,.75,.80,1
+        on_release: app.show_screen('catalog')
+    Button:
+        text: app.tr('تماس','Contact')
+        background_normal: ''
+        background_color: 0,0,0,0
+        color: .65,.75,.80,1
+        on_release: app.show_screen('contact')
+
+
+FloatLayout:
+    Widget:
+        id: scrim
+        size_hint: 1,1
+        opacity: 1 if app.drawer_open else 0
+        disabled: not app.drawer_open
+        canvas:
+            Color:
+                rgba: 0,0,0,.55
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        on_touch_down:
+            app.close_drawer()
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, 1
+        width: dp(290)
+        x: 0 if app.drawer_open else -self.width
+        padding: dp(20),dp(30),dp(16),dp(20)
+        spacing: dp(10)
+        canvas.before:
+            Color:
+                rgba: app.dark_mode and (.04,.09,.13,1) or (.95,.97,.98,1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: app.tr('آلوم متال آراک','Alum Metal Arak')
+            color: .98,.58,.22,1
+            font_size: dp(20)
+            bold: True
             size_hint_y: None
-            height: self.minimum_height
+            height: dp(54)
+            halign: 'right' if not app.is_english else 'left'
+            text_size: self.size
+        Label:
+            text: app.tr('منوی برنامه','App menu')
+            color: .55,.68,.73,1
+            size_hint_y: None
+            height: dp(28)
+            halign: 'right' if not app.is_english else 'left'
+            text_size: self.size
+        GlassButton:
+            text: app.tr('خانه','Home')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('home')
+        GlassButton:
+            text: app.tr('محاسبه وزن','Weight calculator')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('calculator')
+        GlassButton:
+            text: app.tr('قیمت‌ها','Prices')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('prices')
+        GlassButton:
+            text: app.tr('محصولات و آلیاژها','Products and alloys')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('catalog')
+        GlassButton:
+            text: app.tr('درخواست پیش‌فاکتور','Request a quote')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('quote')
+        Widget:
+        GlassButton:
+            text: app.tr('تنظیمات','Settings')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('settings')
+        GlassButton:
+            text: app.tr('تماس با ما','Contact us')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('contact')
+
+    ScreenManager:
+        id: manager
+        AppScreen:
+            name: 'home'
+            ScrollView:
+                do_scroll_x: False
+                bar_width: 0
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(18),dp(16),dp(18),dp(24)
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Header:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(154)
+                        padding: dp(20)
+                        canvas.before:
+                            Color:
+                                rgba: (0.10,0.28,0.38,1) if app.dark_mode else (0.07,0.35,0.47,1)
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [dp(24),dp(24),dp(24),dp(24)]
+                        Label:
+                            text: app.tr('آلومینیوم باکیفیت\nبرای هر صنعت','Quality aluminum\nfor every industry')
+                            font_size: dp(24)
+                            bold: True
+                            halign: 'right' if not app.is_english else 'left'
+                            text_size: self.size
+                        Label:
+                            text: app.tr('کیفیت  •  نوآوری  •  اعتماد','Quality  •  Innovation  •  Trust')
+                            color: .98,.62,.24,1
+                            font_size: dp(12)
+                            halign: 'right' if not app.is_english else 'left'
+                            text_size: self.size
+                    Label:
+                        text: app.tr('خدمات آلوم متال','Alum Metal services')
+                        font_size: dp(19)
+                        bold: True
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: 'right' if not app.is_english else 'left'
+                        text_size: self.size
+                    GlassButton:
+                        text: app.tr('محاسبه وزن آلومینیوم','Aluminum weight calculator')
+                        card_color: .10,.25,.34,1
+                        size_hint_y: None
+                        height: dp(64)
+                        on_release: app.show_screen('calculator')
+                    GlassButton:
+                        text: app.tr('قیمت روز آلومینیوم','Daily aluminum prices')
+                        card_color: .14,.38,.48,1
+                        size_hint_y: None
+                        height: dp(64)
+                        on_release: app.show_screen('prices')
+                    GlassButton:
+                        text: app.tr('کاتالوگ محصولات','Product catalog')
+                        card_color: .86,.40,.16,1
+                        size_hint_y: None
+                        height: dp(64)
+                        on_release: app.show_screen('catalog')
+                    GlassButton:
+                        text: app.tr('بانک آلیاژها','Alloys database')
+                        card_color: .20,.30,.37,1
+                        size_hint_y: None
+                        height: dp(64)
+                        on_release: app.show_screen('alloys')
+                    GlassButton:
+                        text: app.tr('درخواست پیش‌فاکتور','Request a quote')
+                        card_color: .34,.24,.20,1
+                        size_hint_y: None
+                        height: dp(64)
+                        on_release: app.show_screen('quote')
+                    BottomNav:
+
+        AppScreen:
+            name: 'calculator'
+            ScrollView:
+                do_scroll_x: False
+                bar_width: 0
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(18),dp(16),dp(18),dp(24)
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Header:
+                    TitleBlock:
+                        title: app.tr('محاسبه وزن آلومینیوم','Aluminum weight calculator')
+                        subtitle: app.tr('ابعاد ورق یا قطعه را به میلی‌متر وارد کنید.','Enter dimensions in millimeters.')
+                    Field:
+                        hint: app.tr('طول (میلی‌متر)','Length (mm)')
+                        id: length_input
+                    Field:
+                        hint: app.tr('عرض (میلی‌متر)','Width (mm)')
+                        id: width_input
+                    Field:
+                        hint: app.tr('ضخامت (میلی‌متر)','Thickness (mm)')
+                        id: thickness_input
+                    Field:
+                        hint: app.tr('تعداد','Quantity')
+                        id: quantity_input
+                        text: '1'
+                    GlassButton:
+                        text: app.tr('محاسبه کن','Calculate')
+                        card_color: .86,.40,.16,1
+                        size_hint_y: None
+                        height: dp(60)
+                        on_release: app.calculate_weight(length_input.text,width_input.text,thickness_input.text,quantity_input.text)
+                    ResultCard:
+                    BottomNav:
+
+        AppScreen:
+            name: 'prices'
+            ScrollView:
+                do_scroll_x: False
+                bar_width: 0
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(18),dp(16),dp(18),dp(24)
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Header:
+                    TitleBlock:
+                        title: app.tr('قیمت روز آلومینیوم','Daily aluminum prices')
+                        subtitle: app.tr('قیمت‌های نمونه؛ برای استعلام نهایی تماس بگیرید.','Indicative prices; contact us for a final quote.')
+                    PriceRow:
+                        product: app.tr('شمش آلومینیوم','Aluminum ingot')
+                        price: '۲۸۵,۰۰۰ تومان / kg' if not app.is_english else '285,000 IRR / kg'
+                    PriceRow:
+                        product: app.tr('پروفیل ساختمانی','Construction profile')
+                        price: '۳۹۵,۰۰۰ تومان / kg' if not app.is_english else '395,000 IRR / kg'
+                    PriceRow:
+                        product: app.tr('ورق آلومینیوم','Aluminum sheet')
+                        price: '۴۲۵,۰۰۰ تومان / kg' if not app.is_english else '425,000 IRR / kg'
+                    Label:
+                        text: app.tr('آخرین بروزرسانی: امروز — قیمت‌ها ممکن است تغییر کنند.','Last updated: today — prices may change.')
+                        color: .58,.68,.74,1
+                        font_size: dp(12)
+                        size_hint_y: None
+                        height: dp(32)
+                        halign: 'right' if not app.is_english else 'left'
+                        text_size: self.size
+                    BottomNav:
+
+        AppScreen:
+            name: 'catalog'
+            ScrollView:
+                do_scroll_x: False
+                bar_width: 0
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(18),dp(16),dp(18),dp(24)
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Header:
+                    TitleBlock:
+                        title: app.tr('کاتالوگ محصولات','Product catalog')
+                        subtitle: app.tr('راهکارهای آلومینیومی برای پروژه‌های شما','Aluminum solutions for your projects')
+                    ProductCard:
+                        title: app.tr('پروفیل‌های ساختمانی','Architectural profiles')
+                        desc: app.tr('پروفیل‌های سبک و مقاوم برای در و پنجره و نما','Lightweight profiles for doors, windows and facades')
+                        tint: .10,.29,.37,1
+                    ProductCard:
+                        title: app.tr('پروفیل صنعتی','Industrial profiles')
+                        desc: app.tr('مقاطع سفارشی با دقت بالا برای صنایع مختلف','Custom sections with high precision for industry')
+                        tint: .16,.34,.42,1
+                    ProductCard:
+                        title: app.tr('ورق و کویل','Sheets and coils')
+                        desc: app.tr('آلیاژهای متنوع با امکان برش و بسته‌بندی','Various alloys with cutting and packaging options')
+                        tint: .55,.27,.16,1
+                    GlassButton:
+                        text: app.tr('دریافت مشاوره و پیش‌فاکتور','Get consultation and quote')
+                        card_color: .86,.40,.16,1
+                        size_hint_y: None
+                        height: dp(60)
+                        on_release: app.show_screen('quote')
+                    BottomNav:
+
+        AppScreen:
+            name: 'alloys'
+            ScrollView:
+                do_scroll_x: False
+                bar_width: 0
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(18),dp(16),dp(18),dp(24)
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Header:
+                    TitleBlock:
+                        title: app.tr('بانک آلیاژها','Alloys database')
+                        subtitle: app.tr('انتخاب سریع آلیاژ برای کاربردهای رایج','Quick reference for common applications')
+                    AlloyRow:
+                        code: '6063'
+                        name: app.tr('اکسترود و معماری','Extrusion and architecture')
+                        color_value: 'سیلیکون ۰.۲ تا ۰.۶٪' if not app.is_english else 'Silicon 0.2–0.6%'
+                    AlloyRow:
+                        code: '6061'
+                        name: app.tr('قطعات صنعتی و سازه‌ای','Industrial and structural parts')
+                        color_value: 'منیزیم و سیلیکون' if not app.is_english else 'Magnesium and silicon'
+                    AlloyRow:
+                        code: '5052'
+                        name: app.tr('ورق‌کاری و محیط مرطوب','Sheet work and wet environments')
+                        color_value: 'مقاومت خوردگی بالا' if not app.is_english else 'High corrosion resistance'
+                    AlloyRow:
+                        code: '7075'
+                        name: app.tr('قطعات با استحکام بالا','High-strength components')
+                        color_value: 'روی و منیزیم' if not app.is_english else 'Zinc and magnesium'
+                    BottomNav:
+
+        AppScreen:
+            name: 'quote'
+            ScrollView:
+                do_scroll_x: False
+                bar_width: 0
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(18),dp(16),dp(18),dp(24)
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    Header:
+                    TitleBlock:
+                        title: app.tr('درخواست پیش‌فاکتور','Request a quote')
+                        subtitle: app.tr('مشخصات پروژه را بفرستید تا راهنمایی‌تان کنیم.','Tell us about your project and we will help.')
+                    Field:
+                        hint: app.tr('نام و نام خانوادگی','Full name')
+                        id: quote_name
+                    Field:
+                        hint: app.tr('شماره تماس','Phone number')
+                        id: quote_phone
+                    TextInput:
+                        id: quote_details
+                        hint_text: app.tr('شرح محصول یا پروژه','Product or project details')
+                        multiline: True
+                        size_hint_y: None
+                        height: dp(130)
+                    GlassButton:
+                        text: app.tr('ثبت درخواست','Submit request')
+                        card_color: .86,.40,.16,1
+                        size_hint_y: None
+                        height: dp(60)
+                        on_release: app.submit_quote(quote_name.text,quote_phone.text,quote_details.text)
+                    ResultCard:
+                    BottomNav:
+
+        AppScreen:
+            name: 'contact'
             BoxLayout:
-                size_hint_y: None
-                height: dp(55)
-                Image:
-                    source: "logo1.png"
-                    size_hint_x: None
-                    width: dp(92)
-                    fit_mode: "contain"
+                orientation: 'vertical'
+                padding: dp(18),dp(16),dp(18),dp(24)
+                spacing: dp(14)
+                Header:
+                TitleBlock:
+                    title: app.tr('تماس با ما','Contact us')
+                    subtitle: app.tr('برای مشاوره و استعلام قیمت کنار شما هستیم.','We are here for consultation and pricing.')
+                ContactCard:
+                    label: app.tr('تلفن فروش','Sales phone')
+                    value: '۰۹۱۲ ۱۲۳ ۴۵۶۷' if not app.is_english else '+98 912 123 4567'
+                ContactCard:
+                    label: app.tr('ایمیل','Email')
+                    value: 'sales@alummetalarak.ir'
+                ContactCard:
+                    label: app.tr('نشانی','Address')
+                    value: app.tr('اراک، شهرک صنعتی','Arak Industrial Town')
                 Widget:
-                Button:
-                    text: app.is_english and app.rtl("فارسی") or "EN"
-                    size_hint_x: None
-                    width: dp(58)
-                    background_normal: ""
-                    background_color: .93,.43,.09,1
-                    color: 1,1,1,1
-                    bold: True
+                BottomNav:
+
+        AppScreen:
+            name: 'settings'
+            BoxLayout:
+                orientation: 'vertical'
+                padding: dp(18),dp(16),dp(18),dp(24)
+                spacing: dp(14)
+                Header:
+                TitleBlock:
+                    title: app.tr('تنظیمات','Settings')
+                    subtitle: app.tr('ظاهر و زبان برنامه را شخصی‌سازی کنید.','Customize the app language and appearance.')
+                SettingRow:
+                    label: app.tr('زبان برنامه','App language')
+                    value: app.tr('فارسی','English')
                     on_release: app.toggle_language()
-            Label:
-                text: app.is_english and "Welcome to Alum Metal" or app.rtl("به آلوم متال خوش آمدید")
-                color: 1,1,1,1
-                font_size: dp(25)
-                bold: True
-                halign: "right" if not app.is_english else "left"
-                text_size: self.size
-                size_hint_y: None
-                height: dp(42)
-            Label:
-                text: app.is_english and "Aluminum products, prices and services in one place" or app.rtl("محصولات، قیمت‌ها و خدمات آلومینیوم در یکجا")
-                color: .72,.79,.85,1
-                font_size: dp(12)
-                halign: "right" if not app.is_english else "left"
-                text_size: self.size
-                size_hint_y: None
-                height: dp(26)
-            BoxLayout:
-                orientation: "vertical"
-                size_hint_y: None
-                height: dp(142)
-                padding: dp(20)
-                canvas.before:
-                    Color:
-                        rgba: .12,.25,.35,.72
-                    RoundedRectangle:
-                        pos: self.pos
-                        size: self.size
-                        radius: [dp(22),dp(22),dp(22),dp(22)]
-                Label:
-                    text: app.is_english and "Quality aluminum\nfor every industry" or app.rtl("آلومینیوم باکیفیت\nبرای هر صنعت")
-                    color: 1,1,1,1
-                    font_size: dp(23)
-                    bold: True
-                    halign: "right" if not app.is_english else "left"
-                    text_size: self.size
-                Label:
-                    text: app.is_english and "Quality • Innovation • Trust" or app.rtl("کیفیت • نوآوری • اعتماد")
-                    color: .98,.62,.24,1
-                    font_size: dp(12)
-                    halign: "right" if not app.is_english else "left"
-                    text_size: self.size
-            Label:
-                text: app.is_english and "Services" or app.rtl("خدمات")
-                color: 1,1,1,1
-                font_size: dp(18)
-                bold: True
-                halign: "right" if not app.is_english else "left"
-                text_size: self.size
-                size_hint_y: None
-                height: dp(28)
-            GlassButton:
-                text: app.is_english and "Weight Calculator" or app.rtl("محاسبه وزن آلومینیوم")
-                card_color: .12,.25,.35,.72
-                size_hint_y: None
-                height: dp(62)
-            GlassButton:
-                text: app.is_english and "Aluminum Prices" or app.rtl("قیمت روز آلومینیوم")
-                card_color: .18,.40,.52,.66
-                size_hint_y: None
-                height: dp(62)
-            GlassButton:
-                text: app.is_english and "Products Catalog" or app.rtl("کاتالوگ محصولات")
-                card_color: .86,.40,.16,.78
-                size_hint_y: None
-                height: dp(62)
-            GlassButton:
-                text: app.is_english and "Alloys Database" or app.rtl("بانک آلیاژها")
-                card_color: .20,.30,.37,.70
-                size_hint_y: None
-                height: dp(62)
-            BoxLayout:
-                size_hint_y: None
-                height: dp(52)
-                padding: dp(8),dp(5)
-                canvas.before:
-                    Color:
-                        rgba: .98,1,1,.16
-                    RoundedRectangle:
-                        pos: self.pos
-                        size: self.size
-                        radius: [dp(18),dp(18),dp(18),dp(18)]
-                Label:
-                    text: app.is_english and "Home" or app.rtl("خانه")
-                    color: .98,.67,.32,1
-                    bold: True
-                Label:
-                    text: app.is_english and "Services" or app.rtl("خدمات")
-                    color: .72,.79,.85,1
-                Label:
-                    text: app.is_english and "Settings" or app.rtl("تنظیمات")
-                    color: .72,.79,.85,1
-ScreenManager:
-    HomeScreen:
+                SettingRow:
+                    label: app.tr('حالت شب','Dark mode')
+                    value: app.tr('فعال' if app.dark_mode else 'غیرفعال','On' if app.dark_mode else 'Off')
+                    on_release: app.toggle_theme()
+                SettingRow:
+                    label: app.tr('نسخه برنامه','App version')
+                    value: '1.0.0'
+                Widget:
+                BottomNav:
