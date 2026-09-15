@@ -7,7 +7,7 @@
   <meta name="description" content="آلوم متال آراک؛ تولید و تأمین مقاطع و محصولات آلومینیومی" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="logo1.png" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
   <title>آلوم متال آراک</title>
 </head>
 <body>
@@ -75,7 +75,7 @@
         <div class="factory-strip glass-card"><img src="factory-banner.jpg" alt="کارخانه آلوم متال آراک" /><div><p class="eyebrow">FROM FACTORY TO INDUSTRY</p><h3>از تولید تا عرضه، کنار صنعت</h3><button class="text-link" data-route="quote">دریافت مشاوره تخصصی ←</button></div></div>
       </section>
 
-      <section class="screen" id="calculator" data-screen><div class="page-head"><p class="eyebrow">PRECISION TOOL</p><h1>محاسبه وزن آلومینیوم</h1><p>ابعاد ورق یا قطعه را به میلی‌متر وارد کنید.</p></div><div class="form-card glass-card calculator-form"><label>طول (میلی‌متر)<input id="lengthInput" type="number" min="0" placeholder="مثلاً ۱۰۰۰" /></label><label>عرض (میلی‌متر)<input id="widthInput" type="number" min="0" placeholder="مثلاً ۵۰۰" /></label><label>ضخامت (میلی‌متر)<input id="thicknessInput" type="number" min="0" step="0.1" placeholder="مثلاً ۲" /></label><label>تعداد<input id="quantityInput" type="number" min="1" value="1" /></label><button class="primary-button" id="calculateButton">محاسبه کن <span>←</span></button><output class="result-box" id="weightResult">نتیجه اینجا نمایش داده می‌شود</output></div></section>
+      <section class="screen" id="calculator" data-screen><div class="page-head"><p class="eyebrow">PRECISION TOOL</p><h1>محاسبه وزن مقاطع</h1><p>مقطع و آلیاژ را مطابق محصولات آلوم متال انتخاب کنید.</p></div><div class="form-card glass-card calculator-form"><label>نوع مقطع<select id="shapeSelect"></select></label><label>آلیاژ<select id="alloySelect"></select></label><div class="dimension-grid"><label><span id="fieldOneLabel">طول (میلی‌متر)</span><input id="lengthInput" type="number" min="0" placeholder="مثلاً ۱۰۰۰" /></label><label><span id="fieldTwoLabel">عرض (میلی‌متر)</span><input id="widthInput" type="number" min="0" placeholder="مثلاً ۵۰۰" /></label><label><span id="fieldThreeLabel">ضخامت (میلی‌متر)</span><input id="thicknessInput" type="number" min="0" step="0.1" placeholder="مثلاً ۲" /></label></div><label>تعداد<input id="quantityInput" type="number" min="1" value="1" /></label><button class="primary-button" id="calculateButton">محاسبه وزن <span>←</span></button><output class="result-box" id="weightResult">نتیجه اینجا نمایش داده می‌شود</output></div></section>
 
       <section class="screen" id="prices" data-screen><div class="page-head"><p class="eyebrow">MARKET DESK</p><h1>قیمت روز آلومینیوم</h1><p>قیمت‌ها از منابع سالم فایل شما خوانده می‌شوند.</p></div><div class="price-sources" id="priceSources"><p class="muted-note">در حال دریافت قیمت‌ها...</p></div><p class="muted-note" id="pricesUpdated"></p></section>
 
@@ -90,9 +90,9 @@
       <section class="screen" id="settings" data-screen><div class="page-head"><p class="eyebrow">APP CONTROL</p><h1>تنظیمات</h1><p>ظاهر و زبان برنامه را شخصی‌سازی کنید.</p></div><div class="settings-list glass-card"><button id="languageToggle"><span>زبان برنامه</span><strong>فارسی / English</strong></button><button id="settingsTheme"><span>حالت شب</span><strong id="themeStatus">فعال</strong></button><button id="installButton" hidden><span>نصب اپ</span><strong>افزودن به صفحه اصلی</strong></button></div></section>
     </main>
 
-    <nav class="bottom-nav" aria-label="ناوبری اصلی"><a href="#home" data-route="home" class="active"><span>⌂</span>خانه</a><a href="#catalog" data-route="catalog"><span>▦</span>خدمات</a><a href="#contact" data-route="contact"><span>⌁</span>تماس</a></nav>
-    <div class="toast" id="toast" role="status"></div>
+    <nav class="bottom-nav" aria-label="ناوبری اصلی"><a href="#home" data-route="home" class="active"><span class="nav-icon home-icon">⌂</span><small>خانه</small></a><a href="#catalog" data-route="catalog"><span class="nav-icon grid-icon">▦</span><small>کاتالوگ</small></a><a href="#prices" data-route="prices"><span class="nav-icon chart-icon">◉</span><small>قیمت‌ها</small></a><a href="#contact" data-route="contact"><span class="nav-icon phone-icon">⌁</span><small>تماس</small></a></nav>
+    <dialog class="preview-dialog" id="previewDialog"><div class="preview-head"><strong id="previewTitle">پیش‌نمایش</strong><button class="icon-button" id="previewClose" aria-label="بستن پیش‌نمایش">×</button></div><div class="preview-body" id="previewBody"></div></dialog><div class="toast" id="toast" role="status"></div>
   </div>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

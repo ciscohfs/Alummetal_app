@@ -65,19 +65,40 @@ document.addEventListener('fullscreenchange', () => {
   $('#fullscreenToggle').textContent = document.fullscreenElement ? '×' : '⛶';
 });
 
+let calculatorData = null;
+const shapeSelect = $('#shapeSelect');
+const alloySelect = $('#alloySelect');
+const shapeLabels = {sheet:['طول','عرض','ضخامت'],round:['طول','قطر','—'],square:['طول','عرض','ارتفاع'],flat:['طول','عرض','ضخامت'],tube:['طول','قطر خارجی','ضخامت'],hex:['طول','ضلع','—']};
+function refreshShapeLabels() {
+  const labels = shapeLabels[shapeSelect.value] || shapeLabels.sheet;
+  ['fieldOneLabel','fieldTwoLabel','fieldThreeLabel'].forEach((id, index) => { $(`#${id}`).textContent = `${labels[index]} (میلی‌متر)`; });
+  $('#fieldThreeLabel').parentElement.style.display = labels[2] === '—' ? 'none' : 'grid';
+}
+async function loadCalculator() {
+  try {
+    const response = await fetch(`calculator.json?v=${Date.now()}`, { cache: 'no-store' });
+    calculatorData = await response.json();
+    shapeSelect.innerHTML = calculatorData.shapes.map((shape) => `<option value="${shape.id}">${shape.name}</option>`).join('');
+    alloySelect.innerHTML = calculatorData.alloys.map((alloy) => `<option value="${alloy.id}">${alloy.name}</option>`).join('');
+    refreshShapeLabels();
+  } catch { showToast('داده‌های محاسبه‌گر دریافت نشد'); }
+}
+shapeSelect.addEventListener('change', refreshShapeLabels);
 $('#calculateButton').addEventListener('click', () => {
-  const length = Number($('#lengthInput').value);
-  const width = Number($('#widthInput').value);
-  const thickness = Number($('#thicknessInput').value);
-  const quantity = Number($('#quantityInput').value || 1);
+  const length = Number($('#lengthInput').value), first = Number($('#widthInput').value), second = Number($('#thicknessInput').value), quantity = Number($('#quantityInput').value || 1);
   const result = $('#weightResult');
-  if (![length, width, thickness, quantity].every((value) => value > 0)) {
-    result.textContent = 'لطفاً همه ابعاد را با عدد مثبت وارد کنید.';
-    return;
-  }
-  const weight = (length * width * thickness * quantity * 2.7) / 1000000;
-  result.textContent = `وزن تقریبی: ${weight.toFixed(3)} کیلوگرم`;
+  const requiresThird = ['sheet','square','flat','tube'].includes(shapeSelect.value);
+  if (![length, first, quantity].every((value) => value > 0) || (requiresThird && second <= 0)) { result.textContent = 'لطفاً همه ابعاد لازم را با عدد مثبت وارد کنید.'; return; }
+  const density = calculatorData?.alloys.find((alloy) => alloy.id === alloySelect.value)?.density || 2.70;
+  let volume;
+  if (shapeSelect.value === 'round') volume = Math.PI * (first / 2) ** 2 * length;
+  else if (shapeSelect.value === 'tube') volume = Math.PI * (((first / 2) ** 2) - ((first / 2 - second) ** 2)) * length;
+  else if (shapeSelect.value === 'hex') volume = (3 * Math.sqrt(3) / 2) * (first ** 2) * length;
+  else volume = length * first * second;
+  const weight = (volume * density * quantity) / 1000000;
+  result.textContent = `وزن تقریبی: ${weight.toFixed(3)} کیلوگرم — چگالی ${density} g/cm³`;
 });
+loadCalculator();
 
 $('#quoteForm').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -117,7 +138,11 @@ async function loadCatalog() {
   }
   const render = (kind) => {
     const entries = kind === 'catalogs' ? data.catalogs : data.price_pages;
-    list.innerHTML = entries.map((entry) => `<a class="catalog-item glass-card" href="${entry.url}" target="_blank" rel="noreferrer"><span class="catalog-icon">${kind === 'catalogs' ? '▦' : '◉'}</span><span><strong>${entry.name}</strong><small>${entry.type || 'صفحه قیمت'}</small></span><b>↗</b></a>`).join('');
+    list.innerHTML = entries.map((entry) => `<a class="catalog-item glass-card" href="${entry.url}" target="_blank" rel="noreferrer" data-preview-url="${entry.url}" data-preview-title="${entry.name}"><span class="catalog-icon">${kind === 'catalogs' ? '▦' : '◉'}</span><span><strong>${entry.name}</strong><small>${entry.type || 'صفحه قیمت'} · پیش‌نمایش داخل اپ</small></span><b>↗</b></a>`).join('');
+    $$('[data-preview-url]').forEach((item) => item.addEventListener('click', (event) => {
+      event.preventDefault();
+      openPreview(item.dataset.previewUrl, item.dataset.previewTitle);
+    }));
   };
   render('catalogs');
   $$('[data-catalog-tab]').forEach((tab) => tab.addEventListener('click', () => {
@@ -126,6 +151,17 @@ async function loadCatalog() {
   }));
 }
 loadCatalog();
+
+const previewDialog = $('#previewDialog');
+function openPreview(url, title) {
+  $('#previewTitle').textContent = title;
+  const isPdf = url.toLowerCase().includes('.pdf');
+  const isImage = /\.(jpg|jpeg|png|webp)(\?|$)/i.test(url);
+  $('#previewBody').innerHTML = isImage ? `<img class="preview-image" src="${url}" alt="${title}" /><a class="preview-external" href="${url}" target="_blank" rel="noreferrer">باز کردن فایل اصلی ↗</a>` : `<iframe class="preview-frame" src="${url}" title="${title}" loading="lazy"></iframe><a class="preview-external" href="${url}" target="_blank" rel="noreferrer">باز کردن صفحه یا PDF اصلی ↗</a>`;
+  previewDialog.showModal();
+}
+$('#previewClose').addEventListener('click', () => previewDialog.close());
+previewDialog.addEventListener('click', (event) => { if (event.target === previewDialog) previewDialog.close(); });
 
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
