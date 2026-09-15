@@ -85,6 +85,22 @@ $('#quoteForm').addEventListener('submit', (event) => {
   event.target.reset();
 });
 
+async function loadPrices() {
+  const container = $('#priceSources');
+  const updated = $('#pricesUpdated');
+  if (!container) return;
+  try {
+    const response = await fetch(`prices.json?v=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('prices unavailable');
+    const data = await response.json();
+    container.innerHTML = data.sources.map((source) => `<article class="price-source glass-card"><div class="source-head"><div><p class="eyebrow">SOURCE</p><h3>${source.name}</h3></div><a href="${source.url}" target="_blank" rel="noreferrer">مشاهده منبع ↗</a></div><div class="source-items">${source.items.map((item) => `<div class="source-item"><span>${item.name}</span><strong>${item.price}</strong></div>`).join('')}</div><small>آخرین بروزرسانی منبع: ${source.updated_at}</small></article>`).join('');
+    updated.textContent = `فایل قیمت‌ها: ${data.updated_at} — برای دریافت قیمت جدید، فایل prices.json را روی هاست جایگزین کنید.`;
+  } catch {
+    container.innerHTML = '<p class="result-box">دریافت قیمت‌ها انجام نشد؛ اتصال هاست یا فایل prices.json را بررسی کنید.</p>';
+  }
+}
+loadPrices();
+
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;

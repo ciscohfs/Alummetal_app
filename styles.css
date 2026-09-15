@@ -12,3 +12,5 @@ body{display:flex;justify-content:center;background:#020b12}
 .service-card{min-height:142px}
 .bottom-nav{width:min(430px,calc(100% - 28px))}
 @media(min-width:481px){.drawer{left:calc(50% - 240px);margin-left:0}}
+
+.price-sources{display:grid;gap:12px}.price-source{border-radius:20px;padding:16px}.source-head{display:flex;justify-content:space-between;align-items:start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:11px}.source-head h3{margin:0;font-size:15px}.source-head a{color:#ffad68;font-size:10px;text-decoration:none;white-space:nowrap}.source-items{display:grid;gap:8px;padding:11px 0}.source-item{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;color:#c6d8dd}.source-item strong{color:#ffb065;font-size:11px;text-align:left;white-space:nowrap}.price-source>small{color:var(--muted);font-size:9px}

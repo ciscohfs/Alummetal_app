@@ -7,7 +7,7 @@
   <meta name="description" content="آلوم متال آراک؛ تولید و تأمین مقاطع و محصولات آلومینیومی" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="logo1.png" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
   <title>آلوم متال آراک</title>
 </head>
 <body>
@@ -76,7 +76,7 @@
 
       <section class="screen" id="calculator" data-screen><div class="page-head"><p class="eyebrow">PRECISION TOOL</p><h1>محاسبه وزن آلومینیوم</h1><p>ابعاد ورق یا قطعه را به میلی‌متر وارد کنید.</p></div><div class="form-card glass-card calculator-form"><label>طول (میلی‌متر)<input id="lengthInput" type="number" min="0" placeholder="مثلاً ۱۰۰۰" /></label><label>عرض (میلی‌متر)<input id="widthInput" type="number" min="0" placeholder="مثلاً ۵۰۰" /></label><label>ضخامت (میلی‌متر)<input id="thicknessInput" type="number" min="0" step="0.1" placeholder="مثلاً ۲" /></label><label>تعداد<input id="quantityInput" type="number" min="1" value="1" /></label><button class="primary-button" id="calculateButton">محاسبه کن <span>←</span></button><output class="result-box" id="weightResult">نتیجه اینجا نمایش داده می‌شود</output></div></section>
 
-      <section class="screen" id="prices" data-screen><div class="page-head"><p class="eyebrow">MARKET DESK</p><h1>قیمت روز آلومینیوم</h1><p>قیمت‌های مرجع؛ برای استعلام نهایی با ما تماس بگیرید.</p></div><div class="price-list"><article class="price-row glass-card"><span>شمش آلومینیوم<small>Aluminum ingot</small></span><strong>۲۸۵,۰۰۰ <small>تومان / kg</small></strong></article><article class="price-row glass-card"><span>پروفیل ساختمانی<small>Construction profile</small></span><strong>۳۹۵,۰۰۰ <small>تومان / kg</small></strong></article><article class="price-row glass-card"><span>ورق آلومینیوم<small>Aluminum sheet</small></span><strong>۴۲۵,۰۰۰ <small>تومان / kg</small></strong></article></div><p class="muted-note">آخرین بروزرسانی: امروز — قیمت‌ها ممکن است تغییر کنند.</p></section>
+      <section class="screen" id="prices" data-screen><div class="page-head"><p class="eyebrow">MARKET DESK</p><h1>قیمت روز آلومینیوم</h1><p>قیمت‌ها از منابع سالم فایل شما خوانده می‌شوند.</p></div><div class="price-sources" id="priceSources"><p class="muted-note">در حال دریافت قیمت‌ها...</p></div><p class="muted-note" id="pricesUpdated"></p></section>
 
       <section class="screen" id="catalog" data-screen><div class="page-head"><p class="eyebrow">PRODUCT SYSTEM</p><h1>کاتالوگ محصولات</h1><p>راهکارهای آلومینیومی برای پروژه‌های شما</p></div><div class="product-grid"><article class="product-card glass-card"><div class="product-number">01</div><h3>پروفیل‌های ساختمانی</h3><p>مقاطع سبک و مقاوم برای در، پنجره و نما</p></article><article class="product-card glass-card"><div class="product-number">02</div><h3>پروفیل صنعتی</h3><p>مقاطع سفارشی با دقت بالا برای صنایع مختلف</p></article><article class="product-card glass-card"><div class="product-number">03</div><h3>ورق و کویل</h3><p>آلیاژهای متنوع با امکان برش و بسته‌بندی</p></article><article class="product-card glass-card"><div class="product-number">04</div><h3>شمش و بیلت</h3><p>تأمین مواد اولیه خالص و آلیاژی</p></article></div><button class="primary-button" data-route="quote">دریافت مشاوره و پیش‌فاکتور ←</button></section>
 
@@ -92,6 +92,6 @@
     <nav class="bottom-nav" aria-label="ناوبری اصلی"><a href="#home" data-route="home" class="active"><span>⌂</span>خانه</a><a href="#catalog" data-route="catalog"><span>▦</span>خدمات</a><a href="#contact" data-route="contact"><span>⌁</span>تماس</a></nav>
     <div class="toast" id="toast" role="status"></div>
   </div>
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
