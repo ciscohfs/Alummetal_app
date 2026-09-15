@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07121b" />
+  <meta name="description" content="آلوم متال آراک؛ تولید و تأمین مقاطع و محصولات آلومینیومی" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="logo1.png" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <title>آلوم متال آراک</title>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <button class="icon-button menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="#home" data-route="home" aria-label="صفحه اصلی آلوم متال">
+        <img src="logo1.png" alt="لوگوی آلوم متال" />
+      </a>
+      <div class="top-actions">
+        <button class="icon-button" id="themeToggle" aria-label="تغییر تم">☼</button>
+        <button class="icon-button" id="fullscreenToggle" aria-label="تمام صفحه">⛶</button>
+      </div>
+    </header>
+
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-head">
+        <img src="logo1.png" alt="آلوم متال" />
+        <button class="icon-button" id="drawerClose" aria-label="بستن منو">×</button>
+      </div>
+      <p class="eyebrow">منوی آلوم متال</p>
+      <nav class="drawer-nav">
+        <a href="#home" data-route="home">⌂ <span>خانه</span></a>
+        <a href="#calculator" data-route="calculator">◈ <span>محاسبه وزن</span></a>
+        <a href="#prices" data-route="prices">◉ <span>قیمت‌ها</span></a>
+        <a href="#catalog" data-route="catalog">▦ <span>کاتالوگ محصولات</span></a>
+        <a href="#alloys" data-route="alloys">◌ <span>بانک آلیاژها</span></a>
+        <a href="#quote" data-route="quote">✦ <span>درخواست پیش‌فاکتور</span></a>
+        <a href="#contact" data-route="contact">⌁ <span>تماس با ما</span></a>
+        <a href="#settings" data-route="settings">⚙ <span>تنظیمات</span></a>
+      </nav>
+      <div class="drawer-foot">کیفیت، نوآوری و رضایت مشتری</div>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <main id="mainContent" tabindex="-1">
+      <section class="screen active" id="home" data-screen>
+        <div class="hero-card glass-card">
+          <div class="hero-image-wrap"><img src="site-hero.png" alt="محصولات و فناوری آلوم متال" class="hero-image" /></div>
+          <div class="hero-copy">
+            <div>
+              <p class="eyebrow">ALUM METAL ARAK</p>
+              <h1>آلومینیوم باکیفیت<br />برای هر صنعت</h1>
+              <p>تولید و تأمین مقاطع اکسترود شده، ورق، شمش و محصولات آلیاژی</p>
+            </div>
+            <span class="hero-badge">۱۰+ سال تجربه</span>
+          </div>
+          <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric glass-card"><strong>۱۰+</strong><span>سال تجربه</span></div>
+          <div class="metric glass-card"><strong>۳۶۰°</strong><span>زنجیره تأمین</span></div>
+          <div class="metric glass-card"><strong>ISO</strong><span>کنترل کیفیت</span></div>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">SMART SERVICES</p><h2>خدمات آلوم متال</h2></div><span class="heading-line"></span></div>
+        <div class="service-grid">
+          <button class="service-card teal" data-route="calculator"><span class="service-icon">◈</span><span>محاسبه وزن آلومینیوم</span><small>محاسبه سریع و دقیق</small><b>←</b></button>
+          <button class="service-card cyan" data-route="prices"><span class="service-icon">◉</span><span>قیمت روز آلومینیوم</span><small>شمش، ورق و پروفیل</small><b>←</b></button>
+          <button class="service-card orange" data-route="catalog"><span class="service-icon">▦</span><span>کاتالوگ محصولات</span><small>راهکارهای صنعتی و ساختمانی</small><b>←</b></button>
+          <button class="service-card slate" data-route="alloys"><span class="service-icon">◌</span><span>بانک آلیاژها</span><small>انتخاب آلیاژ مناسب</small><b>←</b></button>
+        </div>
+        <div class="factory-strip glass-card"><img src="factory-banner.jpg" alt="کارخانه آلوم متال آراک" /><div><p class="eyebrow">FROM FACTORY TO INDUSTRY</p><h3>از تولید تا عرضه، کنار صنعت</h3><button class="text-link" data-route="quote">دریافت مشاوره تخصصی ←</button></div></div>
+      </section>
+
+      <section class="screen" id="calculator" data-screen><div class="page-head"><p class="eyebrow">PRECISION TOOL</p><h1>محاسبه وزن آلومینیوم</h1><p>ابعاد ورق یا قطعه را به میلی‌متر وارد کنید.</p></div><div class="form-card glass-card calculator-form"><label>طول (میلی‌متر)<input id="lengthInput" type="number" min="0" placeholder="مثلاً ۱۰۰۰" /></label><label>عرض (میلی‌متر)<input id="widthInput" type="number" min="0" placeholder="مثلاً ۵۰۰" /></label><label>ضخامت (میلی‌متر)<input id="thicknessInput" type="number" min="0" step="0.1" placeholder="مثلاً ۲" /></label><label>تعداد<input id="quantityInput" type="number" min="1" value="1" /></label><button class="primary-button" id="calculateButton">محاسبه کن <span>←</span></button><output class="result-box" id="weightResult">نتیجه اینجا نمایش داده می‌شود</output></div></section>
+
+      <section class="screen" id="prices" data-screen><div class="page-head"><p class="eyebrow">MARKET DESK</p><h1>قیمت روز آلومینیوم</h1><p>قیمت‌های مرجع؛ برای استعلام نهایی با ما تماس بگیرید.</p></div><div class="price-list"><article class="price-row glass-card"><span>شمش آلومینیوم<small>Aluminum ingot</small></span><strong>۲۸۵,۰۰۰ <small>تومان / kg</small></strong></article><article class="price-row glass-card"><span>پروفیل ساختمانی<small>Construction profile</small></span><strong>۳۹۵,۰۰۰ <small>تومان / kg</small></strong></article><article class="price-row glass-card"><span>ورق آلومینیوم<small>Aluminum sheet</small></span><strong>۴۲۵,۰۰۰ <small>تومان / kg</small></strong></article></div><p class="muted-note">آخرین بروزرسانی: امروز — قیمت‌ها ممکن است تغییر کنند.</p></section>
+
+      <section class="screen" id="catalog" data-screen><div class="page-head"><p class="eyebrow">PRODUCT SYSTEM</p><h1>کاتالوگ محصولات</h1><p>راهکارهای آلومینیومی برای پروژه‌های شما</p></div><div class="product-grid"><article class="product-card glass-card"><div class="product-number">01</div><h3>پروفیل‌های ساختمانی</h3><p>مقاطع سبک و مقاوم برای در، پنجره و نما</p></article><article class="product-card glass-card"><div class="product-number">02</div><h3>پروفیل صنعتی</h3><p>مقاطع سفارشی با دقت بالا برای صنایع مختلف</p></article><article class="product-card glass-card"><div class="product-number">03</div><h3>ورق و کویل</h3><p>آلیاژهای متنوع با امکان برش و بسته‌بندی</p></article><article class="product-card glass-card"><div class="product-number">04</div><h3>شمش و بیلت</h3><p>تأمین مواد اولیه خالص و آلیاژی</p></article></div><button class="primary-button" data-route="quote">دریافت مشاوره و پیش‌فاکتور ←</button></section>
+
+      <section class="screen" id="alloys" data-screen><div class="page-head"><p class="eyebrow">MATERIAL LAB</p><h1>بانک آلیاژها</h1><p>انتخاب سریع آلیاژ برای کاربردهای رایج</p></div><div class="alloy-list"><article class="alloy-row glass-card"><strong>6063</strong><div><h3>اکسترود و معماری</h3><p>مناسب برای پروفیل‌های ساختمانی و دکوراتیو</p></div></article><article class="alloy-row glass-card"><strong>6061</strong><div><h3>قطعات صنعتی و سازه‌ای</h3><p>استحکام مناسب و قابلیت ماشین‌کاری خوب</p></div></article><article class="alloy-row glass-card"><strong>5052</strong><div><h3>ورق‌کاری و محیط مرطوب</h3><p>مقاومت خوردگی بالا و فرم‌پذیری مناسب</p></div></article><article class="alloy-row glass-card"><strong>7075</strong><div><h3>قطعات با استحکام بالا</h3><p>انتخاب مناسب برای کاربردهای مهندسی</p></div></article></div></section>
+
+      <section class="screen" id="quote" data-screen><div class="page-head"><p class="eyebrow">DIRECT CONTACT</p><h1>درخواست پیش‌فاکتور</h1><p>مشخصات پروژه را بفرستید تا راهنمایی‌تان کنیم.</p></div><form class="form-card glass-card" id="quoteForm"><label>نام و نام خانوادگی<input id="quoteName" required placeholder="نام شما" /></label><label>شماره تماس<input id="quotePhone" required inputmode="tel" placeholder="۰۹۱۲..." /></label><label>شرح محصول یا پروژه<textarea id="quoteDetails" required rows="5" placeholder="نوع محصول، آلیاژ، ابعاد و تعداد"></textarea></label><button class="primary-button" type="submit">ثبت درخواست <span>←</span></button><output class="result-box" id="quoteResult"></output></form></section>
+
+      <section class="screen" id="contact" data-screen><div class="page-head"><p class="eyebrow">LET'S CONNECT</p><h1>تماس با ما</h1><p>برای مشاوره و استعلام قیمت کنار شما هستیم.</p></div><div class="contact-grid"><a class="contact-card glass-card" href="tel:08633257316"><span>☎</span><small>تلفن فروش</small><strong>۰۸۶-۳۳۲۵۷۳۱۶</strong></a><a class="contact-card glass-card" href="tel:09904652053"><span>✆</span><small>همراه</small><strong>۰۹۹۰۴۶۵۲۰۵۳</strong></a><div class="contact-card glass-card"><span>⌖</span><small>نشانی</small><strong>اراک، خیابان دانشگاه، ساختمان هاتف، طبقه سوم</strong></div></div><a class="primary-button link-button" href="https://alummetal.com" target="_blank" rel="noreferrer">مشاهده سایت رسمی ←</a></section>
+
+      <section class="screen" id="settings" data-screen><div class="page-head"><p class="eyebrow">APP CONTROL</p><h1>تنظیمات</h1><p>ظاهر و زبان برنامه را شخصی‌سازی کنید.</p></div><div class="settings-list glass-card"><button id="languageToggle"><span>زبان برنامه</span><strong>فارسی / English</strong></button><button id="settingsTheme"><span>حالت شب</span><strong id="themeStatus">فعال</strong></button><button id="installButton" hidden><span>نصب اپ</span><strong>افزودن به صفحه اصلی</strong></button></div></section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="ناوبری اصلی"><a href="#home" data-route="home" class="active"><span>⌂</span>خانه</a><a href="#catalog" data-route="catalog"><span>▦</span>خدمات</a><a href="#contact" data-route="contact"><span>⌁</span>تماس</a></nav>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script src="app.js?v=2"></script>
+</body>
+</html>

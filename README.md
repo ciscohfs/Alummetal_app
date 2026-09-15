@@ -43,3 +43,15 @@ The displayed aluminum prices are reference values intended for the prototype. T
 ## Status
 
 The application is a functional multi-screen prototype ready for the next product-specific integrations and content updates.
+
+## Web version
+
+The repository also includes a standalone HTML/CSS/JavaScript web app in `index.html`, `styles.css` and `app.js`. It is mobile-first, RTL-aware, responsive on desktop, supports browser fullscreen, safe-area insets, reduced-motion preferences, local theme persistence, and installability as a Progressive Web App through `manifest.webmanifest` and `sw.js`.
+
+Run it locally with:
+
+```bash
+python -m http.server 4173 --bind 0.0.0.0
+```
+
+Then open `http://localhost:4173`. For a real custom domain, upload the web files to any static host and point the domain DNS to that host. HTTPS is required by browsers for service-worker/PWA features outside localhost.
