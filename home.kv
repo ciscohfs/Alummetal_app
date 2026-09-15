@@ -291,6 +291,32 @@
         color: .65,.75,.80,1
         on_release: app.show_screen('contact')
 
+<MetricChip@BoxLayout>:
+    number: ''
+    caption: ''
+    orientation: 'vertical'
+    padding: dp(8),dp(5)
+    canvas.before:
+        Color:
+            rgba: app.dark_mode and (.08,.19,.25,.96) or (.90,.95,.96,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(14),dp(14),dp(14),dp(14)]
+    Label:
+        text: root.number
+        color: .98,.58,.22,1
+        bold: True
+        font_size: dp(17)
+        halign: 'center'
+        text_size: self.size
+    Label:
+        text: root.caption
+        color: .58,.70,.75,1
+        font_size: dp(9)
+        halign: 'center'
+        text_size: self.size
+
 
 FloatLayout:
     Widget:
@@ -390,8 +416,8 @@ FloatLayout:
                         id: hero
                         orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(154)
-                        padding: dp(20)
+                        height: dp(232)
+                        padding: dp(14)
                         canvas.before:
                             Color:
                                 rgba: (0.10 + self.glow*.025,0.28 + self.glow*.035,0.38 + self.glow*.045,1) if app.dark_mode else (0.07 + self.glow*.025,0.35 + self.glow*.035,0.47 + self.glow*.045,1)
@@ -415,9 +441,15 @@ FloatLayout:
                             Ellipse:
                                 pos: self.x-dp(22),self.y+dp(8)
                                 size: dp(64),dp(64)
+                        Image:
+                            source: 'site-hero.png'
+                            size_hint_y: None
+                            height: dp(92)
+                            fit_mode: 'cover'
+                            opacity: .94
                         Label:
                             text: app.tr('آلومینیوم باکیفیت\nبرای هر صنعت','Quality aluminum\nfor every industry')
-                            font_size: dp(24)
+                            font_size: dp(20)
                             bold: True
                             halign: 'right' if not app.is_english else 'left'
                             text_size: self.size
@@ -427,6 +459,19 @@ FloatLayout:
                             font_size: dp(12)
                             halign: 'right' if not app.is_english else 'left'
                             text_size: self.size
+                    BoxLayout:
+                        size_hint_y: None
+                        height: dp(70)
+                        spacing: dp(8)
+                        MetricChip:
+                            number: '۱۰+'
+                            caption: app.tr('سال تجربه','Years')
+                        MetricChip:
+                            number: '۳۶۰°'
+                            caption: app.tr('زنجیره تأمین','Supply chain')
+                        MetricChip:
+                            number: 'ISO'
+                            caption: app.tr('کنترل کیفیت','Quality')
                     Label:
                         text: app.tr('خدمات آلوم متال','Alum Metal services')
                         font_size: dp(19)
