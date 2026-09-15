@@ -42,6 +42,7 @@
             width: 1.0
 
 <AppScreen>:
+    opacity: self.enter_progress
     canvas.before:
         Color:
             rgba: app.dark_mode and (0.025,0.055,0.09,1) or (0.94,0.96,0.97,1)
@@ -385,18 +386,35 @@ FloatLayout:
                     size_hint_y: None
                     height: self.minimum_height
                     Header:
-                    BoxLayout:
+                    AnimatedPanel:
+                        id: hero
                         orientation: 'vertical'
                         size_hint_y: None
                         height: dp(154)
                         padding: dp(20)
                         canvas.before:
                             Color:
-                                rgba: (0.10,0.28,0.38,1) if app.dark_mode else (0.07,0.35,0.47,1)
+                                rgba: (0.10 + self.glow*.025,0.28 + self.glow*.035,0.38 + self.glow*.045,1) if app.dark_mode else (0.07 + self.glow*.025,0.35 + self.glow*.035,0.47 + self.glow*.045,1)
                             RoundedRectangle:
                                 pos: self.pos
                                 size: self.size
                                 radius: [dp(24),dp(24),dp(24),dp(24)]
+                            Color:
+                                rgba: .95,.55,.18,.14 + self.glow*.14
+                            Line:
+                                rounded_rectangle: self.x,self.y,self.width,self.height,dp(24)
+                                width: 1.15 + self.glow*.9
+                        canvas.after:
+                            Color:
+                                rgba: .95,.72,.38,.06 + self.glow*.08
+                            Ellipse:
+                                pos: self.right-dp(105),self.top-dp(52)
+                                size: dp(82),dp(82)
+                            Color:
+                                rgba: .30,.78,.86,.05 + self.glow*.06
+                            Ellipse:
+                                pos: self.x-dp(22),self.y+dp(8)
+                                size: dp(64),dp(64)
                         Label:
                             text: app.tr('آلومینیوم باکیفیت\nبرای هر صنعت','Quality aluminum\nfor every industry')
                             font_size: dp(24)

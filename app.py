@@ -1,10 +1,13 @@
 from pathlib import Path
 
+from kivy.animation import Animation
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.properties import BooleanProperty, ListProperty, StringProperty
+from kivy.properties import BooleanProperty, ListProperty, NumericProperty, StringProperty
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
 
 import arabic_reshaper
 from bidi.algorithm import get_display
@@ -14,10 +17,38 @@ BASE_DIR = Path(__file__).resolve().parent
 
 
 class AppScreen(Screen):
-    pass
+    enter_progress = NumericProperty(1)
+
+    def on_pre_enter(self, *args):
+        self.enter_progress = 0
+        Animation(enter_progress=1, duration=0.34, t='out_quad').start(self)
+
+    def on_enter(self, *args):
+        if 'hero' in self.ids:
+            self.ids.hero.start_pulse()
+
+    def on_leave(self, *args):
+        if 'hero' in self.ids:
+            self.ids.hero.stop_pulse()
 
 
-class GlassButton(__import__('kivy.uix.button', fromlist=['Button']).Button):
+class AnimatedPanel(BoxLayout):
+    glow = NumericProperty(0)
+    pulse_animation = None
+
+    def start_pulse(self):
+        self.stop_pulse()
+        self.pulse_animation = Animation(glow=1, duration=2.2, t='in_out_sine') + Animation(glow=0, duration=2.2, t='in_out_sine')
+        self.pulse_animation.repeat = True
+        self.pulse_animation.start(self)
+
+    def stop_pulse(self):
+        if self.pulse_animation:
+            self.pulse_animation.cancel(self)
+            self.pulse_animation = None
+
+
+class GlassButton(Button):
     card_color = ListProperty([0.09, 0.17, 0.24, 1])
     accent = BooleanProperty(False)
 
@@ -68,7 +99,6 @@ class MainApp(App):
             quantity = float(quantity or 1)
             if min(length, width, thickness, quantity) <= 0:
                 raise ValueError
-            # dimensions in millimeters, density of aluminum in g/cm3
             weight = (length * width * thickness * quantity * 2.70) / 1_000_000
             self.result_text = self.tr('وزن تقریبی: {:.3f} کیلوگرم'.format(weight), 'Estimated weight: {:.3f} kg'.format(weight))
         except (TypeError, ValueError):
