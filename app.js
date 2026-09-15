@@ -99,7 +99,7 @@ $('#calculateButton').addEventListener('click', () => {
   else if (shapeSelect.value === 'hex') volume = (3 * Math.sqrt(3) / 2) * (first ** 2) * length;
   else volume = length * first * second;
   const weight = (volume * density * quantity) / 1000000;
-  result.textContent = `وزن تقریبی: ${weight.toFixed(3)} کیلوگرم — چگالی ${density} g/cm³`;
+  result.textContent = `وزن تقریبی: ${weight.toFixed(3)} کیلوگرم — چگالی ${density} گرم بر سانتی‌متر مکعب`;
 });
 loadCalculator();
 
