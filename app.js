@@ -167,21 +167,26 @@ function alloyExplanation(alloy) {
   const guidance = alloy.series === '1000' ? 'برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است.' : alloy.series === '2000' ? 'برای استحکام بالا و قطعات ماشین‌کاری‌شده انتخاب می‌شود؛ مقاومت خوردگی آن معمولاً به پوشش یا نگهداری مناسب نیاز دارد.' : alloy.series === '3000' ? 'تعادل خوبی بین فرم‌پذیری، مقاومت خوردگی و استحکام متوسط ایجاد می‌کند.' : alloy.series === '4000' ? 'وجود سیلیسیم به بهبود سیالیت، مقاومت حرارتی یا عملکرد جوشکاری کمک می‌کند.' : alloy.series === '5000' ? 'برای محیط‌های مرطوب و دریایی مناسب است و معمولاً جوش‌پذیری خوبی دارد.' : alloy.series === '6000' ? 'انتخاب متعادل برای پروفیل و سازه است؛ اکستروژن، ماشین‌کاری و عملیات حرارتی در آن مهم است.' : alloy.series === '7000' ? 'بیشترین تمرکز آن روی استحکام است و برای قطعات سبک و پربار مهندسی به‌کار می‌رود.' : 'برای کاربردهای تخصصی مانند فویل، بسته‌بندی یا هوافضا استفاده می‌شود.';
   return `${alloy.family} با تمرکز بر ${alloy.title}. ${guidance} کاربردهای رایج: ${alloy.use}.`;
 }
-function updateCompareUI() {
+function syncCompareSelection() {
+  selectedAlloys.clear();
+  ['#compareOne','#compareTwo','#compareThree'].forEach((selector) => { const value = $(selector)?.value; if (value) selectedAlloys.add(value); });
   const count = selectedAlloys.size;
-  $('#compareCount').textContent = count ? `${count} آلیاژ انتخاب شده${count < 2 ? ' — یک مورد دیگر انتخاب کنید' : ''}` : 'حداقل دو آلیاژ را از فهرست انتخاب کنید.';
-  $('#compareButton').disabled = count < 2;
+  const button = $('#compareButton');
+  if (button) button.disabled = count < 2;
+  const countText = $('#compareCount');
+  if (countText) countText.textContent = count ? `${count} آلیاژ برای مقایسه آماده است.` : 'دو آلیاژ را انتخاب کن.';
 }
 function renderComparison() {
-  const chosen = alloyData.alloys.filter((alloy) => selectedAlloys.has(alloy.code));
-  $('#comparisonTable').innerHTML = `<div class="comparison-row comparison-labels"><span>شاخص</span>${chosen.map((a) => `<strong>${a.code}</strong>`).join('')}</div>${[['خانواده','family'],['سری','series'],['چگالی','density'],['تمرکز عملکردی','title'],['کاربرد اصلی','use']].map(([label,key]) => `<div class="comparison-row"><span>${label}</span>${chosen.map((a) => `<div>${key === 'density' ? `${a[key]} g/cm³` : a[key]}</div>`).join('')}</div>`).join('')}<div class="comparison-note">${chosen.map((a) => `<p><b>${a.code}:</b> ${alloyExplanation(a)}</p>`).join('')}</div>`;
+  const chosen = ['#compareOne','#compareTwo','#compareThree'].map((selector) => $(selector)?.value).filter(Boolean).map((code) => alloyData.alloys.find((alloy) => alloy.code === code)).filter(Boolean);
+  if (chosen.length < 2) { showToast('برای مقایسه، حداقل دو آلیاژ را انتخاب کن.'); return; }
+  $('#comparisonTable').innerHTML = `<div class="comparison-row comparison-labels"><span>شاخص</span>${chosen.map((a) => `<strong>${a.code}</strong>`).join('')}</div>${[['خانواده','family'],['سری','series'],['چگالی','density'],['ویژگی اصلی','title'],['کاربرد اصلی','use']].map(([label,key]) => `<div class="comparison-row"><span>${label}</span>${chosen.map((a) => `<div>${key === 'density' ? `${a[key]} گرم بر سانتی‌متر مکعب` : a[key]}</div>`).join('')}</div>`).join('')}<div class="comparison-note">${chosen.map((a) => `<p><b>${a.code}:</b> ${alloyExplanation(a)}</p>`).join('')}</div>`;
   $('#comparePanel').hidden = false;
   $('#comparePanel').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 function updateElementResult() {
   const result = $('#elementResult');
   if (!selectedElements.size) { result.textContent = 'مقدار حداقل یک عنصر را وارد کن تا پیشنهاد مناسب نمایش داده شود.'; return; }
-  const amounts = [...selectedElements].map((element) => `${element} ${document.querySelector(`[data-element=\"${element}\"]`).value}%`).join('، '); const candidates = alloyData.alloys.filter((alloy) => [...selectedElements].some((element) => alloy.family.includes(element))).slice(0, 6);
+  const amounts = [...selectedElements].map((element) => `${document.querySelector(`[data-element=\"${element}\"]`).previousElementSibling.querySelector('b').textContent} ${element} ${document.querySelector(`[data-element=\"${element}\"]`).value}%`).join('، '); const familyMap = {'مس':'آلومینیوم-مس','منیزیم':'آلومینیوم-منیزیم','سیلیسیم':'آلومینیوم-سیلیسیم','منگنز':'آلومینیوم-منگنز','روی':'آلومینیوم-روی','آهن':'آلومینیوم','کروم':'آلومینیوم','تیتانیوم':'آلومینیوم'}; const candidates = alloyData.alloys.filter((alloy) => [...selectedElements].some((element) => alloy.family.includes(familyMap[element]) || (['آهن','کروم','تیتانیوم'].includes(element) && alloy.family.includes('آلومینیوم')))).slice(0, 6);
   result.innerHTML = candidates.length ? `<strong>ترکیب واردشده: ${amounts}</strong><span class="result-caption">پیشنهادهای نزدیک:</span> ${candidates.map((a) => `<button type="button" class="element-match" data-code="${a.code}">${a.code} — ${a.family}</button>`).join('')}<small>این پیشنهاد بر اساس خانواده آلیاژی است؛ برای انتخاب نهایی، کاربرد و استاندارد محصول را هم بررسی کنید.</small>` : 'ترکیب واردشده در داده فعلی پیدا نشد؛ از جست‌وجوی بانک آلیاژها استفاده کنید.';
   $$('.element-match').forEach((button) => button.addEventListener('click', () => { $('#alloySearch').value = button.dataset.code; renderAlloys(); $('#alloyList').scrollIntoView({behavior:'smooth', block:'nearest'}); }));
 }
@@ -211,10 +216,20 @@ async function loadAlloys() {
 }
 $('#alloySearch')?.addEventListener('input', renderAlloys);
 $$('[data-element]').forEach((input) => input.addEventListener('input', () => { const element = input.dataset.element; const amount = Number(input.value || 0); if (amount > 0) selectedElements.add(element); else selectedElements.delete(element); updateElementResult(); }));
-function refreshCompareOptions() { const options = alloyData.alloys.map((a) => `<option value="${a.code}">${a.code} — ${a.title}</option>`).join(''); ['#compareOne','#compareTwo','#compareThree'].forEach((selector) => { const select = $(selector); const value = select.value; select.innerHTML = `<option value="">${selector === '#compareThree' ? 'بدون انتخاب' : 'انتخاب آلیاژ'}</option>${options}`; select.value = value; select.addEventListener('change', () => { selectedAlloys.clear(); ['#compareOne','#compareTwo','#compareThree'].forEach((item) => { if ($(item).value) selectedAlloys.add($(item).value); }); updateCompareUI(); }); }); }
-function updateCompareUI() { const count = selectedAlloys.size; $('#compareButton').disabled = count < 2; $('#compareCount').textContent = count ? `${count} آلیاژ آمادهٔ مقایسه است.` : 'دو یا سه آلیاژ را انتخاب کن.'; }
-$('#compareButton').addEventListener('click', renderComparison);
-$('#clearCompare').addEventListener('click', () => { selectedAlloys.clear(); ['#compareOne','#compareTwo','#compareThree'].forEach((s) => { if ($(s)) $(s).value = ''; }); $('#comparePanel').hidden = true; updateCompareUI(); });
+function refreshCompareOptions() {
+  const options = alloyData.alloys.map((a) => `<option value="${a.code}">${a.code} — ${a.title}</option>`).join('');
+  ['#compareOne','#compareTwo','#compareThree'].forEach((selector) => {
+    const select = $(selector); if (!select) return;
+    const previous = select.value;
+    select.innerHTML = `<option value="">${selector === '#compareThree' ? 'بدون انتخاب' : 'انتخاب آلیاژ'}</option>${options}`;
+    if ([...select.options].some((option) => option.value === previous)) select.value = previous;
+    select.onchange = syncCompareSelection;
+  });
+  syncCompareSelection();
+}
+refreshCompareOptions();
+$('#compareButton').onclick = renderComparison;
+$('#clearCompare').onclick = () => { ['#compareOne','#compareTwo','#compareThree'].forEach((selector) => { if ($(selector)) $(selector).value = ''; }); $('#comparePanel').hidden = true; syncCompareSelection(); };
 $$('[data-series]').forEach((button) => button.addEventListener('click', () => {
   selectedSeries = button.dataset.series;
   $$('[data-series]').forEach((item) => item.classList.toggle('active', item === button));
