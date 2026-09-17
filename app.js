@@ -182,8 +182,8 @@ function renderComparison() {
 function updateElementResult() {
   const result = $('#elementResult');
   if (!selectedElements.size) { result.textContent = 'یک یا چند عنصر را انتخاب کن.'; return; }
-  const candidates = alloyData.alloys.filter((alloy) => [...selectedElements].some((element) => alloy.family.includes(element))).slice(0, 6);
-  result.innerHTML = candidates.length ? `<strong>پیشنهادهای نزدیک:</strong> ${candidates.map((a) => `<button type="button" class="element-match" data-code="${a.code}">${a.code} — ${a.family}</button>`).join('')}<small>این پیشنهاد بر اساس خانواده آلیاژی است؛ برای انتخاب نهایی، کاربرد و استاندارد محصول را هم بررسی کنید.</small>` : 'ترکیب واردشده در داده فعلی پیدا نشد؛ از جست‌وجوی بانک آلیاژها استفاده کنید.';
+  const amounts = [...selectedElements].map((element) => `${element} ${document.querySelector(`[data-element=\"${element}\"]`).value}%`).join('، '); const candidates = alloyData.alloys.filter((alloy) => [...selectedElements].some((element) => alloy.family.includes(element))).slice(0, 6);
+  result.innerHTML = candidates.length ? `<strong>ترکیب واردشده: ${amounts}</strong><span class="result-caption">پیشنهادهای نزدیک:</span> ${candidates.map((a) => `<button type="button" class="element-match" data-code="${a.code}">${a.code} — ${a.family}</button>`).join('')}<small>این پیشنهاد بر اساس خانواده آلیاژی است؛ برای انتخاب نهایی، کاربرد و استاندارد محصول را هم بررسی کنید.</small>` : 'ترکیب واردشده در داده فعلی پیدا نشد؛ از جست‌وجوی بانک آلیاژها استفاده کنید.';
   $$('.element-match').forEach((button) => button.addEventListener('click', () => { $('#alloySearch').value = button.dataset.code; renderAlloys(); $('#alloyList').scrollIntoView({behavior:'smooth', block:'nearest'}); }));
 }
 function renderAlloys() {
@@ -209,7 +209,7 @@ async function loadAlloys() {
   renderAlloys();
 }
 $('#alloySearch')?.addEventListener('input', renderAlloys);
-$$('[data-element]').forEach((button) => button.addEventListener('click', () => { const element = button.dataset.element; if (selectedElements.has(element)) selectedElements.delete(element); else selectedElements.add(element); button.classList.toggle('active', selectedElements.has(element)); updateElementResult(); }));
+$$('[data-element]').forEach((input) => input.addEventListener('input', () => { const element = input.dataset.element; const amount = Number(input.value || 0); if (amount > 0) selectedElements.add(element); else selectedElements.delete(element); updateElementResult(); }));
 $('#compareButton').addEventListener('click', renderComparison);
 $('#clearCompare').addEventListener('click', () => { selectedAlloys.clear(); $('#comparePanel').hidden = true; renderAlloys(); });
 $$('[data-series]').forEach((button) => button.addEventListener('click', () => {

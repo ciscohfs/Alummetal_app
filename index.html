@@ -9,7 +9,8 @@
   <link rel="preload" href="logo1.png" as="image" />
   <link rel="preload" href="site-hero.png" as="image" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="logo1.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="styles.css?v=8" />
   <title>آلوم متال آراک</title>
 </head>
@@ -17,7 +18,7 @@
   <div class="app-shell" id="appShell">
     <header class="topbar">
       <button class="icon-button menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false"><span></span><span></span><span></span></button>
-      <a class="brand" href="#home" data-route="home" aria-label="صفحه اصلی آلوم متال">
+      <a class="brand" href="#home" data-icon="⌂" data-route="home" aria-label="صفحه اصلی آلوم متال">
         <img src="logo1.png" alt="لوگوی آلوم متال" />
       </a>
       <div class="top-actions">
@@ -34,13 +35,13 @@
       <p class="eyebrow">منوی آلوم متال</p>
       <nav class="drawer-nav">
         <a href="#home" data-route="home">⌂ <span>خانه</span></a>
-        <a href="#calculator" data-route="calculator">◈ <span>محاسبه وزن</span></a>
-        <a href="#prices" data-route="prices">◉ <span>قیمت‌ها</span></a>
-        <a href="#catalog" data-route="catalog">▦ <span>کاتالوگ محصولات</span></a>
-        <a href="#alloys" data-route="alloys">◌ <span>بانک آلیاژها</span></a>
-        <a href="#quote" data-route="quote">✦ <span>درخواست پیش‌فاکتور</span></a>
-        <a href="#contact" data-route="contact">⌁ <span>تماس با ما</span></a>
-        <a href="#settings" data-route="settings">⚙ <span>تنظیمات</span></a>
+        <a href="#calculator" data-icon="◇" data-route="calculator">◈ <span>محاسبه وزن</span></a>
+        <a href="#prices" data-icon="◉" data-route="prices">◉ <span>قیمت‌ها</span></a>
+        <a href="#catalog" data-icon="▦" data-route="catalog">▦ <span>کاتالوگ محصولات</span></a>
+        <a href="#alloys" data-icon="◌" data-route="alloys">◌ <span>بانک آلیاژها</span></a>
+        <a href="#quote" data-icon="✦" data-route="quote">✦ <span>درخواست پیش‌فاکتور</span></a>
+        <a href="#contact" data-icon="⌁" data-route="contact">⌁ <span>تماس با ما</span></a>
+        <a href="#settings" data-icon="⚙" data-route="settings">⚙ <span>تنظیمات</span></a>
       </nav>
       <div class="drawer-foot">کیفیت، نوآوری و رضایت مشتری</div>
     </aside>
@@ -84,7 +85,7 @@
 
       <section class="screen" id="catalog" data-screen><div class="page-head"><p class="eyebrow">PRODUCT LIBRARY</p><h1>کاتالوگ و لیست قیمت</h1><p>کاتالوگ‌ها و صفحات قیمت رسمی برای مشاهده و دانلود</p></div><div class="catalog-tabs"><button class="catalog-tab active" data-catalog-tab="catalogs">کاتالوگ‌ها</button><button class="catalog-tab" data-catalog-tab="price-pages">صفحات قیمت</button></div><div class="catalog-list" id="catalogList"><p class="muted-note">در حال دریافت فهرست...</p></div></section>
 
-      <section class="screen" id="alloys" data-screen><div class="page-head"><p class="eyebrow">آزمایشگاه مواد</p><h1>بانک آلیاژها</h1><p>آلیاژ مناسب را بر اساس کد، سری، کاربرد یا عناصر تشکیل‌دهنده پیدا کنید.</p></div><div class="alloy-tools glass-card"><label class="search-box"><span>⌕</span><input id="alloySearch" type="search" placeholder="جست‌وجوی کد، کاربرد یا ویژگی..." autocomplete="off" /></label><div class="alloy-filters" id="alloyFilters"><button class="alloy-filter active" data-series="all">همه</button><button class="alloy-filter" data-series="1000">سری ۱۰۰۰</button><button class="alloy-filter" data-series="2000">سری ۲۰۰۰</button><button class="alloy-filter" data-series="3000">سری ۳۰۰۰</button><button class="alloy-filter" data-series="4000">سری ۴۰۰۰</button><button class="alloy-filter" data-series="5000">سری ۵۰۰۰</button><button class="alloy-filter" data-series="6000">سری ۶۰۰۰</button><button class="alloy-filter" data-series="7000">سری ۷۰۰۰</button><button class="alloy-filter" data-series="8000">سری ۸۰۰۰</button></div></div><div class="alloy-lab glass-card"><div class="lab-heading"><span class="lab-icon">✦</span><div><h2>عنصر بده، آلیاژ تحویل بگیر</h2><p>عناصر غالب یا ویژگی موردنظر را انتخاب کن تا خانواده آلیاژی مناسب پیشنهاد شود.</p></div></div><div class="element-chips" id="elementChips"><button type="button" data-element="مس">مس</button><button type="button" data-element="منیزیم">منیزیم</button><button type="button" data-element="سیلیسیم">سیلیسیم</button><button type="button" data-element="منگنز">منگنز</button><button type="button" data-element="روی">روی</button><button type="button" data-element="لیتیوم">لیتیوم</button></div><div class="element-result" id="elementResult">یک یا چند عنصر را انتخاب کن.</div></div><div class="compare-bar glass-card"><div><strong>مقایسه انتخابی</strong><small id="compareCount">حداقل دو آلیاژ را از فهرست انتخاب کنید.</small></div><button id="compareButton" class="primary-button" type="button" disabled>مقایسه آلیاژها</button></div><div class="alloy-summary" id="alloySummary">در حال دریافت بانک آلیاژها...</div><div class="alloy-list" id="alloyList"></div><div class="compare-panel glass-card" id="comparePanel" hidden><div class="compare-panel-head"><h2>مقایسه آلیاژها</h2><button id="clearCompare" class="text-link" type="button">پاک کردن</button></div><div class="comparison-table" id="comparisonTable"></div></div></section>
+      <section class="screen" id="alloys" data-screen><div class="page-head"><p class="eyebrow">آزمایشگاه مواد</p><h1>بانک آلیاژها</h1><p>آلیاژ مناسب را بر اساس کد، سری، کاربرد یا عناصر تشکیل‌دهنده پیدا کنید.</p></div><div class="alloy-tools glass-card"><label class="search-box"><span>⌕</span><input id="alloySearch" type="search" placeholder="جست‌وجوی کد، کاربرد یا ویژگی..." autocomplete="off" /></label><div class="alloy-filters" id="alloyFilters"><button class="alloy-filter active" data-series="all">همه</button><button class="alloy-filter" data-series="1000">سری ۱۰۰۰</button><button class="alloy-filter" data-series="2000">سری ۲۰۰۰</button><button class="alloy-filter" data-series="3000">سری ۳۰۰۰</button><button class="alloy-filter" data-series="4000">سری ۴۰۰۰</button><button class="alloy-filter" data-series="5000">سری ۵۰۰۰</button><button class="alloy-filter" data-series="6000">سری ۶۰۰۰</button><button class="alloy-filter" data-series="7000">سری ۷۰۰۰</button><button class="alloy-filter" data-series="8000">سری ۸۰۰۰</button></div></div><div class="alloy-lab glass-card"><div class="lab-heading"><span class="lab-icon">✦</span><div><h2>عنصر بده، آلیاژ تحویل بگیر</h2><p>عناصر غالب یا ویژگی موردنظر را انتخاب کن تا خانواده آلیاژی مناسب پیشنهاد شود.</p></div></div><div class="element-chips" id="elementChips"><label class="element-input"><span>مس</span><input type="number" min="0" step="0.01" data-element="مس" placeholder="مقدار" /><em>٪</em></label><label class="element-input"><span>منیزیم</span><input type="number" min="0" step="0.01" data-element="منیزیم" placeholder="مقدار" /><em>٪</em></label><label class="element-input"><span>سیلیسیم</span><input type="number" min="0" step="0.01" data-element="سیلیسیم" placeholder="مقدار" /><em>٪</em></label><label class="element-input"><span>منگنز</span><input type="number" min="0" step="0.01" data-element="منگنز" placeholder="مقدار" /><em>٪</em></label><label class="element-input"><span>روی</span><input type="number" min="0" step="0.01" data-element="روی" placeholder="مقدار" /><em>٪</em></label><label class="element-input"><span>لیتیوم</span><input type="number" min="0" step="0.01" data-element="لیتیوم" placeholder="مقدار" /><em>٪</em></label></div><div class="element-result" id="elementResult">مقدار عناصر را وارد کن تا پیشنهاد آلیاژ نمایش داده شود.</div><div class="embedded-compare"><div><strong>مقایسه انتخابی</strong><small id="compareCount">از کارت‌های زیر حداقل دو آلیاژ انتخاب کنید.</small></div><button id="compareButton" class="primary-button" type="button" disabled>مقایسه</button></div><div class="compare-panel" id="comparePanel" hidden><div class="compare-panel-head"><h2>نتیجه مقایسه</h2><button id="clearCompare" class="text-link" type="button">پاک کردن</button></div><div class="comparison-table" id="comparisonTable"></div></div></div><div class="alloy-summary" id="alloySummary">در حال دریافت بانک آلیاژها...</div><div class="alloy-list" id="alloyList"></div></section>
 
       <section class="screen" id="quote" data-screen><div class="page-head"><p class="eyebrow">DIRECT CONTACT</p><h1>درخواست پیش‌فاکتور</h1><p>مشخصات پروژه را بفرستید تا راهنمایی‌تان کنیم.</p></div><form class="form-card glass-card" id="quoteForm"><label>نام و نام خانوادگی<input id="quoteName" required placeholder="نام شما" /></label><label>شماره تماس<input id="quotePhone" required inputmode="tel" placeholder="۰۹۱۲..." /></label><label>شرح محصول یا پروژه<textarea id="quoteDetails" required rows="5" placeholder="نوع محصول، آلیاژ، ابعاد و تعداد"></textarea></label><button class="primary-button" type="submit">ثبت درخواست <span>←</span></button><output class="result-box" id="quoteResult"></output></form></section>
 
