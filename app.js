@@ -202,7 +202,7 @@ function renderAlloys() {
   $('#alloySummary').textContent = `${items.length} آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.`;
   list.innerHTML = items.length ? items.map((alloy) => `<article class="alloy-row glass-card"><strong>${alloy.code}</strong><div class="alloy-main"><div class="alloy-title"><h3>${alloy.title}</h3><span>${seriesLabel[alloy.series] || 'آلیاژ آلومینیوم'}</span></div><p>${alloyExplanation(alloy)}</p><small>چگالی تقریبی: ${alloy.density} گرم بر سانتی‌متر مکعب · ${alloy.use}</small></div><button class="add-compare" type="button" data-add-compare="${alloy.code}">افزودن به مقایسه</button></article>`).join('') : '<div class="result-box">آلیاژی با این جست‌وجو پیدا نشد.</div>';
   $$('[data-add-compare]').forEach((button) => button.addEventListener('click', () => { const code = button.dataset.addCompare; const slots = ['#compareOne','#compareTwo','#compareThree']; const target = slots.find((selector) => !$(selector).value); if (!target) { showToast('سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کن.'); return; } $(target).value = code; $(target).dispatchEvent(new Event('change')); showToast(`${code} به مقایسه اضافه شد`); }));
-  updateCompareUI();
+  syncCompareSelection();
 }
 refreshCompareOptions();
 renderAlloys();
