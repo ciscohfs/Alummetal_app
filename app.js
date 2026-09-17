@@ -160,6 +160,32 @@ loadCatalog();
 
 let alloyData = BUILTIN_ALLOYS;
 let selectedSeries = 'all';
+const selectedAlloys = new Set();
+const selectedElements = new Set();
+const seriesLabel = {1000:'سری ۱۰۰۰ — آلومینیوم خالص',2000:'سری ۲۰۰۰ — آلومینیوم-مس',3000:'سری ۳۰۰۰ — آلومینیوم-منگنز',4000:'سری ۴۰۰۰ — آلومینیوم-سیلیسیم',5000:'سری ۵۰۰۰ — آلومینیوم-منیزیم',6000:'سری ۶۰۰۰ — آلومینیوم-منیزیم-سیلیسیم',7000:'سری ۷۰۰۰ — آلومینیوم-روی',8000:'سری ۸۰۰۰ — آلیاژهای ویژه'};
+const elementFamilies = {'مس':['2000','آلومینیوم-مس'],'منیزیم':['5000','آلومینیوم-منیزیم'],'سیلیسیم':['4000','آلومینیوم-منیزیم-سیلیسیم'],'منگنز':['3000','آلومینیوم-منگنز'],'روی':['7000','آلومینیوم-روی'],'لیتیوم':['8000','آلومینیوم-لیتیوم']};
+function alloyExplanation(alloy) {
+  const guidance = alloy.series === '1000' ? 'برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است.' : alloy.series === '2000' ? 'برای استحکام بالا و قطعات ماشین‌کاری‌شده انتخاب می‌شود؛ مقاومت خوردگی آن معمولاً به پوشش یا نگهداری مناسب نیاز دارد.' : alloy.series === '3000' ? 'تعادل خوبی بین فرم‌پذیری، مقاومت خوردگی و استحکام متوسط ایجاد می‌کند.' : alloy.series === '4000' ? 'وجود سیلیسیم به بهبود سیالیت، مقاومت حرارتی یا عملکرد جوشکاری کمک می‌کند.' : alloy.series === '5000' ? 'برای محیط‌های مرطوب و دریایی مناسب است و معمولاً جوش‌پذیری خوبی دارد.' : alloy.series === '6000' ? 'انتخاب متعادل برای پروفیل و سازه است؛ اکستروژن، ماشین‌کاری و عملیات حرارتی در آن مهم است.' : alloy.series === '7000' ? 'بیشترین تمرکز آن روی استحکام است و برای قطعات سبک و پربار مهندسی به‌کار می‌رود.' : 'برای کاربردهای تخصصی مانند فویل، بسته‌بندی یا هوافضا استفاده می‌شود.';
+  return `${alloy.family} با تمرکز بر ${alloy.title}. ${guidance} کاربردهای رایج: ${alloy.use}.`;
+}
+function updateCompareUI() {
+  const count = selectedAlloys.size;
+  $('#compareCount').textContent = count ? `${count} آلیاژ انتخاب شده${count < 2 ? ' — یک مورد دیگر انتخاب کنید' : ''}` : 'حداقل دو آلیاژ را از فهرست انتخاب کنید.';
+  $('#compareButton').disabled = count < 2;
+}
+function renderComparison() {
+  const chosen = alloyData.alloys.filter((alloy) => selectedAlloys.has(alloy.code));
+  $('#comparisonTable').innerHTML = `<div class="comparison-row comparison-labels"><span>شاخص</span>${chosen.map((a) => `<strong>${a.code}</strong>`).join('')}</div>${[['خانواده','family'],['سری','series'],['چگالی','density'],['تمرکز عملکردی','title'],['کاربرد اصلی','use']].map(([label,key]) => `<div class="comparison-row"><span>${label}</span>${chosen.map((a) => `<div>${key === 'density' ? `${a[key]} g/cm³` : a[key]}</div>`).join('')}</div>`).join('')}<div class="comparison-note">${chosen.map((a) => `<p><b>${a.code}:</b> ${alloyExplanation(a)}</p>`).join('')}</div>`;
+  $('#comparePanel').hidden = false;
+  $('#comparePanel').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function updateElementResult() {
+  const result = $('#elementResult');
+  if (!selectedElements.size) { result.textContent = 'یک یا چند عنصر را انتخاب کن.'; return; }
+  const candidates = alloyData.alloys.filter((alloy) => [...selectedElements].some((element) => alloy.family.includes(element))).slice(0, 6);
+  result.innerHTML = candidates.length ? `<strong>پیشنهادهای نزدیک:</strong> ${candidates.map((a) => `<button type="button" class="element-match" data-code="${a.code}">${a.code} — ${a.family}</button>`).join('')}<small>این پیشنهاد بر اساس خانواده آلیاژی است؛ برای انتخاب نهایی، کاربرد و استاندارد محصول را هم بررسی کنید.</small>` : 'ترکیب واردشده در داده فعلی پیدا نشد؛ از جست‌وجوی بانک آلیاژها استفاده کنید.';
+  $$('.element-match').forEach((button) => button.addEventListener('click', () => { $('#alloySearch').value = button.dataset.code; renderAlloys(); $('#alloyList').scrollIntoView({behavior:'smooth', block:'nearest'}); }));
+}
 function renderAlloys() {
   const list = $('#alloyList');
   if (!list) return;
@@ -170,8 +196,9 @@ function renderAlloys() {
     return matchesSeries && (!query || haystack.includes(query));
   });
   $('#alloySummary').textContent = `${items.length} آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.`;
-  const seriesLabel = {1000:'سری ۱۰۰۰ — آلومینیوم خالص',2000:'سری ۲۰۰۰ — آلومینیوم-مس',3000:'سری ۳۰۰۰ — آلومینیوم-منگنز',4000:'سری ۴۰۰۰ — آلومینیوم-سیلیسیم',5000:'سری ۵۰۰۰ — آلومینیوم-منیزیم',6000:'سری ۶۰۰۰ — آلومینیوم-منیزیم-سیلیسیم',7000:'سری ۷۰۰۰ — آلومینیوم-روی',8000:'سری ۸۰۰۰ — آلیاژهای ویژه'};
-  list.innerHTML = items.length ? items.map((alloy) => `<article class="alloy-row glass-card"><strong>${alloy.code}</strong><div class="alloy-main"><div class="alloy-title"><h3>${alloy.title}</h3><span>${seriesLabel[alloy.series] || 'آلیاژ آلومینیوم'}</span></div><p>${alloy.family} · ${alloy.use}</p><small>چگالی تقریبی: ${alloy.density} گرم بر سانتی‌متر مکعب</small></div></article>`).join('') : '<div class="result-box">آلیاژی با این جست‌وجو پیدا نشد.</div>';
+  list.innerHTML = items.length ? items.map((alloy) => `<article class="alloy-row glass-card"><label class="compare-check" title="افزودن به مقایسه"><input type="checkbox" data-compare="${alloy.code}" ${selectedAlloys.has(alloy.code) ? 'checked' : ''} /><span></span></label><strong>${alloy.code}</strong><div class="alloy-main"><div class="alloy-title"><h3>${alloy.title}</h3><span>${seriesLabel[alloy.series] || 'آلیاژ آلومینیوم'}</span></div><p>${alloyExplanation(alloy)}</p><small>چگالی تقریبی: ${alloy.density} گرم بر سانتی‌متر مکعب · ${alloy.use}</small></div></article>`).join('') : '<div class="result-box">آلیاژی با این جست‌وجو پیدا نشد.</div>';
+  $$('[data-compare]').forEach((input) => input.addEventListener('change', () => { input.checked ? selectedAlloys.add(input.dataset.compare) : selectedAlloys.delete(input.dataset.compare); updateCompareUI(); }));
+  updateCompareUI();
 }
 renderAlloys();
 async function loadAlloys() {
@@ -182,6 +209,9 @@ async function loadAlloys() {
   renderAlloys();
 }
 $('#alloySearch')?.addEventListener('input', renderAlloys);
+$$('[data-element]').forEach((button) => button.addEventListener('click', () => { const element = button.dataset.element; if (selectedElements.has(element)) selectedElements.delete(element); else selectedElements.add(element); button.classList.toggle('active', selectedElements.has(element)); updateElementResult(); }));
+$('#compareButton').addEventListener('click', renderComparison);
+$('#clearCompare').addEventListener('click', () => { selectedAlloys.clear(); $('#comparePanel').hidden = true; renderAlloys(); });
 $$('[data-series]').forEach((button) => button.addEventListener('click', () => {
   selectedSeries = button.dataset.series;
   $$('[data-series]').forEach((item) => item.classList.toggle('active', item === button));
