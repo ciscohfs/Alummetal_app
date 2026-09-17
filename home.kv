@@ -319,85 +319,6 @@
 
 
 FloatLayout:
-    Widget:
-        id: scrim
-        size_hint: 1,1
-        opacity: 1 if app.drawer_open else 0
-        disabled: not app.drawer_open
-        canvas:
-            Color:
-                rgba: 0,0,0,.55
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        on_touch_down:
-            app.close_drawer()
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: None, 1
-        width: dp(290)
-        x: 0 if app.drawer_open else -self.width
-        padding: dp(20),dp(30),dp(16),dp(20)
-        spacing: dp(10)
-        canvas.before:
-            Color:
-                rgba: app.dark_mode and (.04,.09,.13,1) or (.95,.97,.98,1)
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        Label:
-            text: app.tr('آلوم متال آراک','Alum Metal Arak')
-            color: .98,.58,.22,1
-            font_size: dp(20)
-            bold: True
-            size_hint_y: None
-            height: dp(54)
-            halign: 'right' if not app.is_english else 'left'
-            text_size: self.size
-        Label:
-            text: app.tr('منوی برنامه','App menu')
-            color: .55,.68,.73,1
-            size_hint_y: None
-            height: dp(28)
-            halign: 'right' if not app.is_english else 'left'
-            text_size: self.size
-        GlassButton:
-            text: app.tr('خانه','Home')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('home')
-        GlassButton:
-            text: app.tr('محاسبه وزن','Weight calculator')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('calculator')
-        GlassButton:
-            text: app.tr('قیمت‌ها','Prices')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('prices')
-        GlassButton:
-            text: app.tr('محصولات و آلیاژها','Products and alloys')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('catalog')
-        GlassButton:
-            text: app.tr('درخواست پیش‌فاکتور','Request a quote')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('quote')
-        Widget:
-        GlassButton:
-            text: app.tr('تنظیمات','Settings')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('settings')
-        GlassButton:
-            text: app.tr('تماس با ما','Contact us')
-            size_hint_y: None
-            height: dp(50)
-            on_release: app.show_screen('contact')
-
     ScreenManager:
         id: manager
         AppScreen:
@@ -732,3 +653,81 @@ FloatLayout:
                     value: '1.0.0'
                 Widget:
                 BottomNav:
+    Widget:
+        id: scrim
+        size_hint: 1,1
+        opacity: 1 if app.drawer_open else 0
+        disabled: not app.drawer_open
+        canvas:
+            Color:
+                rgba: 0,0,0,.55
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        on_touch_down:
+            app.close_drawer()
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, 1
+        width: dp(290)
+        x: 0 if app.drawer_open else -self.width
+        padding: dp(20),dp(30),dp(16),dp(20)
+        spacing: dp(10)
+        canvas.before:
+            Color:
+                rgba: app.dark_mode and (.04,.09,.13,1) or (.95,.97,.98,1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: app.tr('آلوم متال آراک','Alum Metal Arak')
+            color: .98,.58,.22,1
+            font_size: dp(20)
+            bold: True
+            size_hint_y: None
+            height: dp(54)
+            halign: 'right' if not app.is_english else 'left'
+            text_size: self.size
+        Label:
+            text: app.tr('منوی برنامه','App menu')
+            color: .55,.68,.73,1
+            size_hint_y: None
+            height: dp(28)
+            halign: 'right' if not app.is_english else 'left'
+            text_size: self.size
+        GlassButton:
+            text: app.tr('خانه','Home')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('home')
+        GlassButton:
+            text: app.tr('محاسبه وزن','Weight calculator')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('calculator')
+        GlassButton:
+            text: app.tr('قیمت‌ها','Prices')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('prices')
+        GlassButton:
+            text: app.tr('محصولات و آلیاژها','Products and alloys')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('catalog')
+        GlassButton:
+            text: app.tr('درخواست پیش‌فاکتور','Request a quote')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('quote')
+        Widget:
+        GlassButton:
+            text: app.tr('تنظیمات','Settings')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('settings')
+        GlassButton:
+            text: app.tr('تماس با ما','Contact us')
+            size_hint_y: None
+            height: dp(50)
+            on_release: app.show_screen('contact')
