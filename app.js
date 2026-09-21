@@ -269,6 +269,5 @@ $('#installButton').addEventListener('click', async () => {
   $('#installButton').hidden = true;
 });
 
-if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => {}));
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
