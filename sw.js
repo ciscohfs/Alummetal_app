@@ -1,6 +1,6 @@
 const CACHE_NAME = 'alum-metal-web-v21';
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './prices.json', './catalog.json', './calculator.json', './alloys.json', './manifest.webmanifest', './logo1.png', './favicon-48.png', './apple-touch-icon.png', './icon-192.png', './icon-512.png', './Yekan.ttf', './BYekan.ttf', './site-hero.png', './factory-banner.jpg'];
-const NETWORK_FIRST = new Set(['index.html', 'styles.css', 'app.js', 'sw.js', 'prices.json', 'catalog.json', 'calculator.json', 'alloys.json']);
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './catalog.json', './calculator.json', './alloys.json', './manifest.webmanifest', './logo1.png', './favicon-48.png', './apple-touch-icon.png', './icon-192.png', './icon-512.png', './Yekan.ttf', './BYekan.ttf', './site-hero.png', './factory-banner.jpg'];
+const NETWORK_FIRST = new Set(['index.html', 'styles.css', 'app.js', 'sw.js', 'catalog.json', 'calculator.json', 'alloys.json']);
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', (event) => {
