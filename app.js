@@ -86,7 +86,7 @@ function refreshShapeLabels() {
 function renderCalculator(data) {
   calculatorData = data;
   shapeSelect.innerHTML = data.shapes.map((shape) => `<option value="${shape.id}">${shape.name}</option>`).join('');
-  alloySelect.innerHTML = data.alloys.map((alloy) => `<option value="${alloy.id}">${alloy.name}</option>`).join('');
+  alloySelect.innerHTML = data.alloys.map((alloy) => `<option value="${alloy.id}">${alloy.id}</option>`).join('');
   refreshShapeLabels();
 }
 async function loadCalculator() {
