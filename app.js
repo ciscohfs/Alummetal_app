@@ -113,13 +113,6 @@ $('#calculateButton').addEventListener('click', () => {
 });
 loadCalculator();
 
-$('#calculatePriceButton').addEventListener('click', () => {
-  const weight = Number($('#priceWeight').value), perKg = Number($('#pricePerKg').value), wastage = Number($('#priceWastage').value || 0);
-  const result = $('#priceResult');
-  if (!(weight > 0) || !(perKg > 0) || wastage < 0) { result.textContent = 'وزن و قیمت هر کیلو را با عدد مثبت وارد کنید.'; return; }
-  const total = weight * perKg * (1 + wastage / 100);
-  result.textContent = `قیمت تقریبی: ${Math.round(total).toLocaleString('fa-IR')} تومان — با احتساب ${wastage.toLocaleString('fa-IR')}٪ هزینه جانبی`;
-});
 
 $('#quoteForm').addEventListener('submit', (event) => {
   event.preventDefault();
