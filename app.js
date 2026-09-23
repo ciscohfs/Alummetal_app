@@ -63,6 +63,7 @@ setTheme(savedTheme === 'light');
 $('#themeToggle').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#settingsTheme').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#languageToggle').addEventListener('click', () => showToast('زبان فعلی برنامه فارسی است.'));
+$('#calculatorGuideToggle')?.addEventListener('click', () => { const guide=$('#calculatorGuide'); const button=$('#calculatorGuideToggle'); const open=!guide.hidden; guide.hidden=open; button.setAttribute('aria-expanded', String(!open)); button.querySelector('span').textContent=open?'＋':'－'; });
 
 $('#fullscreenToggle').addEventListener('click', async () => {
   try {
@@ -78,10 +79,13 @@ let calculatorData = null;
 const shapeSelect = $('#shapeSelect');
 const alloySelect = $('#alloySelect');
 const shapeLabels = {sheet:['طول','عرض','ضخامت'],round:['طول','قطر','—'],square:['طول','عرض','ارتفاع'],flat:['طول','عرض','ضخامت'],tube:['طول','قطر خارجی','ضخامت'],hex:['طول','ضلع','—']};
+const shapeGuideData = {round:['round.jpg','راهنمای اندازه‌گذاری مقطع گرد'],square:['sqr.jpg','راهنمای اندازه‌گذاری چهارپهلو'],flat:['rect.jpg','راهنمای اندازه‌گذاری تسمه'],hex:['hexagon.jpg','راهنمای اندازه‌گذاری شش‌پر'],sheet:['sheet.jpg','راهنمای اندازه‌گذاری ورق'],tube:['pipe.jpg','راهنمای اندازه‌گذاری لوله']};
+function refreshShapeGuide() { const guide=shapeGuideData[shapeSelect.value] || shapeGuideData.sheet; const image=$('#shapeGuideImage'); const caption=$('#shapeGuideCaption'); if (image) { image.src=`shape-guides/${guide[0]}`; image.alt=guide[1]; } if (caption) caption.textContent=guide[1]; }
 function refreshShapeLabels() {
   const labels = shapeLabels[shapeSelect.value] || shapeLabels.sheet;
   ['fieldOneLabel','fieldTwoLabel','fieldThreeLabel'].forEach((id, index) => { $(`#${id}`).textContent = `${labels[index]} (میلی‌متر)`; });
   $('#fieldThreeLabel').parentElement.style.display = labels[2] === '—' ? 'none' : 'grid';
+  refreshShapeGuide();
 }
 function renderCalculator(data) {
   calculatorData = data;
@@ -209,9 +213,10 @@ function renderComparison() {
 }
 function updateElementResult() {
   const result = $('#elementResult');
-  const codeQuery = ($('#elementAlloyCode')?.value || '').trim().replace(/[^0-9]/g,'');
+  const digitMap = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9','٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};
+  const codeQuery = [...($('#elementAlloyCode')?.value || '').trim()].map((char) => digitMap[char] || char).join('').replace(/[^0-9]/g,'');
   if (!selectedElements.size && !codeQuery) { result.textContent = 'مقدار عنصر یا کد آلیاژ را وارد کن تا پیشنهاد دقیق نمایش داده شود.'; return; }
-  const amounts = [...selectedElements].map((element) => `${document.querySelector(`[data-element=\"${element}\"]`).previousElementSibling.querySelector('b').textContent} ${element} ${document.querySelector(`[data-element=\"${element}\"]`).value}%`).join('، '); const familyMap = {'مس':'آلومینیوم-مس','منیزیم':'آلومینیوم-منیزیم','سیلیسیم':'آلومینیوم-سیلیسیم','منگنز':'آلومینیوم-منگنز','روی':'آلومینیوم-روی','آهن':'آلومینیوم','کروم':'آلومینیوم','تیتانیوم':'آلومینیوم'}; const exact = codeQuery ? alloyData.alloys.filter((alloy) => alloy.code.includes(codeQuery)) : []; const candidates = exact.length ? exact : alloyData.alloys.filter((alloy) => [...selectedElements].some((element) => alloy.family.includes(familyMap[element]) || (['آهن','کروم','تیتانیوم'].includes(element) && alloy.family.includes('آلومینیوم'))));
+  const amounts = [...selectedElements].map((element) => `${document.querySelector(`[data-element="${element}"]`).previousElementSibling.querySelector('b').textContent} ${element} ${document.querySelector(`[data-element="${element}"]`).value}%`).join('، '); const familyMap = {'مس':'آلومینیوم-مس','منیزیم':'آلومینیوم-منیزیم','سیلیسیم':'آلومینیوم-سیلیسیم','منگنز':'آلومینیوم-منگنز','روی':'آلومینیوم-روی','آهن':'آلومینیوم','کروم':'آلومینیوم','تیتانیوم':'آلومینیوم'}; const exact = codeQuery ? alloyData.alloys.filter((alloy) => alloy.code.replace(/[^0-9]/g,'') === codeQuery) : []; const targets = {'5052':{منیزیم:2.5,کروم:0.25},'6061':{منیزیم:1,سیلیسیم:0.6,مس:0.28},'6063':{منیزیم:0.55,سیلیسیم:0.45},'7075':{روی:5.6,منیزیم:2.5,مس:1.6},'2024':{مس:4.4,منیزیم:1.5,منگنز:0.6}}; const entered = [...selectedElements].reduce((out, element) => { out[element] = Number(document.querySelector(`[data-element="${element}"]`).value || 0); return out; }, {}); const score = (alloy) => { let value = 0; for (const [element, amount] of Object.entries(entered)) { const family = familyMap[element]; if (family && alloy.family.includes(family.split('آلومینیوم-')[1] || family)) value += 5; const target = targets[alloy.code]?.[element]; if (target) value += Math.max(0, 4 - Math.abs(amount-target)); } return value; }; const candidates = exact.length ? exact : alloyData.alloys.filter((alloy) => score(alloy) > 0).sort((left,right) => score(right)-score(left)).slice(0, 8);
   result.innerHTML = candidates.length ? `<strong>ترکیب واردشده: ${amounts}</strong><span class="result-caption">پیشنهادهای نزدیک:</span> ${candidates.map((a) => `<button type="button" class="element-match" data-code="${a.code}">${a.code} — ${a.family}</button>`).join('')}<small>این پیشنهاد بر اساس خانواده آلیاژی است؛ برای انتخاب نهایی، کاربرد و استاندارد محصول را هم بررسی کنید.</small>` : 'ترکیب واردشده در داده فعلی پیدا نشد؛ از جست‌وجوی بانک آلیاژها استفاده کنید.';
   $$('.element-match').forEach((button) => button.addEventListener('click', () => { $('#alloySearch').value = button.dataset.code; renderAlloys(); $('#alloyList').scrollIntoView({behavior:'smooth', block:'nearest'}); }));
 }
