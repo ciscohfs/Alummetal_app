@@ -20,22 +20,23 @@ Persian-first mobile-style desktop application for Alum Metal Arak, built with P
 ## Run on Windows or Linux
 
 ```bash
+cd desktop
 python -m pip install -r requirements.txt
 python app.py
 ```
 
-The app uses `Yekan.ttf` and `logo1.png`; both files must remain beside `app.py` and `home.kv`.
+The desktop app keeps its Kivy files and `Yekan.ttf` in `desktop/`; shared web images are kept in `web/img/`.
 
 ## Project structure
 
-- `app.py` — Kivy application bootstrap, navigation, localization, theme state and form/calculator logic
-- `home.kv` — UI layout, reusable components and all application screens
-- `Yekan.ttf` — Persian UI font
-- `BYekan.ttf` — B Yekan web font used by the standalone web app
-- `logo1.png` — Alum Metal logo
-- `site-hero.png` — branded industrial hero banner adapted from the public website visual language
-- `factory-banner.jpg` — factory banner reserved for the catalog/about experience
-- `requirements.txt` — Python dependencies
+- `desktop/app.py` — Kivy application bootstrap, navigation, localization, theme state and form/calculator logic
+- `desktop/home.kv` — UI layout, reusable components and all application screens
+- `desktop/Yekan.ttf` — Persian UI font
+- `web/fonts/BYekan.ttf` — B Yekan web font used by the standalone web app
+- `web/img/logo1.png` — Alum Metal logo
+- `web/img/site-hero.png` — branded industrial hero banner adapted from the public website visual language
+- `web/img/factory-banner.jpg` — factory banner reserved for the catalog/about experience
+- `desktop/requirements.txt` — Python dependencies
 
 ## Notes
 
@@ -47,11 +48,12 @@ The application is a functional multi-screen prototype ready for the next produc
 
 ## Web version
 
-The repository also includes a standalone HTML/CSS/JavaScript web app in `index.html`, `styles.css` and `app.js`. It is mobile-first, RTL-aware, responsive on desktop, supports browser fullscreen, safe-area insets, reduced-motion preferences, local theme persistence, and installability as a Progressive Web App through `manifest.webmanifest` and `sw.js`.
+The repository also includes a standalone HTML/CSS/JavaScript web app in `web/index.html`, `web/styles.css` and `web/app.js`. It is mobile-first, RTL-aware, responsive on desktop, supports browser fullscreen, safe-area insets, reduced-motion preferences, local theme persistence, and installability as a Progressive Web App through `manifest.webmanifest` and `sw.js`.
 
 Run it locally with:
 
 ```bash
+cd web
 python -m http.server 4173 --bind 0.0.0.0
 ```
 

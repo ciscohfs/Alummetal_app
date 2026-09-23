@@ -80,7 +80,7 @@ const shapeSelect = $('#shapeSelect');
 const alloySelect = $('#alloySelect');
 const shapeLabels = {sheet:['طول','عرض','ضخامت'],round:['طول','قطر','—'],square:['طول','عرض','ارتفاع'],flat:['طول','عرض','ضخامت'],tube:['طول','قطر خارجی','ضخامت'],hex:['طول','ضلع','—']};
 const shapeGuideData = {round:['round.jpg','راهنمای اندازه‌گذاری مقطع گرد'],square:['sqr.jpg','راهنمای اندازه‌گذاری چهارپهلو'],flat:['rect.jpg','راهنمای اندازه‌گذاری تسمه'],hex:['hexagon.jpg','راهنمای اندازه‌گذاری شش‌پر'],sheet:['sheet.jpg','راهنمای اندازه‌گذاری ورق'],tube:['pipe.jpg','راهنمای اندازه‌گذاری لوله']};
-function refreshShapeGuide() { const guide=shapeGuideData[shapeSelect.value] || shapeGuideData.sheet; const image=$('#shapeGuideImage'); const caption=$('#shapeGuideCaption'); if (image) { image.src=`shape-guides/${guide[0]}`; image.alt=guide[1]; } if (caption) caption.textContent=guide[1]; }
+function refreshShapeGuide() { const guide=shapeGuideData[shapeSelect.value] || shapeGuideData.sheet; const image=$('#shapeGuideImage'); const caption=$('#shapeGuideCaption'); if (image) { image.src=`img/shape-guides/${guide[0]}`; image.alt=guide[1]; } if (caption) caption.textContent=guide[1]; }
 function refreshShapeLabels() {
   const labels = shapeLabels[shapeSelect.value] || shapeLabels.sheet;
   ['fieldOneLabel','fieldTwoLabel','fieldThreeLabel'].forEach((id, index) => { $(`#${id}`).textContent = `${labels[index]} (میلی‌متر)`; });

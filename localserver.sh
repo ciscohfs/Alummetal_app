@@ -5,9 +5,10 @@ cd "$(dirname "$(realpath "$0")")"
 echo "[۱/۳] دریافت آخرین نسخه از GitHub..."
 git pull --ff-only origin main
 
-rm -f reset.html
+rm -f web/reset.html
 PORT="${PORT:-4173}"
 CACHE_BUSTER="$(date +%s)"
+cd web
 
 if command -v python3 >/dev/null 2>&1; then
   PYTHON=python3

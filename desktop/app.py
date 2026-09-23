@@ -58,7 +58,7 @@ class MainApp(App):
     dark_mode = BooleanProperty(True)
     drawer_open = BooleanProperty(False)
     current_screen = StringProperty('home')
-    font_name = StringProperty(str(BASE_DIR / 'BYekan.ttf'))
+    font_name = StringProperty(str(BASE_DIR / 'Yekan.ttf'))
     result_text = StringProperty('')
 
     def build(self):
