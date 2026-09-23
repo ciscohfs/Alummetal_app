@@ -56,3 +56,7 @@ python -m http.server 4173 --bind 0.0.0.0
 ```
 
 Then open `http://localhost:4173`. For a real custom domain, upload the web files to any static host and point the domain DNS to that host. HTTPS is required by browsers for service-worker/PWA features outside localhost.
+
+## اجرای سریع نسخهٔ وب
+
+برای دریافت آخرین نسخه از GitHub، حذف فایل قدیمی `reset.html`، دور زدن کش و اجرای سرور محلی، فایل `localserver.bat` را در ویندوز اجرا کنید. این ابزار به‌صورت خودکار آدرس نسخه‌دار را در مرورگر باز می‌کند. در لینوکس یا macOS نیز از `./localserver.sh` استفاده کنید.
