@@ -3,9 +3,14 @@ set -e
 cd "$(dirname "$(realpath "$0")")"
 
 echo "[۱/۳] دریافت آخرین نسخه از GitHub..."
-git pull --ff-only origin main
-
-rm -f web/reset.html
+if [ -d .git ] && git remote get-url origin >/dev/null 2>&1; then
+  BRANCH="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || echo main)"
+  if ! git pull --ff-only origin "$BRANCH"; then
+    echo "هشدار: دریافت خودکار انجام نشد؛ برنامه با همین نسخه موجود بالا می‌آید."
+  fi
+else
+  echo "هشدار: مخزن Git پیکربندی نشده است؛ برنامه با همین نسخه موجود بالا می‌آید."
+fi
 PORT="${PORT:-4173}"
 CACHE_BUSTER="$(date +%s)"
 cd web

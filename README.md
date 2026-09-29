@@ -61,4 +61,10 @@ Then open `http://localhost:4173`. For a real custom domain, upload the web file
 
 ## اجرای سریع نسخهٔ وب
 
-برای دریافت آخرین نسخه از GitHub، حذف فایل قدیمی `reset.html`، دور زدن کش و اجرای سرور محلی، فایل `localserver.bat` را در ویندوز اجرا کنید. این ابزار به‌صورت خودکار آدرس نسخه‌دار را در مرورگر باز می‌کند. در لینوکس یا macOS نیز از `./localserver.sh` استفاده کنید.
+برای دریافت آخرین نسخه از GitHub (در صورت پیکربندی بودن remote)، دور زدن کش و اجرای سرور محلی، فایل `localserver.bat` را در ویندوز اجرا کنید. این ابزار به‌صورت خودکار آدرس نسخه‌دار را در مرورگر باز می‌کند. در لینوکس یا macOS نیز از `./localserver.sh` استفاده کنید. اگر مخزن Git روی رایانه پیکربندی نشده باشد، اسکریپت با هشدار همان نسخهٔ موجود را بالا می‌آورد و اجرا متوقف نمی‌شود.
+
+## Fonts
+
+- `web/fonts/BYekan.*` — B Yekan (woff2/woff/ttf) used by the web app
+- `web/fonts/Yekan.*` — Yekan font from https://github.com/DediData/Yekan-Font (see `web/fonts/license.txt`)
+- `desktop/Yekan.ttf` — Persian UI font for the Kivy desktop app

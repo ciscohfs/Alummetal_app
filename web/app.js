@@ -293,5 +293,21 @@ $('#installButton').addEventListener('click', async () => {
   $('#installButton').hidden = true;
 });
 
+// Reset app: unregister service worker, clear all caches, then reload fresh.
+$('#resetAppButton')?.addEventListener('click', async () => {
+  try {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(registrations.map((r) => r.unregister()));
+    if ('caches' in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((key) => caches.delete(key)));
+    }
+    localStorage.clear();
+    location.reload();
+  } catch (error) {
+    location.reload();
+  }
+});
+
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
