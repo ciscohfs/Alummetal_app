@@ -8,15 +8,14 @@ echo   Alum Metal Arak - Local Server
 echo ========================================
 echo.
 echo [1/3] دریافت آخرین نسخه از GitHub...
-git pull --ff-only origin main
-if errorlevel 1 (
-  echo.
-  echo دریافت نسخه جدید ناموفق بود. اتصال اینترنت و وضعیت Git را بررسی کنید.
-  pause
-  exit /b 1
+for /f "delims=" %%R in ('git remote get-url origin 2^>nul') do set "HAS_REMOTE=%%R"
+if not defined HAS_REMOTE (
+  echo هشدار: مخزن Git پیکربندی نشده است؛ برنامه با همین نسخه موجود بالا می‌آید.
+) else (
+  git pull --ff-only origin main
+  if errorlevel 1 echo هشدار: دریافت خودکار انجام نشد؛ برنامه با همین نسخه موجود بالا می‌آید.
 )
 
-if exist web\reset.html del /q web\reset.html
 set "PORT=4173"
 set "CACHE_BUSTER=%RANDOM%"
 cd /d "%~dp0web"
