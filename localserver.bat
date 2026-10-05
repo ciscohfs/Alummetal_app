@@ -16,7 +16,6 @@ if errorlevel 1 (
   exit /b 1
 )
 
-if exist web\reset.html del /q web\reset.html
 set "PORT=4173"
 set "CACHE_BUSTER=%RANDOM%"
 cd /d "%~dp0web"

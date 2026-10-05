@@ -1,5 +1,5 @@
-const CACHE_NAME = 'alum-metal-web-v22';
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './catalog.json', './calculator.json', './alloys.json', './manifest.webmanifest', './img/logo1.png', './img/favicon-48.png', './img/apple-touch-icon.png', './img/icon-192.png', './img/icon-512.png', './fonts/Yekan.ttf', './fonts/BYekan.ttf', './img/site-hero.png', './img/factory-banner.jpg'];
+const CACHE_NAME = 'alum-metal-web-v23';
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './catalog.json', './calculator.json', './alloys.json', './manifest.webmanifest', './img/logo1.png', './img/favicon-48.png', './img/apple-touch-icon.png', './img/icon-192.png', './img/icon-512.png', './fonts/BYekan.ttf', './img/site-hero.png', './img/factory-banner.jpg'];
 const NETWORK_FIRST = new Set(['index.html', 'styles.css', 'app.js', 'sw.js', 'catalog.json', 'calculator.json', 'alloys.json']);
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim())));

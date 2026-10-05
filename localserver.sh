@@ -5,7 +5,6 @@ cd "$(dirname "$(realpath "$0")")"
 echo "[۱/۳] دریافت آخرین نسخه از GitHub..."
 git pull --ff-only origin main
 
-rm -f web/reset.html
 PORT="${PORT:-4173}"
 CACHE_BUSTER="$(date +%s)"
 cd web

@@ -487,13 +487,13 @@ FloatLayout:
                         subtitle: app.tr('قیمت‌های نمونه؛ برای استعلام نهایی تماس بگیرید.','Indicative prices; contact us for a final quote.')
                     PriceRow:
                         product: app.tr('شمش آلومینیوم','Aluminum ingot')
-                        price: '۲۸۵,۰۰۰ تومان / kg' if not app.is_english else '285,000 IRR / kg'
+                        price: app.rtl('۲۸۵,۰۰۰ تومان / kg') if not app.is_english else '285,000 IRR / kg'
                     PriceRow:
                         product: app.tr('پروفیل ساختمانی','Construction profile')
-                        price: '۳۹۵,۰۰۰ تومان / kg' if not app.is_english else '395,000 IRR / kg'
+                        price: app.rtl('۳۹۵,۰۰۰ تومان / kg') if not app.is_english else '395,000 IRR / kg'
                     PriceRow:
                         product: app.tr('ورق آلومینیوم','Aluminum sheet')
-                        price: '۴۲۵,۰۰۰ تومان / kg' if not app.is_english else '425,000 IRR / kg'
+                        price: app.rtl('۴۲۵,۰۰۰ تومان / kg') if not app.is_english else '425,000 IRR / kg'
                     Label:
                         text: app.tr('آخرین بروزرسانی: امروز — قیمت‌ها ممکن است تغییر کنند.','Last updated: today — prices may change.')
                         color: .58,.68,.74,1
@@ -557,19 +557,19 @@ FloatLayout:
                     AlloyRow:
                         code: '6063'
                         name: app.tr('اکسترود و معماری','Extrusion and architecture')
-                        color_value: 'سیلیکون ۰.۲ تا ۰.۶٪' if not app.is_english else 'Silicon 0.2–0.6%'
+                        color_value: app.rtl('سیلیکون ۰.۲ تا ۰.۶٪') if not app.is_english else 'Silicon 0.2–0.6%'
                     AlloyRow:
                         code: '6061'
                         name: app.tr('قطعات صنعتی و سازه‌ای','Industrial and structural parts')
-                        color_value: 'منیزیم و سیلیکون' if not app.is_english else 'Magnesium and silicon'
+                        color_value: app.rtl('منیزیم و سیلیکون') if not app.is_english else 'Magnesium and silicon'
                     AlloyRow:
                         code: '5052'
                         name: app.tr('ورق‌کاری و محیط مرطوب','Sheet work and wet environments')
-                        color_value: 'مقاومت خوردگی بالا' if not app.is_english else 'High corrosion resistance'
+                        color_value: app.rtl('مقاومت خوردگی بالا') if not app.is_english else 'High corrosion resistance'
                     AlloyRow:
                         code: '7075'
                         name: app.tr('قطعات با استحکام بالا','High-strength components')
-                        color_value: 'روی و منیزیم' if not app.is_english else 'Zinc and magnesium'
+                        color_value: app.rtl('روی و منیزیم') if not app.is_english else 'Zinc and magnesium'
                     BottomNav:
 
         AppScreen:
