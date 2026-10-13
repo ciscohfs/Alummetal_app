@@ -55,11 +55,19 @@ document.addEventListener('keydown', (event) => { if (event.key === 'Escape') cl
 
 function setTheme(light) {
   document.body.classList.toggle('light', light);
-  localStorage.setItem('alum-theme', light ? 'light' : 'dark');
-  $('#themeStatus').textContent = light ? 'روشن' : 'فعال';
+  localStorage.setItem('alum-theme-v2', light ? 'light' : 'dark');
+  const status = $('#themeStatus');
+  if (status) status.textContent = light ? 'غیرفعال' : 'فعال';
+  const toggle = $('#themeToggle');
+  if (toggle) {
+    toggle.textContent = light ? '☾' : '☼';
+    toggle.setAttribute('aria-label', light ? 'فعال کردن حالت شب' : 'حالت روز');
+  }
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', light ? '#edf3f5' : '#07121b');
 }
-const savedTheme = localStorage.getItem('alum-theme');
-setTheme(savedTheme === 'light');
+const savedTheme = localStorage.getItem('alum-theme-v2');
+setTheme(savedTheme !== 'dark');  // light theme is the default; dark only when chosen
 $('#themeToggle').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#settingsTheme').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#languageToggle').addEventListener('click', () => showToast('زبان فعلی برنامه فارسی است.'));
@@ -187,7 +195,6 @@ if (!alloyData.alloys.some((a) => a.code === '6010')) alloyData.alloys.splice(17
 
 let selectedSeries = 'all';
 const selectedAlloys = new Set();
-const selectedElements = new Set();
 const seriesLabel = {1000:'سری ۱۰۰۰ — آلومینیوم خالص',2000:'سری ۲۰۰۰ — آلومینیوم-مس',3000:'سری ۳۰۰۰ — آلومینیوم-منگنز',4000:'سری ۴۰۰۰ — آلومینیوم-سیلیسیم',5000:'سری ۵۰۰۰ — آلومینیوم-منیزیم',6000:'سری ۶۰۰۰ — آلومینیوم-منیزیم-سیلیسیم',7000:'سری ۷۰۰۰ — آلومینیوم-روی',8000:'سری ۸۰۰۰ — آلیاژهای ویژه',cast:'آلیاژهای ریختگی'};
 function alloyExplanation(alloy) {
   const guidance = alloy.series === '1000' ? 'برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است.' : alloy.series === '2000' ? 'برای استحکام بالا و قطعات ماشین‌کاری‌شده انتخاب می‌شود؛ مقاومت خوردگی آن معمولاً به پوشش یا نگهداری مناسب نیاز دارد.' : alloy.series === '3000' ? 'تعادل خوبی بین فرم‌پذیری، مقاومت خوردگی و استحکام متوسط ایجاد می‌کند.' : alloy.series === '4000' ? 'وجود سیلیسیم به بهبود سیالیت، مقاومت حرارتی یا عملکرد جوشکاری کمک می‌کند.' : alloy.series === '5000' ? 'برای محیط‌های مرطوب و دریایی مناسب است و معمولاً جوش‌پذیری خوبی دارد.' : alloy.series === '6000' ? 'انتخاب متعادل برای پروفیل و سازه است؛ اکستروژن، ماشین‌کاری و عملیات حرارتی در آن مهم است.' : alloy.series === '7000' ? 'بیشترین تمرکز آن روی استحکام است و برای قطعات سبک و پربار مهندسی به‌کار می‌رود.' : 'برای کاربردهای تخصصی مانند فویل، بسته‌بندی یا هوافضا استفاده می‌شود.';
@@ -211,15 +218,375 @@ function renderComparison() {
   $('#comparePanel').hidden = false;
   $('#comparePanel').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
-function updateElementResult() {
-  const result = $('#elementResult');
-  const digitMap = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9','٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};
-  const codeQuery = [...($('#elementAlloyCode')?.value || '').trim()].map((char) => digitMap[char] || char).join('').replace(/[^0-9]/g,'');
-  if (!selectedElements.size && !codeQuery) { result.textContent = 'مقدار عنصر یا کد آلیاژ را وارد کن تا پیشنهاد دقیق نمایش داده شود.'; return; }
-  const amounts = [...selectedElements].map((element) => `${document.querySelector(`[data-element="${element}"]`).previousElementSibling.querySelector('b').textContent} ${element} ${document.querySelector(`[data-element="${element}"]`).value}%`).join('، '); const familyMap = {'مس':'آلومینیوم-مس','منیزیم':'آلومینیوم-منیزیم','سیلیسیم':'آلومینیوم-سیلیسیم','منگنز':'آلومینیوم-منگنز','روی':'آلومینیوم-روی','آهن':'آلومینیوم','کروم':'آلومینیوم','تیتانیوم':'آلومینیوم'}; const exact = codeQuery ? alloyData.alloys.filter((alloy) => alloy.code.replace(/[^0-9]/g,'') === codeQuery) : []; const targets = {'5052':{منیزیم:2.5,کروم:0.25},'6061':{منیزیم:1,سیلیسیم:0.6,مس:0.28},'6063':{منیزیم:0.55,سیلیسیم:0.45},'7075':{روی:5.6,منیزیم:2.5,مس:1.6},'2024':{مس:4.4,منیزیم:1.5,منگنز:0.6}}; const entered = [...selectedElements].reduce((out, element) => { out[element] = Number(document.querySelector(`[data-element="${element}"]`).value || 0); return out; }, {}); const score = (alloy) => { let value = 0; for (const [element, amount] of Object.entries(entered)) { const family = familyMap[element]; if (family && alloy.family.includes(family.split('آلومینیوم-')[1] || family)) value += 5; const target = targets[alloy.code]?.[element]; if (target) value += Math.max(0, 4 - Math.abs(amount-target)); } return value; }; const candidates = exact.length ? exact : alloyData.alloys.filter((alloy) => score(alloy) > 0).sort((left,right) => score(right)-score(left)).slice(0, 8);
-  result.innerHTML = candidates.length ? `<strong>ترکیب واردشده: ${amounts}</strong><span class="result-caption">پیشنهادهای نزدیک:</span> ${candidates.map((a) => `<button type="button" class="element-match" data-code="${a.code}">${a.code} — ${a.family}</button>`).join('')}<small>این پیشنهاد بر اساس خانواده آلیاژی است؛ برای انتخاب نهایی، کاربرد و استاندارد محصول را هم بررسی کنید.</small>` : 'ترکیب واردشده در داده فعلی پیدا نشد؛ از جست‌وجوی بانک آلیاژها استفاده کنید.';
-  $$('.element-match').forEach((button) => button.addEventListener('click', () => { $('#alloySearch').value = button.dataset.code; renderAlloys(); $('#alloyList').scrollIntoView({behavior:'smooth', block:'nearest'}); }));
+const escapeLab = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
+const toFaDigits = (value) => String(value).replace(/[0-9]/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)]);
+const toAsciiDigits = (value) => String(value ?? '').replace(/[۰-۹٠-٩]/g, (digit) => String('۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩'.indexOf(digit) % 10));
+
+const LAB_ELEMENTS = ['Si', 'Fe', 'Cu', 'Mn', 'Mg', 'Cr', 'Zn', 'Ti', 'Ni', 'Li'];
+const ELEMENT_FA = { Si: 'سیلیسیم', Fe: 'آهن', Cu: 'مس', Mn: 'منگنز', Mg: 'منیزیم', Cr: 'کروم', Zn: 'روی', Ti: 'تیتانیوم', Ni: 'نیکل', Li: 'لیتیم' };
+
+// محدوده ترکیب شیمیایی گریدها بر پایه مشخصات ثبت‌شده AA (درصد وزنی).
+// قالب: [کمینه، بیشینه]؛ نبودِ یک عنصر یعنی در آن گرید محدوده‌ای ثبت نشده است. other = عناصر دیگر همان گرید.
+const ALLOY_COMPOSITIONS = {
+  '1050': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.05],Mn:[0,0.05],Mg:[0,0.05],Zn:[0,0.05],Ti:[0,0.03],other:'V ≤ 0.05'},
+  '1060': {Si:[0,0.25],Fe:[0,0.35],Cu:[0,0.05],Mn:[0,0.03],Mg:[0,0.03],Zn:[0,0.05],Ti:[0,0.03],other:'V ≤ 0.05'},
+  '1100': {Si:[0,0.60],Fe:[0,0.60],Cu:[0.05,0.20],Mn:[0,0.05],Zn:[0,0.10],other:'Si+Fe ≤ 0.95'},
+  '1145': {Si:[0,0.35],Fe:[0,0.35],Cu:[0,0.05],Mn:[0,0.05],Mg:[0,0.05],Zn:[0,0.05],Ti:[0,0.03],other:'Si+Fe ≤ 0.55'},
+  '1199': {Si:[0,0.006],Fe:[0,0.006],Cu:[0,0.006],Mn:[0,0.002],Mg:[0,0.006],Zn:[0,0.006],Ti:[0,0.002],other:'Ga ≤ 0.005, V ≤ 0.005, B ≤ 0.001'},
+  '1200': {Si:[0,0.60],Fe:[0,0.60],Cu:[0,0.05],Mn:[0,0.05],Zn:[0,0.10],Ti:[0,0.05],other:'Si+Fe ≤ 1.00'},
+  '1350': {Si:[0,0.10],Fe:[0,0.40],Cu:[0,0.05],Mn:[0,0.01],Cr:[0,0.01],Zn:[0,0.05],other:'B ≤ 0.05, V ≤ 0.02, Ga ≤ 0.03'},
+  '1370': {Si:[0,0.10],Fe:[0,0.25],Cu:[0,0.02],Mn:[0,0.01],Mg:[0,0.02],Cr:[0,0.01],Zn:[0,0.04],Ti:[0,0.02],other:'V ≤ 0.02, B ≤ 0.02, Ga ≤ 0.02'},
+  '2007': {Si:[0,0.8],Fe:[0,0.8],Cu:[3.3,4.6],Mn:[0.50,1.0],Mg:[0.40,1.8],Cr:[0,0.10],Zn:[0,0.8],Ti:[0,0.20],Ni:[0,0.20]},
+  '2011': {Si:[0,0.40],Fe:[0,0.7],Cu:[5.0,6.0],Zn:[0,0.30],other:'Pb 0.20–0.60, Bi 0.20–0.60'},
+  '2014': {Si:[0.50,1.2],Fe:[0,0.7],Cu:[3.9,5.0],Mn:[0.40,1.2],Mg:[0.20,0.8],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.15]},
+  '2024': {Si:[0,0.50],Fe:[0,0.50],Cu:[3.8,4.9],Mn:[0.30,0.9],Mg:[1.2,1.8],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.15]},
+  '2036': {Si:[0,0.50],Fe:[0,0.50],Cu:[2.2,3.0],Mn:[0.10,0.40],Mg:[0.30,0.60],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.15]},
+  '2048': {Si:[0,0.15],Fe:[0,0.20],Cu:[3.3,4.5],Mn:[0.20,0.60],Mg:[1.2,1.8],Zn:[0,0.25],Ti:[0,0.15],Ni:[0.20,0.80]},
+  '2090': {Si:[0,0.12],Fe:[0,0.12],Cu:[2.4,3.0],Mn:[0,0.05],Mg:[0,0.25],Cr:[0,0.05],Zn:[0,0.10],Ti:[0,0.15],Li:[1.9,2.6],other:'Zr 0.08–0.15'},
+  '2124': {Si:[0,0.20],Fe:[0,0.30],Cu:[3.8,4.9],Mn:[0.30,0.9],Mg:[1.2,1.8],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.15]},
+  '2214': {Si:[0.50,1.2],Fe:[0,0.7],Cu:[3.9,5.0],Mn:[0.40,1.2],Mg:[0.20,0.8],Zn:[0,0.25],Ti:[0,0.15]},
+  '2218': {Si:[0,0.9],Fe:[0,1.0],Cu:[3.5,4.5],Mn:[0,0.20],Mg:[1.2,1.8],Zn:[0,0.25],Ti:[0,0.15],Ni:[1.7,2.3]},
+  '2219': {Si:[0,0.20],Fe:[0,0.30],Cu:[5.8,6.8],Mn:[0.20,0.40],Mg:[0,0.02],Zn:[0,0.10],Ti:[0.02,0.10],other:'V 0.05–0.15, Zr 0.10–0.25'},
+  '2319': {Si:[0,0.20],Fe:[0,0.30],Cu:[5.8,6.8],Mn:[0.20,0.40],Mg:[0,0.02],Zn:[0,0.10],Ti:[0.10,0.20],other:'V 0.05–0.15, Zr 0.10–0.25'},
+  '2618': {Si:[0.10,0.25],Fe:[0.9,1.3],Cu:[1.9,2.7],Mg:[1.3,1.8],Zn:[0,0.10],Ti:[0.04,0.10],Ni:[0.9,1.2]},
+  '2619': {Si:[0,0.15],Fe:[0,0.30],Cu:[1.9,2.7],Mg:[1.3,1.8],Zn:[0,0.10],Ti:[0.04,0.10],Ni:[0,0.20],other:'Zr 0.10–0.20'},
+  '3003': {Si:[0,0.6],Fe:[0,0.7],Cu:[0.05,0.20],Mn:[1.0,1.5],Zn:[0,0.10]},
+  '3004': {Si:[0,0.30],Fe:[0,0.7],Cu:[0,0.25],Mn:[1.0,1.5],Mg:[0.8,1.3],Zn:[0,0.25]},
+  '3005': {Si:[0,0.6],Fe:[0,0.7],Cu:[0,0.30],Mn:[1.0,1.5],Mg:[0.20,0.6],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.10]},
+  '3006': {Si:[0,0.30],Fe:[0,0.7],Cu:[0,0.10],Mn:[1.0,1.5],Mg:[0.10,0.50],Zn:[0,0.20],Ti:[0,0.10]},
+  '3102': {Si:[0,0.40],Fe:[0,0.7],Cu:[0,0.10],Mn:[0.05,0.40],Mg:[0,0.05],Zn:[0,0.30],Ti:[0,0.10]},
+  '3103': {Si:[0,0.50],Fe:[0,0.7],Cu:[0,0.10],Mn:[0.9,1.5],Mg:[0,0.30],Cr:[0,0.10],Zn:[0,0.20],Ti:[0,0.10],other:'Zr ≤ 0.10'},
+  '3104': {Si:[0,0.6],Fe:[0,0.8],Cu:[0.05,0.25],Mn:[0.8,1.4],Mg:[0.8,1.3],Zn:[0,0.25],Ti:[0,0.10],other:'V ≤ 0.05, Ga ≤ 0.05'},
+  '3105': {Si:[0,0.6],Fe:[0,0.7],Cu:[0,0.7],Mn:[0.30,0.8],Mg:[0.20,0.8],Cr:[0,0.20],Zn:[0,0.40],Ti:[0,0.10]},
+  '4015': {Si:[9.0,10.5],Fe:[0,0.6],Cu:[0,0.20],Mn:[0,0.05],Mg:[0,0.05],Zn:[0,0.10],Ti:[0,0.10]},
+  '4032': {Si:[11.0,13.5],Fe:[0,1.0],Cu:[0.50,1.3],Mg:[0.80,1.3],Cr:[0,0.10],Zn:[0,0.25],Ni:[0.50,1.3]},
+  '4043': {Si:[4.5,6.0],Fe:[0,0.8],Cu:[0,0.30],Mn:[0,0.05],Mg:[0,0.05],Zn:[0,0.10],Ti:[0,0.20]},
+  '4045': {Si:[9.0,11.0],Fe:[0,0.8],Cu:[0,0.30],Mn:[0,0.05],Mg:[0,0.05],Zn:[0,0.10],Ti:[0,0.20]},
+  '4047': {Si:[11.0,13.0],Fe:[0,0.8],Cu:[0,0.30],Mn:[0,0.15],Mg:[0,0.10],Zn:[0,0.20],Ti:[0,0.15]},
+  '5005': {Si:[0,0.30],Fe:[0,0.7],Cu:[0,0.20],Mn:[0,0.20],Mg:[0.50,1.1],Cr:[0,0.10],Zn:[0,0.25]},
+  '5019': {Si:[0,0.40],Fe:[0,0.50],Cu:[0,0.20],Mn:[0.10,0.6],Mg:[4.5,5.6],Cr:[0,0.20],Zn:[0,0.20],Ti:[0,0.20]},
+  '5025': {Si:[0,0.40],Fe:[0,0.50],Cu:[0,0.20],Mn:[0.10,0.50],Mg:[4.5,5.5],Cr:[0,0.20],Zn:[0,0.25],Ti:[0,0.10]},
+  '5050': {Si:[0,0.40],Fe:[0,0.7],Cu:[0,0.20],Mn:[0,0.10],Mg:[1.1,1.8],Cr:[0,0.10],Zn:[0,0.25]},
+  '5052': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.10],Mn:[0,0.10],Mg:[2.2,2.8],Cr:[0.15,0.35],Zn:[0,0.10]},
+  '5056': {Si:[0,0.30],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.05,0.20],Mg:[4.5,5.6],Cr:[0.05,0.20],Zn:[0,0.10]},
+  '5083': {Si:[0,0.40],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.40,1.0],Mg:[4.0,4.9],Cr:[0.05,0.25],Zn:[0,0.25],Ti:[0,0.15]},
+  '5086': {Si:[0,0.40],Fe:[0,0.50],Cu:[0,0.10],Mn:[0.20,0.7],Mg:[3.5,4.5],Cr:[0.05,0.25],Zn:[0,0.25],Ti:[0,0.15]},
+  '5154': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.10,0.50],Mg:[3.1,3.9],Cr:[0.15,0.35],Zn:[0,0.20],Ti:[0,0.20]},
+  '5182': {Si:[0,0.20],Fe:[0,0.35],Cu:[0,0.15],Mn:[0.20,0.50],Mg:[4.0,5.0],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.10]},
+  '5252': {Si:[0,0.08],Fe:[0,0.10],Cu:[0,0.10],Mn:[0,0.10],Mg:[2.2,2.8],Cr:[0,0.10],Zn:[0,0.05],other:'V ≤ 0.05'},
+  '5254': {Si:[0,0.45],Fe:[0,0.50],Cu:[0,0.05],Mn:[0,0.01],Mg:[3.1,3.9],Cr:[0.15,0.35],Zn:[0,0.20],Ti:[0,0.05]},
+  '5356': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.05,0.20],Mg:[4.5,5.5],Cr:[0.05,0.20],Zn:[0,0.10],Ti:[0.06,0.20]},
+  '5454': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.50,1.0],Mg:[2.4,3.0],Cr:[0.05,0.20],Zn:[0,0.25],Ti:[0,0.20]},
+  '5455': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.10,0.50],Mg:[3.1,3.9],Cr:[0.05,0.20],Zn:[0,0.25],Ti:[0,0.20]},
+  '5456': {Si:[0,0.25],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.50,1.0],Mg:[4.7,5.5],Cr:[0.05,0.20],Zn:[0,0.25],Ti:[0,0.20]},
+  '5457': {Si:[0,0.08],Fe:[0,0.10],Cu:[0,0.20],Mn:[0.20,0.50],Mg:[0.80,1.2],Cr:[0,0.05],Zn:[0,0.05],other:'V ≤ 0.05'},
+  '5652': {Si:[0,0.15],Fe:[0,0.30],Cu:[0,0.04],Mn:[0,0.01],Mg:[2.2,2.8],Cr:[0.15,0.35],Zn:[0,0.10]},
+  '5657': {Si:[0,0.08],Fe:[0,0.10],Cu:[0,0.10],Mn:[0,0.03],Mg:[0.6,1.0],Cr:[0,0.05],Zn:[0,0.05],other:'Ga+V ≤ 0.05'},
+  '5754': {Si:[0,0.40],Fe:[0,0.40],Cu:[0,0.10],Mn:[0,0.50],Mg:[2.6,3.6],Cr:[0,0.30],Zn:[0,0.20],Ti:[0,0.15]},
+  '5757': {Si:[0,0.40],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.50,1.0],Mg:[4.5,5.5],Cr:[0.05,0.20],Zn:[0,0.25],Ti:[0,0.20]},
+  '6005': {Si:[0.6,0.9],Fe:[0,0.35],Cu:[0,0.10],Mn:[0,0.10],Mg:[0.40,0.6],Cr:[0,0.10],Zn:[0,0.10],Ti:[0,0.10]},
+  '6009': {Si:[0.6,1.0],Fe:[0,0.50],Cu:[0.15,0.6],Mn:[0.20,0.8],Mg:[0.40,0.8],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.10]},
+  '6010': {Si:[0.6,1.0],Fe:[0,0.50],Cu:[0.15,0.6],Mn:[0.20,0.8],Mg:[0.6,1.0],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.10]},
+  '6026': {Si:[0.6,1.4],Fe:[0,0.7],Cu:[0.20,0.5],Mn:[0.20,1.0],Mg:[0.6,1.2],Cr:[0,0.30],Zn:[0,0.30],Ti:[0,0.20]},
+  '6060': {Si:[0.30,0.6],Fe:[0.10,0.30],Cu:[0,0.10],Mn:[0,0.10],Mg:[0.35,0.6],Cr:[0,0.05],Zn:[0,0.15],Ti:[0,0.10]},
+  '6061': {Si:[0.40,0.8],Fe:[0,0.7],Cu:[0.15,0.40],Mn:[0,0.15],Mg:[0.8,1.2],Cr:[0.04,0.35],Zn:[0,0.25],Ti:[0,0.15]},
+  '6063': {Si:[0.20,0.6],Fe:[0,0.35],Cu:[0,0.10],Mn:[0,0.10],Mg:[0.45,0.9],Cr:[0,0.10],Zn:[0,0.10],Ti:[0,0.10]},
+  '6066': {Si:[0.9,1.8],Fe:[0,0.50],Cu:[0.7,1.2],Mn:[0.6,1.1],Mg:[0.8,1.4],Cr:[0,0.40],Zn:[0,0.25],Ti:[0,0.20]},
+  '6069': {Si:[0.6,1.2],Fe:[0,0.40],Cu:[0.15,0.55],Mn:[0,0.05],Mg:[0.6,1.2],Cr:[0,0.10],Zn:[0,0.10],Ti:[0,0.10],other:'V ≤ 0.15'},
+  '6070': {Si:[1.0,1.7],Fe:[0,0.7],Cu:[0.15,0.40],Mn:[0.40,1.0],Mg:[0.50,1.2],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.15]},
+  '6082': {Si:[0.7,1.3],Fe:[0,0.50],Cu:[0,0.10],Mn:[0.40,1.0],Mg:[0.6,1.2],Cr:[0,0.25],Zn:[0,0.20],Ti:[0,0.10]},
+  '6101': {Si:[0.30,0.7],Fe:[0,0.50],Cu:[0,0.10],Mn:[0,0.03],Mg:[0.35,0.8],Cr:[0,0.03],Zn:[0,0.10],other:'B ≤ 0.06'},
+  '6111': {Si:[0.6,1.1],Fe:[0,0.40],Cu:[0.50,0.9],Mn:[0.10,0.45],Mg:[0.5,1.0],Cr:[0,0.10],Zn:[0,0.15],Ti:[0,0.10]},
+  '6151': {Si:[0.6,1.2],Fe:[0,1.0],Cu:[0,0.35],Mn:[0,0.20],Mg:[0.45,0.8],Cr:[0.15,0.35],Zn:[0,0.25],Ti:[0,0.15]},
+  '6201': {Si:[0.50,0.9],Fe:[0,0.50],Cu:[0,0.10],Mn:[0,0.03],Mg:[0.6,0.9],Cr:[0,0.03],Zn:[0,0.10],other:'B ≤ 0.06'},
+  '6205': {Si:[0.50,0.9],Fe:[0,0.50],Cu:[0,0.10],Mn:[0,0.03],Mg:[0.6,0.9],Cr:[0,0.05],Zn:[0,0.10],Ti:[0,0.05],other:'B ≤ 0.06'},
+  '6261': {Si:[0.40,0.7],Fe:[0,0.40],Cu:[0,0.15],Mn:[0,0.20],Mg:[0.45,0.75],Cr:[0,0.10],Zn:[0,0.10],Ti:[0,0.10]},
+  '6262': {Si:[0.40,0.8],Fe:[0,0.7],Cu:[0.15,0.40],Mn:[0,0.15],Mg:[0.8,1.2],Cr:[0.04,0.14],Zn:[0,0.25],Ti:[0,0.15],other:'Pb 0.40–0.70, Bi 0.40–0.70'},
+  '6351': {Si:[0.7,1.3],Fe:[0,0.50],Cu:[0,0.10],Mn:[0.40,0.8],Mg:[0.40,0.8],Cr:[0,0.20],Zn:[0,0.20],Ti:[0,0.20]},
+  '6463': {Si:[0.20,0.6],Fe:[0,0.15],Cu:[0,0.20],Mn:[0,0.05],Mg:[0.45,0.9],Cr:[0,0.05],Zn:[0,0.05],Ti:[0,0.05]},
+  '6951': {Si:[0.20,0.6],Fe:[0,0.8],Cu:[0.15,0.40],Mn:[0,0.10],Mg:[0.40,0.8],Zn:[0,0.20],Ti:[0,0.10]},
+  '7005': {Si:[0,0.35],Fe:[0,0.40],Cu:[0,0.10],Mn:[0.20,0.7],Mg:[1.0,1.8],Cr:[0.06,0.20],Zn:[4.0,5.0],Ti:[0.01,0.06],other:'Zr 0.08–0.20'},
+  '7049': {Si:[0,0.25],Fe:[0,0.35],Cu:[1.2,1.9],Mn:[0,0.20],Mg:[2.0,2.9],Cr:[0.10,0.22],Zn:[7.2,8.2],Ti:[0,0.10]},
+  '7050': {Si:[0,0.12],Fe:[0,0.15],Cu:[2.0,2.6],Mn:[0,0.10],Mg:[1.9,2.6],Cr:[0,0.04],Zn:[5.7,6.7],Ti:[0,0.06],other:'Zr 0.08–0.15'},
+  '7072': {Si:[0,0.7],Fe:[0,0.7],Cu:[0,0.10],Mn:[0,0.10],Mg:[0,0.10],Zn:[0.8,1.3],other:'Si+Fe ≤ 0.7'},
+  '7075': {Si:[0,0.40],Fe:[0,0.50],Cu:[1.2,2.0],Mn:[0,0.30],Mg:[2.1,2.9],Cr:[0.18,0.28],Zn:[5.1,6.1],Ti:[0,0.20]},
+  '7079': {Si:[0,0.30],Fe:[0,0.40],Cu:[0.40,0.8],Mn:[0.10,0.30],Mg:[2.9,3.7],Cr:[0.10,0.25],Zn:[3.8,4.8],Ti:[0,0.10]},
+  '7175': {Si:[0,0.15],Fe:[0,0.20],Cu:[1.2,2.0],Mn:[0,0.10],Mg:[2.1,2.9],Cr:[0.18,0.28],Zn:[5.1,6.1],Ti:[0,0.10]},
+  '7475': {Si:[0,0.10],Fe:[0,0.12],Cu:[1.2,1.9],Mn:[0,0.06],Mg:[1.9,2.6],Cr:[0.18,0.25],Zn:[5.2,6.2],Ti:[0,0.06]},
+  '7477': {Si:[0,0.10],Fe:[0,0.12],Cu:[1.2,1.9],Mn:[0,0.06],Mg:[1.9,2.6],Cr:[0.18,0.25],Zn:[5.2,6.2],Ti:[0,0.06],other:'Zr ≤ 0.10'},
+  '8011': {Si:[0.50,0.9],Fe:[0.6,1.0],Cu:[0,0.10],Mn:[0,0.20],Mg:[0,0.05],Cr:[0,0.05],Zn:[0,0.10],Ti:[0,0.08]},
+  '8090': {Si:[0,0.20],Fe:[0,0.30],Cu:[1.0,1.6],Mg:[0.6,1.3],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.10],Li:[2.2,2.7],other:'Zr 0.04–0.16'},
+  '8091': {Si:[0,0.30],Fe:[0,0.50],Cu:[1.6,2.2],Mg:[0.5,1.2],Cr:[0,0.10],Zn:[0,0.25],Ti:[0,0.10],Li:[2.4,2.8],other:'Zr 0.08–0.16'},
+  '319.0': {Si:[5.5,6.5],Fe:[0,1.0],Cu:[3.0,4.0],Mn:[0,0.50],Mg:[0,0.10],Zn:[0,1.0],Ti:[0,0.25],Ni:[0,0.35]},
+  '356.0': {Si:[6.5,7.5],Fe:[0,0.6],Cu:[0,0.25],Mn:[0,0.35],Mg:[0.20,0.45],Zn:[0,0.35],Ti:[0,0.25]},
+  'A356.0': {Si:[6.5,7.5],Fe:[0,0.20],Cu:[0,0.20],Mn:[0,0.10],Mg:[0.20,0.45],Zn:[0,0.10],Ti:[0,0.20]},
+  '380.0': {Si:[7.5,9.5],Fe:[0,2.0],Cu:[3.0,4.0],Mn:[0,0.50],Mg:[0,0.10],Zn:[0,3.0],Ni:[0,0.50],other:'Sn ≤ 0.35'},
+  '413.0': {Si:[11.0,13.0],Fe:[0,2.0],Cu:[0,1.0],Mn:[0,0.35],Mg:[0,0.10],Zn:[0,0.50],Ni:[0,0.50],Ti:[0,0.15]},
+  '443.0': {Si:[4.5,6.0],Fe:[0,0.8],Cu:[0,0.6],Mn:[0,0.50],Mg:[0,0.05],Cr:[0,0.25],Zn:[0,0.50],Ti:[0,0.25],Ni:[0,0.50]},
+  '535.0': {Si:[0,0.15],Fe:[0,0.15],Cu:[0,0.05],Mn:[0.10,0.25],Mg:[6.2,7.5],Cr:[0,0.05],Zn:[0,0.05],Ti:[0.10,0.25]},
+  '712.0': {Si:[0,0.30],Fe:[0,0.50],Cu:[0,0.25],Mn:[0,0.10],Mg:[0.50,0.65],Cr:[0.40,0.6],Zn:[5.0,6.5],Ti:[0.10,0.25]},
+};
+
+// گریدهایی که محدوده ترکیب آن‌ها تقریبی است و با نشان «محدوده تقریبی» نمایش داده می‌شوند.
+const LAB_APPROX = new Set(['1100', '1145', '1200', '2007', '2036', '2048', '2214', '2619', '3006', '3102', '3103', '4015', '5025', '5455', '5757', '6026', '6069', '6205', '6261', '6951', '7079', '7477']);
+
+// گریدهای پرکاربرد بازار به ترتیب اولویت؛ فقط برای شکستن تساوی امتیازها استفاده می‌شود.
+const LAB_POPULAR_ORDER = ['6063', '6061', '6060', '6082', '6005', '6101', '5052', '5083', '5754', '5005', '5086', '1050', '1060', '1100', '3003', '3105', '3004', '3104', '7075', '2024', '2014', '2011', '8011', '4043', '5356', '4047', '6351', '7005', '7050', '2219', '4032', '712.0', '380.0', 'A356.0', '356.0', '319.0', '413.0', '443.0', '535.0', '3005', '5056', '5454', '5154', '5182', '5050', '1200', '1350', '7072', '6010', '6262', '6463'];
+const LAB_POPULAR = new Set(LAB_POPULAR_ORDER);
+const labPopularBonus = (code) => {
+  const index = LAB_POPULAR_ORDER.indexOf(code);
+  return index < 0 ? 0 : Math.max(0.03, 0.12 - index * 0.0025);
+};
+
+// پروفایل جایگزین برای گریدهایی که بعداً به داده اضافه شوند.
+const SERIES_FALLBACK = {
+  '1000': { Si: [0, 0.6], Fe: [0, 0.7], Cu: [0, 0.2], Mn: [0, 0.05], Mg: [0, 0.05], Zn: [0, 0.1], Ti: [0, 0.05] },
+  '2000': { Si: [0, 0.8], Fe: [0, 0.8], Cu: [2.2, 6.8], Mn: [0, 1.2], Mg: [0, 1.8], Cr: [0, 0.25], Zn: [0, 0.8], Ti: [0, 0.2] },
+  '3000': { Si: [0, 0.6], Fe: [0, 0.8], Cu: [0, 0.3], Mn: [0.8, 1.5], Mg: [0, 1.3], Cr: [0, 0.2], Zn: [0, 0.4], Ti: [0, 0.1] },
+  '4000': { Si: [4.5, 13.5], Fe: [0, 1.0], Cu: [0, 1.3], Mn: [0, 0.15], Mg: [0, 1.3], Zn: [0, 0.25], Ti: [0, 0.2] },
+  '5000': { Si: [0, 0.45], Fe: [0, 0.7], Cu: [0, 0.2], Mn: [0, 1.0], Mg: [0.5, 5.6], Cr: [0, 0.35], Zn: [0, 0.25], Ti: [0, 0.2] },
+  '6000': { Si: [0.2, 1.8], Fe: [0, 0.7], Cu: [0, 0.9], Mn: [0, 1.1], Mg: [0.35, 1.4], Cr: [0, 0.4], Zn: [0, 0.3], Ti: [0, 0.2] },
+  '7000': { Si: [0, 0.4], Fe: [0, 0.5], Cu: [0, 2.6], Mn: [0, 0.3], Mg: [1.0, 3.7], Cr: [0, 0.28], Zn: [3.8, 8.2], Ti: [0, 0.2] },
+  '8000': { Si: [0, 0.9], Fe: [0, 1.0], Cu: [0, 2.2], Mn: [0, 0.2], Mg: [0, 1.3], Cr: [0, 0.1], Zn: [0, 0.25], Ti: [0, 0.1] },
+  cast: { Si: [4.5, 13.0], Fe: [0, 2.0], Cu: [0, 4.0], Mn: [0, 0.5], Mg: [0, 7.5], Cr: [0, 0.6], Zn: [0, 6.5], Ti: [0, 0.25], Ni: [0, 0.5] }
+};
+
+// مسیر دوم و ساده‌تر: انتخاب کاربرد به‌جای درصد عناصر.
+const USE_CASES = {
+  profile: { label: 'پروفیل و درب و پنجره', keywords: ['پروفیل', 'درب و پنجره', 'نما', 'دکوراتیو'], series: ['6000'], preferred: ['6063', '6060', '6005', '6101', '6463', '6061'] },
+  structure: { label: 'سازه و صنعت', keywords: ['سازه', 'صنعتی', 'ماشین‌سازی', 'ساختمانی'], series: ['6000', '7000'], preferred: ['6061', '6082', '6005', '6351', '7005'] },
+  marine: { label: 'دریایی و ضدخوردگی', keywords: ['دریایی', 'دریا', 'کشتی', 'مرطوب', 'مخزن'], series: ['5000'], preferred: ['5083', '5086', '5754', '5052', '5454', '5056'] },
+  sheet: { label: 'ورق و ظروف', keywords: ['ورق', 'ظروف', 'بسته‌بندی', 'مخازن'], series: ['1000', '3000', '8000'], preferred: ['1050', '1060', '1100', '3003', '3105', '8011'] },
+  aerospace: { label: 'هوافضا و استحکام بالا', keywords: ['هوافضا', 'نظامی', 'استحکام بالا'], series: ['2000', '7000'], preferred: ['7075', '7050', '2024', '2014', '2219', '7475'] },
+  cast: { label: 'ریخته‌گری', keywords: ['ریختگی', 'شمش', 'قطعات ریخته'], series: ['cast'], preferred: ['356.0', 'A356.0', '380.0', '319.0', '413.0', '443.0'] },
+  electrical: { label: 'رسانایی برق', keywords: ['برق', 'شینه', 'الکتریکی', 'رسانا'], series: ['1000', '6000'], preferred: ['1350', '1370', '1050', '1060', '6101', '6201'] },
+  auto: { label: 'خودرو', keywords: ['خودرو', 'موتور'], series: ['5000', '6000', '4000'], preferred: ['5754', '5182', '6111', '6010', '4032', '6061'] },
+  welding: { label: 'جوشکاری و فیلر', keywords: ['جوش', 'فیلر'], series: ['4000', '5000'], preferred: ['4043', '4047', '5356', '4015', '4045'] },
+  machining: { label: 'ماشین‌کاری دقیق', keywords: ['ماشین‌کاری', 'تراشکاری', 'اتصالات دقیق'], series: ['2000', '6000'], preferred: ['2011', '6262', '6010', '2014', '2007', '6061'] },
+  foil: { label: 'فویل و بسته‌بندی', keywords: ['فویل', 'بسته‌بندی'], series: ['1000', '8000'], preferred: ['8011', '1050', '1100', '1200'] },
+  heatex: { label: 'مبدل حرارتی', keywords: ['مبدل حرارتی', 'مخزن'], series: ['3000', '1000'], preferred: ['3003', '3102', '1100', '6951', '3005', '1050'] }
+};
+
+// نمونه‌های آماده برای آزمون لحظه‌ای
+const LAB_SAMPLES = [
+  { label: 'Si 0.45 · Mg 0.55', values: { Si: 0.45, Mg: 0.55 } },
+  { label: 'Si 0.6 · Mg 1 · Cu 0.28', values: { Si: 0.6, Mg: 1, Cu: 0.28 } },
+  { label: 'Mg 2.5 · Cr 0.25', values: { Mg: 2.5, Cr: 0.25 } },
+  { label: 'Zn 5.6 · Mg 2.5 · Cu 1.6', values: { Zn: 5.6, Mg: 2.5, Cu: 1.6 } },
+  { label: 'Si 7 · Mg 0.35', values: { Si: 7, Mg: 0.35 } }
+];
+
+let selectedUse = null;
+
+function labComposition(code, series) {
+  return ALLOY_COMPOSITIONS[code] || SERIES_FALLBACK[series] || SERIES_FALLBACK['6000'];
 }
+function labRange(profile, element) {
+  const range = profile[element];
+  return Array.isArray(range) ? range : null;
+}
+function labPairScore(value, lo, hi) {
+  // داخل محدوده: اگر گرید این عنصر را «الزامی» دارد (کمینه > 0) تطابق کامل است،
+  // وگرنه فقط یک سقف ناخالصی را رعایت کرده و امتیاز کمتری می‌گیرد.
+  if (value >= lo && value <= hi) return lo > 0 ? 1 : 0.55;
+  const gap = value < lo ? lo - value : value - hi;
+  const scale = Math.max(0.08, hi - lo, 0.35 * Math.max(lo, hi));
+  return 1 / (1 + (gap / scale) * 2.2);
+}
+function labCompositionScore(alloy, entered) {
+  const profile = labComposition(alloy.code, alloy.series);
+  const specified = LAB_ELEMENTS.filter((element) => entered[element] !== undefined);
+  if (!specified.length) return { score: 0, tags: [], allIn: false, profile };
+  let total = 0;
+  let allIn = true;
+  const tags = [];
+  for (const element of specified) {
+    const range = labRange(profile, element) || [0, 0];
+    const lo = range[0];
+    const hi = range[1];
+    const value = entered[element];
+    const inRange = value >= lo && value <= hi;
+    const quality = labPairScore(value, lo, hi);
+    total += quality;
+    if (!inRange) allIn = false;
+    tags.push({ element, value, lo, hi, ok: inRange, near: !inRange && quality >= 0.45 });
+  }
+  let score = total / specified.length;
+  if (allIn) score *= 1.08;
+  // فقط عناصری که گرید واقعاً به آن‌ها نیاز دارد و کاربر وارد نکرده، جریمه می‌شوند.
+  const missing = LAB_ELEMENTS.filter((element) => entered[element] === undefined && (labRange(profile, element) || [0, 0])[0] > 0).length;
+  score *= 1 - 0.06 * Math.min(4, missing);
+  return { score, tags, allIn, missing, profile };
+}
+function labUseScore(alloy, key) {
+  const useCase = USE_CASES[key];
+  if (!useCase) return 0;
+  const text = [`${alloy.use || ''}`, `${alloy.applications || ''}`, `${alloy.title || ''}`, `${alloy.family || ''}`].join(' ');
+  let score = 0;
+  if (useCase.keywords.some((keyword) => text.includes(keyword))) score += 0.35;
+  if (useCase.series.includes(alloy.series)) score += 0.3;
+  // ترتیب فهرست preferred مهم است: گرید نخست همان کاربرد، بالاترین امتیاز را می‌گیرد.
+  const preferredIndex = useCase.preferred.indexOf(alloy.code);
+  if (preferredIndex >= 0) score += Math.max(0.15, 0.45 - preferredIndex * 0.05);
+  return score;
+}
+function rankAlloys(entered, useKey, limit = 6, alloys = alloyData.alloys) {
+  const hasElements = Object.keys(entered).length > 0;
+  if (!hasElements && !useKey) return [];
+  const rows = [];
+  for (const alloy of alloys) {
+    const comp = hasElements ? labCompositionScore(alloy, entered) : { score: 0, tags: [], allIn: false, profile: labComposition(alloy.code, alloy.series) };
+    const use = useKey ? labUseScore(alloy, useKey) : 0;
+    let base;
+    if (hasElements && useKey) base = 0.75 * comp.score + 0.25 * use;
+    else if (hasElements) base = comp.score;
+    else base = use;
+    const score = base * (1 + labPopularBonus(alloy.code));
+    if (!(score > 0.005)) continue;
+    rows.push({ alloy, score, comp, use });
+  }
+  rows.sort((left, right) => (right.score - left.score) || (Number(LAB_POPULAR.has(right.alloy.code)) - Number(LAB_POPULAR.has(left.alloy.code))));
+  return rows.slice(0, limit).map((row) => ({ ...row, percent: Math.max(8, Math.min(99, Math.round(row.score * 100))) }));
+}
+function labReason(row, entered, useKey, direct) {
+  if (direct) return 'این کد را مستقیم جست‌وجو کردی؛ برای دیدن مشخصات کامل «جزئیات در بانک آلیاژها» را بزن.';
+  const parts = [];
+  const count = Object.keys(entered).length;
+  if (count) {
+    if (row.comp && row.comp.allIn) parts.push(`هر ${toFaDigits(count)} عنصر واردشده داخل محدوده استاندارد این گرید است.`);
+    else parts.push('بخشی از مقادیر واردشده با محدوده این گرید فاصله دارد؛ نزدیک‌ترین گزینه در این فهرست است.');
+  }
+  if (useKey && row.use > 0) parts.push(`با کاربرد «${USE_CASES[useKey].label}» هم‌خوانی دارد.`);
+  if (LAB_APPROX.has(row.alloy.code)) parts.push('محدوده اعلام‌شده برای این گرید تقریبی است.');
+  if (row.alloy.use) parts.push(`کاربرد رایج: ${escapeLab(row.alloy.use)}.`);
+  return parts.join(' ');
+}
+function labMatchCard(row, entered, useKey, direct) {
+  const alloy = row.alloy;
+  const profile = (row.comp && row.comp.profile) || labComposition(alloy.code, alloy.series);
+  const tags = [];
+  if (!direct) {
+    for (const element of Object.keys(entered)) {
+      const range = labRange(profile, element) || [0, 0];
+      const lo = range[0];
+      const hi = range[1];
+      const value = entered[element];
+      const quality = labPairScore(value, lo, hi);
+      const cls = value >= lo && value <= hi ? 'ok' : quality >= 0.45 ? 'near' : 'miss';
+      const bound = lo === 0 ? `≤${hi}` : `${lo}–${hi}`;
+      tags.push(`<span class="el-tag ${cls}" title="${ELEMENT_FA[element]}">${element} ${entered[element]} / ${bound}</span>`);
+    }
+  }
+  if (profile.other) tags.push(`<span class="el-tag info">${escapeLab(profile.other)}</span>`);
+  if (LAB_APPROX.has(alloy.code)) tags.push('<span class="el-tag info">محدوده تقریبی</span>');
+  const percent = direct ? 100 : row.percent;
+  const label = direct ? 'کد دقیق' : `تطابق ${toFaDigits(percent)}٪`;
+  return `<article class="match-card glass-card">
+        <div class="match-head">
+          <div class="match-code">${escapeLab(alloy.code)}<small>${label}</small></div>
+          <div class="match-meta"><strong>${escapeLab(alloy.title)}</strong><small>${escapeLab(seriesLabel[alloy.series] || `سری ${alloy.series}`)} · ${escapeLab(alloy.family)}</small></div>
+        </div>
+        ${direct ? '' : `<div class="match-bar"><i style="width:${percent}%"></i></div>`}
+        ${tags.length ? `<div class="match-tags">${tags.join('')}</div>` : ''}
+        <p class="match-reason">${labReason(row, entered, useKey, direct)}</p>
+        <div class="match-actions">
+          <button type="button" data-show-alloy="${escapeLab(alloy.code)}">جزئیات در بانک آلیاژها ←</button>
+          <button type="button" data-add-compare="${escapeLab(alloy.code)}">＋ افزودن به مقایسه</button>
+        </div>
+      </article>`;
+}
+function labReadEntered() {
+  const entered = {};
+  $$('[data-element]').forEach((input) => {
+    const value = Number(toAsciiDigits(input.value).replace(/[^0-9.]/g, ''));
+    if (Number.isFinite(value) && value > 0) entered[input.dataset.element] = value;
+  });
+  return entered;
+}
+function labCodeQuery() {
+  const input = $('#elementAlloyCode');
+  return toAsciiDigits(input ? input.value : '').replace(/[^0-9A-Za-z]/g, '').toUpperCase();
+}
+function labClear(resetUse = true) {
+  $$('[data-element]').forEach((input) => { input.value = ''; });
+  const code = $('#elementAlloyCode');
+  if (code) code.value = '';
+  if (resetUse) {
+    selectedUse = null;
+    $$('.use-chip').forEach((chip) => chip.classList.remove('active'));
+  }
+}
+function labBindResultCards() {
+  $$('#elementResult [data-lab-code]').forEach((button) => button.addEventListener('click', () => {
+    const input = $('#elementAlloyCode');
+    if (input) input.value = button.dataset.labCode;
+    renderElementLab();
+  }));
+  $$('#elementResult [data-show-alloy]').forEach((button) => button.addEventListener('click', () => {
+    const search = $('#alloySearch');
+    if (search) search.value = button.dataset.showAlloy;
+    selectedSeries = 'all';
+    $$('[data-series]').forEach((item) => item.classList.toggle('active', item.dataset.series === 'all'));
+    renderAlloys();
+    navigate('alloys');
+  }));
+}
+function labPopularRow() {
+  return `<div class="popular-row">${LAB_POPULAR_ORDER.slice(0, 12).map((code) => `<button type="button" class="popular-chip" data-lab-code="${code}">${code}</button>`).join('')}</div>`;
+}
+function renderElementLab() {
+  const result = $('#elementResult');
+  if (!result) return;
+  const entered = labReadEntered();
+  const query = labCodeQuery();
+  const hasInput = Object.keys(entered).length > 0;
+  let html = '';
+  if (query) {
+    const digits = query.replace(/[^0-9]/g, '');
+    const exact = alloyData.alloys.filter((alloy) => alloy.code.replace(/[^0-9]/g, '') === digits || alloy.code.toUpperCase().startsWith(query));
+    if (exact.length) {
+      html = `<strong class="lab-result-title">کد آلیاژ «${escapeLab(query)}»</strong><div class="match-list">${exact.slice(0, 4).map((alloy) => labMatchCard({ alloy, percent: 100, comp: null, use: 0 }, entered, selectedUse, true)).join('')}</div>`;
+    } else {
+      const distance = (alloy) => Math.abs(Number(alloy.code.replace(/[^0-9]/g, '')) - Number(digits));
+      const near = alloyData.alloys.slice().sort((left, right) => distance(left) - distance(right)).slice(0, 6);
+      html = `<strong class="lab-result-title">کدی با «${escapeLab(query)}» پیدا نشد</strong><span>نزدیک‌ترین کدهای موجود را انتخاب کن:</span><div class="popular-row">${near.map((alloy) => `<button type="button" class="popular-chip" data-lab-code="${alloy.code}">${alloy.code}</button>`).join('')}</div>`;
+    }
+  } else if (!hasInput && !selectedUse) {
+    html = `<strong class="lab-result-title">از کجا شروع کنم؟</strong><span>یا یکی از کاربردهای بالا را بزن، یا فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45). هر دو راه به آلیاژ می‌رسد.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
+  } else {
+    const rows = rankAlloys(entered, selectedUse, 6);
+    if (!rows.length) {
+      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>یک کاربرد انتخاب کن یا مقدار عنصر را کمی تغییر بده.</span>${labPopularRow()}`;
+    } else {
+      const title = hasInput && selectedUse ? 'نتیجه بر پایه ترکیب و کاربرد' : hasInput ? 'نزدیک‌ترین آلیاژها به ترکیب واردشده' : `پیشنهاد برای کاربرد «${USE_CASES[selectedUse].label}»`;
+      html = `<strong class="lab-result-title">${title}</strong><div class="match-list">${rows.map((row) => labMatchCard(row, entered, selectedUse, false)).join('')}</div><small class="lab-note">درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
+    }
+  }
+  result.innerHTML = html;
+  result.classList.toggle('result-list', html.indexOf('match-list') !== -1);
+  labBindResultCards();
+}
+function addAlloyToCompare(code) {
+  const slots = ['#compareOne', '#compareTwo', '#compareThree'];
+  const target = slots.find((selector) => $(selector) && !$(selector).value);
+  if (!target) { showToast('سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کن.'); return; }
+  $(target).value = code;
+  $(target).dispatchEvent(new Event('change'));
+  showToast(`${code} به مقایسه اضافه شد`);
+}
+function renderLabSamples() {
+  const holder = $('#labSamples');
+  if (!holder || holder.dataset.ready === '1') return;
+  holder.dataset.ready = '1';
+  holder.insertAdjacentHTML('beforeend', LAB_SAMPLES.map((sample, index) => `<button type="button" data-sample="${index}">${sample.label}</button>`).join(''));
+  $$('#labSamples [data-sample]').forEach((button) => button.addEventListener('click', () => {
+    const sample = LAB_SAMPLES[Number(button.dataset.sample)];
+    labClear();
+    if (sample) Object.entries(sample.values).forEach(([element, value]) => { const input = document.querySelector(`[data-element="${element}"]`); if (input) input.value = String(value); });
+    renderElementLab();
+  }));
+}
+
 function renderAlloys() {
   const list = $('#alloyList');
   if (!list) return;
@@ -232,7 +599,6 @@ function renderAlloys() {
   $('#alloySummary').textContent = `${items.length} آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.`;
   const detailMarkup = (alloy) => `<div class="alloy-spec-grid"><div class="alloy-spec"><span>عناصر اصلی</span><b>${alloy.elements || 'ثبت نشده'}</b></div><div class="alloy-spec"><span>چگالی</span><b>${alloy.density} گرم بر سانتی‌متر مکعب</b></div><div class="alloy-spec"><span>خواص مکانیکی</span><b>${alloy.mechanical || alloy.details?.mechanical || 'ثبت نشده'}</b></div><div class="alloy-spec"><span>خواص فیزیکی</span><b>${alloy.physical || alloy.details?.physical || 'ثبت نشده'}</b></div><div class="alloy-spec"><span>مقاومت خوردگی</span><b>${alloy.corrosion || 'وابسته به گرید و شرایط کاری'}</b></div><div class="alloy-spec"><span>عملیات حرارتی</span><b>${alloy.heatTreatment || 'وابسته به گرید و تمپر'}</b></div><div class="alloy-spec wide"><span>کاربرد و استاندارد</span><b>${alloy.use || alloy.applications || 'ثبت نشده'} · ${alloy.standard || 'استاندارد آلیاژ هنگام خرید تأیید شود.'}</b></div></div>`;
   list.innerHTML = items.length ? `<div class="alloy-table-head"><span>کد</span><span>سری / خانواده</span><span>ویژگی اصلی</span><span>چگالی</span><span>جزئیات</span></div>${items.map((alloy) => `<details class="alloy-table-row glass-card"><summary><strong>${alloy.code}</strong><span class="alloy-series">${seriesLabel[alloy.series] || `سری ${alloy.series}`}<small>${alloy.family}</small></span><span class="alloy-short-title">${alloy.title}</span><span class="alloy-density">${alloy.density}</span><span class="alloy-open">مشاهده</span></summary><div class="alloy-table-details">${detailMarkup(alloy)}</div></details>`).join('')}` : '<div class="result-box">آلیاژی با این جست‌وجو پیدا نشد.</div>';
-  $$('[data-add-compare]').forEach((button) => button.addEventListener('click', () => { const code = button.dataset.addCompare; const slots = ['#compareOne','#compareTwo','#compareThree']; const target = slots.find((selector) => !$(selector).value); if (!target) { showToast('سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کن.'); return; } $(target).value = code; $(target).dispatchEvent(new Event('change')); showToast(`${code} به مقایسه اضافه شد`); }));
   syncCompareSelection();
 }
 refreshCompareOptions();
@@ -244,10 +610,27 @@ async function loadAlloys() {
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
   renderAlloys();
+  renderElementLab();
 }
 $('#alloySearch')?.addEventListener('input', renderAlloys);
-$('#elementAlloyCode')?.addEventListener('input', updateElementResult);
-$$('[data-element]').forEach((input) => input.addEventListener('input', () => { const element = input.dataset.element; const amount = Number(input.value || 0); if (amount > 0) selectedElements.add(element); else selectedElements.delete(element); updateElementResult(); }));
+$$('.use-chip').forEach((chip) => chip.addEventListener('click', () => {
+  selectedUse = selectedUse === chip.dataset.use ? null : chip.dataset.use;
+  $$('.use-chip').forEach((item) => item.classList.toggle('active', item.dataset.use === selectedUse && selectedUse !== null));
+  renderElementLab();
+}));
+$$('[data-element]').forEach((input) => input.addEventListener('input', () => {
+  const cleaned = toAsciiDigits(input.value).replace(/[^0-9.]/g, '');
+  if (cleaned !== input.value) input.value = cleaned;
+  renderElementLab();
+}));
+$('#elementAlloyCode')?.addEventListener('input', renderElementLab);
+$('#labReset')?.addEventListener('click', () => { labClear(); renderElementLab(); });
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-add-compare]');
+  if (button) addAlloyToCompare(button.dataset.addCompare);
+});
+renderLabSamples();
+renderElementLab();
 function refreshCompareOptions() {
   const options = alloyData.alloys.map((a) => `<option value="${a.code}">${a.code} — ${a.title}</option>`).join('');
   ['#compareOne','#compareTwo','#compareThree'].forEach((selector) => {
@@ -277,21 +660,60 @@ function openPreview(url, title) {
   $('#previewBody').innerHTML = isImage ? `<img class="preview-image" src="${url}" alt="${title}" /><a class="preview-external" href="${url}" target="_blank" rel="noreferrer">باز کردن فایل اصلی ↗</a>` : `<iframe class="preview-frame" src="${url}" title="${title}" loading="lazy"></iframe><a class="preview-external" href="${url}" target="_blank" rel="noreferrer">باز کردن صفحه یا فایل اصلی ↗</a>`;
   previewDialog.showModal();
 }
+function openGuide(title, html) {
+  $('#previewTitle').textContent = title;
+  $('#previewBody').innerHTML = `<div class="guide-body">${html}</div>`;
+  previewDialog.showModal();
+}
 $('#previewClose').addEventListener('click', () => previewDialog.close());
 previewDialog.addEventListener('click', (event) => { if (event.target === previewDialog) previewDialog.close(); });
 
+const INSTALL_DISMISS_KEY = 'alum-install-dismissed';
+const runningStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+const usingIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+function installGuideHtml() {
+  const steps = usingIos()
+    ? ['اپ را در مرورگر <b>Safari</b> باز کن.', 'دکمه <b>اشتراک‌گذاری</b> (مربع با فلش رو به بالا) را بزن.', 'گزینه <b>Add to Home Screen</b> یا «افزودن به صفحه اصلی» را انتخاب کن.', 'نام «آلوم متال» را تأیید کن و <b>Add</b> را بزن.']
+    : ['اپ را در <b>Chrome</b> یا <b>Edge</b> باز کن.', 'منوی مرورگر (⋮ یا ⋯) را باز کن.', 'گزینه <b>Install app</b> یا «نصب برنامه» را بزن.', 'اگر این گزینه را ندیدی، «افزودن به صفحه اصلی» را از همان منو انتخاب کن.'];
+  return `<ol>${steps.map((step) => `<li>${step}</li>`).join('')}</ol><p class="guide-note">اگر اپ را قبلاً نصب کرده‌ای، این گزینه دیگر نمایش داده نمی‌شود. نصب روی اندروید و iOS به آدرس <b>https</b> نیاز دارد؛ روی localhost هم کار می‌کند.</p>`;
+}
+function setInstallState() {
+  const installed = runningStandalone();
+  const banner = $('#installBanner');
+  if (banner) banner.hidden = installed || localStorage.getItem(INSTALL_DISMISS_KEY) === '1';
+  const hint = $('#installBannerHint');
+  if (hint) hint.textContent = deferredInstallPrompt ? 'یک ضربه برای نصب؛ بدون گشتن در تنظیمات مرورگر.' : 'آموزش گام‌به‌گام نصب روی صفحه اصلی را ببین.';
+  const go = $('#installGo');
+  if (go) go.textContent = deferredInstallPrompt ? 'نصب' : 'آموزش نصب';
+  const row = $('#installButton');
+  if (row) row.hidden = installed;
+  const status = $('#installStatus');
+  if (status) status.textContent = deferredInstallPrompt ? 'نصب سریع' : 'راهنمای نصب';
+}
+function startInstallFlow() {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.then(() => { deferredInstallPrompt = null; setInstallState(); }).catch(() => setInstallState());
+    return;
+  }
+  openGuide('افزودن اپ به صفحه اصلی', installGuideHtml());
+}
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
-  $('#installButton').hidden = false;
+  setInstallState();
 });
-$('#installButton').addEventListener('click', async () => {
-  if (!deferredInstallPrompt) return;
-  deferredInstallPrompt.prompt();
-  await deferredInstallPrompt.userChoice;
+window.addEventListener('appinstalled', () => {
   deferredInstallPrompt = null;
-  $('#installButton').hidden = true;
+  localStorage.removeItem(INSTALL_DISMISS_KEY);
+  showToast('اپ آلوم متال روی صفحه اصلی نصب شد');
+  setInstallState();
 });
+$('#installGo')?.addEventListener('click', startInstallFlow);
+$('#installButton')?.addEventListener('click', startInstallFlow);
+$('#installDismiss')?.addEventListener('click', () => { localStorage.setItem(INSTALL_DISMISS_KEY, '1'); setInstallState(); });
+setInstallState();
 
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);

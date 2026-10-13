@@ -50,6 +50,15 @@ The application is a functional multi-screen prototype ready for the next produc
 
 The repository also includes a standalone HTML/CSS/JavaScript web app in `web/index.html`, `web/styles.css` and `web/app.js`. It is mobile-first and RTL-aware, and lays out as a single 480 px column on phones and as a full multi-column page on desktop screens (breakpoint at 700 px). It supports browser fullscreen, safe-area insets, reduced-motion preferences and local theme persistence. A `manifest.webmanifest` is provided so the app can be installed to the home screen. Offline caching through `sw.js` is intentionally disabled: `index.html` unregisters any service worker and clears legacy caches on every load so the static app always serves the current files.
 
+### Web app notes (current revision)
+
+- Light theme is the default; dark mode stays available from the header button and the settings screen, and the `theme-color` meta follows the active theme.
+- The navigation drawer opens from the right, matching the RTL layout and the hamburger button in the top bar.
+- The home hero banner was removed. The shortcut grid ("دسترسی سریع") now holds four cards and includes the alloy finder.
+- **عنصر بده، آلیاژ بگیر** was rebuilt: every alloy carries an AA-based composition range in `app.js` (`ALLOY_COMPOSITIONS`), matching is distance-based and scored, and the screen always returns ranked suggestions — from a single element value (e.g. `Si 0.45`) or from one application chip. Results marked «محدوده تقریبی» use approximate ranges and must be confirmed against the mill certificate before a final decision.
+- Install-to-home-screen is always reachable: a dismissible banner on the home screen plus a permanent row in settings, with a step-by-step per-platform guide when the browser does not fire `beforeinstallprompt`.
+- Brand assets were refreshed: `img/logo-alummetal.png` (transparent), `img/icon-192.png` / `img/icon-512.png`, `img/apple-touch-icon.png`, `img/favicon.*`, and the Bale/Eitaa/Rubika marks under `img/social/`.
+
 Run it locally with:
 
 ```bash

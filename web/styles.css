@@ -137,3 +137,120 @@ body.light .form-card label,body.light .form-card label span,body.light .dimensi
   .picker-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .picker-grid label:last-child{grid-column:auto}
 }
+
+/* ==========================================================================
+   Layer: RTL right-side drawer, light-first theme, install CTA, social logos,
+   and the rebuilt "element in, alloy out" laboratory.
+   ========================================================================== */
+
+/* Visually hidden helper (keeps a real h1 without showing the removed hero copy). */
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* `hidden` must win over the display rules of these components. */
+.install-banner[hidden],.settings-list button[hidden]{display:none!important}
+
+/* --------------------------------------------------------------- drawer: right side */
+.drawer{inset:0 0 0 auto;border:0;border-radius:26px 0 0 26px;transform:translateX(105%);box-shadow:-18px 0 55px rgba(4,26,34,.18)}
+.drawer.open{transform:translateX(0)}
+body:not(.light) .drawer{box-shadow:-18px 0 55px rgba(0,0,0,.35)}
+@media(min-width:481px){.drawer{left:auto;right:calc(50% - 240px);margin-left:0;margin-right:0}}
+@media(min-width:700px){.drawer{left:auto;margin-left:0;right:max(0px,calc(50% - 480px))}}
+
+/* --------------------------------------------------------------- install to home screen */
+.install-banner{display:flex;align-items:center;gap:12px;border-radius:20px;padding:13px 14px;margin:4px 0 18px}
+.install-icon{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:13px;background:rgba(36,190,208,.16);color:var(--cyan);font-size:20px}
+.install-copy{flex:1;min-width:0;display:grid;gap:3px}
+.install-copy strong{font-size:11px;line-height:1.7}
+.install-copy small{font-size:9px;line-height:1.7;color:var(--muted)}
+.install-actions{display:flex;align-items:center;gap:6px;flex:none}
+.install-go{border:0;border-radius:12px;padding:9px 13px;background:linear-gradient(110deg,var(--orange),#e84e19);color:#fff;font-size:11px;font-weight:800;box-shadow:0 8px 18px rgba(232,78,25,.22)}
+.install-go:active{transform:scale(.97)}
+.install-x{border:0;background:transparent;color:var(--muted);font-size:19px;line-height:1;padding:2px 4px}
+
+/* install guide shown inside the existing preview dialog */
+.preview-body{overflow:auto}
+.guide-body{display:grid;gap:10px;padding:2px 16px 14px}
+.guide-body ol{margin:0;padding-inline-start:18px;display:grid;gap:8px}
+.guide-body li{font-size:11px;line-height:1.95}
+.guide-body b{color:var(--orange)}
+.guide-body .guide-note{font-size:10px;line-height:1.85;color:var(--muted);margin:0}
+body.light .guide-body .guide-note{color:#315761}
+
+/* --------------------------------------------------------------- social logos */
+.social-link .social-mark{width:34px;height:34px;border-radius:11px;overflow:hidden}
+.social-link .social-mark img{display:block;width:100%;height:100%;object-fit:contain}
+.social-link.telegram .social-mark img,.social-link.bale .social-mark,.social-link.eitaa .social-mark,.social-link.rubika .social-mark{background:transparent}
+@media(max-width:380px){.social-link .social-mark{width:30px;height:30px;border-radius:10px}}
+
+/* --------------------------------------------------------------- element laboratory */
+.lab-card{margin-bottom:12px}
+.use-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:13px}
+.use-chip{border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.05);color:var(--text);padding:11px 9px;font-size:11px;font-weight:700;text-align:center;line-height:1.6;transition:transform .16s var(--ease),background .2s,border-color .2s}
+.use-chip:active{transform:scale(.97)}
+.use-chip.active{background:linear-gradient(120deg,var(--orange),#e84e19);border-color:transparent;color:#fff;box-shadow:0 8px 18px rgba(232,78,25,.26)}
+.lab-samples{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:13px 0 4px}
+.lab-samples>span{font-size:10px;color:var(--muted)}
+.lab-samples button{border:1px dashed var(--line);border-radius:11px;background:transparent;color:var(--cyan);padding:7px 9px;font-size:10px;font-weight:800;font-family:Arial,sans-serif}
+.lab-samples button:active{transform:scale(.97)}
+.element-chips{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.lab-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.lab-foot .element-code-search{flex:1;min-width:190px;margin:0}
+.lab-foot .text-link{font-size:10px;color:var(--muted);text-decoration:underline}
+.element-result.result-list{display:block}
+.match-list{display:grid;gap:10px;width:100%}
+.match-card{border-radius:20px;padding:13px 14px}
+.match-head{display:flex;align-items:center;gap:11px}
+.match-code{display:grid;gap:2px;flex:none;min-width:78px;text-align:center;direction:ltr;font-family:Arial,sans-serif;font-size:21px;font-weight:900;color:var(--orange)}
+.match-code small{font-family:'B Yekan',Tahoma,sans-serif;font-size:9px;font-weight:700;color:var(--orange);opacity:.85;direction:rtl}
+.match-meta{flex:1;min-width:0;display:grid;gap:3px}
+.match-meta strong{font-size:12px;line-height:1.7;font-weight:700}
+.match-meta small{font-size:9px;line-height:1.7;color:var(--muted)}
+.match-bar{height:6px;margin:9px 0 8px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.match-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--orange))}
+.match-tags{display:flex;flex-wrap:wrap;gap:5px}
+.el-tag{border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.05);padding:5px 7px;font-family:Arial,sans-serif;font-size:9px;font-weight:700;direction:ltr}
+.el-tag.ok{background:rgba(36,190,208,.15);border-color:rgba(36,190,208,.32);color:#a6e9f0}
+.el-tag.near{background:rgba(255,117,31,.13);border-color:rgba(255,140,60,.32);color:#ffd0a7}
+.el-tag.info{background:rgba(255,255,255,.04);color:var(--muted)}
+.match-reason{margin:9px 0 0;font-size:10px;line-height:1.85;color:var(--muted)}
+.match-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+.match-actions button{border:0;background:none;color:#ffb26e;padding:0;font-size:10px;font-weight:800}
+.popular-row{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
+.popular-chip{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.05);color:var(--text);padding:7px 9px;font-family:Arial,sans-serif;font-size:10px;font-weight:800}
+.popular-chip:active{transform:scale(.97)}
+.lab-note{margin:11px 0 0;font-size:10px;line-height:1.85;color:var(--muted)}
+
+/* light-theme tuning for the new laboratory parts */
+body.light .use-chip{background:rgba(255,255,255,.74)}
+body.light .use-chip.active{background:linear-gradient(120deg,var(--orange),#e84e19);color:#fff}
+body.light .match-bar{background:rgba(16,42,52,.1)}
+body.light .el-tag{background:rgba(255,255,255,.72)}
+body.light .el-tag.ok{background:rgba(36,160,170,.15);border-color:rgba(24,120,130,.3);color:#0f6069}
+body.light .el-tag.near{background:rgba(232,78,25,.11);border-color:rgba(200,80,30,.28);color:#9a4415}
+body.light .el-tag.info{background:rgba(255,255,255,.6)}
+body.light .match-reason,body.light .lab-note,body.light .match-meta small,body.light .install-copy small{color:#315761}
+body.light .match-actions button{color:#bf5a17}
+body.light .lab-samples button{color:#0e6c78}
+body.light .popular-chip{background:rgba(255,255,255,.72)}
+body.light .install-icon{background:rgba(36,160,170,.14);color:#0e6c78}
+
+@media(min-width:700px){
+  .use-chips{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .element-chips{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .match-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){
+  .use-chip{padding:9px 6px;font-size:10px}
+  .match-head{flex-wrap:wrap}
+  .match-code{min-width:64px;font-size:19px}
+  .install-banner{gap:9px;padding:11px 12px}
+  .install-icon{width:34px;height:34px}
+  .install-copy strong{font-size:10px}
+  .install-go{padding:8px 11px;font-size:10px}
+}
+
+/* Desktop fix: the shortcut grid now holds four cards (element-lab was added). */
+@media(min-width:700px){
+  .service-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .service-card{min-height:168px}
+}

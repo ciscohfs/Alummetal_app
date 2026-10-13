@@ -1,14 +1,15 @@
 {
   "name": "آلوم متال آراک",
   "short_name": "آلوم متال",
-  "description": "اپ وب آلوم متال آراک",
+  "description": "اپ وب آلوم متال آراک؛ محاسبه وزن مقاطع، کاتالوگ محصولات، بانک آلیاژها و پیشنهاد آلیاژ از روی ترکیب",
   "lang": "fa-IR",
   "dir": "rtl",
   "start_url": "./index.html#home",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#07121b",
-  "theme_color": "#07121b",
+  "background_color": "#edf3f5",
+  "theme_color": "#edf3f5",
   "icons": [
     {
       "src": "img/icon-192.png",
