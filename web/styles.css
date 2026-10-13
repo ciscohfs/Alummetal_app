@@ -249,9 +249,9 @@ body.light .install-icon{background:rgba(36,160,170,.14);color:#0e6c78}
   .install-go{padding:8px 11px;font-size:10px}
 }
 
-/* Desktop fix: the shortcut grid now holds four cards (element-lab was added). */
+/* The shortcut grid holds six cards: two rows of three on desktop. */
 @media(min-width:700px){
-  .service-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .service-card{min-height:168px}
 }
 
@@ -268,4 +268,42 @@ body.light .install-icon{background:rgba(36,160,170,.14);color:#0e6c78}
 @media(max-width:380px){
   .factory-strip{padding:14px;min-height:0}
   .factory-strip h3{font-size:16px}
+}
+
+/* ==========================================================================
+   Layer: mockup shortcut cards (navy tiles + line icons) and a locked
+   desktop sidebar so the menu never has to be opened or closed on desktop.
+   ========================================================================== */
+
+/* Shortcut cards: one brand-navy family with line icons, per the supplied mockup. */
+.service-grid .service-card,
+body.light .service-grid .service-card{background:linear-gradient(145deg,#123a4e,#08151f);border:1px solid rgba(180,226,238,.14)}
+.service-grid .service-card:before{background:rgba(255,255,255,.05)}
+.service-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:rgba(36,190,208,.13);color:#7ed7ea;font-size:0}
+.service-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.service-grid .service-card span:not(.service-icon),
+body.light .service-grid .service-card span:not(.service-icon){color:#f1f9fb}
+.service-grid .service-card small,
+body.light .service-grid .service-card small{color:#a6c3cc}
+.service-grid .service-card b,
+body.light .service-grid .service-card b{color:#ffad68}
+
+/* Desktop: the drawer stays open as a sidebar; no hamburger, no scrim, no transform. */
+@media(min-width:1024px){
+  .drawer{transform:none!important;left:auto;right:0;margin:0;height:100vh;width:300px;border-radius:0;
+          border:0;border-left:1px solid rgba(180,226,238,.14);box-shadow:none;overflow-y:auto}
+  body:not(.light) .drawer{box-shadow:none}
+  .drawer .drawer-head .icon-button{display:none}
+  #menuToggle{display:none}
+  .scrim{display:none!important}
+  body{padding-right:300px}
+  .toast{left:calc(50% - 150px)}
+}
+
+/* Below the sidebar breakpoint the closed drawer sits inside the viewport on wide
+   screens (its position tracks the centred column), so hide it outright instead of
+   relying on the slide transform alone. */
+@media(max-width:1023px){
+  .drawer{visibility:hidden;transition:transform .32s var(--ease),visibility 0s linear .32s}
+  .drawer.open{visibility:visible;transition:transform .32s var(--ease),visibility 0s linear 0s}
 }

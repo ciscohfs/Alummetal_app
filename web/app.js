@@ -22,7 +22,12 @@ function showToast(message) {
   showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
+// On wide screens the drawer is a permanently visible sidebar (see the CSS layer),
+// so opening and closing only apply below the 1024px breakpoint.
+const sidebarQuery = window.matchMedia('(min-width: 1024px)');
+const sidebarLocked = () => sidebarQuery.matches;
 function openDrawer() {
+  if (sidebarLocked()) return;
   drawer.classList.add('open');
   scrim.classList.add('show');
   drawer.setAttribute('aria-hidden', 'false');
@@ -31,9 +36,10 @@ function openDrawer() {
 function closeDrawer() {
   drawer.classList.remove('open');
   scrim.classList.remove('show');
-  drawer.setAttribute('aria-hidden', 'true');
+  drawer.setAttribute('aria-hidden', sidebarLocked() ? 'false' : 'true');
   $('#menuToggle').setAttribute('aria-expanded', 'false');
 }
+if (sidebarQuery.addEventListener) sidebarQuery.addEventListener('change', () => closeDrawer());
 function navigate(route) {
   const target = document.getElementById(route) || $('#home');
   $$('[data-screen]').forEach((screen) => screen.classList.toggle('active', screen === target));
@@ -449,7 +455,7 @@ function rankAlloys(entered, useKey, limit = 6, alloys = alloyData.alloys) {
   return rows.slice(0, limit).map((row) => ({ ...row, percent: Math.max(8, Math.min(99, Math.round(row.score * 100))) }));
 }
 function labReason(row, entered, useKey, direct) {
-  if (direct) return 'این کد را مستقیم جست‌وجو کردی؛ برای دیدن مشخصات کامل «جزئیات در بانک آلیاژها» را بزن.';
+  if (direct) return 'این کد را مستقیم جست‌وجو کردی؛ برای دیدن مشخصات کامل «جزئیات در دانشنامه آلیاژها» را بزن.';
   const parts = [];
   const count = Object.keys(entered).length;
   if (count) {
@@ -490,7 +496,7 @@ function labMatchCard(row, entered, useKey, direct) {
         ${tags.length ? `<div class="match-tags">${tags.join('')}</div>` : ''}
         <p class="match-reason">${labReason(row, entered, useKey, direct)}</p>
         <div class="match-actions">
-          <button type="button" data-show-alloy="${escapeLab(alloy.code)}">جزئیات در بانک آلیاژها ←</button>
+          <button type="button" data-show-alloy="${escapeLab(alloy.code)}">جزئیات در دانشنامه آلیاژها ←</button>
           <button type="button" data-add-compare="${escapeLab(alloy.code)}">＋ افزودن به مقایسه</button>
         </div>
       </article>`;
@@ -549,11 +555,11 @@ function renderElementLab() {
       html = `<strong class="lab-result-title">کدی با «${escapeLab(query)}» پیدا نشد</strong><span>نزدیک‌ترین کدهای موجود را انتخاب کن:</span><div class="popular-row">${near.map((alloy) => `<button type="button" class="popular-chip" data-lab-code="${alloy.code}">${alloy.code}</button>`).join('')}</div>`;
     }
   } else if (!hasInput) {
-    html = `<strong class="lab-result-title">از کجا شروع کنم؟</strong><span>فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45)؛ بقیه کار با ما. اگر ترکیب را نمی‌دانی، «کاربرد بده، آلیاژ بگیر» را امتحان کن.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
+    html = `<strong class="lab-result-title">از کجا شروع کنم؟</strong><span>فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45)؛ بقیه کار با ما. اگر ترکیب را نمی‌دانی، «انتخاب آلیاژ بر اساس کاربرد» را امتحان کن.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
   } else {
     const rows = rankAlloys(entered, null, 6);
     if (!rows.length) {
-      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>مقدار عنصر را کمی تغییر بده یا از «کاربرد بده، آلیاژ بگیر» استفاده کن.</span>${labPopularRow()}`;
+      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>مقدار عنصر را کمی تغییر بده یا از «انتخاب آلیاژ بر اساس کاربرد» استفاده کن.</span>${labPopularRow()}`;
     } else {
       html = `<strong class="lab-result-title">نزدیک‌ترین آلیاژها به ترکیب واردشده</strong><div class="match-list">${rows.map((row) => labMatchCard(row, entered, null, false)).join('')}</div><small class="lab-note">درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
     }
