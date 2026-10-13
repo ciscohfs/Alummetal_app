@@ -507,22 +507,19 @@ function labCodeQuery() {
   const input = $('#elementAlloyCode');
   return toAsciiDigits(input ? input.value : '').replace(/[^0-9A-Za-z]/g, '').toUpperCase();
 }
-function labClear(resetUse = true) {
+function labClear() {
   $$('[data-element]').forEach((input) => { input.value = ''; });
   const code = $('#elementAlloyCode');
   if (code) code.value = '';
-  if (resetUse) {
-    selectedUse = null;
-    $$('.use-chip').forEach((chip) => chip.classList.remove('active'));
-  }
 }
-function labBindResultCards() {
-  $$('#elementResult [data-lab-code]').forEach((button) => button.addEventListener('click', () => {
+function labBindResultCards(container) {
+  if (!container) return;
+  container.querySelectorAll('[data-lab-code]').forEach((button) => button.addEventListener('click', () => {
     const input = $('#elementAlloyCode');
     if (input) input.value = button.dataset.labCode;
     renderElementLab();
   }));
-  $$('#elementResult [data-show-alloy]').forEach((button) => button.addEventListener('click', () => {
+  container.querySelectorAll('[data-show-alloy]').forEach((button) => button.addEventListener('click', () => {
     const search = $('#alloySearch');
     if (search) search.value = button.dataset.showAlloy;
     selectedSeries = 'all';
@@ -531,8 +528,8 @@ function labBindResultCards() {
     navigate('alloys');
   }));
 }
-function labPopularRow() {
-  return `<div class="popular-row">${LAB_POPULAR_ORDER.slice(0, 12).map((code) => `<button type="button" class="popular-chip" data-lab-code="${code}">${code}</button>`).join('')}</div>`;
+function labPopularRow(attribute = 'data-lab-code') {
+  return `<div class="popular-row">${LAB_POPULAR_ORDER.slice(0, 12).map((code) => `<button type="button" class="popular-chip" ${attribute}="${code}">${code}</button>`).join('')}</div>`;
 }
 function renderElementLab() {
   const result = $('#elementResult');
@@ -545,26 +542,43 @@ function renderElementLab() {
     const digits = query.replace(/[^0-9]/g, '');
     const exact = alloyData.alloys.filter((alloy) => alloy.code.replace(/[^0-9]/g, '') === digits || alloy.code.toUpperCase().startsWith(query));
     if (exact.length) {
-      html = `<strong class="lab-result-title">کد آلیاژ «${escapeLab(query)}»</strong><div class="match-list">${exact.slice(0, 4).map((alloy) => labMatchCard({ alloy, percent: 100, comp: null, use: 0 }, entered, selectedUse, true)).join('')}</div>`;
+      html = `<strong class="lab-result-title">کد آلیاژ «${escapeLab(query)}»</strong><div class="match-list">${exact.slice(0, 4).map((alloy) => labMatchCard({ alloy, percent: 100, comp: null, use: 0 }, entered, null, true)).join('')}</div>`;
     } else {
       const distance = (alloy) => Math.abs(Number(alloy.code.replace(/[^0-9]/g, '')) - Number(digits));
       const near = alloyData.alloys.slice().sort((left, right) => distance(left) - distance(right)).slice(0, 6);
       html = `<strong class="lab-result-title">کدی با «${escapeLab(query)}» پیدا نشد</strong><span>نزدیک‌ترین کدهای موجود را انتخاب کن:</span><div class="popular-row">${near.map((alloy) => `<button type="button" class="popular-chip" data-lab-code="${alloy.code}">${alloy.code}</button>`).join('')}</div>`;
     }
-  } else if (!hasInput && !selectedUse) {
-    html = `<strong class="lab-result-title">از کجا شروع کنم؟</strong><span>یا یکی از کاربردهای بالا را بزن، یا فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45). هر دو راه به آلیاژ می‌رسد.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
+  } else if (!hasInput) {
+    html = `<strong class="lab-result-title">از کجا شروع کنم؟</strong><span>فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45)؛ بقیه کار با ما. اگر ترکیب را نمی‌دانی، «کاربرد بده، آلیاژ بگیر» را امتحان کن.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
   } else {
-    const rows = rankAlloys(entered, selectedUse, 6);
+    const rows = rankAlloys(entered, null, 6);
     if (!rows.length) {
-      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>یک کاربرد انتخاب کن یا مقدار عنصر را کمی تغییر بده.</span>${labPopularRow()}`;
+      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>مقدار عنصر را کمی تغییر بده یا از «کاربرد بده، آلیاژ بگیر» استفاده کن.</span>${labPopularRow()}`;
     } else {
-      const title = hasInput && selectedUse ? 'نتیجه بر پایه ترکیب و کاربرد' : hasInput ? 'نزدیک‌ترین آلیاژها به ترکیب واردشده' : `پیشنهاد برای کاربرد «${USE_CASES[selectedUse].label}»`;
-      html = `<strong class="lab-result-title">${title}</strong><div class="match-list">${rows.map((row) => labMatchCard(row, entered, selectedUse, false)).join('')}</div><small class="lab-note">درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
+      html = `<strong class="lab-result-title">نزدیک‌ترین آلیاژها به ترکیب واردشده</strong><div class="match-list">${rows.map((row) => labMatchCard(row, entered, null, false)).join('')}</div><small class="lab-note">درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
     }
   }
   result.innerHTML = html;
   result.classList.toggle('result-list', html.indexOf('match-list') !== -1);
-  labBindResultCards();
+  labBindResultCards(result);
+}
+function renderUseLab() {
+  const result = $('#useResult');
+  if (!result) return;
+  let html = '';
+  if (!selectedUse) {
+    html = `<strong class="lab-result-title">از کدام کاربرد شروع کنیم؟</strong><span>یکی از کاربردهای بالا را انتخاب کن تا آلیاژهای پیشنهادی همان کاربرد را ببینی. اگر کد یا ترکیب را می‌دانی، «عنصر بده، آلیاژ بگیر» دقیق‌تر است.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow('data-show-alloy')}`;
+  } else {
+    const rows = rankAlloys({}, selectedUse, 6);
+    if (!rows.length) {
+      html = `<strong class="lab-result-title">برای این کاربرد پیشنهادی پیدا نشد</strong><span>کاربرد دیگری را امتحان کن.</span>${labPopularRow('data-show-alloy')}`;
+    } else {
+      html = `<strong class="lab-result-title">پیشنهاد برای کاربرد «${USE_CASES[selectedUse].label}»</strong><div class="match-list">${rows.map((row) => labMatchCard(row, {}, selectedUse, false)).join('')}</div><small class="lab-note">این پیشنهادها بر پایه کاربرد رایج هر گرید است؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
+    }
+  }
+  result.innerHTML = html;
+  result.classList.toggle('result-list', html.indexOf('match-list') !== -1);
+  labBindResultCards(result);
 }
 function addAlloyToCompare(code) {
   const slots = ['#compareOne', '#compareTwo', '#compareThree'];
@@ -611,13 +625,19 @@ async function loadAlloys() {
   refreshCompareOptions();
   renderAlloys();
   renderElementLab();
+  renderUseLab();
 }
 $('#alloySearch')?.addEventListener('input', renderAlloys);
 $$('.use-chip').forEach((chip) => chip.addEventListener('click', () => {
   selectedUse = selectedUse === chip.dataset.use ? null : chip.dataset.use;
   $$('.use-chip').forEach((item) => item.classList.toggle('active', item.dataset.use === selectedUse && selectedUse !== null));
-  renderElementLab();
+  renderUseLab();
 }));
+$('#useLabReset')?.addEventListener('click', () => {
+  selectedUse = null;
+  $$('.use-chip').forEach((chip) => chip.classList.remove('active'));
+  renderUseLab();
+});
 $$('[data-element]').forEach((input) => input.addEventListener('input', () => {
   const cleaned = toAsciiDigits(input.value).replace(/[^0-9.]/g, '');
   if (cleaned !== input.value) input.value = cleaned;
@@ -631,6 +651,7 @@ document.addEventListener('click', (event) => {
 });
 renderLabSamples();
 renderElementLab();
+renderUseLab();
 function refreshCompareOptions() {
   const options = alloyData.alloys.map((a) => `<option value="${a.code}">${a.code} — ${a.title}</option>`).join('');
   ['#compareOne','#compareTwo','#compareThree'].forEach((selector) => {

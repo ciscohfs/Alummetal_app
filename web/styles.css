@@ -254,3 +254,18 @@ body.light .install-icon{background:rgba(36,160,170,.14);color:#0e6c78}
   .service-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
   .service-card{min-height:168px}
 }
+
+/* Shortcut cards 5 and 6: the use-case finder and the alloy comparison. */
+.service-card.lime{background:linear-gradient(145deg,#1d7d6a,#0f4b45)}
+.service-card.plum{background:linear-gradient(145deg,#5b4a7e,#2f2748)}
+
+/* The factory strip is text-only now (its image was removed), so it carries its own
+   rhythm and a brand accent on the inline-start edge instead of a photo. */
+.factory-strip{padding:18px;min-height:104px;border-inline-start:3px solid rgba(255,117,31,.55)}
+.factory-strip .factory-copy{display:grid;gap:2px;width:100%;align-content:center}
+.factory-strip h3{font-size:18px;margin:0 0 10px}
+.factory-strip .text-link{font-size:12px;font-weight:800}
+@media(max-width:380px){
+  .factory-strip{padding:14px;min-height:0}
+  .factory-strip h3{font-size:16px}
+}
