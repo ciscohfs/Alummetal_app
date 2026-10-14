@@ -1,5 +1,13 @@
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+// A `?v=` query is only a cache buster used by the self-update flow. Remove it as soon
+// as the document is in, so visitors always see the bare domain in the address bar.
+try {
+  if (window.location.search.includes('v=')) {
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+  }
+} catch { /* ignore a blocked history write */ }
 const appShell = $('#appShell');
 const drawer = $('#drawer');
 const scrim = $('#scrim');
@@ -44,7 +52,8 @@ function navigate(route) {
   const target = document.getElementById(route) || $('#home');
   $$('[data-screen]').forEach((screen) => screen.classList.toggle('active', screen === target));
   $$('[data-route]').forEach((link) => link.classList.toggle('active', link.dataset.route === route));
-  if (window.location.hash !== `#${route}`) history.replaceState(null, '', `#${route}`);
+  // The address bar stays exactly as the visitor typed it: screens are switched in
+  // memory only, so no #hash and no ?query ever shows up while browsing.
   closeDrawer();
   $('#mainContent').focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -130,13 +139,6 @@ $('#calculateButton').addEventListener('click', () => {
   result.textContent = `وزن تقریبی: ${weight.toFixed(3)} کیلوگرم — چگالی ${density} گرم بر سانتی‌متر مکعب`;
 });
 loadCalculator();
-
-
-$('#quoteForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  $('#quoteResult').textContent = 'درخواست شما ثبت موقت شد؛ کارشناسان با شما تماس می‌گیرند.';
-  event.target.reset();
-});
 
 
 async function loadCatalog() {
@@ -744,3 +746,225 @@ setInstallState();
 
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
+
+/* ==========================================================================
+   Layer: daily notifications (two random messages a day) + in-app update flow
+   (version.json -> popup -> settings row -> cache clear -> reload).
+   ========================================================================== */
+
+const NOTIFY_STATE_KEY = 'alum-notify-state-v1';
+const NOTIFY_DISMISS_KEY = 'alum-notify-dismissed';
+const NOTIFY_ENABLED_KEY = 'alum-notify-enabled';
+const VERSION_KEY = 'alum-app-version';
+
+const NOTIFY_MESSAGES = [
+  'وزن مقاطع را در چند ثانیه حساب کن؛ ابزار «محاسبه وزن» در همین اپ است.',
+  'کاتالوگ محصولات به‌روز است؛ ورق، گرد، پروفیل و مقاطع خاص را ببین.',
+  'درصد عناصر را داری؟ «عنصر بده، آلیاژ بگیر» نزدیک‌ترین گریدها را پیشنهاد می‌دهد.',
+  'برای استعلام موجودی و قیمت با کارشناسان فروش تماس بگیرید: ۰۸۶-۳۳۲۵۷۳۱۶',
+  'آلیاژ مناسب کاربردت را پیدا نمی‌کنی؟ سری به «انتخاب آلیاژ بر اساس کاربرد» بزن.',
+  '۶۰۶۳ پرکاربردترین آلیاژ پروفیل ساختمانی است؛ مشخصات کاملش در دانشنامه آلیاژها.',
+  'دو آلیاژ را کنار هم مقایسه کن تا انتخاب مطمئن‌تری داشته باشی.',
+  'اپ آلوم متال را روی صفحه اصلی نصب کن تا دسترسی سریع‌تری داشته باشی.',
+  'نکته فنی: چگالی آلومینیوم بین ۲٫۶۶ تا ۲٫۸۱ گرم بر سانتی‌متر مکعب است؛ ماشین‌حساب خودش چگالی درست را انتخاب می‌کند.',
+  'ورق آلومینیوم با ضخامت ۰٫۱ تا ۵۰۰ میلی‌متر؛ موجودی را از کارشناسان فروش بگیر.',
+  'آلیاژهای سری ۵۰۰۰ برای محیط‌های مرطوب و دریایی مقاومت خوردگی خوبی دارند.',
+  'با هر بار باز کردن اپ، آخرین نسخه و داده‌ها دریافت می‌شود.'
+];
+
+const readJson = (key) => { try { return JSON.parse(localStorage.getItem(key)) || null; } catch { return null; } };
+const writeJson = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } };
+const todayKey = () => { const now = new Date(); return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`; };
+const notificationsSupported = () => 'Notification' in window;
+const notificationsEnabled = () => notificationsSupported() && Notification.permission === 'granted' && localStorage.getItem(NOTIFY_ENABLED_KEY) !== '0';
+
+// Two random hours a day, chosen once per day so a reload never reshuffles them.
+function notifyState() {
+  const day = todayKey();
+  let state = readJson(NOTIFY_STATE_KEY);
+  if (!state || state.day !== day || !Array.isArray(state.slots) || state.slots.length !== 2) {
+    const hours = [9, 11, 13, 15, 18, 20];
+    for (let i = hours.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [hours[i], hours[j]] = [hours[j], hours[i]];
+    }
+    state = { day, slots: hours.slice(0, 2).sort((a, b) => a - b), sent: [], used: [] };
+    writeJson(NOTIFY_STATE_KEY, state);
+  }
+  if (!Array.isArray(state.sent)) state.sent = [];
+  if (!Array.isArray(state.used)) state.used = [];
+  return state;
+}
+
+function pickNotifyMessage(state) {
+  let pool = NOTIFY_MESSAGES.map((_, index) => index).filter((index) => !state.used.includes(index));
+  if (!pool.length) { state.used = []; pool = NOTIFY_MESSAGES.map((_, index) => index); }
+  const index = pool[Math.floor(Math.random() * pool.length)];
+  state.used.push(index);
+  return index;
+}
+
+async function fireNotification(body) {
+  showToast(body);
+  const options = {
+    body,
+    icon: 'img/icon-192.png?v=15',
+    badge: 'img/favicon-48.png',
+    lang: 'fa',
+    dir: 'rtl',
+    tag: 'alum-daily',
+    data: { route: 'home' }
+  };
+  if (!notificationsSupported() || Notification.permission !== 'granted') return;
+  // The service worker path is what Android and iOS accept; plain Notification is the desktop fallback.
+  try {
+    if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.register('notify-sw.js');
+      await registration.showNotification('آلوم متال آراک', options);
+      return;
+    }
+  } catch { /* fall through to the constructor below */ }
+  try { new Notification('آلوم متال آراک', options); } catch { /* toast already showed the message */ }
+}
+
+// One message per check, so the two daily alerts never arrive back to back.
+async function checkDailyNotifications() {
+  if (!notificationsEnabled()) return;
+  const state = notifyState();
+  const due = state.slots.find((hour) => !state.sent.includes(hour) && new Date().getHours() >= hour);
+  if (due === undefined) return;
+  state.sent.push(due);
+  const index = pickNotifyMessage(state);
+  writeJson(NOTIFY_STATE_KEY, state);
+  await fireNotification(NOTIFY_MESSAGES[index]);
+}
+
+function notifyStatusText() {
+  if (!notificationsSupported()) return 'در این مرورگر نیست';
+  if (Notification.permission === 'denied') return 'مسدود شده';
+  if (Notification.permission !== 'granted') return 'در انتظار اجازه';
+  return notificationsEnabled() ? 'فعال' : 'خاموش';
+}
+
+function refreshNotifyUi() {
+  const status = $('#notifyStatus');
+  if (status) status.textContent = notifyStatusText();
+  const banner = $('#notifyBanner');
+  if (banner) {
+    banner.hidden = !notificationsSupported()
+      || Notification.permission !== 'default'
+      || localStorage.getItem(NOTIFY_DISMISS_KEY) === '1';
+  }
+}
+
+async function requestNotifications() {
+  if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); refreshNotifyUi(); return; }
+  let permission = Notification.permission;
+  if (permission === 'default') {
+    try { permission = await Notification.requestPermission(); } catch { permission = Notification.permission; }
+  }
+  if (permission === 'granted') {
+    localStorage.setItem(NOTIFY_ENABLED_KEY, '1');
+    localStorage.removeItem(NOTIFY_DISMISS_KEY);
+    showToast('اعلان‌های روزانه فعال شد؛ روزی دو پیام دریافت می‌کنی.');
+    checkDailyNotifications();
+  } else if (permission === 'denied') {
+    showToast('اجازهٔ اعلان رد شد؛ برای فعال‌سازی آن را از تنظیمات مرورگر باز کن.');
+  } else {
+    showToast('اجازهٔ اعلان داده نشد.');
+  }
+  refreshNotifyUi();
+}
+
+$('#notifyEnable')?.addEventListener('click', requestNotifications);
+$('#notifyDismiss')?.addEventListener('click', () => { localStorage.setItem(NOTIFY_DISMISS_KEY, '1'); refreshNotifyUi(); });
+$('#notifyButton')?.addEventListener('click', async () => {
+  if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); return; }
+  if (Notification.permission === 'default') { await requestNotifications(); return; }
+  if (Notification.permission === 'denied') { showToast('اجازهٔ اعلان در تنظیمات مرورگر مسدود است.'); refreshNotifyUi(); return; }
+  const wasEnabled = notificationsEnabled();
+  localStorage.setItem(NOTIFY_ENABLED_KEY, wasEnabled ? '0' : '1');
+  showToast(wasEnabled ? 'اعلان‌های روزانه خاموش شد.' : 'اعلان‌های روزانه فعال شد؛ روزی دو پیام.');
+  refreshNotifyUi();
+  if (!wasEnabled) checkDailyNotifications();
+});
+refreshNotifyUi();
+checkDailyNotifications();
+window.setInterval(checkDailyNotifications, 60 * 1000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) checkDailyNotifications(); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('notify-sw.js').catch(() => {});
+
+/* --------------------------------------------------------------- update flow */
+const updateDialog = $('#updateDialog');
+let pendingUpdate = null;
+
+function setUpdateStatus(text) { const row = $('#updateStatus'); if (row) row.textContent = text; }
+
+function openUpdateDialog() {
+  if (!pendingUpdate || !updateDialog) return;
+  const line = $('#updateVersionLine');
+  if (line) line.textContent = pendingUpdate.date ? `نسخهٔ ${pendingUpdate.version} — تاریخ انتشار ${pendingUpdate.date}` : `نسخهٔ ${pendingUpdate.version}`;
+  const notes = pendingUpdate.notes || [];
+  const list = $('#updateNotes');
+  if (list) {
+    list.innerHTML = notes.slice(0, 6).map((note) => `<li>${escapeLab(String(note))}</li>`).join('');
+    list.hidden = !notes.length;
+  }
+  if (!updateDialog.open) { try { updateDialog.showModal(); } catch { /* already open */ } }
+}
+
+async function applyUpdate() {
+  const target = pendingUpdate ? pendingUpdate.version : null;
+  showToast('در حال به‌روزرسانی…');
+  try { if ('caches' in window) { const keys = await caches.keys(); await Promise.all(keys.map((key) => caches.delete(key))); } } catch { /* ignore */ }
+  try {
+    if ('serviceWorker' in navigator) {
+      const items = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(items.map((item) => item.unregister()));
+    }
+  } catch { /* ignore */ }
+  try { if (target) localStorage.setItem(VERSION_KEY, String(target)); } catch { /* ignore */ }
+  if (target) {
+    // The version query makes the browser fetch a fresh index.html (and with it the
+    // versioned CSS/JS); the first lines of app.js strip that query again, so the
+    // address bar only ever shows the domain itself.
+    window.location.replace(`${window.location.pathname}?v=${encodeURIComponent(target)}`);
+  } else {
+    window.location.reload();
+  }
+}
+
+async function checkForUpdate() {
+  try {
+    const response = await fetch('version.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('version unavailable');
+    const data = await response.json();
+    const remote = Number(data.version);
+    if (!Number.isFinite(remote) || remote <= 0) throw new Error('bad version');
+    let seen = Number(localStorage.getItem(VERSION_KEY) || 0) || 0;
+    if (!seen) { try { localStorage.setItem(VERSION_KEY, String(remote)); } catch { /* ignore */ } setUpdateStatus('به‌روز'); return; }
+    if (remote <= seen) { setUpdateStatus('به‌روز'); return; }
+    pendingUpdate = { version: remote, date: data.date || '', notes: Array.isArray(data.notes) ? data.notes : [] };
+    setUpdateStatus('نسخهٔ جدید دارد');
+    let asked = false;
+    try { asked = sessionStorage.getItem('alum-update-asked') === '1'; } catch { /* ignore */ }
+    if (!asked) {
+      try { sessionStorage.setItem('alum-update-asked', '1'); } catch { /* ignore */ }
+      openUpdateDialog();
+    }
+  } catch {
+    setUpdateStatus('بررسی هنگام اتصال');
+  }
+}
+
+$('#updateApply')?.addEventListener('click', applyUpdate);
+$('#updateLater')?.addEventListener('click', () => updateDialog?.close());
+$('#updateClose')?.addEventListener('click', () => updateDialog?.close());
+updateDialog?.addEventListener('click', (event) => { if (event.target === updateDialog) updateDialog.close(); });
+$('#updateButton')?.addEventListener('click', async () => {
+  if (pendingUpdate) { openUpdateDialog(); return; }
+  setUpdateStatus('در حال بررسی…');
+  await checkForUpdate();
+  if (!pendingUpdate) showToast('نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستی.');
+});
+checkForUpdate();

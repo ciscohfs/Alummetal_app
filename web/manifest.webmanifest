@@ -4,7 +4,7 @@
   "description": "اپ وب آلوم متال آراک؛ محاسبه وزن مقاطع، کاتالوگ محصولات، بانک آلیاژها و پیشنهاد آلیاژ از روی ترکیب",
   "lang": "fa-IR",
   "dir": "rtl",
-  "start_url": "./index.html#home",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
