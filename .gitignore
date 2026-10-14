@@ -14,3 +14,9 @@ Thumbs.db
 # OS and editor artifacts
 .DS_Store
 ._*
+
+# Tooling artifacts: screenshots and packaging zips generated while working on the
+# project. They are never source code, so they must not enter the history.
+deploy-web.zip
+*-screenshot.png
+*-check.png
