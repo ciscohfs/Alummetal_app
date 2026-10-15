@@ -6,6 +6,12 @@
   "dir": "rtl",
   "start_url": "./index.html",
   "scope": "./",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "./manifest.webmanifest"
+    }
+  ],
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#edf3f5",

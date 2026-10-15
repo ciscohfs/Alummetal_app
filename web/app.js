@@ -119,7 +119,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=17');
+    const response = await fetchWithTimeout('calculator.json?v=18');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -177,7 +177,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=17');
+    const response = await fetchWithTimeout('catalog.json?v=18');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -628,7 +628,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=17');
+    const response = await fetchWithTimeout('alloys.json?v=18');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -699,6 +699,9 @@ $('#previewClose').addEventListener('click', () => previewDialog.close());
 previewDialog.addEventListener('click', (event) => { if (event.target === previewDialog) previewDialog.close(); });
 
 const INSTALL_DISMISS_KEY = 'alum-install-dismissed';
+// Written when the browser confirms the app got installed, so the install banner stops
+// asking on every later visit too (a dismissal is per visit, an installation is not).
+const INSTALLED_KEY = 'alum-app-installed';
 
 // The two banners at the top of the home screen are dismissed for the current visit
 // only. sessionStorage is emptied when the tab closes, so a visitor who still has not
@@ -706,6 +709,8 @@ const INSTALL_DISMISS_KEY = 'alum-install-dismissed';
 const sessionFlag = (key) => { try { return sessionStorage.getItem(key) === '1'; } catch { return false; } };
 const setSessionFlag = (key) => { try { sessionStorage.setItem(key, '1'); } catch { /* private mode */ } };
 const clearSessionFlag = (key) => { try { sessionStorage.removeItem(key); } catch { /* private mode */ } };
+const localFlag = (key) => { try { return localStorage.getItem(key) === '1'; } catch { return false; } };
+const setLocalFlag = (key) => { try { localStorage.setItem(key, '1'); } catch { /* private mode */ } };
 
 const runningStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 const usingIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -716,8 +721,26 @@ function installGuideHtml() {
     : ['اپ را در <b>Chrome</b> یا <b>Edge</b> باز کن.', 'منوی مرورگر (⋮ یا ⋯) را باز کن.', 'گزینه <b>Install app</b> یا «نصب برنامه» را بزن.', 'اگر این گزینه را ندیدی، «افزودن به صفحه اصلی» را از همان منو انتخاب کن.'];
   return `<ol>${steps.map((step) => `<li>${step}</li>`).join('')}</ol><p class="guide-note">اگر اپ را قبلاً نصب کرده‌ای، این گزینه دیگر نمایش داده نمی‌شود. نصب روی اندروید و iOS به آدرس <b>https</b> نیاز دارد؛ روی localhost هم کار می‌کند.</p>`;
 }
+// "Installed" is true while the app runs standalone, once the browser reported the
+// installation, or once the platform told us the app is already installed. The
+// detection below can only ever hide the banner, never bring it back.
+let installedDetected = false;
+const appIsInstalled = () => runningStandalone() || installedDetected || localFlag(INSTALLED_KEY);
+
+async function detectInstalledApp() {
+  if (!navigator.getInstalledRelatedApps) return;
+  try {
+    const related = await navigator.getInstalledRelatedApps();
+    if (Array.isArray(related) && related.length) {
+      installedDetected = true;
+      setLocalFlag(INSTALLED_KEY);
+      setInstallState();
+    }
+  } catch { /* unsupported or blocked; keep the current state */ }
+}
+
 function setInstallState() {
-  const installed = runningStandalone();
+  const installed = appIsInstalled();
   const banner = $('#installBanner');
   if (banner) banner.hidden = installed || sessionFlag(INSTALL_DISMISS_KEY);
   const hint = $('#installBannerHint');
@@ -744,6 +767,8 @@ window.addEventListener('beforeinstallprompt', (event) => {
 });
 window.addEventListener('appinstalled', () => {
   deferredInstallPrompt = null;
+  installedDetected = true;
+  setLocalFlag(INSTALLED_KEY);
   clearSessionFlag(INSTALL_DISMISS_KEY);
   showToast('اپ آلوم متال روی صفحه اصلی نصب شد');
   setInstallState();
@@ -752,6 +777,7 @@ $('#installGo')?.addEventListener('click', startInstallFlow);
 $('#installButton')?.addEventListener('click', startInstallFlow);
 $('#installDismiss')?.addEventListener('click', () => { setSessionFlag(INSTALL_DISMISS_KEY); setInstallState(); });
 setInstallState();
+detectInstalledApp();
 
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
@@ -817,7 +843,7 @@ async function fireNotification(body) {
   showToast(body);
   const options = {
     body,
-    icon: 'img/icon-192.png?v=17',
+    icon: 'img/icon-192.png?v=18',
     badge: 'img/favicon-48.png',
     lang: 'fa',
     dir: 'rtl',
