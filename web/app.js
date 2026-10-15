@@ -85,7 +85,11 @@ const savedTheme = localStorage.getItem('alum-theme-v2');
 setTheme(savedTheme !== 'dark');  // light theme is the default; dark only when chosen
 $('#themeToggle').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#settingsTheme').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
-$('#languageToggle').addEventListener('click', () => showToast('زبان فعلی برنامه فارسی است.'));
+$('#languageToggle').addEventListener('click', () => {
+  const next = isEnglish() ? 'fa' : 'en';
+  applyLanguage(next);
+  showToast(isEnglish() ? 'Language changed to English.' : 'زبان برنامه به فارسی تغییر کرد.');
+});
 $('#calculatorGuideToggle')?.addEventListener('click', () => { const guide=$('#calculatorGuide'); const button=$('#calculatorGuideToggle'); const open=!guide.hidden; guide.hidden=open; button.setAttribute('aria-expanded', String(!open)); button.querySelector('span').textContent=open?'＋':'－'; });
 
 $('#fullscreenToggle').addEventListener('click', async () => {
@@ -119,7 +123,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=19');
+    const response = await fetchWithTimeout('calculator.json?v=20');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -177,7 +181,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=19');
+    const response = await fetchWithTimeout('catalog.json?v=20');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -228,7 +232,8 @@ function renderComparison() {
   $('#comparePanel').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 const escapeLab = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
-const toFaDigits = (value) => String(value).replace(/[0-9]/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)]);
+// Persian digits are the default, but in English mode the numbers stay ASCII.
+const toFaDigits = (value) => (isEnglish() ? String(value) : String(value).replace(/[0-9]/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)]));
 const toAsciiDigits = (value) => String(value ?? '').replace(/[۰-۹٠-٩]/g, (digit) => String('۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩'.indexOf(digit) % 10));
 
 // Persian and Arabic keyboards type their own digits and separators, so «۰٫۴۵» and
@@ -242,6 +247,147 @@ function normaliseElementValue(value) {
   const dot = ascii.indexOf('.');
   return dot === -1 ? ascii : ascii.slice(0, dot + 1) + ascii.slice(dot + 1).replace(/\./g, '');
 }
+
+/* ==========================================================================
+   Layer: language — Persian (RTL) by default, English (LTR) as a second
+   language. i18n.json keeps a Persian->English map plus templates with {0}
+   slots. A MutationObserver re-translates every new or changed text node and
+   the placeholder/aria-label/title/alt attributes, so no render path has to
+   know which language is active. data-* attributes and select/option *values*
+   are never touched, so routes, ids and form state stay intact.
+   ========================================================================== */
+
+let currentLang = 'fa';
+try { currentLang = localStorage.getItem('alum-lang') === 'en' ? 'en' : 'fa'; } catch { /* private mode */ }
+const isEnglish = () => currentLang === 'en';
+
+// The attribute names worth translating; everything else (value, data-*, id…) is data.
+const EN_ATTRS = ['placeholder', 'aria-label', 'title', 'alt'];
+// A cell that is only digits, units and separators: convert the digits, no lookup.
+const NUMBER_ONLY = /^[0-9۰-۹٠-٩\s.,٬٫*×xX+()\-–—/]+$/;
+
+let i18n = null;   // { map, patterns: [[regex, english]] }
+
+function asciiNumber(value) {
+  return toAsciiDigits(value).replace(/[٬\u066C]/g, '').replace(/[٫\u066B]/g, '.');
+}
+
+// Persian source text -> English. Values nested inside a {0} slot are translated
+// again, so composed renders («use · standard», «series — family») come out right.
+function translateFa(text, depth = 0) {
+  if (!i18n || !isEnglish()) return String(text);
+  const value = String(text);
+  const key = value.trim();
+  if (!key) return value;
+  const exact = i18n.map[key];
+  if (exact !== undefined) return value.replace(key, exact);
+  if (NUMBER_ONLY.test(key)) return value.replace(key, asciiNumber(key));
+  if (depth < 3) {
+    for (const [regex, english] of i18n.patterns) {
+      const match = regex.exec(key);
+      if (!match) continue;
+      const filled = english.replace(/\{(\d+)\}/g, (_, index) => asciiNumber(translateFa(match[Number(index) + 1] ?? '', depth + 1).trim()));
+      return value.replace(key, filled);
+    }
+  }
+  return value.replace(key, asciiNumber(key));
+}
+
+function compileI18n(payload) {
+  const map = payload && payload.map ? payload.map : {};
+  const patterns = Object.entries((payload && payload.patterns) || {}).map(([fa, english]) => {
+    const source = '^' + fa.split(/\{(\d+)\}/).map((part, index) => (index % 2 ? '(.+?)' : part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))).join('') + '$';
+    return [new RegExp(source), english];
+  }).sort((a, b) => b[0].source.length - a[0].source.length);   // most specific template first
+  i18n = { map, patterns };
+}
+
+function translateTextNode(node) {
+  const text = node.nodeValue;
+  if (!text || !text.trim()) return;
+  if (isEnglish()) {
+    const english = translateFa(text);
+    if (english !== text) { node.__fa = text; node.nodeValue = english; }
+  } else if (node.__fa !== undefined) {
+    node.nodeValue = node.__fa;
+    delete node.__fa;
+  }
+}
+
+function translateAttributes(element) {
+  EN_ATTRS.forEach((name) => {
+    const value = element.getAttribute(name);
+    if (!value) return;
+    if (isEnglish()) {
+      const english = translateFa(value);
+      if (english !== value) {
+        element.__faAttrs = element.__faAttrs || {};
+        element.__faAttrs[name] = value;
+        element.setAttribute(name, english);
+      }
+    } else if (element.__faAttrs && element.__faAttrs[name] !== undefined) {
+      element.setAttribute(name, element.__faAttrs[name]);
+      delete element.__faAttrs[name];
+    }
+  });
+}
+
+function translateTree(root) {
+  const scope = root || document.body;
+  if (!scope) return;
+  if (scope.nodeType === 3) { translateTextNode(scope); return; }
+  if (scope.nodeType !== 1 && scope.nodeType !== 9) return;
+  if (scope.nodeType === 1) translateAttributes(scope);
+  const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
+    acceptNode: (node) => (node.nodeType === 1 && /^(SCRIPT|STYLE)$/.test(node.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT)
+  });
+  walker.currentNode = scope;
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node.nodeType === 3) translateTextNode(node);
+    else translateAttributes(node);
+  }
+}
+
+function applyLanguage(lang, remember = true) {
+  currentLang = lang === 'en' ? 'en' : 'fa';
+  if (remember) { try { localStorage.setItem('alum-lang', currentLang); } catch { /* private mode */ } }
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = isEnglish() ? 'ltr' : 'rtl';
+
+  const title = document.querySelector('title');
+  if (title) {
+    if (!title.__fa) title.__fa = title.textContent.trim();
+    title.textContent = isEnglish() ? translateFa(title.__fa) : title.__fa;
+  }
+  const description = document.querySelector('meta[name="description"]');
+  if (description) {
+    if (!description.__fa) description.__fa = description.getAttribute('content');
+    description.setAttribute('content', isEnglish() ? translateFa(description.__fa) : description.__fa);
+  }
+  translateTree(document.body);
+  // The update notes come from version.json, so the dialog is re-rendered to switch language.
+  if (updateDialog && updateDialog.open) openUpdateDialog();
+}
+
+// cssText/className writes and fast loops fire many records at once: batch them into one frame.
+let translateQueued = false;
+function translateSoon() {
+  if (translateQueued || !isEnglish()) return;
+  translateQueued = true;
+  requestAnimationFrame(() => { translateQueued = false; translateTree(document.body); });
+}
+new MutationObserver(translateSoon).observe(document.documentElement, {
+  childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: EN_ATTRS
+});
+
+// Direction is set right away so the very first paint is already LTR in English mode.
+if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
+
+const i18nReady = fetch('i18n.json?v=20', { cache: 'no-store' })
+  .then((response) => (response.ok ? response.json() : null))
+  .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
+  .catch(() => { /* without the dictionary the app simply stays Persian */ });
 
 const LAB_ELEMENTS = ['Si', 'Fe', 'Cu', 'Mn', 'Mg', 'Cr', 'Zn', 'Ti', 'Ni', 'Li'];
 const ELEMENT_FA = { Si: 'سیلیسیم', Fe: 'آهن', Cu: 'مس', Mn: 'منگنز', Mg: 'منیزیم', Cr: 'کروم', Zn: 'روی', Ti: 'تیتانیوم', Ni: 'نیکل', Li: 'لیتیم' };
@@ -642,7 +788,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=19');
+    const response = await fetchWithTimeout('alloys.json?v=20');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -855,12 +1001,15 @@ function pickNotifyMessage(state) {
 
 async function fireNotification(body) {
   showToast(body);
+  // The toast text is translated by the DOM observer; the OS notification needs the string directly.
+  const localised = isEnglish() ? translateFa(body) : body;
+  const title = isEnglish() ? 'Alum Metal Arak' : 'آلوم متال آراک';
   const options = {
-    body,
-    icon: 'img/icon-192.png?v=19',
+    body: localised,
+    icon: `img/icon-192.png?v=20`,
     badge: 'img/favicon-48.png',
-    lang: 'fa',
-    dir: 'rtl',
+    lang: currentLang,
+    dir: isEnglish() ? 'ltr' : 'rtl',
     tag: 'alum-daily',
     data: { route: 'home' }
   };
@@ -869,11 +1018,11 @@ async function fireNotification(body) {
   try {
     if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.register('notify-sw.js');
-      await registration.showNotification('آلوم متال آراک', options);
+      await registration.showNotification(title, options);
       return;
     }
   } catch { /* fall through to the constructor below */ }
-  try { new Notification('آلوم متال آراک', options); } catch { /* toast already showed the message */ }
+  try { new Notification(title, options); } catch { /* toast already showed the message */ }
 }
 
 // One message per check, so the two daily alerts never arrive back to back.
@@ -956,7 +1105,8 @@ function openUpdateDialog() {
   if (!pendingUpdate || !updateDialog) return;
   const line = $('#updateVersionLine');
   if (line) line.textContent = pendingUpdate.date ? `نسخهٔ ${pendingUpdate.version} — تاریخ انتشار ${pendingUpdate.date}` : `نسخهٔ ${pendingUpdate.version}`;
-  const notes = pendingUpdate.notes || [];
+  // version.json carries English notes next to the Persian ones, so the dialog can switch language.
+  const notes = (isEnglish() && pendingUpdate.notesEn && pendingUpdate.notesEn.length ? pendingUpdate.notesEn : pendingUpdate.notes) || [];
   const list = $('#updateNotes');
   if (list) {
     list.innerHTML = notes.slice(0, 6).map((note) => `<li>${escapeLab(String(note))}</li>`).join('');
@@ -996,7 +1146,7 @@ async function checkForUpdate() {
     let seen = Number(localStorage.getItem(VERSION_KEY) || 0) || 0;
     if (!seen) { try { localStorage.setItem(VERSION_KEY, String(remote)); } catch { /* ignore */ } setUpdateStatus('به‌روز'); return; }
     if (remote <= seen) { setUpdateStatus('به‌روز'); return; }
-    pendingUpdate = { version: remote, date: data.date || '', notes: Array.isArray(data.notes) ? data.notes : [] };
+    pendingUpdate = { version: remote, date: data.date || '', notes: Array.isArray(data.notes) ? data.notes : [], notesEn: Array.isArray(data.notesEn) ? data.notesEn : [] };
     setUpdateStatus('نسخهٔ جدید دارد');
     let asked = false;
     try { asked = sessionStorage.getItem('alum-update-asked') === '1'; } catch { /* ignore */ }

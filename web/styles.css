@@ -340,3 +340,46 @@ body.light .update-version{color:#b64c18}
   .brand-tagline strong{font-size:19px}
   .brand-tagline span{font-size:11px}
 }
+
+/* ==========================================================================
+   Layer: English (LTR). The sheet is authored RTL-first, so the Persian layer
+   above flips the physical side of a handful of components (the drawer, a few
+   right-aligned blocks and the two left-aligned figure columns). Only those
+   rules are mirrored here; everything else is direction-agnostic.
+   ========================================================================== */
+
+html[dir="ltr"] body{direction:ltr}
+
+/* Blocks that were pinned to the right edge become left-aligned. */
+html[dir="ltr"] .service-card,
+html[dir="ltr"] .settings-list button,
+html[dir="ltr"] .catalog-sheet-head,
+html[dir="ltr"] .guide-toggle{text-align:left}
+html[dir="ltr"] .catalog-table{direction:ltr}
+html[dir="ltr"] .catalog-table th,
+html[dir="ltr"] .catalog-table td{text-align:left}
+
+/* Figure columns that were pinned to the left edge become right-aligned. */
+html[dir="ltr"] .price-row strong,
+html[dir="ltr"] .source-item strong,
+html[dir="ltr"] .phone-line i{text-align:right}
+
+/* Small positioned details (arrow of a service card, compare button, badge). */
+html[dir="ltr"] .service-card b{left:auto;right:16px}
+html[dir="ltr"] .add-compare{right:auto;left:14px}
+html[dir="ltr"] .alloy-table-row summary .compact-add{margin-right:0;margin-left:-30px}
+html[dir="ltr"] .social-link>b{margin-right:0;margin-left:auto}
+html[dir="ltr"] .drawer-nav a:before{margin-left:0;margin-right:2px}
+html[dir="ltr"] .match-code small{direction:ltr}
+
+/* The drawer slides in from the left (the base sheet is already LTR here). */
+html[dir="ltr"] .drawer{inset:0 auto 0 0;border:0;border-radius:0 26px 26px 0;transform:translateX(-105%);box-shadow:18px 0 55px rgba(4,26,34,.18)}
+html[dir="ltr"] .drawer.open{transform:translateX(0)}
+html[dir="ltr"] body:not(.light) .drawer{box-shadow:18px 0 55px rgba(0,0,0,.35)}
+@media(min-width:481px){html[dir="ltr"] .drawer{left:calc(50% - 240px);right:auto;margin-left:0;margin-right:0}}
+@media(min-width:700px){html[dir="ltr"] .drawer{left:max(0px,calc(50% - 480px));right:auto;margin-left:0}}
+@media(min-width:1024px){
+  html[dir="ltr"] .drawer{transform:none!important;left:0;right:auto;border-radius:0;border:0;border-right:1px solid rgba(180,226,238,.14);box-shadow:none}
+  html[dir="ltr"] body{padding-right:0;padding-left:300px}
+  html[dir="ltr"] .toast{left:calc(50% + 150px)}
+}
