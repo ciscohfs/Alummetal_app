@@ -119,7 +119,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=18');
+    const response = await fetchWithTimeout('calculator.json?v=19');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -177,7 +177,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=18');
+    const response = await fetchWithTimeout('catalog.json?v=19');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -230,6 +230,18 @@ function renderComparison() {
 const escapeLab = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
 const toFaDigits = (value) => String(value).replace(/[0-9]/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)]);
 const toAsciiDigits = (value) => String(value ?? '').replace(/[۰-۹٠-٩]/g, (digit) => String('۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩'.indexOf(digit) % 10));
+
+// Persian and Arabic keyboards type their own digits and separators, so «۰٫۴۵» and
+// «0,45» must read as 0.45 — never as 45. Thousands separators are dropped, every
+// decimal separator becomes ".", and only the first dot survives.
+function normaliseElementValue(value) {
+  const ascii = toAsciiDigits(value)
+    .replace(/[٬\u066C]/g, '')
+    .replace(/[٫\u066B،\u060C,]/g, '.')
+    .replace(/[^0-9.]/g, '');
+  const dot = ascii.indexOf('.');
+  return dot === -1 ? ascii : ascii.slice(0, dot + 1) + ascii.slice(dot + 1).replace(/\./g, '');
+}
 
 const LAB_ELEMENTS = ['Si', 'Fe', 'Cu', 'Mn', 'Mg', 'Cr', 'Zn', 'Ti', 'Ni', 'Li'];
 const ELEMENT_FA = { Si: 'سیلیسیم', Fe: 'آهن', Cu: 'مس', Mn: 'منگنز', Mg: 'منیزیم', Cr: 'کروم', Zn: 'روی', Ti: 'تیتانیوم', Ni: 'نیکل', Li: 'لیتیم' };
@@ -507,7 +519,7 @@ function labMatchCard(row, entered, useKey, direct) {
 function labReadEntered() {
   const entered = {};
   $$('[data-element]').forEach((input) => {
-    const value = Number(toAsciiDigits(input.value).replace(/[^0-9.]/g, ''));
+    const value = Number(normaliseElementValue(input.value));
     if (Number.isFinite(value) && value > 0) entered[input.dataset.element] = value;
   });
   return entered;
@@ -613,7 +625,9 @@ function renderLabSamples() {
 function renderAlloys() {
   const list = $('#alloyList');
   if (!list) return;
-  const query = ($('#alloySearch').value || '').trim().toLowerCase();
+  // Normalise the query the same way as the lab inputs, so a Persian keyboard finds
+  // «۶۰۶۱» just like "6061".
+  const query = toAsciiDigits($('#alloySearch').value || '').trim().toLowerCase();
   const items = alloyData.alloys.filter((alloy) => {
     const matchesSeries = selectedSeries === 'all' || alloy.series === selectedSeries;
     const haystack = `${alloy.code} ${alloy.series} ${alloy.family} ${alloy.title} ${alloy.use} ${alloy.elements || ''} ${alloy.mechanical || ''} ${alloy.physical || ''} ${alloy.applications || ''}`.toLowerCase();
@@ -628,7 +642,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=18');
+    const response = await fetchWithTimeout('alloys.json?v=19');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -648,7 +662,7 @@ $('#useLabReset')?.addEventListener('click', () => {
   renderUseLab();
 });
 $$('[data-element]').forEach((input) => input.addEventListener('input', () => {
-  const cleaned = toAsciiDigits(input.value).replace(/[^0-9.]/g, '');
+  const cleaned = normaliseElementValue(input.value);
   if (cleaned !== input.value) input.value = cleaned;
   renderElementLab();
 }));
@@ -843,7 +857,7 @@ async function fireNotification(body) {
   showToast(body);
   const options = {
     body,
-    icon: 'img/icon-192.png?v=18',
+    icon: 'img/icon-192.png?v=19',
     badge: 'img/favicon-48.png',
     lang: 'fa',
     dir: 'rtl',
