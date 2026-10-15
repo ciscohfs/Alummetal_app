@@ -259,15 +259,14 @@ body.light .install-icon{background:rgba(36,160,170,.14);color:#0e6c78}
 .service-card.lime{background:linear-gradient(145deg,#1d7d6a,#0f4b45)}
 .service-card.plum{background:linear-gradient(145deg,#5b4a7e,#2f2748)}
 
-/* The factory strip is text-only now (its image was removed), so it carries its own
-   rhythm and a brand accent on the inline-start edge instead of a photo. */
-.factory-strip{padding:18px;min-height:104px;border-inline-start:3px solid rgba(255,117,31,.55)}
-.factory-strip .factory-copy{display:grid;gap:2px;width:100%;align-content:center}
-.factory-strip h3{font-size:18px;margin:0 0 10px}
-.factory-strip .text-link{font-size:12px;font-weight:800}
+/* The factory strip became a single "دریافت مشاوره" call to action: the copy above the
+   button was removed, so the button now sits centred in the card. */
+.factory-strip{display:flex;align-items:center;justify-content:center;margin-top:18px;padding:9px;border-inline-start:3px solid rgba(255,117,31,.55)}
+.advice-strip .text-link{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;font-size:13px;font-weight:800}
+.advice-strip .text-link span{font-family:Arial,sans-serif!important;direction:ltr}
 @media(max-width:380px){
-  .factory-strip{padding:14px;min-height:0}
-  .factory-strip h3{font-size:16px}
+  .factory-strip{padding:8px}
+  .advice-strip .text-link{font-size:12px}
 }
 
 /* ==========================================================================

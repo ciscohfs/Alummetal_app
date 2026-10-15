@@ -119,7 +119,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=16');
+    const response = await fetchWithTimeout('calculator.json?v=17');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -177,7 +177,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=16');
+    const response = await fetchWithTimeout('catalog.json?v=17');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -628,7 +628,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=16');
+    const response = await fetchWithTimeout('alloys.json?v=17');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -699,6 +699,14 @@ $('#previewClose').addEventListener('click', () => previewDialog.close());
 previewDialog.addEventListener('click', (event) => { if (event.target === previewDialog) previewDialog.close(); });
 
 const INSTALL_DISMISS_KEY = 'alum-install-dismissed';
+
+// The two banners at the top of the home screen are dismissed for the current visit
+// only. sessionStorage is emptied when the tab closes, so a visitor who still has not
+// installed the app or enabled the daily notifications is asked again next time.
+const sessionFlag = (key) => { try { return sessionStorage.getItem(key) === '1'; } catch { return false; } };
+const setSessionFlag = (key) => { try { sessionStorage.setItem(key, '1'); } catch { /* private mode */ } };
+const clearSessionFlag = (key) => { try { sessionStorage.removeItem(key); } catch { /* private mode */ } };
+
 const runningStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 const usingIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
@@ -711,7 +719,7 @@ function installGuideHtml() {
 function setInstallState() {
   const installed = runningStandalone();
   const banner = $('#installBanner');
-  if (banner) banner.hidden = installed || localStorage.getItem(INSTALL_DISMISS_KEY) === '1';
+  if (banner) banner.hidden = installed || sessionFlag(INSTALL_DISMISS_KEY);
   const hint = $('#installBannerHint');
   if (hint) hint.textContent = deferredInstallPrompt ? 'یک ضربه برای نصب؛ بدون گشتن در تنظیمات مرورگر.' : 'آموزش گام‌به‌گام نصب روی صفحه اصلی را ببین.';
   const go = $('#installGo');
@@ -736,13 +744,13 @@ window.addEventListener('beforeinstallprompt', (event) => {
 });
 window.addEventListener('appinstalled', () => {
   deferredInstallPrompt = null;
-  localStorage.removeItem(INSTALL_DISMISS_KEY);
+  clearSessionFlag(INSTALL_DISMISS_KEY);
   showToast('اپ آلوم متال روی صفحه اصلی نصب شد');
   setInstallState();
 });
 $('#installGo')?.addEventListener('click', startInstallFlow);
 $('#installButton')?.addEventListener('click', startInstallFlow);
-$('#installDismiss')?.addEventListener('click', () => { localStorage.setItem(INSTALL_DISMISS_KEY, '1'); setInstallState(); });
+$('#installDismiss')?.addEventListener('click', () => { setSessionFlag(INSTALL_DISMISS_KEY); setInstallState(); });
 setInstallState();
 
 const initialRoute = window.location.hash.slice(1) || 'home';
@@ -809,7 +817,7 @@ async function fireNotification(body) {
   showToast(body);
   const options = {
     body,
-    icon: 'img/icon-192.png?v=16',
+    icon: 'img/icon-192.png?v=17',
     badge: 'img/favicon-48.png',
     lang: 'fa',
     dir: 'rtl',
@@ -852,9 +860,12 @@ function refreshNotifyUi() {
   if (status) status.textContent = notifyStatusText();
   const banner = $('#notifyBanner');
   if (banner) {
+    // Only for visitors who still do not have the daily alerts on (and who are able to
+    // grant the permission), and only until they close it for this visit.
     banner.hidden = !notificationsSupported()
-      || Notification.permission !== 'default'
-      || localStorage.getItem(NOTIFY_DISMISS_KEY) === '1';
+      || notificationsEnabled()
+      || Notification.permission === 'denied'
+      || sessionFlag(NOTIFY_DISMISS_KEY);
   }
 }
 
@@ -866,7 +877,7 @@ async function requestNotifications() {
   }
   if (permission === 'granted') {
     localStorage.setItem(NOTIFY_ENABLED_KEY, '1');
-    localStorage.removeItem(NOTIFY_DISMISS_KEY);
+    clearSessionFlag(NOTIFY_DISMISS_KEY);
     showToast('اعلان‌های روزانه فعال شد؛ روزی دو پیام دریافت می‌کنی.');
     checkDailyNotifications();
   } else if (permission === 'denied') {
@@ -878,7 +889,7 @@ async function requestNotifications() {
 }
 
 $('#notifyEnable')?.addEventListener('click', requestNotifications);
-$('#notifyDismiss')?.addEventListener('click', () => { localStorage.setItem(NOTIFY_DISMISS_KEY, '1'); refreshNotifyUi(); });
+$('#notifyDismiss')?.addEventListener('click', () => { setSessionFlag(NOTIFY_DISMISS_KEY); refreshNotifyUi(); });
 $('#notifyButton')?.addEventListener('click', async () => {
   if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); return; }
   if (Notification.permission === 'default') { await requestNotifications(); return; }
