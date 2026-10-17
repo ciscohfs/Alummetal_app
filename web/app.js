@@ -123,7 +123,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=20');
+    const response = await fetchWithTimeout('calculator.json?v=21');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -181,7 +181,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=20');
+    const response = await fetchWithTimeout('catalog.json?v=21');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -371,11 +371,19 @@ function applyLanguage(lang, remember = true) {
 }
 
 // cssText/className writes and fast loops fire many records at once: batch them into one frame.
+// A timer backs up the frame request: a background tab never paints, so its animation frames can
+// be delayed or dropped, and a stuck queue would leave new text untranslated for good.
 let translateQueued = false;
 function translateSoon() {
   if (translateQueued || !isEnglish()) return;
   translateQueued = true;
-  requestAnimationFrame(() => { translateQueued = false; translateTree(document.body); });
+  const run = () => {
+    if (!translateQueued) return;
+    translateQueued = false;
+    translateTree(document.body);
+  };
+  requestAnimationFrame(run);
+  window.setTimeout(run, 120);
 }
 new MutationObserver(translateSoon).observe(document.documentElement, {
   childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: EN_ATTRS
@@ -384,7 +392,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=20', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=21', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -788,7 +796,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=20');
+    const response = await fetchWithTimeout('alloys.json?v=21');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -843,13 +851,6 @@ $$('[data-series]').forEach((button) => button.addEventListener('click', () => {
 loadAlloys();
 
 const previewDialog = $('#previewDialog');
-function openPreview(url, title) {
-  $('#previewTitle').textContent = title;
-  const isPdf = url.toLowerCase().includes('.pdf');
-  const isImage = /\.(jpg|jpeg|png|webp)(\?|$)/i.test(url);
-  $('#previewBody').innerHTML = isImage ? `<img class="preview-image" src="${url}" alt="${title}" /><a class="preview-external" href="${url}" target="_blank" rel="noreferrer">باز کردن فایل اصلی ↗</a>` : `<iframe class="preview-frame" src="${url}" title="${title}" loading="lazy"></iframe><a class="preview-external" href="${url}" target="_blank" rel="noreferrer">باز کردن صفحه یا فایل اصلی ↗</a>`;
-  previewDialog.showModal();
-}
 function openGuide(title, html) {
   $('#previewTitle').textContent = title;
   $('#previewBody').innerHTML = `<div class="guide-body">${html}</div>`;
@@ -1006,7 +1007,7 @@ async function fireNotification(body) {
   const title = isEnglish() ? 'Alum Metal Arak' : 'آلوم متال آراک';
   const options = {
     body: localised,
-    icon: `img/icon-192.png?v=20`,
+    icon: `img/icon-192.png?v=21`,
     badge: 'img/favicon-48.png',
     lang: currentLang,
     dir: isEnglish() ? 'ltr' : 'rtl',

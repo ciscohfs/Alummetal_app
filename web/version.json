@@ -1,7 +1,9 @@
 {
-  "version": 20,
-  "date": "1405-07-23",
+  "version": 21,
+  "date": "1405-07-25",
   "notes": [
+    "اصلاح ترجمه در حالت انگلیسی: اگر اپ مدتی در پس‌زمینه (تب دیگر) می‌ماند یا شکل مقطع را در ماشین‌حساب عوض می‌کردی، بعضی متن‌ها فارسی می‌ماندند؛ حالا بلافاصله انگلیسی می‌شوند",
+    "حذف کد بی‌استفادهٔ پیش‌نمایش تصویر که دیگر جایی صدا زده نمی‌شد",
     "پشتیبانی کامل از زبان انگلیسی: از تنظیمات، ردیف «زبان برنامه» را بزن تا کل برنامه (همهٔ صفحه‌ها، جداول، نتایج محاسبه و پیام‌ها) به انگلیسی و چیدمان چپ‌به‌راست تغییر کند",
     "زبان انتخابی به‌خاطر سپرده می‌شود؛ دفعهٔ بعد که برنامه را باز کنی همان زبان فعال است",
     "در حالت انگلیسی، اعداد و جست‌وجو با ارقام لاتین نمایش داده می‌شوند",
@@ -16,6 +18,8 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "English fix: text could stay Persian when the app sat in a background tab or right after switching the calculator shape; everything now switches to English immediately",
+    "Removed the unused image-preview code that was no longer called anywhere",
     "Full English support: in Settings press the “App language” row and the whole app — every screen, table, calculated result and message — switches to English with a left-to-right layout",
     "The chosen language is remembered, so the next time you open the app it stays selected",
     "In English mode numbers and searches are shown with Latin digits",
