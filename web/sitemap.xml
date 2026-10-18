@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- آلوم متال آراک — نقشهٔ سایت.
+     برنامه یک تک‌صفحه است و آدرس نوار آدرس تغییر نمی‌کند (بدون # و ?)،
+     پس فقط یک آدرس برای معرفی به گوگل وجود دارد. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://app-alummetal.ir/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
