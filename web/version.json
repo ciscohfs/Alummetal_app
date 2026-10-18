@@ -1,7 +1,13 @@
 {
-  "version": 21,
-  "date": "1405-07-25",
+  "version": 22,
+  "date": "1405-07-26",
   "notes": [
+    "اعلان‌ها فقط برای نسخهٔ جدید اپ هستند: وقتی نسخهٔ تازه‌ای منتشر شود یک اعلان می‌آید و با زدن روی آن اپ باز می‌شود",
+    "اعلان‌های روزانه و زمان‌بندی‌شده به‌طور کامل حذف شدند؛ اپ دیگر هیچ پیام تبلیغاتی یا زمان‌بندی‌شده‌ای نمی‌فرستد",
+    "هر نسخه فقط یک‌بار اعلان می‌دهد؛ اگر روی اعلان زدی و به‌روزرسانی نکردی، دوباره پیام نمی‌آید",
+    "ردیف تنظیمات به «اعلان نسخهٔ جدید» تغییر کرد؛ از همان‌جا می‌شود اعلان‌ها را روشن یا خاموش کرد",
+    "بررسی نسخه به‌روزرسانی حالا هر بار که به اپ برگردی (حداکثر هر ده دقیقه) هم انجام می‌شود، نه فقط در باز کردن اول",
+    "میان‌بر «فعال‌سازی اعلان» از صفحهٔ اصلی برداشته شد",
     "اصلاح ترجمه در حالت انگلیسی: اگر اپ مدتی در پس‌زمینه (تب دیگر) می‌ماند یا شکل مقطع را در ماشین‌حساب عوض می‌کردی، بعضی متن‌ها فارسی می‌ماندند؛ حالا بلافاصله انگلیسی می‌شوند",
     "حذف کد بی‌استفادهٔ پیش‌نمایش تصویر که دیگر جایی صدا زده نمی‌شد",
     "پشتیبانی کامل از زبان انگلیسی: از تنظیمات، ردیف «زبان برنامه» را بزن تا کل برنامه (همهٔ صفحه‌ها، جداول، نتایج محاسبه و پیام‌ها) به انگلیسی و چیدمان چپ‌به‌راست تغییر کند",
@@ -18,6 +24,12 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "Notifications are now only about new versions: one alert when a fresh release is published, and tapping it opens the app",
+    "The daily and scheduled alerts are gone completely; the app no longer sends any promotional or timed message",
+    "Each version notifies once; if you see the alert and skip the update, it stays quiet",
+    "The settings row is now “New version alerts”, where they can be switched on or off",
+    "The version check also runs whenever you come back to the app (at most every ten minutes), not only on the first load",
+    "The “Enable notifications” shortcut was removed from the home screen",
     "English fix: text could stay Persian when the app sat in a background tab or right after switching the calculator shape; everything now switches to English immediately",
     "Removed the unused image-preview code that was no longer called anywhere",
     "Full English support: in Settings press the “App language” row and the whole app — every screen, table, calculated result and message — switches to English with a left-to-right layout",

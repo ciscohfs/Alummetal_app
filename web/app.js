@@ -123,7 +123,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=21');
+    const response = await fetchWithTimeout('calculator.json?v=22');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -181,7 +181,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=21');
+    const response = await fetchWithTimeout('catalog.json?v=22');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -392,7 +392,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=21', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=22', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -796,7 +796,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=21');
+    const response = await fetchWithTimeout('alloys.json?v=22');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -864,9 +864,8 @@ const INSTALL_DISMISS_KEY = 'alum-install-dismissed';
 // asking on every later visit too (a dismissal is per visit, an installation is not).
 const INSTALLED_KEY = 'alum-app-installed';
 
-// The two banners at the top of the home screen are dismissed for the current visit
-// only. sessionStorage is emptied when the tab closes, so a visitor who still has not
-// installed the app or enabled the daily notifications is asked again next time.
+// The install banner asks again on every visit until the app is really installed:
+// sessionStorage is emptied when the tab closes, localStorage is not.
 const sessionFlag = (key) => { try { return sessionStorage.getItem(key) === '1'; } catch { return false; } };
 const setSessionFlag = (key) => { try { sessionStorage.setItem(key, '1'); } catch { /* private mode */ } };
 const clearSessionFlag = (key) => { try { sessionStorage.removeItem(key); } catch { /* private mode */ } };
@@ -944,78 +943,48 @@ const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
 
 /* ==========================================================================
-   Layer: daily notifications (two random messages a day) + in-app update flow
-   (version.json -> popup -> settings row -> cache clear -> reload).
+   Layer: new-version notifications + the in-app update flow
+   (version.json -> one system notification + popup -> settings row ->
+   cache clear -> reload).
+   The app sends nothing else: no daily, scheduled or promotional alerts.
    ========================================================================== */
 
-const NOTIFY_STATE_KEY = 'alum-notify-state-v1';
-const NOTIFY_DISMISS_KEY = 'alum-notify-dismissed';
 const NOTIFY_ENABLED_KEY = 'alum-notify-enabled';
+const UPDATE_NOTIFIED_KEY = 'alum-update-notified';
 const VERSION_KEY = 'alum-app-version';
 
-const NOTIFY_MESSAGES = [
-  'وزن مقاطع را در چند ثانیه حساب کن؛ ابزار «محاسبه وزن» در همین اپ است.',
-  'کاتالوگ محصولات به‌روز است؛ ورق، گرد، پروفیل و مقاطع خاص را ببین.',
-  'درصد عناصر را داری؟ «عنصر بده، آلیاژ بگیر» نزدیک‌ترین گریدها را پیشنهاد می‌دهد.',
-  'برای استعلام موجودی و قیمت با کارشناسان فروش تماس بگیرید: ۰۸۶-۳۳۲۵۷۳۱۶',
-  'آلیاژ مناسب کاربردت را پیدا نمی‌کنی؟ سری به «انتخاب آلیاژ بر اساس کاربرد» بزن.',
-  '۶۰۶۳ پرکاربردترین آلیاژ پروفیل ساختمانی است؛ مشخصات کاملش در دانشنامه آلیاژها.',
-  'دو آلیاژ را کنار هم مقایسه کن تا انتخاب مطمئن‌تری داشته باشی.',
-  'اپ آلوم متال را روی صفحه اصلی نصب کن تا دسترسی سریع‌تری داشته باشی.',
-  'نکته فنی: چگالی آلومینیوم بین ۲٫۶۶ تا ۲٫۸۱ گرم بر سانتی‌متر مکعب است؛ ماشین‌حساب خودش چگالی درست را انتخاب می‌کند.',
-  'ورق آلومینیوم با ضخامت ۰٫۱ تا ۵۰۰ میلی‌متر؛ موجودی را از کارشناسان فروش بگیر.',
-  'آلیاژهای سری ۵۰۰۰ برای محیط‌های مرطوب و دریایی مقاومت خوردگی خوبی دارند.',
-  'با هر بار باز کردن اپ، آخرین نسخه و داده‌ها دریافت می‌شود.'
-];
-
-const readJson = (key) => { try { return JSON.parse(localStorage.getItem(key)) || null; } catch { return null; } };
-const writeJson = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ } };
-const todayKey = () => { const now = new Date(); return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`; };
 const notificationsSupported = () => 'Notification' in window;
-const notificationsEnabled = () => notificationsSupported() && Notification.permission === 'granted' && localStorage.getItem(NOTIFY_ENABLED_KEY) !== '0';
+// Alerts are on by default once the browser permission exists; the settings row can switch
+// them off. They only ever fire for a version the visitor has not been told about yet.
+const updateAlertsEnabled = () => notificationsSupported() && Notification.permission === 'granted' && localStorage.getItem(NOTIFY_ENABLED_KEY) !== '0';
 
-// Two random hours a day, chosen once per day so a reload never reshuffles them.
-function notifyState() {
-  const day = todayKey();
-  let state = readJson(NOTIFY_STATE_KEY);
-  if (!state || state.day !== day || !Array.isArray(state.slots) || state.slots.length !== 2) {
-    const hours = [9, 11, 13, 15, 18, 20];
-    for (let i = hours.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [hours[i], hours[j]] = [hours[j], hours[i]];
-    }
-    state = { day, slots: hours.slice(0, 2).sort((a, b) => a - b), sent: [], used: [] };
-    writeJson(NOTIFY_STATE_KEY, state);
-  }
-  if (!Array.isArray(state.sent)) state.sent = [];
-  if (!Array.isArray(state.used)) state.used = [];
-  return state;
+function notifyStatusText() {
+  if (!notificationsSupported()) return 'در این مرورگر نیست';
+  if (Notification.permission === 'denied') return 'مسدود شده';
+  if (Notification.permission !== 'granted') return 'در انتظار اجازه';
+  return updateAlertsEnabled() ? 'فعال' : 'خاموش';
 }
 
-function pickNotifyMessage(state) {
-  let pool = NOTIFY_MESSAGES.map((_, index) => index).filter((index) => !state.used.includes(index));
-  if (!pool.length) { state.used = []; pool = NOTIFY_MESSAGES.map((_, index) => index); }
-  const index = pool[Math.floor(Math.random() * pool.length)];
-  state.used.push(index);
-  return index;
+function refreshNotifyUi() {
+  const status = $('#notifyStatus');
+  if (status) status.textContent = notifyStatusText();
 }
 
-async function fireNotification(body) {
-  showToast(body);
-  // The toast text is translated by the DOM observer; the OS notification needs the string directly.
-  const localised = isEnglish() ? translateFa(body) : body;
-  const title = isEnglish() ? 'Alum Metal Arak' : 'آلوم متال آراک';
+// The only notification this app ever shows: a fresh release is waiting on the server.
+async function fireUpdateNotification(version, note) {
+  if (!updateAlertsEnabled()) return;
+  const title = isEnglish() ? 'Alum Metal Arak — new version' : 'آلوم متال آراک — نسخهٔ جدید';
+  const body = note || (isEnglish() ? `Version ${version} is ready to install.` : `نسخهٔ ${version} آمادهٔ نصب است.`);
   const options = {
-    body: localised,
-    icon: `img/icon-192.png?v=21`,
+    body,
+    icon: 'img/icon-192.png?v=22',
     badge: 'img/favicon-48.png',
     lang: currentLang,
     dir: isEnglish() ? 'ltr' : 'rtl',
-    tag: 'alum-daily',
-    data: { route: 'home' }
+    tag: 'alum-update',
+    data: { route: 'settings' }
   };
-  if (!notificationsSupported() || Notification.permission !== 'granted') return;
-  // The service worker path is what Android and iOS accept; plain Notification is the desktop fallback.
+  // The service worker path is what Android and iOS accept; the constructor is the desktop fallback.
   try {
     if ('serviceWorker' in navigator) {
       const registration = await navigator.serviceWorker.register('notify-sw.js');
@@ -1023,53 +992,18 @@ async function fireNotification(body) {
       return;
     }
   } catch { /* fall through to the constructor below */ }
-  try { new Notification(title, options); } catch { /* toast already showed the message */ }
+  try { new Notification(title, options); } catch { /* the update dialog still shows it */ }
 }
 
-// One message per check, so the two daily alerts never arrive back to back.
-async function checkDailyNotifications() {
-  if (!notificationsEnabled()) return;
-  const state = notifyState();
-  const due = state.slots.find((hour) => !state.sent.includes(hour) && new Date().getHours() >= hour);
-  if (due === undefined) return;
-  state.sent.push(due);
-  const index = pickNotifyMessage(state);
-  writeJson(NOTIFY_STATE_KEY, state);
-  await fireNotification(NOTIFY_MESSAGES[index]);
-}
-
-function notifyStatusText() {
-  if (!notificationsSupported()) return 'در این مرورگر نیست';
-  if (Notification.permission === 'denied') return 'مسدود شده';
-  if (Notification.permission !== 'granted') return 'در انتظار اجازه';
-  return notificationsEnabled() ? 'فعال' : 'خاموش';
-}
-
-function refreshNotifyUi() {
-  const status = $('#notifyStatus');
-  if (status) status.textContent = notifyStatusText();
-  const banner = $('#notifyBanner');
-  if (banner) {
-    // Only for visitors who still do not have the daily alerts on (and who are able to
-    // grant the permission), and only until they close it for this visit.
-    banner.hidden = !notificationsSupported()
-      || notificationsEnabled()
-      || Notification.permission === 'denied'
-      || sessionFlag(NOTIFY_DISMISS_KEY);
-  }
-}
-
-async function requestNotifications() {
+async function requestNotificationPermission() {
   if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); refreshNotifyUi(); return; }
   let permission = Notification.permission;
   if (permission === 'default') {
     try { permission = await Notification.requestPermission(); } catch { permission = Notification.permission; }
   }
   if (permission === 'granted') {
-    localStorage.setItem(NOTIFY_ENABLED_KEY, '1');
-    clearSessionFlag(NOTIFY_DISMISS_KEY);
-    showToast('اعلان‌های روزانه فعال شد؛ روزی دو پیام دریافت می‌کنی.');
-    checkDailyNotifications();
+    try { localStorage.setItem(NOTIFY_ENABLED_KEY, '1'); } catch { /* private mode */ }
+    showToast('اعلان نسخهٔ جدید فعال شد؛ فقط وقتی نسخهٔ تازهٔ اپ منتشر شود خبر می‌گیری.');
   } else if (permission === 'denied') {
     showToast('اجازهٔ اعلان رد شد؛ برای فعال‌سازی آن را از تنظیمات مرورگر باز کن.');
   } else {
@@ -1078,22 +1012,20 @@ async function requestNotifications() {
   refreshNotifyUi();
 }
 
-$('#notifyEnable')?.addEventListener('click', requestNotifications);
-$('#notifyDismiss')?.addEventListener('click', () => { setSessionFlag(NOTIFY_DISMISS_KEY); refreshNotifyUi(); });
 $('#notifyButton')?.addEventListener('click', async () => {
-  if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); return; }
-  if (Notification.permission === 'default') { await requestNotifications(); return; }
+  if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); refreshNotifyUi(); return; }
   if (Notification.permission === 'denied') { showToast('اجازهٔ اعلان در تنظیمات مرورگر مسدود است.'); refreshNotifyUi(); return; }
-  const wasEnabled = notificationsEnabled();
-  localStorage.setItem(NOTIFY_ENABLED_KEY, wasEnabled ? '0' : '1');
-  showToast(wasEnabled ? 'اعلان‌های روزانه خاموش شد.' : 'اعلان‌های روزانه فعال شد؛ روزی دو پیام.');
+  if (Notification.permission === 'default') { await requestNotificationPermission(); return; }
+  const wasEnabled = updateAlertsEnabled();
+  try { localStorage.setItem(NOTIFY_ENABLED_KEY, wasEnabled ? '0' : '1'); } catch { /* private mode */ }
+  showToast(wasEnabled ? 'اعلان نسخهٔ جدید خاموش شد.' : 'اعلان نسخهٔ جدید فعال شد؛ فقط وقتی نسخهٔ تازهٔ اپ منتشر شود خبر می‌گیری.');
   refreshNotifyUi();
-  if (!wasEnabled) checkDailyNotifications();
 });
+
 refreshNotifyUi();
-checkDailyNotifications();
-window.setInterval(checkDailyNotifications, 60 * 1000);
-document.addEventListener('visibilitychange', () => { if (!document.hidden) checkDailyNotifications(); });
+// Whatever the removed daily-alert feature left behind is cleared once, so nothing can schedule again.
+try { localStorage.removeItem('alum-notify-state-v1'); } catch { /* private mode */ }
+try { sessionStorage.removeItem('alum-notify-dismissed'); } catch { /* private mode */ }
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('notify-sw.js').catch(() => {});
 
 /* --------------------------------------------------------------- update flow */
@@ -1138,6 +1070,7 @@ async function applyUpdate() {
 }
 
 async function checkForUpdate() {
+  lastUpdateCheck = Date.now();
   try {
     const response = await fetch('version.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('version unavailable');
@@ -1149,6 +1082,14 @@ async function checkForUpdate() {
     if (remote <= seen) { setUpdateStatus('به‌روز'); return; }
     pendingUpdate = { version: remote, date: data.date || '', notes: Array.isArray(data.notes) ? data.notes : [], notesEn: Array.isArray(data.notesEn) ? data.notesEn : [] };
     setUpdateStatus('نسخهٔ جدید دارد');
+    // Exactly one system notification per new version, so a visitor is told once and never twice.
+    let notified = '';
+    try { notified = localStorage.getItem(UPDATE_NOTIFIED_KEY) || ''; } catch { /* private mode */ }
+    if (notified !== String(remote)) {
+      try { localStorage.setItem(UPDATE_NOTIFIED_KEY, String(remote)); } catch { /* private mode */ }
+      const notes = isEnglish() && pendingUpdate.notesEn.length ? pendingUpdate.notesEn : pendingUpdate.notes;
+      fireUpdateNotification(remote, notes[0] || '');
+    }
     let asked = false;
     try { asked = sessionStorage.getItem('alum-update-asked') === '1'; } catch { /* ignore */ }
     if (!asked) {
@@ -1170,4 +1111,11 @@ $('#updateButton')?.addEventListener('click', async () => {
   await checkForUpdate();
   if (!pendingUpdate) showToast('نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستی.');
 });
+let lastUpdateCheck = 0;
 checkForUpdate();
+// A PWA can stay open for days, so re-check when the visitor returns to the tab
+// (at most every ten minutes) instead of only on a fresh load.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden || Date.now() - lastUpdateCheck < 10 * 60 * 1000) return;
+  checkForUpdate();
+});

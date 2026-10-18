@@ -1,6 +1,6 @@
 /* Notification-only service worker.
-   It never answers fetch events, so it caches nothing and cannot serve stale
-   app files — the static app in index.html keeps clearing its own caches. */
+   It answers nothing but a tap on the one alert this app sends — the new-version
+   alert — so it caches nothing and can never serve a stale app file. */
 self.addEventListener('install', (event) => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));
 
