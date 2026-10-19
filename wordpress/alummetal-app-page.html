@@ -1,0 +1,225 @@
+<style>
+/* صفحهٔ معرفی اپ آلوم متال — برای وردپرس (بلوک «HTML سفارشی»)
+   کلاس همه چیز amapp- است تا با تم سایت تداخلی نداشته باشد.
+   رنگها از خود سایت گرفته شده‌اند: قرمز #c05f5f، سرمه‌ای #344652، خاکستری #889095. */
+.amapp{--red:#c05f5f;--red-dark:#a03d3d;--ink:#344652;--ink-soft:#55606e;--grey:#889095;--line:#e1e1e1;--paper:#f8f8f8;font-family:inherit;color:var(--ink-soft)}
+.amapp *{box-sizing:border-box}
+.amapp a{text-decoration:none}
+.amapp-wrap{max-width:1000px;margin:0 auto;padding:34px 18px}
+.amapp-eyebrow{display:inline-block;margin:0 0 10px;padding:5px 11px;border-radius:3px;background:rgba(192,95,95,.1);color:var(--red);font-size:12px;font-weight:700;letter-spacing:.5px}
+.amapp h1,.amapp h2,.amapp h3{color:var(--ink);font-weight:800;line-height:1.5;margin:0}
+.amapp p{margin:0}
+
+/* Hero */
+.amapp-hero{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 24px;box-shadow:0 12px 34px rgba(52,70,82,.07)}
+.amapp-hero img{width:104px;height:104px;border-radius:24px;object-fit:contain;background:#fff;border:1px solid var(--line)}
+.amapp-hero h1{font-size:26px}
+.amapp-hero .amapp-lead{margin:8px 0 16px;font-size:15px;line-height:2}
+.amapp-cta{display:flex;flex-wrap:wrap;gap:9px}
+.amapp-btn{display:inline-block;border:1px solid var(--red);background:var(--red);color:#fff;border-radius:3px;padding:12px 22px;font-size:14px;font-weight:700;transition:.18s}
+.amapp-btn:hover{background:var(--red-dark);border-color:var(--red-dark);color:#fff}
+.amapp-btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.amapp-btn.ghost:hover{background:var(--paper);color:var(--red);border-color:var(--red)}
+.amapp-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.amapp-chips span{font-size:12px;color:var(--grey);border:1px dashed var(--line);border-radius:3px;padding:5px 10px}
+.amapp-hero-side{display:none}
+
+/* عنوان هر بخش */
+.amapp-sec{margin-top:34px}
+.amapp-sec>h2{font-size:21px}
+.amapp-sec>p.amapp-sub{margin:6px 0 16px;font-size:14px;color:var(--grey);line-height:1.9}
+
+/* قابلیتها */
+.amapp-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.amapp-feat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 15px;transition:.2s}
+.amapp-feat:hover{border-color:var(--red);box-shadow:0 10px 24px rgba(52,70,82,.08);transform:translateY(-2px)}
+.amapp-feat i{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--red);font-style:normal;font-size:19px;font-weight:800}
+.amapp-feat b{display:block;margin:11px 0 4px;color:var(--ink);font-size:14.5px}
+.amapp-feat p{font-size:13px;line-height:1.95;color:var(--grey)}
+
+/* پیش‌نمایش گوشی */
+.amapp-shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.amapp-phone{flex:0 0 190px;background:#0b1820;border:6px solid #20323c;border-radius:24px;padding:9px;box-shadow:0 16px 32px rgba(16,26,32,.22)}
+.amapp-phone .scr{background:linear-gradient(180deg,#0b1820,#071016);border-radius:16px;padding:10px 9px;color:#dfeef1}
+.amapp-phone .bar{height:6px;border-radius:99px;background:rgba(255,255,255,.16);margin:0 0 9px}
+.amapp-phone .card{border-radius:12px;background:rgba(255,255,255,.07);padding:8px;margin-bottom:7px}
+.amapp-phone .card strong{display:block;font-size:10.5px;color:#fff}
+.amapp-phone .card small{display:block;font-size:8.5px;color:#8fb0b7;line-height:1.8}
+.amapp-phone .btn{border-radius:10px;background:linear-gradient(90deg,#ff751f,#e6531d);color:#fff;text-align:center;font-size:10px;padding:8px 0;margin-top:6px;font-weight:700}
+.amapp-phone figcaption{margin-top:8px;font-size:10.5px;color:var(--grey);text-align:center}
+
+/* نصب */
+.amapp-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.amapp-step{background:#fff;border:1px solid var(--line);border-radius:10px;padding:17px 16px}
+.amapp-step h3{font-size:15px;display:flex;align-items:center;gap:8px}
+.amapp-step h3 i{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:rgba(192,95,95,.1);color:var(--red);font-style:normal;font-size:13px}
+.amapp-step ol{margin:11px 0 0;padding-inline-start:19px}
+.amapp-step li{font-size:13px;line-height:2;color:var(--ink-soft)}
+.amapp-step b{color:var(--ink)}
+.amapp-note{margin-top:12px;font-size:12.5px;color:var(--grey);background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:11px 13px;line-height:1.9}
+
+/* پرسشها */
+.amapp-faq{display:grid;gap:10px}
+.amapp-faq>div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 15px}
+.amapp-faq b{display:block;color:var(--ink);font-size:14px;margin-bottom:5px}
+.amapp-faq p{font-size:13px;line-height:2;color:var(--grey)}
+
+/* پایان */
+.amapp-foot{margin-top:34px;background:linear-gradient(135deg,#3a4c59,#28343c);border-radius:12px;padding:26px 22px;text-align:center;color:#fff}
+.amapp-foot h2{color:#fff;font-size:20px}
+.amapp-foot p{margin:8px 0 16px;font-size:13.5px;color:#c3ced4;line-height:1.9}
+.amapp-foot .amapp-btn{background:#fff;border-color:#fff;color:var(--ink)}
+.amapp-foot .amapp-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+.amapp-contact{margin-top:14px;font-size:12.5px;color:#9fb0b9}
+.amapp-contact a{color:#fff;border-bottom:1px dotted rgba(255,255,255,.4)}
+.amapp-qr{margin:16px auto 0;display:block;width:96px;height:96px;background:#fff;border-radius:8px;padding:5px}
+.amapp-qr-cap{font-size:11px;color:#9fb0b9;margin-top:6px}
+
+@media(max-width:640px){
+  .amapp-wrap{padding:26px 14px}
+  .amapp-hero{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .amapp-hero img{width:88px;height:88px}
+  .amapp-hero h1{font-size:22px}
+  .amapp-cta,.amapp-chips{justify-content:center}
+}
+@media(min-width:641px){
+  .amapp-hero{grid-template-columns:auto 1fr auto;padding:32px 30px}
+  .amapp-hero-side{display:flex;flex-direction:column;gap:9px}
+  .amapp-hero-side a{border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:12.5px;color:var(--ink)}
+  .amapp-hero-side a:hover{border-color:var(--red);color:var(--red)}
+}
+</style>
+
+<div class="amapp" dir="rtl">
+  <div class="amapp-wrap">
+
+    <!-- Hero -->
+    <div class="amapp-hero">
+      <img src="https://app-alummetal.ir/img/icon-512.png" alt="آیکون اپ آلوم متال" width="104" height="104" loading="lazy" />
+      <div>
+        <span class="amapp-eyebrow">اپلیکیشن آلوم متال</span>
+        <h1>همهٔ ابزارهای آلومینیوم، در یک اپ</h1>
+        <p class="amapp-lead">کاتالوگ محصولات، دانشنامهٔ آلیاژها، محاسبهٔ وزن مقاطع و انتخاب آلیاژ بر اساس کاربرد؛ رایگان، بدون تبلیغات و بدون ثبت‌نام.</p>
+        <div class="amapp-cta">
+          <a class="amapp-btn" href="https://app-alummetal.ir/" target="_blank" rel="noopener">ورود به اپ</a>
+          <a class="amapp-btn ghost" href="#amapp-install">نصب روی گوشی</a>
+        </div>
+        <div class="amapp-chips"><span>رایگان</span><span>بدون ثبت‌نام</span><span>بدون تبلیغات</span><span>به‌روزرسانی خودکار</span></div>
+      </div>
+      <div class="amapp-hero-side">
+        <a href="https://alummetal.com" target="_blank" rel="noopener">سایت اصلی آلوم متال</a>
+        <a href="tel:08633257316">تلفن فروش: ۰۸۶-۳۳۲۵۷۳۱۶</a>
+      </div>
+    </div>
+
+    <!-- قابلیتها -->
+    <section class="amapp-sec">
+      <h2>اپ چه کارهایی برایت انجام میدهد؟</h2>
+      <p class="amapp-sub">ابزارهایی که هر روز در کار با آلومینیوم به آنها نیاز داری؛ سریع، دقیق و روی هر دستگاه.</p>
+      <div class="amapp-feats">
+        <div class="amapp-feat"><i>⌗</i><b>محاسبهٔ وزن مقاطع</b><p>مقطع، آلیاژ و تعداد را وارد کن؛ وزن دقیق قطعه را در چند ثانیه بگیر.</p></div>
+        <div class="amapp-feat"><i>▤</i><b>کاتالوگ محصولات</b><p>ورق، لوله، پروفیل، تسمه، گرد و چهارپهلو، همراه با نقشهٔ فنی هر قلم.</p></div>
+        <div class="amapp-feat"><i>☰</i><b>دانشنامهٔ آلیاژها</b><p>جدول کامل آلیاژهای کارپذیر و ریختگی با مشخصات فنی و کاربردها.</p></div>
+        <div class="amapp-feat"><i>✦</i><b>عنصر بده، آلیاژ بگیر</b><p>درصد یک عنصر را بنویس؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شود.</p></div>
+        <div class="amapp-feat"><i>⇄</i><b>مقایسهٔ آلیاژها</b><p>تا سه آلیاژ را کنار هم ببین و بهترین را برای کار خودت انتخاب کن.</p></div>
+        <div class="amapp-feat"><i>◎</i><b>انتخاب بر اساس کاربرد</b><p>فقط بگو قطعه برای چیست؛ درب و پنجره، دریایی، هوافضا، ریخته‌گری و…</p></div>
+      </div>
+    </section>
+
+    <!-- پیش‌نمایش -->
+    <section class="amapp-sec">
+      <h2>یک نگاه به اپ</h2>
+      <p class="amapp-sub">چیدمان ساده و فارسی، همراه با حالت تاریک.</p>
+      <div class="amapp-shots">
+        <figure class="amapp-phone" style="margin:0">
+          <div class="scr">
+            <div class="bar" style="width:52%"></div>
+            <div class="card"><strong>محاسبه وزن آلومینیوم</strong><small>محاسبه سریع و دقیق</small></div>
+            <div class="card"><strong>کاتالوگ محصولات</strong><small>راهکارهای صنعتی و ساختمانی</small></div>
+            <div class="card"><strong>دانشنامه آلیاژها</strong><small>مشخصات فنی همه گریدها</small></div>
+            <div class="btn">دریافت مشاوره تخصصی</div>
+          </div>
+          <figcaption>صفحهٔ اصلی</figcaption>
+        </figure>
+        <figure class="amapp-phone" style="margin:0">
+          <div class="scr">
+            <div class="bar" style="width:38%"></div>
+            <div class="card"><strong>محاسبه وزن مقاطع</strong><small>مقطع و آلیاژ را انتخاب کن</small></div>
+            <div class="card"><strong>نوع مقطع</strong><small>ورق — ورق فابریک</small></div>
+            <div class="card"><strong>ابعاد (mm)</strong><small>طول ۱۰۰۰ — عرض ۵۰۰ — ضخامت ۲</small></div>
+            <div class="btn">محاسبه وزن</div>
+          </div>
+          <figcaption>ماشین‌حساب وزن</figcaption>
+        </figure>
+        <figure class="amapp-phone" style="margin:0">
+          <div class="scr">
+            <div class="bar" style="width:45%"></div>
+            <div class="card"><strong>دانشنامه آلیاژها</strong><small>جست‌وجوی کد، کاربرد یا ویژگی</small></div>
+            <div class="card"><strong>۶۰۶۱</strong><small>ورق، پروفیل، سازهٔ دریایی — جوش‌پذیری بالا</small></div>
+            <div class="card"><strong>۶۰۶۳</strong><small>پروفیل پنجره و درب — آنودایز عالی</small></div>
+            <div class="btn">مقایسه آلیاژها</div>
+          </div>
+          <figcaption>دانشنامهٔ آلیاژها</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- نصب -->
+    <section class="amapp-sec" id="amapp-install">
+      <h2>نصب روی صفحهٔ اصلی گوشی یا کامپیوتر</h2>
+      <p class="amapp-sub">نصب رایگان است و چند ثانیه طول میکشد؛ بعد از نصب، اپ مانند بقیهٔ برنامه‌های گوشی باز میشود.</p>
+      <div class="amapp-steps">
+        <div class="amapp-step">
+          <h3><i>1</i> اندروید</h3>
+          <ol>
+            <li>اپ را در مرورگر <b>Chrome</b> باز کن.</li>
+            <li>منوی مرورگر (سه‌نقطه ⋮) را بزن.</li>
+            <li><b>نصب برنامه</b> یا «افزودن به صفحهٔ اصلی» را انتخاب کن.</li>
+            <li>تأیید کن تا آیکون اپ روی صفحهٔ اصلی بیاید.</li>
+          </ol>
+        </div>
+        <div class="amapp-step">
+          <h3><i>2</i> آیفون و آیپد</h3>
+          <ol>
+            <li>اپ را در مرورگر <b>Safari</b> باز کن.</li>
+            <li>دکمهٔ اشتراک‌گذاری (مربع با فلش ⬆) را بزن.</li>
+            <li><b>افزودن به صفحهٔ اصلی</b> را انتخاب کن.</li>
+            <li>نام را تأیید و <b>Add</b> را بزن.</li>
+          </ol>
+        </div>
+        <div class="amapp-step">
+          <h3><i>3</i> کامپیوتر</h3>
+          <ol>
+            <li>اپ را در <b>Chrome</b> یا <b>Edge</b> باز کن.</li>
+            <li>آیکون نصب در کنار نوار آدرس را بزن.</li>
+            <li>یا از منوی مرورگر <b>Install app</b> را بزن.</li>
+            <li>آیکون اپ روی دسکتاپ یا منوی استارت می‌آید.</li>
+          </ol>
+        </div>
+      </div>
+      <p class="amapp-note">نصب روی اندروید و iOS به آدرس <b>https</b> نیاز دارد. بعد از نصب، نسخهٔ جدید اپ به‌صورت خودکار اعمال میشود؛ اگر اپ را نصب کرده باشی، از انتشار نسخهٔ تازه هم اعلان می‌گیری.</p>
+    </section>
+
+    <!-- پرسش‌ها -->
+    <section class="amapp-sec">
+      <h2>پرسش‌های پرتکرار</h2>
+      <div class="amapp-faq">
+        <div><b>اپ رایگان است؟</b><p>بله، کاملاً رایگان، بدون تبلیغات و بدون نیاز به ثبت‌نام.</p></div>
+        <div><b>روی چه دستگاههایی کار میکند؟</b><p>اندروید، آیفون، آیپد و کامپیوتر؛ از همان مرورگر وب و بدون نیاز به دانلود از بازار یا اپ‌استور.</p></div>
+        <div><b>بدون اینترنت هم کار میکند؟</b><p>ابزارها و اطلاعاتی که تا به حال دیده‌ای تا مدتی در حافظهٔ دستگاه می‌مانند؛ برای دریافت نسخهٔ تازه و قیمت‌های روز، به اینترنت نیاز است.</p></div>
+        <div><b>از کجا قیمت روز را بگیرم؟</b><p>قیمت و موجودی را کارشناسان فروش اعلام می‌کنند؛ از طریق تلفن فروش یا بخش تماس با ما در اپ.</p></div>
+      </div>
+    </section>
+
+    <!-- پایان -->
+    <div class="amapp-foot">
+      <h2>همین حالا وارد اپ آلوم متال شو</h2>
+      <p>با یک لمس، کاتالوگ و ابزارهای آلومینیوم همراهت است.</p>
+      <a class="amapp-btn" href="https://app-alummetal.ir/" target="_blank" rel="noopener">ورود به اپ</a>
+      <div class="amapp-contact">تلفن فروش: <a href="tel:08633257316">۰۸۶-۳۳۲۵۷۳۱۶</a> &nbsp;|&nbsp; همراه: <a href="tel:09904652053">۰۹۹۰۴۶۵۲۰۵۳</a></div>
+      <img class="amapp-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=https%3A%2F%2Fapp-alummetal.ir%2F" alt="کد QR برای ورود به اپ" loading="lazy" />
+      <p class="amapp-qr-cap">برای باز شدن اپ روی گوشی، این کد را با دوربین اسکن کن.</p>
+    </div>
+
+  </div>
+</div>
