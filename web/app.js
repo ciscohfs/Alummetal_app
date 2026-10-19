@@ -123,7 +123,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=22');
+    const response = await fetchWithTimeout('calculator.json?v=23');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -181,7 +181,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=22');
+    const response = await fetchWithTimeout('catalog.json?v=23');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -392,7 +392,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=22', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=23', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -796,7 +796,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=22');
+    const response = await fetchWithTimeout('alloys.json?v=23');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -875,11 +875,40 @@ const setLocalFlag = (key) => { try { localStorage.setItem(key, '1'); } catch { 
 const runningStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 const usingIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
+// The install guide is one pop-up used everywhere: it opens by itself for a visitor who
+// has never installed the app, and again from the settings row whenever it is asked for.
+const INSTALL_GUIDE_SEEN_KEY = 'alum-install-guide-seen';
+
+function installBenefits() {
+  return ['سریع‌تر از مرورگر باز می‌شود', 'تمام‌صفحه، بدون نوار آدرس', 'بدون اینترنت هم کار می‌کند', 'اعلان نسخهٔ جدید می‌گیرد'];
+}
+function installSteps() {
+  return usingIos()
+    ? ['اپ را در مرورگر Safari باز کن.', 'دکمهٔ اشتراک‌گذاری (مربع با فلش رو به بالا) را بزن.', 'گزینهٔ «افزودن به صفحهٔ اصلی» را انتخاب کن.', 'نام «آلوم متال» را تأیید کن.']
+    : ['اپ را در مرورگر Chrome یا Edge باز کن.', 'منوی مرورگر (سه‌نقطه) را باز کن.', 'گزینهٔ «نصب برنامه» یا «افزودن به صفحهٔ اصلی» را بزن.', 'تأیید کن تا آیکون اپ روی صفحهٔ اصلی بیاید.'];
+}
 function installGuideHtml() {
-  const steps = usingIos()
-    ? ['اپ را در مرورگر <b>Safari</b> باز کن.', 'دکمه <b>اشتراک‌گذاری</b> (مربع با فلش رو به بالا) را بزن.', 'گزینه <b>Add to Home Screen</b> یا «افزودن به صفحه اصلی» را انتخاب کن.', 'نام «آلوم متال» را تأیید کن و <b>Add</b> را بزن.']
-    : ['اپ را در <b>Chrome</b> یا <b>Edge</b> باز کن.', 'منوی مرورگر (⋮ یا ⋯) را باز کن.', 'گزینه <b>Install app</b> یا «نصب برنامه» را بزن.', 'اگر این گزینه را ندیدی، «افزودن به صفحه اصلی» را از همان منو انتخاب کن.'];
-  return `<ol>${steps.map((step) => `<li>${step}</li>`).join('')}</ol><p class="guide-note">اگر اپ را قبلاً نصب کرده‌ای، این گزینه دیگر نمایش داده نمی‌شود. نصب روی اندروید و iOS به آدرس <b>https</b> نیاز دارد؛ روی localhost هم کار می‌کند.</p>`;
+  const benefits = installBenefits().map((text) => `<li>${text}</li>`).join('');
+  const steps = installSteps().map((text) => `<li>${text}</li>`).join('');
+  const platform = usingIos() ? 'در iPhone و iPad' : 'در اندروید و کامپیوتر';
+  const ctaLabel = 'نصب اپ';
+  const note = 'نصب روی اندروید و iOS به آدرس https نیاز دارد؛ روی کامپیوتر هم می‌شود اپ را نصب کرد.';
+  const cta = deferredInstallPrompt ? `<button class="primary-button install-guide-cta" id="installGuideCta" type="button">${ctaLabel}</button>` : '';
+  return `<ul class="install-benefits">${benefits}</ul>${cta}<strong class="install-steps-title">${platform}</strong><ol class="install-steps">${steps}</ol><p class="guide-note">${note}</p>`;
+}
+function openInstallGuide() {
+  openGuide('افزودن اپ به صفحه اصلی', installGuideHtml());
+  setLocalFlag(INSTALL_GUIDE_SEEN_KEY);
+}
+// First visit and no app installed: the guide introduces itself once, a moment after the
+// home screen is up. A pending update notice always has priority over it.
+function maybeShowInstallGuide() {
+  if (appIsInstalled() || localFlag(INSTALL_GUIDE_SEEN_KEY)) return;
+  window.setTimeout(() => {
+    if (appIsInstalled() || localFlag(INSTALL_GUIDE_SEEN_KEY)) return;
+    if (previewDialog.open || $('#updateDialog')?.open || pendingUpdate) return;
+    openInstallGuide();
+  }, 1800);
 }
 // "Installed" is true while the app runs standalone, once the browser reported the
 // installation, or once the platform told us the app is already installed. The
@@ -912,14 +941,24 @@ function setInstallState() {
   const status = $('#installStatus');
   if (status) status.textContent = deferredInstallPrompt ? 'نصب سریع' : 'راهنمای نصب';
 }
-function startInstallFlow() {
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-    deferredInstallPrompt.userChoice.then(() => { deferredInstallPrompt = null; setInstallState(); }).catch(() => setInstallState());
-    return;
-  }
-  openGuide('افزودن اپ به صفحه اصلی', installGuideHtml());
+// The native prompt is only available when the browser offered one; the guide is the
+// fallback for iOS (which never offers it) and for every browser that hides the menu entry.
+function runInstallPrompt() {
+  const prompt = deferredInstallPrompt;
+  if (!prompt) return false;
+  prompt.prompt();
+  prompt.userChoice.then(() => { deferredInstallPrompt = null; setInstallState(); }).catch(() => setInstallState());
+  return true;
 }
+function startInstallFlow() {
+  if (runInstallPrompt()) return;
+  openInstallGuide();
+}
+$('#previewBody').addEventListener('click', (event) => {
+  if (!event.target.closest('#installGuideCta')) return;
+  previewDialog.close();
+  runInstallPrompt();
+});
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
@@ -930,6 +969,7 @@ window.addEventListener('appinstalled', () => {
   installedDetected = true;
   setLocalFlag(INSTALLED_KEY);
   clearSessionFlag(INSTALL_DISMISS_KEY);
+  if (previewDialog.open) previewDialog.close();
   showToast('اپ آلوم متال روی صفحه اصلی نصب شد');
   setInstallState();
 });
@@ -938,6 +978,7 @@ $('#installButton')?.addEventListener('click', startInstallFlow);
 $('#installDismiss')?.addEventListener('click', () => { setSessionFlag(INSTALL_DISMISS_KEY); setInstallState(); });
 setInstallState();
 detectInstalledApp();
+maybeShowInstallGuide();
 
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
@@ -977,7 +1018,7 @@ async function fireUpdateNotification(version, note) {
   const body = note || (isEnglish() ? `Version ${version} is ready to install.` : `نسخهٔ ${version} آمادهٔ نصب است.`);
   const options = {
     body,
-    icon: 'img/icon-192.png?v=22',
+    icon: 'img/icon-192.png?v=23',
     badge: 'img/favicon-48.png',
     lang: currentLang,
     dir: isEnglish() ? 'ltr' : 'rtl',

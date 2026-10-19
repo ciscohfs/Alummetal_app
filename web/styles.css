@@ -383,3 +383,16 @@ html[dir="ltr"] body:not(.light) .drawer{box-shadow:18px 0 55px rgba(0,0,0,.35)}
   html[dir="ltr"] body{padding-right:0;padding-left:300px}
   html[dir="ltr"] .toast{left:calc(50% + 150px)}
 }
+
+/* Install guide pop-up: benefits, the platform steps and, when the browser offered a
+   native prompt, one orange button that runs it. */
+.guide-body{overflow-y:auto}
+.install-benefits{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.install-benefits li{display:flex;align-items:center;gap:9px;font-size:11px;line-height:1.85}
+.install-benefits li:before{content:'✓';display:grid;place-items:center;flex:0 0 20px;height:20px;border-radius:7px;background:rgba(255,117,31,.16);color:var(--orange);font-size:11px;font-family:Arial,sans-serif}
+.install-guide-cta{width:100%;padding:12px;font-size:12px}
+.install-steps-title{font-size:11px;color:var(--muted)}
+.install-steps{margin:0;padding-inline-start:20px;display:grid;gap:7px}
+.install-steps li{font-size:11px;line-height:1.95}
+body.light .install-benefits li:before{background:rgba(255,117,31,.14);color:#c1541a}
+body.light .install-steps-title{color:#315761}
