@@ -1161,12 +1161,9 @@ async function applyUpdate() {
   const target = pendingUpdate ? pendingUpdate.version : null;
   showToast('در حال به‌روزرسانی…');
   try { if ('caches' in window) { const keys = await caches.keys(); await Promise.all(keys.map((key) => caches.delete(key))); } } catch { /* ignore */ }
-  try {
-    if ('serviceWorker' in navigator) {
-      const items = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(items.map((item) => item.unregister()));
-    }
-  } catch { /* ignore */ }
+  // The notification worker is deliberately NOT unregistered here: on some Android
+  // launchers removing it made the installed app vanish from the home screen. It caches
+  // nothing, so keeping it registered is safe and the reload still gets fresh files.
   try { if (target) localStorage.setItem(VERSION_KEY, String(target)); } catch { /* ignore */ }
   if (target) {
     // The version query makes the browser fetch a fresh index.html (and with it the

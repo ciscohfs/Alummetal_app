@@ -420,6 +420,7 @@ body.light .settings-list strong{background:rgba(255,117,31,.1);border-color:rgb
 html[dir="ltr"] .settings-chevron svg{transform:scaleX(-1)}
 .ios-switch{flex:0 0 auto;width:44px;height:26px;border-radius:99px;background:rgba(120,120,128,.32);position:relative;transition:background .22s ease}
 .ios-switch i{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.32);transition:transform .22s var(--ease)}
+html[dir="rtl"] .ios-switch i{left:auto;right:2px}
 .ios-switch.on{background:var(--orange)}
 .ios-switch.on i{transform:translateX(18px)}
 html[dir="rtl"] .ios-switch.on i{transform:translateX(-18px)}
