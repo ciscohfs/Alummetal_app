@@ -68,11 +68,17 @@ $('#drawerClose').addEventListener('click', closeDrawer);
  scrim.addEventListener('click', closeDrawer);
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeDrawer(); });
 
-function setTheme(light) {
+function setTheme(light, remember = true) {
   document.body.classList.toggle('light', light);
-  localStorage.setItem('alum-theme-v2', light ? 'light' : 'dark');
+  // `remember` stays false for the system-driven state: the visitor's own choice is only
+  // ever written when they press a theme control themselves.
+  if (remember) { try { localStorage.setItem('alum-theme-v2', light ? 'light' : 'dark'); } catch { /* private mode */ } }
   const status = $('#themeStatus');
   if (status) status.textContent = light ? 'غیرفعال' : 'فعال';
+  const switchKnob = $('#themeSwitch');
+  if (switchKnob) switchKnob.classList.toggle('on', !light);
+  const switchRow = $('#settingsTheme');
+  if (switchRow) switchRow.setAttribute('aria-checked', String(!light));
   const toggle = $('#themeToggle');
   if (toggle) {
     toggle.textContent = light ? '☾' : '☼';
@@ -81,8 +87,16 @@ function setTheme(light) {
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', light ? '#edf3f5' : '#07121b');
 }
+// Until the visitor picks a theme themselves, the app follows the phone's own
+// light/dark setting — including live changes while the app is open.
+const systemDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const themeWasChosen = () => { try { return !!localStorage.getItem('alum-theme-v2'); } catch { return false; } };
 const savedTheme = localStorage.getItem('alum-theme-v2');
-setTheme(savedTheme !== 'dark');  // light theme is the default; dark only when chosen
+setTheme(savedTheme ? savedTheme !== 'dark' : !systemDarkQuery.matches, false);
+const followSystemTheme = (event) => { if (!themeWasChosen()) setTheme(!event.matches, false); };
+if (systemDarkQuery.addEventListener) systemDarkQuery.addEventListener('change', followSystemTheme);
+else if (systemDarkQuery.addListener) systemDarkQuery.addListener(followSystemTheme);
+// Pressing a theme control is an explicit choice, so it is remembered from now on.
 $('#themeToggle').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#settingsTheme').addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
 $('#languageToggle').addEventListener('click', () => {
@@ -979,6 +993,60 @@ $('#installDismiss')?.addEventListener('click', () => { setSessionFlag(INSTALL_D
 setInstallState();
 detectInstalledApp();
 maybeShowInstallGuide();
+
+/* ==========================================================================
+   Layer: sharing the app
+   The native share sheet is used whenever the browser offers one (phones);
+   every other case falls back to a pop-up with the direct link and a QR code.
+   ========================================================================== */
+
+const SHARE_URL = 'https://app-alummetal.ir/';
+
+function legacyCopy(text) {
+  try {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    area.remove();
+    return ok;
+  } catch { return false; }
+}
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text).then(() => true).catch(() => legacyCopy(text));
+  }
+  return Promise.resolve(legacyCopy(text));
+}
+function openShareDialog() {
+  const html = `<div class="share-body">
+    <img class="share-qr" src="img/qr-app.png" alt="کد QR اپ آلوم متال" width="168" height="168" />
+    <p class="share-hint">با دوربین گوشی این کد را اسکن کن تا اپ باز شود.</p>
+    <div class="share-url">${SHARE_URL}</div>
+    <button class="primary-button install-guide-cta" id="shareCopy" type="button">کپی لینک</button>
+  </div>`;
+  openGuide('اشتراک‌گذاری اپ', html);
+}
+$('#shareButton')?.addEventListener('click', async () => {
+  const data = {
+    title: isEnglish() ? 'Alum Metal Arak' : 'آلوم متال آراک',
+    text: isEnglish() ? 'Alum Metal Arak app: section weight calculator, product catalogue and alloy database' : 'اپ آلوم متال آراک؛ محاسبه وزن مقاطع، کاتالوگ محصولات و بانک آلیاژها',
+    url: SHARE_URL
+  };
+  // A cancelled share sheet is not an error: nothing is shown then.
+  if (navigator.share) {
+    try { await navigator.share(data); return; } catch (error) { if (error && error.name === 'AbortError') return; }
+  }
+  openShareDialog();
+});
+$('#previewBody').addEventListener('click', (event) => {
+  if (!event.target.closest('#shareCopy')) return;
+  copyText(SHARE_URL).then((ok) => showToast(ok ? 'لینک کپی شد.' : 'کپی انجام نشد؛ آدرس را دستی انتخاب کن.'));
+});
 
 const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);

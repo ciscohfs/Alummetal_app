@@ -1,0 +1,730 @@
+آلوم متال آراک	Alum Metal Arak
+منوی آلوم متال	Alum Metal menu
+خانه	Home
+محاسبه وزن	Weight calculator
+کاتالوگ محصولات	Product catalogue
+دانشنامه آلیاژها	Alloy encyclopedia
+عنصر بده، آلیاژ بگیر	Enter elements, get alloys
+انتخاب آلیاژ بر اساس کاربرد	Pick an alloy by application
+مقایسه آلیاژها	Compare alloys
+تماس با ما	Contact us
+تنظیمات	Settings
+کیفیت، نوآوری و رضایت مشتری	Quality, innovation and customer satisfaction
+آلوم متال آراک — تولید و تأمین مقاطع و محصولات آلومینیومی	Alum Metal Arak — production and supply of aluminium sections and products
+تخصص در آلیاژ، کیفیت در تولید	Alloy expertise, production quality
+اپ آلوم متال را روی صفحه اصلی نصب کن	Install the Alum Metal app on your home screen
+دسترسی سریع‌تر، تمام‌صفحه و بدون نیاز به اینترنت.	Faster access, full screen and works offline.
+نصب	Install
+اعلان‌های روزانهٔ آلوم متال	Alum Metal daily notifications
+روزی دو پیام کوتاه؛ برای فعال‌سازی اجازهٔ اعلان بده.	Two short messages a day; allow notifications to enable them.
+فعال‌سازی	Enable
+دسترسی سریع	Quick access
+محاسبه وزن آلومینیوم	Aluminium weight calculator
+محاسبه سریع و دقیق	Fast and accurate calculation
+راهکارهای صنعتی و ساختمانی	Industrial and building solutions
+مشخصات فنی همه گریدها	Technical data for every grade
+پیشنهاد آلیاژ از روی ترکیب	Suggest an alloy from its composition
+مشخصات فنی، کنار هم	Technical data side by side
+پیشنهاد آلیاژ از روی کاربرد	Suggest an alloy from the application
+دریافت مشاوره تخصصی	Get expert advice
+ابزار دقیق	Precise tools
+محاسبه وزن مقاطع	Section weight calculator
+مقطع و آلیاژ را مطابق محصولات آلوم متال انتخاب کنید.	Pick the section and alloy that match Alum Metal products.
+راهنمای استفاده	How to use
+چطور وزن را حساب کنیم؟	How is the weight calculated?
+ابتدا مقطع و آلیاژ را انتخاب کن، سپس طول و اندازه‌های مشخص‌شده روی تصویر را به میلی‌متر وارد کن. برای چند قطعه، تعداد را تغییر بده و دکمه محاسبه وزن را بزن.	First choose the section and the alloy, then enter the length and the dimensions marked on the drawing in millimetres. For several pieces change the quantity and press the weight button.
+حروف روی تصویر، اندازه‌هایی هستند که باید در کادرهای پایین وارد شوند.	The letters on the drawing are the dimensions you enter in the boxes below.
+نوع مقطع	Section type
+راهنمای اندازه‌گذاری مقطع	Section dimension guide
+آلیاژ	Alloy
+طول (میلی‌متر)	Length (mm)
+عرض (میلی‌متر)	Width (mm)
+ضخامت (میلی‌متر)	Thickness (mm)
+تعداد	Quantity
+نتیجه اینجا نمایش داده می‌شود	The result appears here
+کتابخانه محصولات	Product library
+کاتالوگ‌های رسمی محصولات آلوم متال؛ برای دریافت موجودی و قیمت با ما تماس بگیرید.	Official Alum Metal product catalogues; contact us for stock and prices.
+برای دریافت موجودی و قیمت با ما تماس بگیرید	Contact us for stock and prices
+کارشناسان فروش پاسخ‌گوی شما هستند.	Our sales engineers are here to help.
+در حال دریافت فهرست...	Loading the list…
+دانشنامه آلیاژ	Alloy encyclopedia
+جدول کامل آلیاژهای کارپذیر و ریختگی با مشخصات فنی و کاربردها.	Complete table of wrought and casting alloys with technical data and applications.
+برای دریافت موجودی و قیمت آلیاژ با ما تماس بگیرید	Contact us for alloy stock and prices
+همه	All
+سری ۱۰۰۰	Series 1000
+سری ۲۰۰۰	Series 2000
+سری ۳۰۰۰	Series 3000
+سری ۴۰۰۰	Series 4000
+سری ۵۰۰۰	Series 5000
+سری ۶۰۰۰	Series 6000
+سری ۷۰۰۰	Series 7000
+سری ۸۰۰۰	Series 8000
+در حال دریافت دانشنامه آلیاژها...	Loading the alloy encyclopedia…
+یافتن آلیاژ	Find an alloy
+مقدار یک عنصر را بنویس؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شوند.	Type one element value; the closest alloys are suggested with a match percentage.
+یک عنصر کافی است	One element is enough
+لازم نیست همه را پر کنی؛ نتیجه زنده و لحظه‌ای به‌روز می‌شود.	You do not need to fill them all; the result updates live.
+نمونه سریع:	Quick sample:
+سیلیسیم	Silicon
+آهن	Iron
+مس	Copper
+منگنز	Manganese
+منیزیم	Magnesium
+کروم	Chromium
+روی	Zinc
+تیتانیوم	Titanium
+نیکل	Nickel
+لیتیم	Lithium
+پاک کردن مقادیر	Clear values
+ترکیب را نمی‌دانی؟ «انتخاب آلیاژ بر اساس کاربرد» ←	Do not know the composition? “Pick an alloy by application” →
+کد آلیاژ را می‌دانی؟	Know the alloy code?
+مقدار یک عنصر را وارد کن تا آلیاژهای نزدیک نمایش داده شوند.	Enter one element value to see the closest alloys.
+انتخاب سریع	Quick pick
+فقط بگو قطعه برای چه کاری است؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شوند.	Just say what the part is for; the closest alloys are suggested with a match percentage.
+کاربردت را انتخاب کن	Choose your application
+اگر درصد عناصر را نمی‌دانی، از اینجا شروع کن؛ یک انتخاب کافی است.	If you do not know the element percentages, start here; one choice is enough.
+پروفیل و درب و پنجره	Profiles, doors and windows
+سازه و صنعت	Structure and industry
+دریایی و ضدخوردگی	Marine and corrosion resistant
+ورق و ظروف	Sheet and containers
+هوافضا و استحکام بالا	Aerospace and high strength
+ریخته‌گری	Casting
+رسانایی برق	Electrical conductivity
+جوشکاری و فیلر	Welding and filler
+ماشین‌کاری دقیق	Precision machining
+فویل و بسته‌بندی	Foil and packaging
+پاک کردن انتخاب	Clear selection
+ترکیب را می‌دانم؛ «عنصر بده، آلیاژ بگیر» ←	I know the composition; “Enter elements, get alloys” →
+یکی از کاربردهای بالا را انتخاب کن تا آلیاژهای مناسب نمایش داده شوند.	Choose one of the applications above to see suitable alloys.
+مقایسه آلیاژ	Alloy comparison
+مقایسهٔ آلیاژها	Compare alloys
+حداقل دو آلیاژ را انتخاب کن و مشخصات فنی آن‌ها را کنار هم ببین.	Choose at least two alloys and see their technical data side by side.
+دو آلیاژ را انتخاب کن.	Choose two alloys.
+انتخاب اول	First choice
+انتخاب آلیاژ	Choose an alloy
+انتخاب دوم	Second choice
+انتخاب سوم	Third choice
+اختیاری	Optional
+بدون انتخاب	No selection
+نمایش مقایسه	Show comparison
+نتیجهٔ مقایسه	Comparison result
+پاک کردن	Clear
+تماس با آلوم متال	Contact Alum Metal
+برای مشاوره، استعلام و پیگیری سفارش تماس با ما.	Call us for advice, quotations and order follow-up.
+راه‌های تماس مستقیم	Direct contact
+پاسخ‌گویی و فروش	Support and sales
+تلفن فروش	Sales phone
+همراه اول	Mobile 1
+همراه دوم	Mobile 2
+آدرس دفتر مرکزی	Head office address
+اراک، خیابان دانشگاه، ساختمان هاتف، طبقه سوم، واحد ۴	Arak, Daneshgah St., Hatef Building, 3rd floor, unit 4
+اراک، شهرک صنعتی خیرآباد	Arak, Kheyrabad Industrial Estate
+شبکه‌های اجتماعی	Social networks
+ما را دنبال کنید	Follow us
+تلگرام	Telegram
+بله	Bale
+کانال آلوم متال	Alum Metal channel
+ایتا	Eitaa
+روبیکا	Rubika
+صفحه آلوم متال	Alum Metal page
+مشاهده سایت رسمی	Visit the official website
+کنترل برنامه	App control
+ظاهر و زبان برنامه را شخصی‌سازی کنید.	Personalise the look and language of the app.
+زبان برنامه	App language
+فارسی	English
+حالت شب	Night mode
+غیرفعال	Off
+اعلان‌های روزانه	Daily notifications
+در حال بررسی…	Checking…
+به‌روزرسانی برنامه	Update the app
+نصب اپ روی صفحه اصلی	Install the app on the home screen
+راهنمای نصب	Install guide
+کاتالوگ	Catalogue
+تماس	Contact
+پیش‌نمایش	Preview
+نسخهٔ جدید اپ آماده است	A new app version is ready
+برای اعمال نسخهٔ جدید، کش قدیمی پاک و برنامه دوباره بارگذاری می‌شود.	To apply it, the old cache is cleared and the app reloads.
+به‌روزرسانی	Update
+بعداً	Later
+آلوم متال آراک؛ تولید و تأمین مقاطع و محصولات آلومینیومی	Alum Metal Arak; production and supply of aluminium sections and products
+باز کردن منو	Open the menu
+صفحه اصلی آلوم متال	Alum Metal home
+لوگوی آلوم متال	Alum Metal logo
+تغییر تم	Toggle theme
+تمام صفحه	Full screen
+آلوم متال	Alum Metal
+بستن منو	Close the menu
+بستن پیشنهاد نصب	Dismiss the install banner
+بستن پیشنهاد اعلان	Dismiss the notification banner
+راهنمای اندازه‌گذاری مقطع گرد	Round section dimension guide
+مثلاً ۱۰۰۰	e.g. 1000
+مثلاً ۵۰۰	e.g. 500
+مثلاً ۲	e.g. 2
+جست‌وجوی کد، کاربرد یا ویژگی	Search by code, use or property
+مثلاً 0.45	e.g. 0.45
+مثلاً 6061 یا ۶۰۶۱	e.g. 6061
+ناوبری اصلی	Main navigation
+بستن پیش‌نمایش	Close the preview
+بستن پنجره به‌روزرسانی	Close the update dialog
+کاتالوگ ورق	Sheet catalogue
+آلیاژها، تمپر، عرض و ضخامت قابل تأمین	Alloys, tempers, available widths and thicknesses
+تمپر	Temper
+عرض ورق	Sheet width
+ضخامت ورق	Sheet thickness
+کاتالوگ گرد	Round bar catalogue
+قطرهای موجود و وزن هر متر	Available diameters and weight per metre
+قطر	Diameter
+وزن هر متر	Weight per metre
+کاتالوگ تسمه و چهارپهلو	Flat bar and square catalogue
+ابعاد مقطع و وزن هر متر	Section dimensions and weight per metre
+ابعاد	Dimensions
+کاتالوگ لوله	Pipe catalogue
+قطر خارجی، ضخامت و وزن هر متر	Outer diameter, wall thickness and weight per metre
+قطر خارجی	Outer diameter
+ضخامت	Thickness
+کاتالوگ لوله — قطر داخلی	Pipe catalogue — inner diameter
+قطر خارجی، قطر داخلی و طول شاخه	Outer diameter, inner diameter and bar length
+قطر داخلی	Inner diameter
+طول شاخه	Bar length
+کاتالوگ شش پر	Hex bar catalogue
+سایز و وزن هر متر	Size and weight per metre
+سایز	Size
+ورق / صفحه	Sheet / plate
+طول	Length
+عرض	Width
+گرد	Round bar
+چهارپهلو	Square bar
+ارتفاع	Height
+تسمه	Flat bar
+لوله	Pipe
+شش‌پر	Hex bar
+ضلع	Side
+6063 — پروفیل و اکستروژن	6063 — profiles and extrusion
+6061 — صنعتی و سازه‌ای	6061 — industrial and structural
+6060 — مقاطع عمومی	6060 — general sections
+6005 — مقاطع صنعتی	6005 — industrial sections
+6082 — سازه‌ای با استحکام بالاتر	6082 — higher-strength structural
+5052 — ورق و محیط مرطوب	5052 — sheet and wet environments
+5083 — ورق صنعتی و دریایی	5083 — industrial and marine sheet
+2024 — سری 2000	2024 — 2000 series
+7075 — استحکام بالا	7075 — high strength
+سری 7000 — مقاطع آلیاژی	7000 series — alloyed sections
+1050 — ورق عمومی	1050 — general sheet
+آلومینیوم خالص	Pure aluminium
+رسانایی و شکل‌پذیری بالا	High conductivity and formability
+ورق عمومی، ظروف، بسته‌بندی و قطعات الکتریکی	General sheet, containers, packaging and electrical parts
+برق، ورق‌کاری، بسته‌بندی	Electrical, sheet metal work, packaging
+Al ≥ 99٪؛ عناصر آلیاژی ناچیز	Al ≥ 99%; negligible alloying elements
+استحکام پایین، شکل‌پذیری و فرم‌دهی بسیار خوب	Low strength, very good formability
+چگالی حدود 2.71 g/cm³؛ رسانایی حرارتی و الکتریکی بالا	Density about 2.71 g/cm³; high thermal and electrical conductivity
+مطابق خانواده سری؛ مقاومت واقعی به تمپر، سطح و محیط کاری وابسته است.	Follows the series family; real corrosion resistance depends on temper, surface and service environment.
+بسته به گرید و تمپر؛ برای این سری باید برگه آنالیز/استاندارد گرید بررسی شود.	Depends on grade and temper; check the grade analysis/standard sheet for this series.
+AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	AA / ASTM / EN; the exact equivalent must be confirmed at purchase.
+رسانایی و فرم‌پذیری عمومی	General conductivity and formability
+فرم‌پذیری عالی	Excellent formability
+مبدل حرارتی، ظروف و کاربردهای عمومی	Heat exchangers, containers and general uses
+آلومینیوم-مس	Aluminium-copper
+استحکام و ماشین‌کاری بالا	High strength and machinability
+هوافضا، قطعات ماشین‌کاری و سازه	Aerospace, machined parts and structures
+Al–Cu؛ معمولاً Mg و Mn نیز دارد	Al–Cu; usually also Mg and Mn
+استحکام بالا و ماشین‌کاری خوب؛ جوش‌پذیری محدودتر	High strength and good machinability; more limited weldability
+چگالی حدود 2.78 تا 2.83 g/cm³؛ حساس‌تر به خوردگی	Density about 2.78–2.83 g/cm³; more sensitive to corrosion
+ماشین‌کاری بسیار خوب	Very good machinability
+قطعات تراش‌کاری‌شده و اتصالات دقیق	Turned parts and precision fittings
+استحکام بالا نسبت به وزن	High strength-to-weight ratio
+قطعات هوافضا و سازه‌های مهندسی	Aerospace parts and engineering structures
+آلومینیوم-منگنز	Aluminium-manganese
+مقاومت خوردگی و فرم‌پذیری خوب	Good corrosion resistance and formability
+ظروف، مخازن، مبدل حرارتی و ورق‌کاری	Containers, tanks, heat exchangers and sheet metal work
+مخازن، تجهیزات خانگی و ورق‌کاری	Tanks, household equipment and sheet metal work
+Al–Mn؛ گاهی Mg و Cu	Al–Mn; sometimes Mg and Cu
+استحکام متوسط و شکل‌پذیری مناسب	Moderate strength and good formability
+چگالی حدود 2.72 تا 2.73 g/cm³؛ مقاومت خوردگی خوب	Density about 2.72–2.73 g/cm³; good corrosion resistance
+فرم‌پذیری و مقاومت خوردگی	Formability and corrosion resistance
+شکل‌پذیری و مقاومت خوردگی	Formability and corrosion resistance
+درب و پنجره، نما و ورق‌های ساختمانی	Doors and windows, façades and building sheet
+آلومینیوم-سیلیسیم	Aluminium-silicon
+مقاومت حرارتی و جوشکاری	Heat resistance and welding
+جوشکاری، فیلر و قطعات ریختگی	Welding, filler and castings
+Al–Si؛ سیلیسیم عنصر اصلی	Al–Si; silicon is the main element
+مقاومت سایشی و دمایی مناسب؛ سیالیت خوب	Good wear and heat resistance; good fluidity
+چگالی حدود 2.68 تا 2.69 g/cm³؛ انبساط حرارتی کمتر	Density about 2.68–2.69 g/cm³; lower thermal expansion
+مقاومت دمایی و سایش	Heat and wear resistance
+قطعات موتور و کاربردهای خودرویی	Engine parts and automotive uses
+سیالیت و قابلیت جوشکاری	Fluidity and weldability
+فیلر جوشکاری و قطعات ریختگی	Welding filler and castings
+آلومینیوم-منیزیم	Aluminium-magnesium
+مقاومت خوردگی و جوش‌پذیری	Corrosion resistance and weldability
+صنایع دریایی، مخزن و ورق صنعتی	Marine industry, tanks and industrial sheet
+Al–Mg؛ ممکن است Mn و Cr نیز داشته باشد	Al–Mg; may also contain Mn and Cr
+استحکام خوب، جوش‌پذیری و مقاومت خوردگی عالی	Good strength, excellent weldability and corrosion resistance
+چگالی حدود 2.66 تا 2.68 g/cm³؛ مناسب محیط دریایی	Density about 2.66–2.68 g/cm³; suited to marine environments
+مقاومت خوردگی عالی	Excellent corrosion resistance
+ورق‌کاری، مخزن سوخت و محیط مرطوب	Sheet metal work, fuel tanks and wet environments
+استحکام و مقاومت دریایی	Strength and marine resistance
+سازه‌های دریایی، مخازن و صنایع سنگین	Marine structures, tanks and heavy industry
+جوشکاری و خوردگی مناسب	Good welding and corrosion behaviour
+کشتی‌سازی و سازه‌های دریایی	Shipbuilding and marine structures
+خودرو، ورق‌کاری و صنایع شیمیایی	Automotive, sheet metal work and chemical industry
+آلومینیوم-منیزیم-سیلیسیم	Aluminium-magnesium-silicon
+استحکام مناسب در اکستروژن	Good strength for extrusion
+مقاطع صنعتی و سازه‌های سبک	Industrial sections and light structures
+پروفیل، ساختمان و ماشین‌سازی	Profiles, building and machinery
+Al–Mg–Si؛ گاهی Cu و Mn	Al–Mg–Si; sometimes Cu and Mn
+تعادل استحکام، اکستروژن، ماشین‌کاری و جوش‌پذیری	Balanced strength, extrusion, machinability and weldability
+چگالی حدود 2.69 تا 2.71 g/cm³؛ عملیات حرارتی‌پذیر	Density about 2.69–2.71 g/cm³; heat treatable
+تعادل استحکام و اکستروژن	Balanced strength and extrusion
+استحکام و قابلیت ماشین‌کاری مناسب	Good strength and machinability
+مقاطع صنعتی، قطعات ماشین‌کاری‌شده و سازه‌های سبک	Industrial sections, machined parts and light structures
+اکستروژن و سطح مناسب	Good extrusion and surface
+پروفیل و مقاطع عمومی	Profiles and general sections
+تعادل استحکام و ماشین‌کاری	Balanced strength and machinability
+قطعات صنعتی، سازه، فریم و تجهیزات	Industrial parts, structures, frames and equipment
+اکستروژن عالی و کیفیت سطح	Excellent extrusion and surface quality
+پروفیل ساختمانی، دکوراتیو و هیت‌سینک	Building and decorative profiles, heat sinks
+استحکام بالاتر و جوشکاری خوب	Higher strength and good welding
+سازه‌ها، ماشین‌سازی و قطعات صنعتی	Structures, machinery and industrial parts
+رسانایی الکتریکی بالا	High electrical conductivity
+شینه و تجهیزات انتقال برق	Busbars and power transmission equipment
+آلومینیوم-روی	Aluminium-zinc
+استحکام و قابلیت جوشکاری	Strength and weldability
+دوچرخه و سازه‌های سبک مقاوم	Bicycles and strong light structures
+هوافضا، نظامی و تجهیزات ورزشی	Aerospace, defence and sports equipment
+Al–Zn؛ معمولاً Mg و Cu نیز دارد	Al–Zn; usually also Mg and Cu
+استحکام بسیار بالا برای قطعات پربار	Very high strength for highly loaded parts
+چگالی حدود 2.78 تا 2.83 g/cm³؛ حساسیت خوردگی تنشی	Density about 2.78–2.83 g/cm³; stress-corrosion sensitivity
+استحکام بسیار بالا	Very high strength
+مقاومت بالا در مقاطع ضخیم	High strength in thick sections
+هوافضا و قطعات سنگین مهندسی	Aerospace and heavy engineering parts
+هوافضا، قطعات مهندسی و تجهیزات ورزشی	Aerospace, engineering parts and sports equipment
+آلومینیوم با عناصر دیگر	Aluminium with other elements
+سبک و شکل‌پذیر	Light and formable
+فویل، بسته‌بندی و ورق‌های عمومی	Foil, packaging and general sheet
+فویل، بسته‌بندی و هوافضا	Foil, packaging and aerospace
+Al با Li یا عناصر ویژه دیگر	Al with Li or other special elements
+وزن کم و خواص تخصصی متناسب با گرید	Low weight and grade-specific properties
+چگالی متغیر؛ برخی گریدها برای کاهش وزن طراحی شده‌اند	Variable density; some grades are designed for weight saving
+آلومینیوم-لیتیوم	Aluminium-lithium
+وزن پایین و استحکام مناسب	Low weight and good strength
+کاربردهای تخصصی هوافضا	Specialised aerospace uses
+آلومینیوم با عناصر ویژه	Aluminium with special elements
+وزن پایین و کاربرد تخصصی	Low weight and specialised use
+آلیاژ ریختگی	Casting alloy
+ریختگی عمومی و قطعات مهندسی	General castings and engineering parts
+قطعات ریختگی و شمش آلیاژی	Castings and alloy ingots
+قطعات صنعتی، پوسته‌ها و قطعات ریختگی	Industrial parts, housings and castings
+ترکیب وابسته به گرید ریختگی و استاندارد تولید	Composition depends on the casting grade and production standard
+خواص مکانیکی وابسته به روش ریخته‌گری، عملیات حرارتی و تخلخل قطعه	Mechanical properties depend on the casting method, heat treatment and porosity
+چگالی تقریبی 2.70 g/cm³؛ رفتار حرارتی وابسته به ترکیب	Density about 2.70 g/cm³; thermal behaviour depends on composition
+وابسته به ترکیب شیمیایی و کیفیت سطح.	Depends on the chemical composition and surface quality.
+برخی گریدها مانند A356.0 قابلیت عملیات حرارتی دارند.	Some grades such as A356.0 can be heat treated.
+AA Casting / ASTM؛ وضعیت .0 قطعه ریختگی و .1 شمش است.	AA Casting / ASTM; the .0 suffix is a casting and .1 an ingot.
+ریختگی با استحکام و سیالیت مناسب	Casting with good strength and fluidity
+ریختگی دقیق و قطعات سبک	Precision castings and light parts
+ریختگی تحت فشار و قطعات صنعتی	Die casting and industrial parts
+ریختگی با سیالیت بالا	Casting with high fluidity
+ریختگی با شکل‌پذیری مناسب	Casting with good formability
+ریختگی آلومینیوم-منیزیم	Aluminium-magnesium casting
+ریختگی تخصصی آلومینیوم-روی	Specialised aluminium-zinc casting
+چگالی حدود 2.71 g/cm³؛ رسانایی الکتریکی و حرارتی بالا	Density about 2.71 g/cm³; high electrical and thermal conductivity
+استحکام بالا، ماشین‌کاری خوب، جوش‌پذیری محدودتر	High strength, good machinability, more limited weldability
+استحکام متوسط، شکل‌پذیری و مقاومت خوردگی مناسب	Moderate strength, good formability and corrosion resistance
+چگالی حدود 2.72 تا 2.73 g/cm³؛ غیرمغناطیسی	Density about 2.72–2.73 g/cm³; non-magnetic
+Al–Si؛ سیلیسیم عنصر اصلی آلیاژی	Al–Si; silicon is the main alloying element
+مقاومت سایشی و دمایی مناسب؛ سیالیت خوب در ریخته‌گری	Good wear and heat resistance; good fluidity in casting
+استحکام بسیار بالا، مناسب قطعات پربار مهندسی	Very high strength, suited to highly loaded engineering parts
+چگالی حدود 2.78 تا 2.83 g/cm³؛ حساسیت بیشتر به خوردگی تنشی	Density about 2.78–2.83 g/cm³; more stress-corrosion sensitivity
+وزن کم و خواص تخصصی متناسب با آلیاژ	Low weight and alloy-specific properties
+سری ۱۰۰۰ — آلومینیوم خالص	Series 1000 — pure aluminium
+سری ۲۰۰۰ — آلومینیوم-مس	Series 2000 — aluminium-copper
+سری ۳۰۰۰ — آلومینیوم-منگنز	Series 3000 — aluminium-manganese
+سری ۴۰۰۰ — آلومینیوم-سیلیسیم	Series 4000 — aluminium-silicon
+سری ۵۰۰۰ — آلومینیوم-منیزیم	Series 5000 — aluminium-magnesium
+سری ۶۰۰۰ — آلومینیوم-منیزیم-سیلیسیم	Series 6000 — aluminium-magnesium-silicon
+سری ۷۰۰۰ — آلومینیوم-روی	Series 7000 — aluminium-zinc
+سری ۸۰۰۰ — آلیاژهای ویژه	Series 8000 — special alloys
+آلیاژهای ریختگی	Casting alloys
+فعال	On
+فعال کردن حالت شب	Turn on night mode
+حالت روز	Day mode
+زبان فعلی برنامه فارسی است.	The app language is Persian.
+حالت تمام صفحه در این مرورگر در دسترس نیست	Full screen is not available in this browser
+راهنمای اندازه‌گذاری چهارپهلو	Square section dimension guide
+راهنمای اندازه‌گذاری تسمه	Flat bar dimension guide
+راهنمای اندازه‌گذاری شش‌پر	Hex bar dimension guide
+راهنمای اندازه‌گذاری ورق	Sheet dimension guide
+راهنمای اندازه‌گذاری لوله	Pipe dimension guide
+لطفاً همه ابعاد لازم را با عدد مثبت وارد کنید.	Please enter all required dimensions as positive numbers.
+نمایش خلاصه	Show summary
+نمایش کامل جدول	Show the full table
+برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است.	Suited to conductivity, forming and general uses.
+برای استحکام بالا و قطعات ماشین‌کاری‌شده انتخاب می‌شود؛ مقاومت خوردگی آن معمولاً به پوشش یا نگهداری مناسب نیاز دارد.	Chosen for high strength and machined parts; its corrosion resistance usually needs a suitable coating or maintenance.
+تعادل خوبی بین فرم‌پذیری، مقاومت خوردگی و استحکام متوسط ایجاد می‌کند.	Offers a good balance of formability, corrosion resistance and moderate strength.
+وجود سیلیسیم به بهبود سیالیت، مقاومت حرارتی یا عملکرد جوشکاری کمک می‌کند.	Silicon improves fluidity, heat resistance or welding behaviour.
+برای محیط‌های مرطوب و دریایی مناسب است و معمولاً جوش‌پذیری خوبی دارد.	Suited to wet and marine environments and usually has good weldability.
+انتخاب متعادل برای پروفیل و سازه است؛ اکستروژن، ماشین‌کاری و عملیات حرارتی در آن مهم است.	A balanced choice for profiles and structures; extrusion, machining and heat treatment matter.
+بیشترین تمرکز آن روی استحکام است و برای قطعات سبک و پربار مهندسی به‌کار می‌رود.	Its main focus is strength and it is used for light, highly loaded engineering parts.
+برای کاربردهای تخصصی مانند فویل، بسته‌بندی یا هوافضا استفاده می‌شود.	Used for specialised applications such as foil, packaging or aerospace.
+برای مقایسه، حداقل دو آلیاژ را انتخاب کن.	Choose at least two alloys to compare.
+خانواده	Family
+سری	Series
+عناصر اصلی	Main elements
+خواص مکانیکی	Mechanical properties
+خواص فیزیکی	Physical properties
+مقاومت خوردگی	Corrosion resistance
+عملیات حرارتی	Heat treatment
+استانداردها	Standards
+چگالی	Density
+ویژگی اصلی	Main property
+کاربرد اصلی	Main use
+کاربردهای سری	Series applications
+اطلاعات ثبت نشده	Not recorded
+شاخص	Property
+این کد را مستقیم جست‌وجو کردی؛ برای دیدن مشخصات کامل «جزئیات در دانشنامه آلیاژها» را بزن.	You searched this code directly; press “Details in the alloy encyclopedia” to see the full data.
+بخشی از مقادیر واردشده با محدوده این گرید فاصله دارد؛ نزدیک‌ترین گزینه در این فهرست است.	Some entered values are outside this grade’s range; it is the closest option in this list.
+محدوده اعلام‌شده برای این گرید تقریبی است.	The stated range for this grade is approximate.
+محدوده تقریبی	Approximate range
+کد دقیق	Exact code
+نزدیک‌ترین کدهای موجود را انتخاب کن:	Pick the closest available code:
+از کجا شروع کنم؟	Where do I start?
+گریدهای پرکاربرد:	Popular grades:
+چیزی برای پیشنهاد پیدا نشد	Nothing to suggest
+مقدار عنصر را کمی تغییر بده یا از «انتخاب آلیاژ بر اساس کاربرد» استفاده کن.	Change the element value a little or use “Pick an alloy by application”.
+نزدیک‌ترین آلیاژها به ترکیب واردشده	Closest alloys to the entered composition
+درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.	The match percentage is the distance between your composition and each grade’s standard range; confirm the analysis sheet and product standard before the final choice.
+از کدام کاربرد شروع کنیم؟	Which application shall we start from?
+یکی از کاربردهای بالا را انتخاب کن تا آلیاژهای پیشنهادی همان کاربرد را ببینی. اگر کد یا ترکیب را می‌دانی، «عنصر بده، آلیاژ بگیر» دقیق‌تر است.	Choose one of the applications above to see the alloys suggested for it. If you know the code or composition, “Enter elements, get alloys” is more precise.
+برای این کاربرد پیشنهادی پیدا نشد	No suggestion found for this application
+کاربرد دیگری را امتحان کن.	Try another application.
+این پیشنهادها بر پایه کاربرد رایج هر گرید است؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.	These suggestions are based on each grade’s typical use; confirm the analysis sheet and product standard before the final choice.
+سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کن.	Three alloys are selected; change one of them to modify the comparison.
+کاربرد و استاندارد	Use and standard
+کد	Code
+سری / خانواده	Series / family
+جزئیات	Details
+آلیاژی با این جست‌وجو پیدا نشد.	No alloy matches this search.
+باز کردن فایل اصلی ↗	Open the original file ↗
+باز کردن صفحه یا فایل اصلی ↗	Open the original page or file ↗
+اپ را در مرورگر	Open the app in
+باز کن.	.
+دکمه	Tap the
+اشتراک‌گذاری	Share
+(مربع با فلش رو به بالا) را بزن.	button (a square with an arrow pointing up).
+گزینه	Choose
+یا «افزودن به صفحه اصلی» را انتخاب کن.	or “Add to Home Screen”.
+نام «آلوم متال» را تأیید کن و	Confirm the name “Alum Metal” and
+را بزن.	.
+اپ را در	Open the app in
+یا	or
+منوی مرورگر (⋮ یا ⋯) را باز کن.	Open the browser menu (⋮ or ⋯).
+یا «نصب برنامه» را بزن.	or tap “Install app”.
+اگر این گزینه را ندیدی، «افزودن به صفحه اصلی» را از همان منو انتخاب کن.	If you cannot see it, choose “Add to Home Screen” from the same menu.
+اگر اپ را قبلاً نصب کرده‌ای، این گزینه دیگر نمایش داده نمی‌شود. نصب روی اندروید و iOS به آدرس	If you have already installed the app this option is hidden. Installing on Android and iOS needs an
+نیاز دارد؛ روی localhost هم کار می‌کند.	address; it also works on localhost.
+یک ضربه برای نصب؛ بدون گشتن در تنظیمات مرورگر.	One tap to install; no digging through browser settings.
+آموزش گام‌به‌گام نصب روی صفحه اصلی را ببین.	See the step-by-step guide to install on the home screen.
+آموزش نصب	Install guide
+نصب سریع	Quick install
+افزودن اپ به صفحه اصلی	Add the app to the home screen
+اپ آلوم متال روی صفحه اصلی نصب شد	The Alum Metal app was installed on the home screen
+وزن مقاطع را در چند ثانیه حساب کن؛ ابزار «محاسبه وزن» در همین اپ است.	Calculate section weight in seconds; the “Weight calculator” is built into this app.
+کاتالوگ محصولات به‌روز است؛ ورق، گرد، پروفیل و مقاطع خاص را ببین.	The product catalogue is up to date; see sheet, round bar, profiles and special sections.
+درصد عناصر را داری؟ «عنصر بده، آلیاژ بگیر» نزدیک‌ترین گریدها را پیشنهاد می‌دهد.	Have the element percentages? “Enter elements, get alloys” suggests the closest grades.
+برای استعلام موجودی و قیمت با کارشناسان فروش تماس بگیرید: ۰۸۶-۳۳۲۵۷۳۱۶	Call our sales engineers for stock and prices: 086-33257316
+آلیاژ مناسب کاربردت را پیدا نمی‌کنی؟ سری به «انتخاب آلیاژ بر اساس کاربرد» بزن.	Cannot find the right alloy for your application? Try “Pick an alloy by application”.
+۶۰۶۳ پرکاربردترین آلیاژ پروفیل ساختمانی است؛ مشخصات کاملش در دانشنامه آلیاژها.	6063 is the most widely used building-profile alloy; its full data is in the alloy encyclopedia.
+دو آلیاژ را کنار هم مقایسه کن تا انتخاب مطمئن‌تری داشته باشی.	Compare two alloys side by side for a safer choice.
+اپ آلوم متال را روی صفحه اصلی نصب کن تا دسترسی سریع‌تری داشته باشی.	Install the Alum Metal app on your home screen for faster access.
+نکته فنی: چگالی آلومینیوم بین ۲٫۶۶ تا ۲٫۸۱ گرم بر سانتی‌متر مکعب است؛ ماشین‌حساب خودش چگالی درست را انتخاب می‌کند.	Technical note: aluminium density is 2.66–2.81 g/cm³; the calculator picks the right density itself.
+ورق آلومینیوم با ضخامت ۰٫۱ تا ۵۰۰ میلی‌متر؛ موجودی را از کارشناسان فروش بگیر.	Aluminium sheet from 0.1 to 500 mm thick; ask our sales engineers for availability.
+آلیاژهای سری ۵۰۰۰ برای محیط‌های مرطوب و دریایی مقاومت خوردگی خوبی دارند.	5000-series alloys resist corrosion well in wet and marine environments.
+با هر بار باز کردن اپ، آخرین نسخه و داده‌ها دریافت می‌شود.	Every time you open the app, the latest version and data are fetched.
+در این مرورگر نیست	Not available in this browser
+مسدود شده	Blocked
+در انتظار اجازه	Waiting for permission
+خاموش	Off
+این مرورگر از اعلان پشتیبانی نمی‌کند.	This browser does not support notifications.
+اعلان‌های روزانه فعال شد؛ روزی دو پیام دریافت می‌کنی.	Daily notifications are on; you will get two messages a day.
+اجازهٔ اعلان رد شد؛ برای فعال‌سازی آن را از تنظیمات مرورگر باز کن.	Notification permission was denied; enable it from the browser settings.
+اجازهٔ اعلان داده نشد.	Notification permission was not granted.
+اجازهٔ اعلان در تنظیمات مرورگر مسدود است.	Notification permission is blocked in the browser settings.
+اعلان‌های روزانه خاموش شد.	Daily notifications are off.
+اعلان‌های روزانه فعال شد؛ روزی دو پیام.	Daily notifications are on; two messages a day.
+در حال به‌روزرسانی…	Updating…
+به‌روز	Up to date
+نسخهٔ جدید دارد	New version available
+بررسی هنگام اتصال	Checks when online
+نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستی.	No new version is available; you are on the latest one.
+
+---- live ----
+38 ردیف	<pattern/skip>
+نمایش 6 ردیف نخست	<pattern/skip>
+83 ردیف	<pattern/skip>
+192 ردیف	<pattern/skip>
+84 ردیف	<pattern/skip>
+41 ردیف	<pattern/skip>
+استخری	Pools
+22 ردیف	<pattern/skip>
+ریختگی	Casting
+97 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+مشاهده	View
+2.71 گرم بر سانتی‌متر مکعب	<pattern/skip>
+ورق عمومی، ظروف، بسته‌بندی و قطعات الکتریکی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+برق، ورق‌کاری، بسته‌بندی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+مبدل حرارتی، ظروف و کاربردهای عمومی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.8 گرم بر سانتی‌متر مکعب	<pattern/skip>
+هوافضا، قطعات ماشین‌کاری و سازه · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.83 گرم بر سانتی‌متر مکعب	<pattern/skip>
+قطعات تراش‌کاری‌شده و اتصالات دقیق · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.78 گرم بر سانتی‌متر مکعب	<pattern/skip>
+قطعات هوافضا و سازه‌های مهندسی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.73 گرم بر سانتی‌متر مکعب	<pattern/skip>
+ظروف، مخازن، مبدل حرارتی و ورق‌کاری · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+مخازن، تجهیزات خانگی و ورق‌کاری · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.72 گرم بر سانتی‌متر مکعب	<pattern/skip>
+درب و پنجره، نما و ورق‌های ساختمانی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.69 گرم بر سانتی‌متر مکعب	<pattern/skip>
+جوشکاری، فیلر و قطعات ریختگی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.68 گرم بر سانتی‌متر مکعب	<pattern/skip>
+قطعات موتور و کاربردهای خودرویی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+فیلر جوشکاری و قطعات ریختگی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+صنایع دریایی، مخزن و ورق صنعتی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+ورق‌کاری، مخزن سوخت و محیط مرطوب · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.66 گرم بر سانتی‌متر مکعب	<pattern/skip>
+سازه‌های دریایی، مخازن و صنایع سنگین · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+کشتی‌سازی و سازه‌های دریایی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.67 گرم بر سانتی‌متر مکعب	<pattern/skip>
+خودرو، ورق‌کاری و صنایع شیمیایی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.7 گرم بر سانتی‌متر مکعب	<pattern/skip>
+مقاطع صنعتی و سازه‌های سبک · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+پروفیل، ساختمان و ماشین‌سازی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+مقاطع صنعتی، قطعات ماشین‌کاری‌شده و سازه‌های سبک · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+پروفیل و مقاطع عمومی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+قطعات صنعتی، سازه، فریم و تجهیزات · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+پروفیل ساختمانی، دکوراتیو و هیت‌سینک · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+سازه‌ها، ماشین‌سازی و قطعات صنعتی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+شینه و تجهیزات انتقال برق · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+دوچرخه و سازه‌های سبک مقاوم · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.81 گرم بر سانتی‌متر مکعب	<pattern/skip>
+هوافضا، نظامی و تجهیزات ورزشی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+هوافضا و قطعات سنگین مهندسی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+هوافضا، قطعات مهندسی و تجهیزات ورزشی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+فویل، بسته‌بندی و ورق‌های عمومی · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+2.55 گرم بر سانتی‌متر مکعب	<pattern/skip>
+کاربردهای تخصصی هوافضا · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+فویل، بسته‌بندی و هوافضا · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
+قطعات ریختگی و شمش آلیاژی · AA Casting / ASTM؛ وضعیت .0 قطعه ریختگی و .1 شمش است.	<pattern/skip>
+٪	%
+فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45)؛ بقیه کار با ما. اگر ترکیب را نمی‌دانی، «انتخاب آلیاژ بر اساس کاربرد» را امتحان کن.	Just write one element value (for example Si = 0.45); we do the rest. If you do not know the composition, try “Pick an alloy by application”.
+خودرو	Automotive
+مبدل حرارتی	Heat exchangers
+1050 — رسانایی و شکل‌پذیری بالا	<pattern/skip>
+1060 — رسانایی و فرم‌پذیری عمومی	<pattern/skip>
+1100 — فرم‌پذیری عالی	<pattern/skip>
+1145 — رسانایی و فرم‌پذیری عمومی	<pattern/skip>
+1199 — رسانایی و فرم‌پذیری عمومی	<pattern/skip>
+1200 — رسانایی و فرم‌پذیری عمومی	<pattern/skip>
+1350 — رسانایی و فرم‌پذیری عمومی	<pattern/skip>
+1370 — رسانایی و فرم‌پذیری عمومی	<pattern/skip>
+2007 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2011 — ماشین‌کاری بسیار خوب	<pattern/skip>
+2014 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2024 — استحکام بالا نسبت به وزن	<pattern/skip>
+2036 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2048 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2090 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2124 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2214 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2218 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2219 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2319 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2618 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+2619 — استحکام و ماشین‌کاری بالا	<pattern/skip>
+3003 — مقاومت خوردگی و فرم‌پذیری خوب	<pattern/skip>
+3004 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+3005 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+3006 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+3102 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+3103 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+3104 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+3105 — شکل‌پذیری و مقاومت خوردگی	<pattern/skip>
+4015 — مقاومت حرارتی و جوشکاری	<pattern/skip>
+4032 — مقاومت دمایی و سایش	<pattern/skip>
+4043 — سیالیت و قابلیت جوشکاری	<pattern/skip>
+4045 — مقاومت حرارتی و جوشکاری	<pattern/skip>
+4047 — مقاومت حرارتی و جوشکاری	<pattern/skip>
+5005 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5019 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5025 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5050 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5052 — مقاومت خوردگی عالی	<pattern/skip>
+5056 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5083 — استحکام و مقاومت دریایی	<pattern/skip>
+5086 — جوشکاری و خوردگی مناسب	<pattern/skip>
+5154 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5182 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5252 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5254 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5356 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5454 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5455 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5456 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5457 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5652 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5657 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+5754 — فرم‌پذیری و مقاومت خوردگی	<pattern/skip>
+5757 — مقاومت خوردگی و جوش‌پذیری	<pattern/skip>
+6005 — استحکام مناسب در اکستروژن	<pattern/skip>
+6009 — تعادل استحکام و اکستروژن	<pattern/skip>
+6010 — استحکام و قابلیت ماشین‌کاری مناسب	<pattern/skip>
+6026 — تعادل استحکام و اکستروژن	<pattern/skip>
+6060 — اکستروژن و سطح مناسب	<pattern/skip>
+6061 — تعادل استحکام و ماشین‌کاری	<pattern/skip>
+6063 — اکستروژن عالی و کیفیت سطح	<pattern/skip>
+6066 — تعادل استحکام و اکستروژن	<pattern/skip>
+6069 — تعادل استحکام و اکستروژن	<pattern/skip>
+6070 — تعادل استحکام و اکستروژن	<pattern/skip>
+6082 — استحکام بالاتر و جوشکاری خوب	<pattern/skip>
+6101 — رسانایی الکتریکی بالا	<pattern/skip>
+6111 — تعادل استحکام و اکستروژن	<pattern/skip>
+6151 — تعادل استحکام و اکستروژن	<pattern/skip>
+6201 — تعادل استحکام و اکستروژن	<pattern/skip>
+6205 — تعادل استحکام و اکستروژن	<pattern/skip>
+6261 — تعادل استحکام و اکستروژن	<pattern/skip>
+6262 — تعادل استحکام و اکستروژن	<pattern/skip>
+6351 — تعادل استحکام و اکستروژن	<pattern/skip>
+6463 — تعادل استحکام و اکستروژن	<pattern/skip>
+6951 — تعادل استحکام و اکستروژن	<pattern/skip>
+7005 — استحکام و قابلیت جوشکاری	<pattern/skip>
+7049 — استحکام بسیار بالا	<pattern/skip>
+7050 — مقاومت بالا در مقاطع ضخیم	<pattern/skip>
+7072 — استحکام بسیار بالا	<pattern/skip>
+7075 — استحکام بسیار بالا	<pattern/skip>
+7079 — استحکام بسیار بالا	<pattern/skip>
+7175 — استحکام بسیار بالا	<pattern/skip>
+7475 — استحکام بسیار بالا	<pattern/skip>
+7477 — استحکام بسیار بالا	<pattern/skip>
+8011 — سبک و شکل‌پذیر	<pattern/skip>
+8090 — وزن پایین و استحکام مناسب	<pattern/skip>
+8091 — وزن پایین و کاربرد تخصصی	<pattern/skip>
+319.0 — ریختگی عمومی و قطعات مهندسی	<pattern/skip>
+356.0 — ریختگی با استحکام و سیالیت مناسب	<pattern/skip>
+A356.0 — ریختگی دقیق و قطعات سبک	<pattern/skip>
+380.0 — ریختگی تحت فشار و قطعات صنعتی	<pattern/skip>
+413.0 — ریختگی با سیالیت بالا	<pattern/skip>
+443.0 — ریختگی با شکل‌پذیری مناسب	<pattern/skip>
+535.0 — ریختگی آلومینیوم-منیزیم	<pattern/skip>
+712.0 — ریختگی تخصصی آلومینیوم-روی	<pattern/skip>
+نسخهٔ 19 — تاریخ انتشار 1405-07-22	<pattern/skip>
+اصلاح ورودی‌های فارسی: «۰٫۴۵» و «0,45» در آزمایشگاه عنصر حالا درست خوانده می‌شوند (قبلاً ۴۵ خوانده می‌شد)	<pattern/skip>
+جست‌وجوی دانشنامه با اعداد فارسی هم کار می‌کند؛ مثلاً «۶۰۶۱» همان 6061 را پیدا می‌کند	<pattern/skip>
+اصلاح ساختار لینک‌های ناوبری (منوی کنار و نوار پایین)	<pattern/skip>
+میان‌بر «نصب اپ» بعد از نصب دیگر نمایش داده نمی‌شود؛ حتی اگر اپ را از داخل مرورگر باز کنی	<pattern/skip>
+میان‌بر «نصب اپ» و «فعال‌سازی اعلان» در صفحهٔ اصلی فقط برای کاربری می‌آید که هنوز نصب/فعال نکرده است	<pattern/skip>
+بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود	<pattern/skip>
+ورق	Sheet
+تسمه و چهارپهلو	Flat bar & square
+لوله داخلی	Inside-diameter pipe
+شش پر	Hex
+قطر (میلی‌متر)	Diameter (mm)
+— (میلی‌متر)	— (mm)
+ارتفاع (میلی‌متر)	Height (mm)
+قطر خارجی (میلی‌متر)	Outer diameter (mm)
+ضلع (میلی‌متر)	Side (mm)
+وزن تقریبی: 3494.413 کیلوگرم — چگالی 2.69 گرم بر سانتی‌متر مکعب	<pattern/skip>
+8 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+14 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+5 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+21 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+9 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+3 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+0 آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	<pattern/skip>
+تطابق ۹۹٪	<pattern/skip>
+سری ۶۰۰۰ — آلومینیوم-منیزیم-سیلیسیم · آلومینیوم-منیزیم-سیلیسیم	<pattern/skip>
+هر ۲ عنصر واردشده داخل محدوده استاندارد این گرید است. کاربرد رایج: پروفیل ساختمانی، دکوراتیو و هیت‌سینک.	<pattern/skip>
+جزئیات در دانشنامه آلیاژها ←	Details in the alloy encyclopedia ←
+＋ افزودن به مقایسه	＋ Add to comparison
+هر ۲ عنصر واردشده داخل محدوده استاندارد این گرید است. کاربرد رایج: شینه و تجهیزات انتقال برق.	<pattern/skip>
+هر ۲ عنصر واردشده داخل محدوده استاندارد این گرید است. کاربرد رایج: پروفیل و مقاطع عمومی.	<pattern/skip>
+هر ۲ عنصر واردشده داخل محدوده استاندارد این گرید است. کاربرد رایج: پروفیل، ساختمان و ماشین‌سازی.	<pattern/skip>
+هر ۲ عنصر واردشده داخل محدوده استاندارد این گرید است. محدوده اعلام‌شده برای این گرید تقریبی است. کاربرد رایج: پروفیل، ساختمان و ماشین‌سازی.	<pattern/skip>
+کد آلیاژ «6061»	<pattern/skip>
+کدی با «9999» پیدا نشد	<pattern/skip>
+پیشنهاد برای کاربرد «پروفیل و درب و پنجره»	<pattern/skip>
+با کاربرد «پروفیل و درب و پنجره» هم‌خوانی دارد. کاربرد رایج: پروفیل ساختمانی، دکوراتیو و هیت‌سینک.	<pattern/skip>
+با کاربرد «پروفیل و درب و پنجره» هم‌خوانی دارد. کاربرد رایج: پروفیل و مقاطع عمومی.	<pattern/skip>
+با کاربرد «پروفیل و درب و پنجره» هم‌خوانی دارد. کاربرد رایج: مقاطع صنعتی و سازه‌های سبک.	<pattern/skip>
+با کاربرد «پروفیل و درب و پنجره» هم‌خوانی دارد. کاربرد رایج: شینه و تجهیزات انتقال برق.	<pattern/skip>
+تطابق ۹۵٪	<pattern/skip>
+با کاربرد «پروفیل و درب و پنجره» هم‌خوانی دارد. کاربرد رایج: قطعات صنعتی، سازه، فریم و تجهیزات.	<pattern/skip>
+تطابق ۹۳٪	<pattern/skip>
+با کاربرد «پروفیل و درب و پنجره» هم‌خوانی دارد. کاربرد رایج: پروفیل، ساختمان و ماشین‌سازی.	<pattern/skip>
+پیشنهاد برای کاربرد «ریخته‌گری»	<pattern/skip>
+آلیاژهای ریختگی · آلیاژ ریختگی	<pattern/skip>
+با کاربرد «ریخته‌گری» هم‌خوانی دارد. کاربرد رایج: قطعات ریختگی و شمش آلیاژی.	<pattern/skip>
+تطابق ۹۸٪	<pattern/skip>
+تطابق ۸۸٪	<pattern/skip>
+2 آلیاژ برای مقایسه آماده است.	<pattern/skip>
+آلومینیوم خالص با تمرکز بر رسانایی و شکل‌پذیری بالا. برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است. کاربردهای رایج: ورق عمومی، ظروف، بسته‌بندی و قطعات الکتریکی.	<pattern/skip>
+آلومینیوم خالص با تمرکز بر رسانایی و فرم‌پذیری عمومی. برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است. کاربردهای رایج: برق، ورق‌کاری، بسته‌بندی.	<pattern/skip>
+3 آلیاژ برای مقایسه آماده است.	<pattern/skip>
+آلومینیوم خالص با تمرکز بر فرم‌پذیری عالی. برای رسانایی، فرم‌دهی و کاربردهای عمومی مناسب است. کاربردهای رایج: مبدل حرارتی، ظروف و کاربردهای عمومی.	<pattern/skip>
+1 آلیاژ برای مقایسه آماده است.	<pattern/skip>
+تابلوی آلوم متال	<pattern/skip>
+۶۰۶۳ به مقایسه اضافه شد	<pattern/skip>
+قطر داخلی (میلی‌متر)	Inner diameter (mm)
+سایز (میلی‌متر)	Size (mm)
+اعلان نسخهٔ جدید	New version alerts
+اعلان نسخهٔ جدید فعال شد؛ فقط وقتی نسخهٔ تازهٔ اپ منتشر شود خبر می‌گیری.	New-version alerts are on; you will only hear from us when a new version is published.
+اعلان نسخهٔ جدید خاموش شد.	New-version alerts are off.
+سریع‌تر از مرورگر باز می‌شود	Opens faster than the browser
+تمام‌صفحه، بدون نوار آدرس	Full screen, without the address bar
+بدون اینترنت هم کار می‌کند	Works without an internet connection
+اعلان نسخهٔ جدید می‌گیرد	You get new-version alerts
+اپ را در مرورگر Safari باز کن.	Open the app in the Safari browser.
+دکمهٔ اشتراک‌گذاری (مربع با فلش رو به بالا) را بزن.	Tap the Share button (the square with the arrow pointing up).
+گزینهٔ «افزودن به صفحهٔ اصلی» را انتخاب کن.	Choose “Add to Home Screen”.
+نام «آلوم متال» را تأیید کن.	Confirm the name “Alum Metal”.
+اپ را در مرورگر Chrome یا Edge باز کن.	Open the app in the Chrome or Edge browser.
+منوی مرورگر (سه‌نقطه) را باز کن.	Open the browser menu (the three dots).
+گزینهٔ «نصب برنامه» یا «افزودن به صفحهٔ اصلی» را بزن.	Tap “Install app” or “Add to Home Screen”.
+تأیید کن تا آیکون اپ روی صفحهٔ اصلی بیاید.	Confirm and the app icon lands on your home screen.
+در iPhone و iPad	On iPhone and iPad
+در اندروید و کامپیوتر	On Android and desktop
+نصب اپ	Install app
+نصب روی اندروید و iOS به آدرس https نیاز دارد؛ روی کامپیوتر هم می‌شود اپ را نصب کرد.	Installing on Android and iOS needs an https address; on a computer the app can be installed too.
+اشتراک‌گذاری اپ	Share the app
+لینک و QR	Link & QR
+کد QR اپ آلوم متال	QR code of the Alum Metal app
+با دوربین گوشی این کد را اسکن کن تا اپ باز شود.	Scan this code with your phone camera to open the app.
+کپی لینک	Copy link
+لینک کپی شد.	Link copied.
+اپ آلوم متال آراک؛ محاسبه وزن مقاطع، کاتالوگ محصولات و بانک آلیاژها	Alum Metal Arak app: section weight calculator, product catalogue and alloy database
+کپی انجام نشد؛ آدرس را دستی انتخاب کن.	Could not copy; select the address manually.
+
+---- patterns ----
+وزن تقریبی: {0} کیلوگرم — چگالی {1} گرم بر سانتی‌متر مکعب	Approximate weight: {0} kg — density {1} g/cm³
+{0} گرم بر سانتی‌متر مکعب	{0} g/cm³
+{0} آلیاژ پیدا شد — چگالی‌ها تقریبی هستند.	{0} alloys found — densities are approximate.
+{0} آلیاژ برای مقایسه آماده است.	{0} alloys ready to compare.
+تطابق {0}٪	{0}% match
+{0} ردیف	{0} rows
+نمایش {0} ردیف نخست	Show the first {0} rows
+نسخهٔ {0} — تاریخ انتشار {1}	Version {0} — released {1}
+نسخهٔ {0}	Version {0}
+سری {0}	Series {0}
+{0} به مقایسه اضافه شد	{0} added to the comparison
+کد آلیاژ «{0}»	Alloy code “{0}”
+کدی با «{0}» پیدا نشد	No code matching “{0}” was found
+پیشنهاد برای کاربرد «{0}»	Suggestions for the “{0}” use case
+{0} با تمرکز بر {1}. {2} کاربردهای رایج: {3}.	{0} for {1}. {2} Common applications: {3}.
+هر {0} عنصر واردشده داخل محدوده استاندارد این گرید است. {1} کاربرد رایج: {2}.	Every {0} entered elements fall inside this grade’s standard range. {1} Typical use: {2}.
+هر {0} عنصر واردشده داخل محدوده استاندارد این گرید است. کاربرد رایج: {1}.	Every {0} entered elements fall inside this grade’s standard range. Typical use: {1}.
+با کاربرد «{0}» هم‌خوانی دارد. {1} کاربرد رایج: {2}.	Matches the “{0}” use case. {1} Typical use: {2}.
+با کاربرد «{0}» هم‌خوانی دارد. کاربرد رایج: {1}.	Matches the “{0}” use case. Typical use: {1}.
+محدوده اعلام‌شده برای این گرید تقریبی است. کاربرد رایج: {0}.	The stated range for this grade is approximate. Typical use: {0}.
+کاربرد رایج: {0}.	Typical use: {0}.
+هر {0} عنصر واردشده داخل محدوده استاندارد این گرید است.	Every {0} entered elements fall inside this grade’s standard range.
+با کاربرد «{0}» هم‌خوانی دارد.	Matches the “{0}” use case.
+{0} · {1}	{0} · {1}
+{0} — {1}	{0} — {1}

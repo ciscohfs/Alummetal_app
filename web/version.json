@@ -2,6 +2,11 @@
   "version": 23,
   "date": "1405-07-27",
   "notes": [
+    "حالت روز/شب از تنظیمات خودِ گوشی پیروی می‌کند: تا وقتی دستی انتخابش نکرده‌ای، با حالت سیستم روشن/تیره می‌شود؛ سوییچ «حالت شب» هم رنگ تم خودِ اپ است",
+    "ردیف‌های تنظیمات شبیه تنظیمات آیفون شد: آیکون‌های رنگی گرد کنار هر ردیف، فلش جهت‌دار و یک کلید سوییچی برای حالت شب که با یک لمس جابه‌جا می‌شود",
+    "صفحهٔ لودینگ برنددار جایگزین شد: دیگر هنگام باز شدن اپ مربع سفید وسط صفحه نمی‌آید؛ حالا لوگو با یک نوار پیشرفت رنگی نشان داده می‌شود و با رنگ خودِ اپ (روشن یا تیره) هماهنگ است",
+    "صفحهٔ اول همیشه با رنگ خودِ اپ باز می‌شود؛ دیگر فلش سفیدِ قبل از لود شدن استایل‌ها دیده نمی‌شود",
+    "دکمهٔ «اشتراک‌گذاری اپ» به تنظیمات اضافه شد: روی گوشی منوی اشتراک‌گذاری خود دستگاه باز می‌شود و اگر در دسترس نباشد، لینک مستقیم اپ به‌همراه QR کد و دکمهٔ کپی نمایش داده می‌شود",
     "راهنمای نصب حالا خودش پاپ‌آپ می‌شود: اگر اپ را نصب نکرده باشی، یک‌بار و به‌طور خودکار راهنمای گام‌به‌گام نصب را می‌بینی",
     "همین راهنما از تنظیمات هم باز می‌شود (ردیف «نصب اپ روی صفحه اصلی») تا هر وقت خواستی مراحل را ببینی",
     "راهنما اول مزیت‌های نصب را می‌گوید: باز شدن سریع‌تر، تمام‌صفحه، کار بدون اینترنت و اعلان نسخهٔ جدید",
@@ -29,6 +34,11 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "Day/night mode now follows the phone's own setting: until you pick one manually the app switches with the system theme, and the “Night mode” switch uses the app accent colour",
+    "The settings rows now look like the iPhone settings: coloured rounded icons, a direction chevron on every row and an iOS-style switch for the night mode",
+    "A branded loading screen replaces the bad splash: no more white square in the middle when the app opens; the logo appears with a coloured progress bar and matches the app colours (light or dark)",
+    "The first screen always opens with the app colour; the white flash before the styles load is gone",
+    "A “Share the app” row was added to settings: on a phone it opens the device share sheet, and when that is not available it shows the direct link with a QR code and a copy button",
     "The install guide now opens by itself as a pop-up: if the app is not installed you see the step-by-step guide once, automatically",
     "The same guide also opens from settings (the “Install app on home screen” row) whenever you want to see the steps",
     "The guide first explains the benefits: faster launch, full screen, works without internet and new-version alerts",
