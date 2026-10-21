@@ -1,7 +1,9 @@
 {
-  "version": 24,
+  "version": 25,
   "date": "1405-07-30",
   "notes": [
+    "لودینگ تکراری برطرف شد: صفحهٔ لودینگ اپ حالا دقیقاً شبیه اسپلش خود گوشی است، پس موقع باز کردن اپ یک لودینگ پیوسته دیده می‌شود",
+    "در بخش تماس، کنار هر شماره یک دکمهٔ تماس (آیکون گوشی) اضافه شد تا واضح باشد با زدن روی شماره تماس برقرار می‌شود",
     "این نسخه برای رفع کش قدیمی است: از این به بعد مرورگر همیشه نسخهٔ تازهٔ فایل‌ها را می‌گیرد (قبلاً بعضی گوشی‌ها فایل‌های نسخهٔ قبل را نشان می‌دادند)",
     "خط‌های مشکی بالای صفحه (پشت نوار وضعیت) و پایین صفحه برداشته شد؛ رنگ پس‌زمینهٔ کل صفحه با تم روشن/تیره هماهنگ شد",
     "بعد از هر آپدیت، تغییرات واقعاً روی گوشی اعمال می‌شود و لازم نیست دستی کش را پاک کنی",
@@ -40,6 +42,8 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "Fixed the double loading screen: the in-app loading screen now mirrors the phone's own splash, so opening the app shows one continuous loading",
+    "In the contact section every phone number now has a call button (phone icon) so it is clear that tapping it starts a call",
     "This release fixes the stale cache: the browser now always gets the current files (some phones kept showing files from the previous release)",
     "The black bands at the top (behind the status bar) and bottom of the screen are gone; the page background now matches the light/dark theme",
     "After each update the changes really land on the phone, with no need to clear the cache by hand",
