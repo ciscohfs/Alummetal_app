@@ -4,15 +4,13 @@
   <meta charset="UTF-8" />
   <script>
     // Set the language direction before the first paint so English mode never flashes RTL.
-    // The theme is applied now too (following the phone's setting until the visitor picks
-    // one), so the boot screen matches the app colours from the very first pixel.
+    // The boot screen itself is always light on purpose: it matches the OS/PWA splash
+    // colour (manifest background_color), so a cold start looks like ONE continuous
+    // loading screen instead of a light splash followed by a dark box.
     // Wrapped in an IIFE: nothing here may leak a global name into app.js.
     (function () {
       try {
         if (localStorage.getItem('alum-lang') === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
-        var savedTheme = localStorage.getItem('alum-theme-v2');
-        var darkNow = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (darkNow) document.documentElement.setAttribute('data-boot-theme', 'dark');
       } catch (e) { /* private mode */ }
     })();
   </script>
@@ -20,9 +18,7 @@
     /* First-paint layer: paints the app background and a branded boot screen before the
        main stylesheet arrives, so visitors never see a white page or a stray box. */
     html{background:#edf3f5}
-    html[data-boot-theme="dark"]{background:#07121b}
     .boot-screen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#edf3f5;transition:opacity .4s ease}
-    html[data-boot-theme="dark"] .boot-screen{background:#07121b}
     .boot-screen.is-hidden{opacity:0;pointer-events:none}
     .boot-logo{width:170px;max-width:56vw;height:auto;animation:boot-rise .6s ease both}
     .boot-bar{display:block;width:132px;height:4px;border-radius:99px;overflow:hidden;background:rgba(36,190,208,.18)}
@@ -80,12 +76,12 @@
   </script>
   <link rel="preload" href="fonts/BYekan.ttf?v=9" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="img/logo-alummetalarak.png" as="image" />
-  <link rel="manifest" href="manifest.webmanifest?v=23" />
-  <link rel="icon" href="img/favicon.ico?v=23" sizes="16x16 32x32 48x48" type="image/x-icon" />
-  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png?v=23" />
-  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png?v=23" />
-  <link rel="stylesheet" href="styles.css?v=23" media="print" onload="this.media='all';window.__cssReady=true" />
-  <noscript><link rel="stylesheet" href="styles.css?v=23" /></noscript>
+  <link rel="manifest" href="manifest.webmanifest?v=24" />
+  <link rel="icon" href="img/favicon.ico?v=24" sizes="16x16 32x32 48x48" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png?v=24" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png?v=24" />
+  <link rel="stylesheet" href="styles.css?v=24" media="print" onload="this.media='all';window.__cssReady=true" />
+  <noscript><link rel="stylesheet" href="styles.css?v=24" /></noscript>
   <title>آلوم متال آراک</title>
 </head>
 <body>
@@ -241,6 +237,6 @@
 
     <div class="toast" id="toast" role="status"></div>
   </div>
-  <script src="app.js?v=23"></script>
+  <script src="app.js?v=24"></script>
 </body>
 </html>

@@ -137,7 +137,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=23');
+    const response = await fetchWithTimeout('calculator.json?v=24');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -195,7 +195,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=23');
+    const response = await fetchWithTimeout('catalog.json?v=24');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -406,7 +406,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=23', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=24', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -810,7 +810,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=23');
+    const response = await fetchWithTimeout('alloys.json?v=24');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -1086,7 +1086,7 @@ async function fireUpdateNotification(version, note) {
   const body = note || (isEnglish() ? `Version ${version} is ready to install.` : `نسخهٔ ${version} آمادهٔ نصب است.`);
   const options = {
     body,
-    icon: 'img/icon-192.png?v=23',
+    icon: 'img/icon-192.png?v=24',
     badge: 'img/favicon-48.png',
     lang: currentLang,
     dir: isEnglish() ? 'ltr' : 'rtl',

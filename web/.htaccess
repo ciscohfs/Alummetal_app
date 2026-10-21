@@ -6,13 +6,26 @@ DirectoryIndex index.html
 <IfModule mod_headers.c>
   # index.html carries the ?v= query for styles.css / app.js, so it must always be
   # revalidated with the server. Without this rule a returning visitor can be kept on
-  # an old shell and would never see the in-app update popup.
-  <FilesMatch "\.(html|htm)$">
+  # an old shell — the app then says "up to date" while showing old files, and the
+  # in-app update popup never appears. Same for version.json and the manifest.
+  <FilesMatch "\.(html|htm|json|webmanifest)$">
     Header set Cache-Control "no-cache, must-revalidate"
     Header set Pragma "no-cache"
+  </FilesMatch>
+
+  # Every release changes ?v=N on these files, so a long cache is safe and makes
+  # repeat launches instant.
+  <FilesMatch "\.(css|js|woff2?|ttf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Images are mostly not query-versioned (logo, shape guides, social icons), so keep
+  # their cache short enough that a replacement shows up within a week.
+  <FilesMatch "\.(png|jpe?g|svg|webp|ico|gif)$">
+    Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 </IfModule>
 
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json application/manifest+json image/svg+xml
 </IfModule>

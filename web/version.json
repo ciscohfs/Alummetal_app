@@ -1,7 +1,10 @@
 {
-  "version": 23,
-  "date": "1405-07-27",
+  "version": 24,
+  "date": "1405-07-30",
   "notes": [
+    "این نسخه برای رفع کش قدیمی است: از این به بعد مرورگر همیشه نسخهٔ تازهٔ فایل‌ها را می‌گیرد (قبلاً بعضی گوشی‌ها فایل‌های نسخهٔ قبل را نشان می‌دادند)",
+    "خط‌های مشکی بالای صفحه (پشت نوار وضعیت) و پایین صفحه برداشته شد؛ رنگ پس‌زمینهٔ کل صفحه با تم روشن/تیره هماهنگ شد",
+    "بعد از هر آپدیت، تغییرات واقعاً روی گوشی اعمال می‌شود و لازم نیست دستی کش را پاک کنی",
     "اصلاح لودینگ دوتایی: دیگر قبل از لودینگ برنددار صفحهٔ سفیدِ خالی دیده نمی‌شود و فقط یک لودینگ با لوگو می‌آید",
     "اصلاح سوییچ حالت شب در زبان فارسی: دایرهٔ سوییچ درست از راست به چپ جابه‌جا می‌شود و از مسیر خارج نمی‌شود",
     "اصلاح پاک شدن اپ نصب‌شده بعد از به‌روزرسانی: دیگر سرویس‌ورکر اعلان‌ها هنگام آپدیت حذف نمی‌شود که بعضی گوشی‌های اندروید آیکون اپ را پاک می‌کردند",
@@ -37,6 +40,9 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "This release fixes the stale cache: the browser now always gets the current files (some phones kept showing files from the previous release)",
+    "The black bands at the top (behind the status bar) and bottom of the screen are gone; the page background now matches the light/dark theme",
+    "After each update the changes really land on the phone, with no need to clear the cache by hand",
     "Fixed the double loading: no more empty white page before the branded loader — only one loading screen with the logo appears",
     "Fixed the night-mode switch in Persian: the knob now slides correctly from right to left and never leaves the track",
     "Fixed the installed app disappearing after an update: the notification worker is no longer unregistered during the update, which made some Android launchers remove the app icon",
