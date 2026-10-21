@@ -70,6 +70,10 @@ document.addEventListener('keydown', (event) => { if (event.key === 'Escape') cl
 
 function setTheme(light, remember = true) {
   document.body.classList.toggle('light', light);
+  // Keep the canvas colour in sync with the theme: the compositor paints the root
+  // background behind every layer, so it must never differ from the app background
+  // (a mismatch shows as a 1px band under the header / above the bottom nav).
+  document.documentElement.style.background = light ? '#eaf3f4' : '#081117';
   // `remember` stays false for the system-driven state: the visitor's own choice is only
   // ever written when they press a theme control themselves.
   if (remember) { try { localStorage.setItem('alum-theme-v2', light ? 'light' : 'dark'); } catch { /* private mode */ } }
@@ -137,7 +141,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=25');
+    const response = await fetchWithTimeout('calculator.json?v=26');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -195,7 +199,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=25');
+    const response = await fetchWithTimeout('catalog.json?v=26');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -406,7 +410,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=25', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=26', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -810,7 +814,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=25');
+    const response = await fetchWithTimeout('alloys.json?v=26');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -1086,7 +1090,7 @@ async function fireUpdateNotification(version, note) {
   const body = note || (isEnglish() ? `Version ${version} is ready to install.` : `نسخهٔ ${version} آمادهٔ نصب است.`);
   const options = {
     body,
-    icon: 'img/icon-192.png?v=25',
+    icon: 'img/icon-192.png?v=26',
     badge: 'img/favicon-48.png',
     lang: currentLang,
     dir: isEnglish() ? 'ltr' : 'rtl',

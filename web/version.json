@@ -1,7 +1,8 @@
 {
-  "version": 25,
+  "version": 26,
   "date": "1405-07-30",
   "notes": [
+    "خط‌های نازک روشن که موقع باز کردن اپ زیر هدر و بالای نوار پایین دیده می‌شد برداشته شد (رنگ پس‌زمینهٔ کلی از همان لحظهٔ اول با تم هماهنگ می‌شود)",
     "لودینگ تکراری برطرف شد: صفحهٔ لودینگ اپ حالا دقیقاً شبیه اسپلش خود گوشی است، پس موقع باز کردن اپ یک لودینگ پیوسته دیده می‌شود",
     "در بخش تماس، کنار هر شماره یک دکمهٔ تماس (آیکون گوشی) اضافه شد تا واضح باشد با زدن روی شماره تماس برقرار می‌شود",
     "این نسخه برای رفع کش قدیمی است: از این به بعد مرورگر همیشه نسخهٔ تازهٔ فایل‌ها را می‌گیرد (قبلاً بعضی گوشی‌ها فایل‌های نسخهٔ قبل را نشان می‌دادند)",
@@ -42,6 +43,7 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "Removed the thin light hairlines that appeared under the header and above the bottom nav on a cold start (the root background now matches the theme from the very first paint)",
     "Fixed the double loading screen: the in-app loading screen now mirrors the phone's own splash, so opening the app shows one continuous loading",
     "In the contact section every phone number now has a call button (phone icon) so it is clear that tapping it starts a call",
     "This release fixes the stale cache: the browser now always gets the current files (some phones kept showing files from the previous release)",
