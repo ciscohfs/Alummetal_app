@@ -1,7 +1,9 @@
 {
-  "version": 32,
+  "version": "1.2",
   "date": "1405-07-31",
   "notes": [
+    "جدول مقایسهٔ آلیاژها دوباره یکدست و خواناتر شد (ستون‌ها دیگر به‌هم نمی‌ریزند)",
+    "آیکون جست‌وجوی دانشنامه و آیکون مقایسه هم مثل بقیه آیکون‌ها تمیز و یکدست شدند",
     "فلش‌های تزئینی از کارت‌های صفحهٔ خانه برداشته شد و چیدمان کارت‌ها مرتب‌تر شد",
     "فلش‌های «←» و «↗» همه‌جا با یک آیکون تمیز و نازک جایگزین شد (قبلاً شبیه فلش پاورپوینت بود)",
     "اعلان‌های سیستمی فعلاً خاموش شدند؛ در تنظیمات، ردیف «اعلان نسخهٔ جدید» غیرفعال است و می‌نویسد «فعلاً در دسترس نیست»",
@@ -46,6 +48,8 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "The alloy comparison table is consistent and readable again (the columns no longer break apart)",
+    "The encyclopedia search icon and the compare icon are clean, consistent icons now",
     "The decorative arrows were removed from the home tiles and the card layout was tidied up",
     "The “←” and “↗” glyphs were replaced everywhere with a clean thin icon (they looked like a PowerPoint arrow)",
     "System notifications are switched off for now; the \"New-version alerts\" row in the settings is disabled and says \"Not available right now\"",

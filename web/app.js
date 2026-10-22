@@ -141,7 +141,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=32');
+    const response = await fetchWithTimeout('calculator.json?v=1.2');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -199,7 +199,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=32');
+    const response = await fetchWithTimeout('catalog.json?v=1.2');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -245,7 +245,12 @@ function renderComparison() {
   if (chosen.length < 2) { showToast('برای مقایسه، حداقل دو آلیاژ را انتخاب کن.'); return; }
   const rows = [['خانواده','family'],['سری','series'],['عناصر اصلی','details.elements'],['خواص مکانیکی','details.mechanical'],['خواص فیزیکی','details.physical'],['مقاومت خوردگی','corrosion'],['عملیات حرارتی','heatTreatment'],['استانداردها','standard'],['چگالی','density'],['ویژگی اصلی','title'],['کاربرد اصلی','use'],['کاربردهای سری','applications']];
   const valueFor = (alloy, key) => key === 'density' ? `${alloy.density} گرم بر سانتی‌متر مکعب` : key.split('.').reduce((value, part) => value?.[part], alloy) || 'اطلاعات ثبت نشده';
-  $('#comparisonTable').innerHTML = `<div class="comparison-row comparison-labels"><span>شاخص</span>${chosen.map((a) => `<strong>${a.code}</strong>`).join('')}</div>${rows.map(([label,key]) => `<div class="comparison-row"><span>${label}</span>${chosen.map((a) => `<div>${valueFor(a,key)}</div>`).join('')}</div>`).join('')}<div class="comparison-note">${chosen.map((a) => `<p><b>${a.code}:</b> ${alloyExplanation(a)}</p>`).join('')}</div>`;
+  const table = $('#comparisonTable');
+  // The number of alloy columns is told to CSS as a custom property: an auto-fit
+  // grid used to push the third column onto a new line on narrow screens, which
+  // broke the table apart.
+  table.style.setProperty('--cmp-n', String(chosen.length));
+  table.innerHTML = `<div class="comparison-row comparison-labels"><span>شاخص</span>${chosen.map((a) => `<strong>${a.code}</strong>`).join('')}</div>${rows.map(([label,key]) => `<div class="comparison-row"><span>${label}</span>${chosen.map((a) => `<div>${valueFor(a,key)}</div>`).join('')}</div>`).join('')}<div class="comparison-note">${chosen.map((a) => `<p><b>${a.code}:</b> ${alloyExplanation(a)}</p>`).join('')}</div>`;
   $('#comparePanel').hidden = false;
   $('#comparePanel').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
@@ -410,7 +415,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=32', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=1.2', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -814,7 +819,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=32');
+    const response = await fetchWithTimeout('alloys.json?v=1.2');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -1116,17 +1121,35 @@ async function applyUpdate() {
   }
 }
 
+// Releases used to be flat build numbers (…, 30, 31, 32) and are dotted now
+// (1.1, 1.2, …). A dotted release always counts as newer than a flat one, so the
+// phones that stored "32" still get the update popup once after the switch.
+function versionParts(value) { return String(value).split('.').map((part) => Number(part) || 0); }
+function versionIsNewer(remote, seen) {
+  const dotted = String(remote).includes('.');
+  if (dotted !== String(seen).includes('.')) return dotted;
+  const a = versionParts(remote);
+  const b = versionParts(seen);
+  for (let i = 0; i < Math.max(a.length, b.length); i += 1) {
+    const x = a[i] || 0;
+    const y = b[i] || 0;
+    if (x !== y) return x > y;
+  }
+  return false;
+}
+
 async function checkForUpdate() {
   lastUpdateCheck = Date.now();
   try {
     const response = await fetch('version.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('version unavailable');
     const data = await response.json();
-    const remote = Number(data.version);
-    if (!Number.isFinite(remote) || remote <= 0) throw new Error('bad version');
-    let seen = Number(localStorage.getItem(VERSION_KEY) || 0) || 0;
-    if (!seen) { try { localStorage.setItem(VERSION_KEY, String(remote)); } catch { /* ignore */ } setUpdateStatus('به‌روز'); return; }
-    if (remote <= seen) { setUpdateStatus('به‌روز'); return; }
+    const remote = String(data.version ?? '').trim();
+    if (!remote) throw new Error('bad version');
+    let seen = '';
+    try { seen = String(localStorage.getItem(VERSION_KEY) || '').trim(); } catch { /* private mode */ }
+    if (!seen) { try { localStorage.setItem(VERSION_KEY, remote); } catch { /* ignore */ } setUpdateStatus('به‌روز'); return; }
+    if (!versionIsNewer(remote, seen)) { setUpdateStatus('به‌روز'); return; }
     pendingUpdate = { version: remote, date: data.date || '', notes: Array.isArray(data.notes) ? data.notes : [], notesEn: Array.isArray(data.notesEn) ? data.notesEn : [] };
     setUpdateStatus('نسخهٔ جدید دارد');
     // System notifications are switched off, so the in-app popup below is the only way
