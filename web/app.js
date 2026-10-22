@@ -141,7 +141,7 @@ function renderCalculator(data) {
 async function loadCalculator() {
   renderCalculator(BUILTIN_CALCULATOR);
   try {
-    const response = await fetchWithTimeout('calculator.json?v=26');
+    const response = await fetchWithTimeout('calculator.json?v=27');
     if (response.ok) renderCalculator(await response.json());
   } catch { /* keep the instant built-in calculator */ }
 }
@@ -199,7 +199,7 @@ async function loadCatalog() {
   };
   renderCatalog();
   try {
-    const response = await fetchWithTimeout('catalog.json?v=26');
+    const response = await fetchWithTimeout('catalog.json?v=27');
     if (!response.ok) throw new Error('catalog unavailable');
     const remote = await response.json();
     // Never let an older cached copy win over the data built into app.js.
@@ -410,7 +410,7 @@ new MutationObserver(translateSoon).observe(document.documentElement, {
 // Direction is set right away so the very first paint is already LTR in English mode.
 if (isEnglish()) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
 
-const i18nReady = fetch('i18n.json?v=26', { cache: 'no-store' })
+const i18nReady = fetch('i18n.json?v=27', { cache: 'no-store' })
   .then((response) => (response.ok ? response.json() : null))
   .then((payload) => { if (payload && payload.map) { compileI18n(payload); applyLanguage(currentLang, false); } })
   .catch(() => { /* without the dictionary the app simply stays Persian */ });
@@ -814,7 +814,7 @@ refreshCompareOptions();
 renderAlloys();
 async function loadAlloys() {
   try {
-    const response = await fetchWithTimeout('alloys.json?v=26');
+    const response = await fetchWithTimeout('alloys.json?v=27');
     if (response.ok) alloyData = enrichAlloyData(await response.json());
   } catch { /* use built-in alloy data */ }
   refreshCompareOptions();
@@ -1056,90 +1056,27 @@ const initialRoute = window.location.hash.slice(1) || 'home';
 navigate(initialRoute);
 
 /* ==========================================================================
-   Layer: new-version notifications + the in-app update flow
-   (version.json -> one system notification + popup -> settings row ->
-   cache clear -> reload).
-   The app sends nothing else: no daily, scheduled or promotional alerts.
+   Layer: new-version alerts — currently switched OFF by the app owner
+   (2026-10-22). Nothing asks for permission, no service worker is registered
+   and no system notification is ever fired. The in-app update popup (below)
+   still works, so the user is told about a new release inside the app.
+   Do not re-enable notifications without asking the owner first.
    ========================================================================== */
 
-const NOTIFY_ENABLED_KEY = 'alum-notify-enabled';
-const UPDATE_NOTIFIED_KEY = 'alum-update-notified';
 const VERSION_KEY = 'alum-app-version';
 
-const notificationsSupported = () => 'Notification' in window;
-// Alerts are on by default once the browser permission exists; the settings row can switch
-// them off. They only ever fire for a version the visitor has not been told about yet.
-const updateAlertsEnabled = () => notificationsSupported() && Notification.permission === 'granted' && localStorage.getItem(NOTIFY_ENABLED_KEY) !== '0';
-
-function notifyStatusText() {
-  if (!notificationsSupported()) return 'در این مرورگر نیست';
-  if (Notification.permission === 'denied') return 'مسدود شده';
-  if (Notification.permission !== 'granted') return 'در انتظار اجازه';
-  return updateAlertsEnabled() ? 'فعال' : 'خاموش';
-}
-
+// The settings row is disabled and only explains the current state.
 function refreshNotifyUi() {
   const status = $('#notifyStatus');
-  if (status) status.textContent = notifyStatusText();
+  if (status) status.textContent = isEnglish() ? 'Not available right now' : 'فعلاً در دسترس نیست';
 }
-
-// The only notification this app ever shows: a fresh release is waiting on the server.
-async function fireUpdateNotification(version, note) {
-  if (!updateAlertsEnabled()) return;
-  const title = isEnglish() ? 'Alum Metal Arak — new version' : 'آلوم متال آراک — نسخهٔ جدید';
-  const body = note || (isEnglish() ? `Version ${version} is ready to install.` : `نسخهٔ ${version} آمادهٔ نصب است.`);
-  const options = {
-    body,
-    icon: 'img/icon-192.png?v=26',
-    badge: 'img/favicon-48.png',
-    lang: currentLang,
-    dir: isEnglish() ? 'ltr' : 'rtl',
-    tag: 'alum-update',
-    data: { route: 'settings' }
-  };
-  // The service worker path is what Android and iOS accept; the constructor is the desktop fallback.
-  try {
-    if ('serviceWorker' in navigator) {
-      const registration = await navigator.serviceWorker.register('notify-sw.js');
-      await registration.showNotification(title, options);
-      return;
-    }
-  } catch { /* fall through to the constructor below */ }
-  try { new Notification(title, options); } catch { /* the update dialog still shows it */ }
-}
-
-async function requestNotificationPermission() {
-  if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); refreshNotifyUi(); return; }
-  let permission = Notification.permission;
-  if (permission === 'default') {
-    try { permission = await Notification.requestPermission(); } catch { permission = Notification.permission; }
-  }
-  if (permission === 'granted') {
-    try { localStorage.setItem(NOTIFY_ENABLED_KEY, '1'); } catch { /* private mode */ }
-    showToast('اعلان نسخهٔ جدید فعال شد؛ فقط وقتی نسخهٔ تازهٔ اپ منتشر شود خبر می‌گیری.');
-  } else if (permission === 'denied') {
-    showToast('اجازهٔ اعلان رد شد؛ برای فعال‌سازی آن را از تنظیمات مرورگر باز کن.');
-  } else {
-    showToast('اجازهٔ اعلان داده نشد.');
-  }
-  refreshNotifyUi();
-}
-
-$('#notifyButton')?.addEventListener('click', async () => {
-  if (!notificationsSupported()) { showToast('این مرورگر از اعلان پشتیبانی نمی‌کند.'); refreshNotifyUi(); return; }
-  if (Notification.permission === 'denied') { showToast('اجازهٔ اعلان در تنظیمات مرورگر مسدود است.'); refreshNotifyUi(); return; }
-  if (Notification.permission === 'default') { await requestNotificationPermission(); return; }
-  const wasEnabled = updateAlertsEnabled();
-  try { localStorage.setItem(NOTIFY_ENABLED_KEY, wasEnabled ? '0' : '1'); } catch { /* private mode */ }
-  showToast(wasEnabled ? 'اعلان نسخهٔ جدید خاموش شد.' : 'اعلان نسخهٔ جدید فعال شد؛ فقط وقتی نسخهٔ تازهٔ اپ منتشر شود خبر می‌گیری.');
-  refreshNotifyUi();
-});
 
 refreshNotifyUi();
 // Whatever the removed daily-alert feature left behind is cleared once, so nothing can schedule again.
 try { localStorage.removeItem('alum-notify-state-v1'); } catch { /* private mode */ }
 try { sessionStorage.removeItem('alum-notify-dismissed'); } catch { /* private mode */ }
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('notify-sw.js').catch(() => {});
+try { localStorage.removeItem('alum-notify-enabled'); } catch { /* private mode */ }
+try { localStorage.removeItem('alum-update-notified'); } catch { /* private mode */ }
 
 /* --------------------------------------------------------------- update flow */
 const updateDialog = $('#updateDialog');
@@ -1165,9 +1102,9 @@ async function applyUpdate() {
   const target = pendingUpdate ? pendingUpdate.version : null;
   showToast('در حال به‌روزرسانی…');
   try { if ('caches' in window) { const keys = await caches.keys(); await Promise.all(keys.map((key) => caches.delete(key))); } } catch { /* ignore */ }
-  // The notification worker is deliberately NOT unregistered here: on some Android
-  // launchers removing it made the installed app vanish from the home screen. It caches
-  // nothing, so keeping it registered is safe and the reload still gets fresh files.
+  // The old notification worker is deliberately NOT unregistered here: on some Android
+  // launchers removing it made the installed app vanish from the home screen. The app no
+  // longer registers it and never asks for notification permission, so it stays harmless.
   try { if (target) localStorage.setItem(VERSION_KEY, String(target)); } catch { /* ignore */ }
   if (target) {
     // The version query makes the browser fetch a fresh index.html (and with it the
@@ -1192,14 +1129,8 @@ async function checkForUpdate() {
     if (remote <= seen) { setUpdateStatus('به‌روز'); return; }
     pendingUpdate = { version: remote, date: data.date || '', notes: Array.isArray(data.notes) ? data.notes : [], notesEn: Array.isArray(data.notesEn) ? data.notesEn : [] };
     setUpdateStatus('نسخهٔ جدید دارد');
-    // Exactly one system notification per new version, so a visitor is told once and never twice.
-    let notified = '';
-    try { notified = localStorage.getItem(UPDATE_NOTIFIED_KEY) || ''; } catch { /* private mode */ }
-    if (notified !== String(remote)) {
-      try { localStorage.setItem(UPDATE_NOTIFIED_KEY, String(remote)); } catch { /* private mode */ }
-      const notes = isEnglish() && pendingUpdate.notesEn.length ? pendingUpdate.notesEn : pendingUpdate.notes;
-      fireUpdateNotification(remote, notes[0] || '');
-    }
+    // System notifications are switched off, so the in-app popup below is the only way
+    // the visitor hears about a new release.
     let asked = false;
     try { asked = sessionStorage.getItem('alum-update-asked') === '1'; } catch { /* ignore */ }
     if (!asked) {

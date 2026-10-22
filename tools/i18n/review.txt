@@ -701,6 +701,7 @@ A356.0 — ریختگی دقیق و قطعات سبک	<pattern/skip>
 لینک کپی شد.	Link copied.
 اپ آلوم متال آراک؛ محاسبه وزن مقاطع، کاتالوگ محصولات و بانک آلیاژها	Alum Metal Arak app: section weight calculator, product catalogue and alloy database
 کپی انجام نشد؛ آدرس را دستی انتخاب کن.	Could not copy; select the address manually.
+فعلاً در دسترس نیست	Not available right now
 
 ---- patterns ----
 وزن تقریبی: {0} کیلوگرم — چگالی {1} گرم بر سانتی‌متر مکعب	Approximate weight: {0} kg — density {1} g/cm³

@@ -409,6 +409,11 @@ body.light .share-hint{color:#315761}
 /* --------------------------------------------------------------- settings rows */
 .settings-list .settings-label{font-size:12.5px;flex:1;min-width:0;line-height:1.6}
 .settings-list button:hover{background:rgba(255,255,255,.07);border-color:rgba(255,117,31,.35)}
+/* Rows that are switched off for now (e.g. notifications): no hover, no pointer. */
+.settings-list button:disabled{opacity:.62;cursor:not-allowed;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))}
+.settings-list button:disabled:hover{border-color:var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))}
+body.light .settings-list button:disabled{background:rgba(255,255,255,.6);border-color:rgba(20,57,66,.1)}
+body.light .settings-list button:disabled:hover{background:rgba(255,255,255,.6);border-color:rgba(20,57,66,.1)}
 .settings-list button:active{transform:scale(.985)}
 .settings-list button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 body.light .settings-list button{background:rgba(255,255,255,.75);border-color:rgba(20,57,66,.14)}

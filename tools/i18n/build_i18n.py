@@ -525,7 +525,7 @@ LIVE_BLOCK = r'''
 241|Link copied.
 242|Alum Metal Arak app: section weight calculator, product catalogue and alloy database
 243|Could not copy; select the address manually.
-'''
+244|Not available right now'''
 
 PATTERNS_BLOCK = r'''
 وزن تقریبی: {0} کیلوگرم — چگالی {1} گرم بر سانتی‌متر مکعب|Approximate weight: {0} kg — density {1} g/cm³
