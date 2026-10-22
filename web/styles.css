@@ -433,3 +433,20 @@ html[dir="rtl"] .ios-switch i{left:auto;right:2px}
 .ios-switch.on i{transform:translateX(18px)}
 html[dir="rtl"] .ios-switch.on i{transform:translateX(-18px)}
 @media(max-width:340px){.settings-chevron{display:none}.settings-icon{flex-basis:26px;width:26px;height:26px}.settings-icon svg{width:15px;height:15px}}
+
+/* ---------------------------------------------------------------------------
+   Clean navigation arrows. The old "←" / "↗" glyphs looked like a PowerPoint
+   arrow in the Persian font, so they are drawn as small masked icons that take
+   the colour of the text next to them: a rounded shaft + head, pointing to the
+   reading direction (left in Persian, right in English).
+   --------------------------------------------------------------------------- */
+.ui-arrow{display:inline-block;width:14px;height:14px;margin-inline-start:6px;vertical-align:-2px;
+  background-color:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12H5M11 6l-6 6 6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12H5M11 6l-6 6 6 6'/%3E%3C/svg%3E") no-repeat center/contain}
+.ui-arrow-out{display:inline-block;width:14px;height:14px;background-color:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6'/%3E%3C/svg%3E") no-repeat center/contain;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6'/%3E%3C/svg%3E") no-repeat center/contain}
+html[dir="ltr"] .ui-arrow{transform:scaleX(-1)}
+.service-card b.ui-arrow{width:19px;height:19px;margin:0;font-size:0}
+.social-link>b.ui-arrow-out{width:14px;height:14px;font-size:0}
+.primary-button .ui-arrow,.text-link .ui-arrow{width:13px;height:13px}

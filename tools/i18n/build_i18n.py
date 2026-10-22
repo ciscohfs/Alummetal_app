@@ -96,7 +96,7 @@ SRC_BLOCK = r'''
 75|Nickel
 76|Lithium
 77|Clear values
-78|Do not know the composition? “Pick an alloy by application” →
+78|Do not know the composition? “Pick an alloy by application”
 79|Know the alloy code?
 80|Enter one element value to see the closest alloys.
 81|Quick pick
@@ -114,7 +114,7 @@ SRC_BLOCK = r'''
 93|Precision machining
 94|Foil and packaging
 95|Clear selection
-96|I know the composition; “Enter elements, get alloys” →
+96|I know the composition; “Enter elements, get alloys”
 97|Choose one of the applications above to see suitable alloys.
 98|Alloy comparison
 99|Compare alloys
@@ -494,7 +494,7 @@ LIVE_BLOCK = r'''
 171|Height (mm)
 172|Outer diameter (mm)
 173|Side (mm)
-185|Details in the alloy encyclopedia ←
+185|Details in the alloy encyclopedia
 186|＋ Add to comparison
 215|Inner diameter (mm)
 216|Size (mm)
