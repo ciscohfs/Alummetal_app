@@ -12,8 +12,8 @@
 کیفیت، نوآوری و رضایت مشتری	Quality, innovation and customer satisfaction
 آلوم متال آراک — تولید و تأمین مقاطع و محصولات آلومینیومی	Alum Metal Arak — production and supply of aluminium sections and products
 تخصص در آلیاژ، کیفیت در تولید	Alloy expertise, production quality
-اپ آلوم متال را روی صفحه اصلی نصب کن	Install the Alum Metal app on your home screen
-دسترسی سریع‌تر، تمام‌صفحه و بدون نیاز به اینترنت.	Faster access, full screen and works offline.
+اپ آلوم متال را روی صفحه اصلی نصب کنید	Install the Alum Metal app on your home screen
+دسترسی سریع‌تر و تمام‌صفحه.	Faster access and full screen.
 نصب	Install
 اعلان‌های روزانهٔ آلوم متال	Alum Metal daily notifications
 روزی دو پیام کوتاه؛ برای فعال‌سازی اجازهٔ اعلان بده.	Two short messages a day; allow notifications to enable them.
@@ -32,7 +32,7 @@
 مقطع و آلیاژ را مطابق محصولات آلوم متال انتخاب کنید.	Pick the section and alloy that match Alum Metal products.
 راهنمای استفاده	How to use
 چطور وزن را حساب کنیم؟	How is the weight calculated?
-ابتدا مقطع و آلیاژ را انتخاب کن، سپس طول و اندازه‌های مشخص‌شده روی تصویر را به میلی‌متر وارد کن. برای چند قطعه، تعداد را تغییر بده و دکمه محاسبه وزن را بزن.	First choose the section and the alloy, then enter the length and the dimensions marked on the drawing in millimetres. For several pieces change the quantity and press the weight button.
+ابتدا مقطع و آلیاژ را انتخاب کنید، سپس طول و اندازه‌های مشخص‌شده روی تصویر را به میلی‌متر وارد کنید. برای چند قطعه، تعداد را تغییر دهید و دکمهٔ محاسبهٔ وزن را بزنید.	First choose the section and the alloy, then enter the length and the dimensions marked on the drawing in millimetres. For several pieces change the quantity and press the weight button.
 حروف روی تصویر، اندازه‌هایی هستند که باید در کادرهای پایین وارد شوند.	The letters on the drawing are the dimensions you enter in the boxes below.
 نوع مقطع	Section type
 راهنمای اندازه‌گذاری مقطع	Section dimension guide
@@ -46,7 +46,7 @@
 کاتالوگ‌های رسمی محصولات آلوم متال؛ برای دریافت موجودی و قیمت با ما تماس بگیرید.	Official Alum Metal product catalogues; contact us for stock and prices.
 برای دریافت موجودی و قیمت با ما تماس بگیرید	Contact us for stock and prices
 کارشناسان فروش پاسخ‌گوی شما هستند.	Our sales engineers are here to help.
-در حال دریافت فهرست...	Loading the list…
+در حال دریافت فهرست…	Loading the list…
 دانشنامه آلیاژ	Alloy encyclopedia
 جدول کامل آلیاژهای کارپذیر و ریختگی با مشخصات فنی و کاربردها.	Complete table of wrought and casting alloys with technical data and applications.
 برای دریافت موجودی و قیمت آلیاژ با ما تماس بگیرید	Contact us for alloy stock and prices
@@ -59,11 +59,11 @@
 سری ۶۰۰۰	Series 6000
 سری ۷۰۰۰	Series 7000
 سری ۸۰۰۰	Series 8000
-در حال دریافت دانشنامه آلیاژها...	Loading the alloy encyclopedia…
+در حال دریافت دانشنامه آلیاژها…	Loading the alloy encyclopedia…
 یافتن آلیاژ	Find an alloy
-مقدار یک عنصر را بنویس؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شوند.	Type one element value; the closest alloys are suggested with a match percentage.
+مقدار یک عنصر را وارد کنید؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شوند.	Type one element value; the closest alloys are suggested with a match percentage.
 یک عنصر کافی است	One element is enough
-لازم نیست همه را پر کنی؛ نتیجه زنده و لحظه‌ای به‌روز می‌شود.	You do not need to fill them all; the result updates live.
+لازم نیست همه را پر کنید؛ نتیجه به‌صورت زنده به‌روز می‌شود.	You do not need to fill them all; the result updates live.
 نمونه سریع:	Quick sample:
 سیلیسیم	Silicon
 آهن	Iron
@@ -76,13 +76,13 @@
 نیکل	Nickel
 لیتیم	Lithium
 پاک کردن مقادیر	Clear values
-ترکیب را نمی‌دانی؟ «انتخاب آلیاژ بر اساس کاربرد»	Do not know the composition? “Pick an alloy by application”
-کد آلیاژ را می‌دانی؟	Know the alloy code?
-مقدار یک عنصر را وارد کن تا آلیاژهای نزدیک نمایش داده شوند.	Enter one element value to see the closest alloys.
+ترکیب را نمی‌دانید؟ «انتخاب آلیاژ بر اساس کاربرد»	Do not know the composition? “Pick an alloy by application”
+کد آلیاژ را می‌دانید؟	Know the alloy code?
+مقدار یک عنصر را وارد کنید تا آلیاژهای نزدیک نمایش داده شوند.	Enter one element value to see the closest alloys.
 انتخاب سریع	Quick pick
-فقط بگو قطعه برای چه کاری است؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شوند.	Just say what the part is for; the closest alloys are suggested with a match percentage.
-کاربردت را انتخاب کن	Choose your application
-اگر درصد عناصر را نمی‌دانی، از اینجا شروع کن؛ یک انتخاب کافی است.	If you do not know the element percentages, start here; one choice is enough.
+فقط بگویید قطعه برای چه کاری است؛ نزدیک‌ترین آلیاژها با درصد تطابق پیشنهاد می‌شوند.	Just say what the part is for; the closest alloys are suggested with a match percentage.
+کاربرد را انتخاب کنید	Choose your application
+اگر درصد عناصر را نمی‌دانید، از اینجا شروع کنید؛ یک انتخاب کافی است.	If you do not know the element percentages, start here; one choice is enough.
 پروفیل و درب و پنجره	Profiles, doors and windows
 سازه و صنعت	Structure and industry
 دریایی و ضدخوردگی	Marine and corrosion resistant
@@ -95,11 +95,11 @@
 فویل و بسته‌بندی	Foil and packaging
 پاک کردن انتخاب	Clear selection
 ترکیب را می‌دانم؛ «عنصر بده، آلیاژ بگیر»	I know the composition; “Enter elements, get alloys”
-یکی از کاربردهای بالا را انتخاب کن تا آلیاژهای مناسب نمایش داده شوند.	Choose one of the applications above to see suitable alloys.
+یکی از کاربردهای بالا را انتخاب کنید تا آلیاژهای مناسب نمایش داده شوند.	Choose one of the applications above to see suitable alloys.
 مقایسه آلیاژ	Alloy comparison
 مقایسهٔ آلیاژها	Compare alloys
-حداقل دو آلیاژ را انتخاب کن و مشخصات فنی آن‌ها را کنار هم ببین.	Choose at least two alloys and see their technical data side by side.
-دو آلیاژ را انتخاب کن.	Choose two alloys.
+حداقل دو آلیاژ را انتخاب کنید و مشخصات فنی آن‌ها را کنار هم ببینید.	Choose at least two alloys and see their technical data side by side.
+دو آلیاژ را انتخاب کنید.	Choose two alloys.
 انتخاب اول	First choice
 انتخاب آلیاژ	Choose an alloy
 انتخاب دوم	Second choice
@@ -110,7 +110,7 @@
 نتیجهٔ مقایسه	Comparison result
 پاک کردن	Clear
 تماس با آلوم متال	Contact Alum Metal
-برای مشاوره، استعلام و پیگیری سفارش تماس با ما.	Call us for advice, quotations and order follow-up.
+برای مشاوره، استعلام قیمت و پیگیری سفارش با ما در تماس باشید.	Call us for advice, quotations and order follow-up.
 راه‌های تماس مستقیم	Direct contact
 پاسخ‌گویی و فروش	Support and sales
 تلفن فروش	Sales phone
@@ -365,7 +365,7 @@ Al–Si؛ سیلیسیم عنصر اصلی آلیاژی	Al–Si; silicon is the 
 انتخاب متعادل برای پروفیل و سازه است؛ اکستروژن، ماشین‌کاری و عملیات حرارتی در آن مهم است.	A balanced choice for profiles and structures; extrusion, machining and heat treatment matter.
 بیشترین تمرکز آن روی استحکام است و برای قطعات سبک و پربار مهندسی به‌کار می‌رود.	Its main focus is strength and it is used for light, highly loaded engineering parts.
 برای کاربردهای تخصصی مانند فویل، بسته‌بندی یا هوافضا استفاده می‌شود.	Used for specialised applications such as foil, packaging or aerospace.
-برای مقایسه، حداقل دو آلیاژ را انتخاب کن.	Choose at least two alloys to compare.
+برای مقایسه، حداقل دو آلیاژ را انتخاب کنید.	Choose at least two alloys to compare.
 خانواده	Family
 سری	Series
 عناصر اصلی	Main elements
@@ -380,24 +380,24 @@ Al–Si؛ سیلیسیم عنصر اصلی آلیاژی	Al–Si; silicon is the 
 کاربردهای سری	Series applications
 اطلاعات ثبت نشده	Not recorded
 شاخص	Property
-این کد را مستقیم جست‌وجو کردی؛ برای دیدن مشخصات کامل «جزئیات در دانشنامه آلیاژها» را بزن.	You searched this code directly; press “Details in the alloy encyclopedia” to see the full data.
+این کد را مستقیم جست‌وجو کردید؛ برای دیدن مشخصات کامل، «جزئیات در دانشنامه آلیاژها» را بزنید.	You searched this code directly; press “Details in the alloy encyclopedia” to see the full data.
 بخشی از مقادیر واردشده با محدوده این گرید فاصله دارد؛ نزدیک‌ترین گزینه در این فهرست است.	Some entered values are outside this grade’s range; it is the closest option in this list.
 محدوده اعلام‌شده برای این گرید تقریبی است.	The stated range for this grade is approximate.
 محدوده تقریبی	Approximate range
 کد دقیق	Exact code
-نزدیک‌ترین کدهای موجود را انتخاب کن:	Pick the closest available code:
-از کجا شروع کنم؟	Where do I start?
+نزدیک‌ترین کدهای موجود را انتخاب کنید:	Pick the closest available code:
+از کجا شروع کنیم؟	Where to start?
 گریدهای پرکاربرد:	Popular grades:
 چیزی برای پیشنهاد پیدا نشد	Nothing to suggest
-مقدار عنصر را کمی تغییر بده یا از «انتخاب آلیاژ بر اساس کاربرد» استفاده کن.	Change the element value a little or use “Pick an alloy by application”.
+مقدار عنصر را کمی تغییر دهید یا از «انتخاب آلیاژ بر اساس کاربرد» استفاده کنید.	Change the element value a little or use “Pick an alloy by application”.
 نزدیک‌ترین آلیاژها به ترکیب واردشده	Closest alloys to the entered composition
 درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.	The match percentage is the distance between your composition and each grade’s standard range; confirm the analysis sheet and product standard before the final choice.
 از کدام کاربرد شروع کنیم؟	Which application shall we start from?
-یکی از کاربردهای بالا را انتخاب کن تا آلیاژهای پیشنهادی همان کاربرد را ببینی. اگر کد یا ترکیب را می‌دانی، «عنصر بده، آلیاژ بگیر» دقیق‌تر است.	Choose one of the applications above to see the alloys suggested for it. If you know the code or composition, “Enter elements, get alloys” is more precise.
+یکی از کاربردهای بالا را انتخاب کنید تا آلیاژهای پیشنهادی همان کاربرد را ببینید. اگر کد یا ترکیب را می‌دانید، «عنصر بده، آلیاژ بگیر» دقیق‌تر است.	Choose one of the applications above to see the alloys suggested for it. If you know the code or composition, “Enter elements, get alloys” is more precise.
 برای این کاربرد پیشنهادی پیدا نشد	No suggestion found for this application
-کاربرد دیگری را امتحان کن.	Try another application.
+کاربرد دیگری را امتحان کنید.	Try another application.
 این پیشنهادها بر پایه کاربرد رایج هر گرید است؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.	These suggestions are based on each grade’s typical use; confirm the analysis sheet and product standard before the final choice.
-سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کن.	Three alloys are selected; change one of them to modify the comparison.
+سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کنید.	Three alloys are selected; change one of them to modify the comparison.
 کاربرد و استاندارد	Use and standard
 کد	Code
 سری / خانواده	Series / family
@@ -422,7 +422,7 @@ Al–Si؛ سیلیسیم عنصر اصلی آلیاژی	Al–Si; silicon is the 
 اگر اپ را قبلاً نصب کرده‌ای، این گزینه دیگر نمایش داده نمی‌شود. نصب روی اندروید و iOS به آدرس	If you have already installed the app this option is hidden. Installing on Android and iOS needs an
 نیاز دارد؛ روی localhost هم کار می‌کند.	address; it also works on localhost.
 یک ضربه برای نصب؛ بدون گشتن در تنظیمات مرورگر.	One tap to install; no digging through browser settings.
-آموزش گام‌به‌گام نصب روی صفحه اصلی را ببین.	See the step-by-step guide to install on the home screen.
+آموزش گام‌به‌گام نصب روی صفحه اصلی را ببینید.	See the step-by-step guide to install on the home screen.
 آموزش نصب	Install guide
 نصب سریع	Quick install
 افزودن اپ به صفحه اصلی	Add the app to the home screen
@@ -454,7 +454,7 @@ Al–Si؛ سیلیسیم عنصر اصلی آلیاژی	Al–Si; silicon is the 
 به‌روز	Up to date
 نسخهٔ جدید دارد	New version available
 بررسی هنگام اتصال	Checks when online
-نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستی.	No new version is available; you are on the latest one.
+نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستید.	No new version is available; you are on the latest one.
 
 ---- live ----
 38 ردیف	<pattern/skip>
@@ -515,7 +515,7 @@ Al–Si؛ سیلیسیم عنصر اصلی آلیاژی	Al–Si; silicon is the 
 فویل، بسته‌بندی و هوافضا · AA / ASTM / EN؛ معادل دقیق باید هنگام خرید تأیید شود.	<pattern/skip>
 قطعات ریختگی و شمش آلیاژی · AA Casting / ASTM؛ وضعیت .0 قطعه ریختگی و .1 شمش است.	<pattern/skip>
 ٪	%
-فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45)؛ بقیه کار با ما. اگر ترکیب را نمی‌دانی، «انتخاب آلیاژ بر اساس کاربرد» را امتحان کن.	Just write one element value (for example Si = 0.45); we do the rest. If you do not know the composition, try “Pick an alloy by application”.
+فقط مقدار یک عنصر را وارد کنید (مثلاً Si = 0.45)؛ همین برای پیشنهاد کافی است. اگر ترکیب را نمی‌دانید، «انتخاب آلیاژ بر اساس کاربرد» را امتحان کنید.	Just write one element value (for example Si = 0.45); we do the rest. If you do not know the composition, try “Pick an alloy by application”.
 خودرو	Automotive
 مبدل حرارتی	Heat exchangers
 1050 — رسانایی و شکل‌پذیری بالا	<pattern/skip>
@@ -679,28 +679,28 @@ A356.0 — ریختگی دقیق و قطعات سبک	<pattern/skip>
 اعلان نسخهٔ جدید خاموش شد.	New-version alerts are off.
 سریع‌تر از مرورگر باز می‌شود	Opens faster than the browser
 تمام‌صفحه، بدون نوار آدرس	Full screen, without the address bar
-بدون اینترنت هم کار می‌کند	Works without an internet connection
+با یک ضربه از صفحهٔ اصلی باز می‌شود	Opens from the home screen in one tap
 اعلان نسخهٔ جدید می‌گیرد	You get new-version alerts
-اپ را در مرورگر Safari باز کن.	Open the app in the Safari browser.
-دکمهٔ اشتراک‌گذاری (مربع با فلش رو به بالا) را بزن.	Tap the Share button (the square with the arrow pointing up).
-گزینهٔ «افزودن به صفحهٔ اصلی» را انتخاب کن.	Choose “Add to Home Screen”.
-نام «آلوم متال» را تأیید کن.	Confirm the name “Alum Metal”.
-اپ را در مرورگر Chrome یا Edge باز کن.	Open the app in the Chrome or Edge browser.
-منوی مرورگر (سه‌نقطه) را باز کن.	Open the browser menu (the three dots).
-گزینهٔ «نصب برنامه» یا «افزودن به صفحهٔ اصلی» را بزن.	Tap “Install app” or “Add to Home Screen”.
-تأیید کن تا آیکون اپ روی صفحهٔ اصلی بیاید.	Confirm and the app icon lands on your home screen.
+اپ را در مرورگر Safari باز کنید.	Open the app in the Safari browser.
+دکمهٔ اشتراک‌گذاری (مربع با فلش رو به بالا) را بزنید.	Tap the Share button (the square with the arrow pointing up).
+گزینهٔ «افزودن به صفحهٔ اصلی» را انتخاب کنید.	Choose “Add to Home Screen”.
+نام «آلوم متال» را تأیید کنید.	Confirm the name “Alum Metal”.
+اپ را در مرورگر Chrome یا Edge باز کنید.	Open the app in the Chrome or Edge browser.
+منوی مرورگر (سه‌نقطه) را باز کنید.	Open the browser menu (the three dots).
+گزینهٔ «نصب برنامه» یا «افزودن به صفحهٔ اصلی» را بزنید.	Tap “Install app” or “Add to Home Screen”.
+تأیید کنید تا آیکون اپ روی صفحهٔ اصلی بیاید.	Confirm and the app icon lands on your home screen.
 در iPhone و iPad	On iPhone and iPad
 در اندروید و کامپیوتر	On Android and desktop
 نصب اپ	Install app
-نصب روی اندروید و iOS به آدرس https نیاز دارد؛ روی کامپیوتر هم می‌شود اپ را نصب کرد.	Installing on Android and iOS needs an https address; on a computer the app can be installed too.
+نصب روی اندروید و iOS به آدرس https نیاز دارد؛ روی کامپیوتر هم می‌توان اپ را نصب کرد.	Installing on Android and iOS needs an https address; on a computer the app can be installed too.
 اشتراک‌گذاری اپ	Share the app
 لینک و QR	Link & QR
 کد QR اپ آلوم متال	QR code of the Alum Metal app
-با دوربین گوشی این کد را اسکن کن تا اپ باز شود.	Scan this code with your phone camera to open the app.
+با دوربین گوشی این کد را اسکن کنید تا اپ باز شود.	Scan this code with your phone camera to open the app.
 کپی لینک	Copy link
 لینک کپی شد.	Link copied.
 اپ آلوم متال آراک؛ محاسبه وزن مقاطع، کاتالوگ محصولات و بانک آلیاژها	Alum Metal Arak app: section weight calculator, product catalogue and alloy database
-کپی انجام نشد؛ آدرس را دستی انتخاب کن.	Could not copy; select the address manually.
+کپی انجام نشد؛ آدرس را دستی انتخاب کنید.	Could not copy; select the address manually.
 فعلاً در دسترس نیست	Not available right now
 
 ---- patterns ----

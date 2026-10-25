@@ -33,7 +33,7 @@ SRC_BLOCK = r'''
 12|Alum Metal Arak — production and supply of aluminium sections and products
 13|Alloy expertise, production quality
 14|Install the Alum Metal app on your home screen
-15|Faster access, full screen and works offline.
+15|Faster access and full screen.
 16|Install
 17|Alum Metal daily notifications
 18|Two short messages a day; allow notifications to enable them.
@@ -406,7 +406,7 @@ SRC_BLOCK = r'''
 385|Approximate range
 386|Exact code
 387|Pick the closest available code:
-388|Where do I start?
+388|Where to start?
 389|Popular grades:
 390|Nothing to suggest
 391|Change the element value a little or use “Pick an alloy by application”.
@@ -503,7 +503,7 @@ LIVE_BLOCK = r'''
 219|New-version alerts are off.
 220|Opens faster than the browser
 221|Full screen, without the address bar
-222|Works without an internet connection
+222|Opens from the home screen in one tap
 223|You get new-version alerts
 224|Open the app in the Safari browser.
 225|Tap the Share button (the square with the arrow pointing up).

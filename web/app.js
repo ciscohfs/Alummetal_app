@@ -238,11 +238,11 @@ function syncCompareSelection() {
   const button = $('#compareButton');
   if (button) button.disabled = count < 2;
   const countText = $('#compareCount');
-  if (countText) countText.textContent = count ? `${count} آلیاژ برای مقایسه آماده است.` : 'دو آلیاژ را انتخاب کن.';
+  if (countText) countText.textContent = count ? `${count} آلیاژ برای مقایسه آماده است.` : 'دو آلیاژ را انتخاب کنید.';
 }
 function renderComparison() {
   const chosen = ['#compareOne','#compareTwo','#compareThree'].map((selector) => $(selector)?.value).filter(Boolean).map((code) => alloyData.alloys.find((alloy) => alloy.code === code)).filter(Boolean);
-  if (chosen.length < 2) { showToast('برای مقایسه، حداقل دو آلیاژ را انتخاب کن.'); return; }
+  if (chosen.length < 2) { showToast('برای مقایسه، حداقل دو آلیاژ را انتخاب کنید.'); return; }
   const rows = [['خانواده','family'],['سری','series'],['عناصر اصلی','details.elements'],['خواص مکانیکی','details.mechanical'],['خواص فیزیکی','details.physical'],['مقاومت خوردگی','corrosion'],['عملیات حرارتی','heatTreatment'],['استانداردها','standard'],['چگالی','density'],['ویژگی اصلی','title'],['کاربرد اصلی','use'],['کاربردهای سری','applications']];
   const valueFor = (alloy, key) => key === 'density' ? `${alloy.density} گرم بر سانتی‌متر مکعب` : key.split('.').reduce((value, part) => value?.[part], alloy) || 'اطلاعات ثبت نشده';
   const table = $('#comparisonTable');
@@ -647,7 +647,7 @@ function rankAlloys(entered, useKey, limit = 6, alloys = alloyData.alloys) {
   return rows.slice(0, limit).map((row) => ({ ...row, percent: Math.max(8, Math.min(99, Math.round(row.score * 100))) }));
 }
 function labReason(row, entered, useKey, direct) {
-  if (direct) return 'این کد را مستقیم جست‌وجو کردی؛ برای دیدن مشخصات کامل «جزئیات در دانشنامه آلیاژها» را بزن.';
+  if (direct) return 'این کد را مستقیم جست‌وجو کردید؛ برای دیدن مشخصات کامل، «جزئیات در دانشنامه آلیاژها» را بزنید.';
   const parts = [];
   const count = Object.keys(entered).length;
   if (count) {
@@ -744,14 +744,14 @@ function renderElementLab() {
     } else {
       const distance = (alloy) => Math.abs(Number(alloy.code.replace(/[^0-9]/g, '')) - Number(digits));
       const near = alloyData.alloys.slice().sort((left, right) => distance(left) - distance(right)).slice(0, 6);
-      html = `<strong class="lab-result-title">کدی با «${escapeLab(query)}» پیدا نشد</strong><span>نزدیک‌ترین کدهای موجود را انتخاب کن:</span><div class="popular-row">${near.map((alloy) => `<button type="button" class="popular-chip" data-lab-code="${alloy.code}">${alloy.code}</button>`).join('')}</div>`;
+      html = `<strong class="lab-result-title">کدی با «${escapeLab(query)}» پیدا نشد</strong><span>نزدیک‌ترین کدهای موجود را انتخاب کنید:</span><div class="popular-row">${near.map((alloy) => `<button type="button" class="popular-chip" data-lab-code="${alloy.code}">${alloy.code}</button>`).join('')}</div>`;
     }
   } else if (!hasInput) {
-    html = `<strong class="lab-result-title">از کجا شروع کنم؟</strong><span>فقط مقدار یک عنصر را بنویس (مثلاً Si = 0.45)؛ بقیه کار با ما. اگر ترکیب را نمی‌دانی، «انتخاب آلیاژ بر اساس کاربرد» را امتحان کن.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
+    html = `<strong class="lab-result-title">از کجا شروع کنیم؟</strong><span>فقط مقدار یک عنصر را وارد کنید (مثلاً Si = 0.45)؛ همین برای پیشنهاد کافی است. اگر ترکیب را نمی‌دانید، «انتخاب آلیاژ بر اساس کاربرد» را امتحان کنید.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow()}`;
   } else {
     const rows = rankAlloys(entered, null, 6);
     if (!rows.length) {
-      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>مقدار عنصر را کمی تغییر بده یا از «انتخاب آلیاژ بر اساس کاربرد» استفاده کن.</span>${labPopularRow()}`;
+      html = `<strong class="lab-result-title">چیزی برای پیشنهاد پیدا نشد</strong><span>مقدار عنصر را کمی تغییر دهید یا از «انتخاب آلیاژ بر اساس کاربرد» استفاده کنید.</span>${labPopularRow()}`;
     } else {
       html = `<strong class="lab-result-title">نزدیک‌ترین آلیاژها به ترکیب واردشده</strong><div class="match-list">${rows.map((row) => labMatchCard(row, entered, null, false)).join('')}</div><small class="lab-note">درصد تطابق از فاصله ترکیب واردشده تا محدوده استاندارد هر گرید محاسبه می‌شود؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
     }
@@ -765,11 +765,11 @@ function renderUseLab() {
   if (!result) return;
   let html = '';
   if (!selectedUse) {
-    html = `<strong class="lab-result-title">از کدام کاربرد شروع کنیم؟</strong><span>یکی از کاربردهای بالا را انتخاب کن تا آلیاژهای پیشنهادی همان کاربرد را ببینی. اگر کد یا ترکیب را می‌دانی، «عنصر بده، آلیاژ بگیر» دقیق‌تر است.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow('data-show-alloy')}`;
+    html = `<strong class="lab-result-title">از کدام کاربرد شروع کنیم؟</strong><span>یکی از کاربردهای بالا را انتخاب کنید تا آلیاژهای پیشنهادی همان کاربرد را ببینید. اگر کد یا ترکیب را می‌دانید، «عنصر بده، آلیاژ بگیر» دقیق‌تر است.</span><span class="result-caption">گریدهای پرکاربرد:</span>${labPopularRow('data-show-alloy')}`;
   } else {
     const rows = rankAlloys({}, selectedUse, 6);
     if (!rows.length) {
-      html = `<strong class="lab-result-title">برای این کاربرد پیشنهادی پیدا نشد</strong><span>کاربرد دیگری را امتحان کن.</span>${labPopularRow('data-show-alloy')}`;
+      html = `<strong class="lab-result-title">برای این کاربرد پیشنهادی پیدا نشد</strong><span>کاربرد دیگری را امتحان کنید.</span>${labPopularRow('data-show-alloy')}`;
     } else {
       html = `<strong class="lab-result-title">پیشنهاد برای کاربرد «${USE_CASES[selectedUse].label}»</strong><div class="match-list">${rows.map((row) => labMatchCard(row, {}, selectedUse, false)).join('')}</div><small class="lab-note">این پیشنهادها بر پایه کاربرد رایج هر گرید است؛ برای انتخاب نهایی، برگه آنالیز و استاندارد محصول را تأیید کنید.</small>`;
     }
@@ -781,7 +781,7 @@ function renderUseLab() {
 function addAlloyToCompare(code) {
   const slots = ['#compareOne', '#compareTwo', '#compareThree'];
   const target = slots.find((selector) => $(selector) && !$(selector).value);
-  if (!target) { showToast('سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کن.'); return; }
+  if (!target) { showToast('سه آلیاژ انتخاب شده است؛ برای تغییر، یکی از انتخاب‌ها را عوض کنید.'); return; }
   $(target).value = code;
   $(target).dispatchEvent(new Event('change'));
   showToast(`${code} به مقایسه اضافه شد`);
@@ -903,19 +903,19 @@ const usingIos = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigato
 const INSTALL_GUIDE_SEEN_KEY = 'alum-install-guide-seen';
 
 function installBenefits() {
-  return ['سریع‌تر از مرورگر باز می‌شود', 'تمام‌صفحه، بدون نوار آدرس', 'بدون اینترنت هم کار می‌کند', 'اعلان نسخهٔ جدید می‌گیرد'];
+  return ['سریع‌تر از مرورگر باز می‌شود', 'تمام‌صفحه، بدون نوار آدرس', 'با یک ضربه از صفحهٔ اصلی باز می‌شود', 'اعلان نسخهٔ جدید می‌گیرد'];
 }
 function installSteps() {
   return usingIos()
-    ? ['اپ را در مرورگر Safari باز کن.', 'دکمهٔ اشتراک‌گذاری (مربع با فلش رو به بالا) را بزن.', 'گزینهٔ «افزودن به صفحهٔ اصلی» را انتخاب کن.', 'نام «آلوم متال» را تأیید کن.']
-    : ['اپ را در مرورگر Chrome یا Edge باز کن.', 'منوی مرورگر (سه‌نقطه) را باز کن.', 'گزینهٔ «نصب برنامه» یا «افزودن به صفحهٔ اصلی» را بزن.', 'تأیید کن تا آیکون اپ روی صفحهٔ اصلی بیاید.'];
+    ? ['اپ را در مرورگر Safari باز کنید.', 'دکمهٔ اشتراک‌گذاری (مربع با فلش رو به بالا) را بزنید.', 'گزینهٔ «افزودن به صفحهٔ اصلی» را انتخاب کنید.', 'نام «آلوم متال» را تأیید کنید.']
+    : ['اپ را در مرورگر Chrome یا Edge باز کنید.', 'منوی مرورگر (سه‌نقطه) را باز کنید.', 'گزینهٔ «نصب برنامه» یا «افزودن به صفحهٔ اصلی» را بزنید.', 'تأیید کنید تا آیکون اپ روی صفحهٔ اصلی بیاید.'];
 }
 function installGuideHtml() {
   const benefits = installBenefits().map((text) => `<li>${text}</li>`).join('');
   const steps = installSteps().map((text) => `<li>${text}</li>`).join('');
   const platform = usingIos() ? 'در iPhone و iPad' : 'در اندروید و کامپیوتر';
   const ctaLabel = 'نصب اپ';
-  const note = 'نصب روی اندروید و iOS به آدرس https نیاز دارد؛ روی کامپیوتر هم می‌شود اپ را نصب کرد.';
+  const note = 'نصب روی اندروید و iOS به آدرس https نیاز دارد؛ روی کامپیوتر هم می‌توان اپ را نصب کرد.';
   const cta = deferredInstallPrompt ? `<button class="primary-button install-guide-cta" id="installGuideCta" type="button">${ctaLabel}</button>` : '';
   return `<ul class="install-benefits">${benefits}</ul>${cta}<strong class="install-steps-title">${platform}</strong><ol class="install-steps">${steps}</ol><p class="guide-note">${note}</p>`;
 }
@@ -956,7 +956,7 @@ function setInstallState() {
   const banner = $('#installBanner');
   if (banner) banner.hidden = installed || sessionFlag(INSTALL_DISMISS_KEY);
   const hint = $('#installBannerHint');
-  if (hint) hint.textContent = deferredInstallPrompt ? 'یک ضربه برای نصب؛ بدون گشتن در تنظیمات مرورگر.' : 'آموزش گام‌به‌گام نصب روی صفحه اصلی را ببین.';
+  if (hint) hint.textContent = deferredInstallPrompt ? 'یک ضربه برای نصب؛ بدون گشتن در تنظیمات مرورگر.' : 'آموزش گام‌به‌گام نصب روی صفحه اصلی را ببینید.';
   const go = $('#installGo');
   if (go) go.textContent = deferredInstallPrompt ? 'نصب' : 'آموزش نصب';
   const row = $('#installButton');
@@ -1034,7 +1034,7 @@ function copyText(text) {
 function openShareDialog() {
   const html = `<div class="share-body">
     <img class="share-qr" src="img/qr-app.png" alt="کد QR اپ آلوم متال" width="168" height="168" />
-    <p class="share-hint">با دوربین گوشی این کد را اسکن کن تا اپ باز شود.</p>
+    <p class="share-hint">با دوربین گوشی این کد را اسکن کنید تا اپ باز شود.</p>
     <div class="share-url">${SHARE_URL}</div>
     <button class="primary-button install-guide-cta" id="shareCopy" type="button">کپی لینک</button>
   </div>`;
@@ -1054,7 +1054,7 @@ $('#shareButton')?.addEventListener('click', async () => {
 });
 $('#previewBody').addEventListener('click', (event) => {
   if (!event.target.closest('#shareCopy')) return;
-  copyText(SHARE_URL).then((ok) => showToast(ok ? 'لینک کپی شد.' : 'کپی انجام نشد؛ آدرس را دستی انتخاب کن.'));
+  copyText(SHARE_URL).then((ok) => showToast(ok ? 'لینک کپی شد.' : 'کپی انجام نشد؛ آدرس را دستی انتخاب کنید.'));
 });
 
 const initialRoute = window.location.hash.slice(1) || 'home';
@@ -1092,7 +1092,7 @@ function setUpdateStatus(text) { const row = $('#updateStatus'); if (row) row.te
 function openUpdateDialog() {
   if (!pendingUpdate || !updateDialog) return;
   const line = $('#updateVersionLine');
-  if (line) line.textContent = pendingUpdate.date ? `نسخهٔ ${pendingUpdate.version} — تاریخ انتشار ${pendingUpdate.date}` : `نسخهٔ ${pendingUpdate.version}`;
+  if (line) line.textContent = pendingUpdate.date ? `نسخهٔ ${toFaDigits(pendingUpdate.version)} — تاریخ انتشار ${toFaDigits(pendingUpdate.date.replace(/-/g, '/'))}` : `نسخهٔ ${toFaDigits(pendingUpdate.version)}`;
   // version.json carries English notes next to the Persian ones, so the dialog can switch language.
   const notes = (isEnglish() && pendingUpdate.notesEn && pendingUpdate.notesEn.length ? pendingUpdate.notesEn : pendingUpdate.notes) || [];
   const list = $('#updateNotes');
@@ -1173,7 +1173,7 @@ $('#updateButton')?.addEventListener('click', async () => {
   if (pendingUpdate) { openUpdateDialog(); return; }
   setUpdateStatus('در حال بررسی…');
   await checkForUpdate();
-  if (!pendingUpdate) showToast('نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستی.');
+  if (!pendingUpdate) showToast('نسخهٔ جدیدی موجود نیست؛ روی آخرین نسخه هستید.');
 });
 let lastUpdateCheck = 0;
 checkForUpdate();
