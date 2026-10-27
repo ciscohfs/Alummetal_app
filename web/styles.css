@@ -258,6 +258,38 @@ body.light .install-icon{background:rgba(36,160,170,.14);color:#0e6c78}
   .service-card{min-height:168px}
 }
 
+/* Responsive hardening for large text/zoom/screen scaling */
+*{max-width:100%}
+img,svg,video{max-width:100%;height:auto}
+body{overflow-x:hidden;word-break:normal;overflow-wrap:break-word}
+.app-shell{overflow-x:hidden;max-width:100%}
+main{overflow-x:hidden}
+.topbar,.bottom-nav,.drawer,.glass-card,.form-card,.contact-card,.catalog-sheet,.alloy-lab,.alloy-tools{max-width:100%}
+.service-grid,.catalog-list,.alloy-list,.element-chips,.use-chips,.dimension-grid{max-width:100%}
+.service-card,.catalog-item,.alloy-row,.alloy-table-row summary,.phone-line,.social-link{min-width:0;max-width:100%}
+.service-card span:not(.service-icon),.catalog-item strong,.catalog-item small,.alloy-row h3,.alloy-title h3,.phone-line b,.match-meta strong{overflow-wrap:anywhere;word-break:break-word}
+.alloy-table-row summary{grid-template-columns:40px 80px minmax(0,1fr) 38px 24px}
+.alloy-table-head{grid-template-columns:40px 80px minmax(0,1fr) 38px 24px}
+.catalog-table{min-width:0;width:100%}
+.catalog-table th,.catalog-table td{white-space:normal;word-break:break-word}
+.comparison-table{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.comparison-row{min-width:280px}
+@media(max-width:320px){
+  .topbar{padding-left:8px;padding-right:8px}
+  .brand img{width:88px}
+  .icon-button{width:36px;height:36px}
+  .service-grid{grid-template-columns:1fr}
+  .element-chips,.use-chips{grid-template-columns:1fr}
+  .picker-grid{grid-template-columns:1fr}
+  .bottom-nav{max-width:calc(100% - 16px)}
+  .alloy-table-row summary{grid-template-columns:36px 70px minmax(0,1fr) 34px 22px;gap:4px;padding-left:6px;padding-right:6px}
+  .alloy-table-head{grid-template-columns:36px 70px minmax(0,1fr) 34px 22px;gap:4px;padding-left:6px;padding-right:6px}
+}
+@media(max-width:360px){
+  .page-head h1{font-size:22px}
+  .section-heading h2{font-size:18px}
+}
+
 /* Shortcut cards 5 and 6: the use-case finder and the alloy comparison. */
 .service-card.lime{background:linear-gradient(145deg,#1d7d6a,#0f4b45)}
 .service-card.plum{background:linear-gradient(145deg,#5b4a7e,#2f2748)}

@@ -1,7 +1,11 @@
 {
-  "version": "1.2",
-  "date": "1405-07-31",
+  "version": "1.2.1",
+  "date": "1405-08-04",
   "notes": [
+    "عنوان و توضیحات اپ اصلاح شد تا با جست‌وجوی «اپلیکیشن آلوم متال» بهتر و بالاتر دیده شوی",
+    "چیدمان صفحه‌ها در گوشی‌هایی که متن را بزرگ کرده‌اند یا صفحه را زوم کرده‌اند دیگر به‌هم نمی‌ریزد",
+    "جدول آلیاژها، جدول مقایسه و کارت‌ها در نمایش با اندازهٔ بزرگ هم مرتب و خوانا می‌مانند",
+    "از این نسخه به بعد هر تغییر با شمارهٔ تازه می‌آید تا گوشی نسخهٔ قدیمی را از کش نشان ندهد",
     "جدول مقایسهٔ آلیاژها دوباره یکدست و خواناتر شد (ستون‌ها دیگر به‌هم نمی‌ریزند)",
     "آیکون جست‌وجوی دانشنامه و آیکون مقایسه هم مثل بقیه آیکون‌ها تمیز و یکدست شدند",
     "فلش‌های تزئینی از کارت‌های صفحهٔ خانه برداشته شد و چیدمان کارت‌ها مرتب‌تر شد",
@@ -48,6 +52,10 @@
     "بستن این میان‌برها فقط برای همان بازدید است؛ اگر کاربر نصب یا فعال نکرده باشد، دفعهٔ بعد دوباره نمایش داده می‌شود"
   ],
   "notesEn": [
+    "The app title and description were rewritten so “Alum Metal app” shows up better in search",
+    "Layouts no longer break on phones where the text size or page zoom is increased",
+    "The alloy table, comparison table and cards stay tidy and readable at large display sizes",
+    "From this release on every change ships with a new version number, so phones never show a cached old build",
     "The alloy comparison table is consistent and readable again (the columns no longer break apart)",
     "The encyclopedia search icon and the compare icon are clean, consistent icons now",
     "The decorative arrows were removed from the home tiles and the card layout was tidied up",
