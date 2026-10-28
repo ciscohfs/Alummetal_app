@@ -1,0 +1,42 @@
+<style>
+/* ===== آیکون شناور اپ آلوم متال — بلوک HTML/CSS برای افزونه Ad Inserter =====
+   فقط HTML و CSS است (بدون جاوااسکریپت). همهٔ انتخابگرها با .amx-tab شروع می‌شوند
+   تا با استایل قالب تداخل نکنند. روی دسکتاپ با هاور باز می‌شود و روی موبایل
+   همیشه نام اپ را کنار آیکون نشان می‌دهد. */
+.amx-tab{position:fixed;inset-inline-start:auto;left:22px;bottom:22px;z-index:99999;display:inline-flex;flex-direction:row;align-items:center;direction:rtl;font-family:inherit;background:linear-gradient(135deg,#344652,#1f2b33);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px;opacity:.98;text-decoration:none!important;box-shadow:0 14px 34px rgba(20,30,38,.38),0 2px 6px rgba(20,30,38,.28);transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+.amx-tab:hover,.amx-tab:focus-visible{transform:translateY(-2px);opacity:1;box-shadow:0 20px 44px rgba(20,30,38,.46),0 3px 8px rgba(20,30,38,.3)}
+.amx-tab:focus-visible{outline:3px solid rgba(192,95,95,.65);outline-offset:3px}
+.amx-tab-icowrap{position:relative;flex:none;display:block;line-height:0}
+.amx-tab-ico{display:block;width:48px;height:48px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.92),0 4px 10px rgba(0,0,0,.32)}
+.amx-tab-dot{position:absolute;top:1px;right:1px;width:12px;height:12px;border-radius:50%;background:#c05f5f;border:2px solid #fff;animation:amx-tab-pulse 2.6s ease-out infinite}
+@keyframes amx-tab-pulse{0%{box-shadow:0 0 0 0 rgba(192,95,95,.55)}70%{box-shadow:0 0 0 9px rgba(192,95,95,0)}100%{box-shadow:0 0 0 0 rgba(192,95,95,0)}}
+.amx-tab-txt{display:flex;flex-direction:column;justify-content:center;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;margin-inline-end:0;transition:max-width .3s ease,opacity .25s ease,margin-inline-end .3s ease}
+.amx-tab:hover .amx-tab-txt,.amx-tab:focus-visible .amx-tab-txt{max-width:260px;opacity:1;margin-inline-end:13px}
+.amx-tab-txt b{color:#fff!important;font-size:13.5px!important;font-weight:700!important;line-height:1.55!important;text-decoration:none!important}
+.amx-tab-txt small{color:#a9bcc5;font-size:11px;line-height:1.6}
+@media (hover:none){ /* موبایل و تاچ: هیچ هاوری نیست، پس همیشه نام اپ دیده شود */
+  .amx-tab-txt{max-width:260px;opacity:1;margin-inline-end:11px}
+  .amx-tab-txt small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .amx-tab-dot{animation:none}
+  .amx-tab{transition:none}
+}
+@media(max-width:640px){
+  .amx-tab{left:12px;bottom:12px;padding:5px}
+  .amx-tab-ico{width:42px;height:42px}
+  .amx-tab-txt b{font-size:12.5px!important}
+  .amx-tab:hover .amx-tab-txt{max-width:200px;margin-inline-end:10px}
+}
+</style>
+
+<a class="amx-tab" href="https://app-alummetal.ir/" target="_blank" rel="noopener" aria-label="اپلیکیشن آلوم متال — نصب رایگان" title="اپلیکیشن آلوم متال — رایگان روی گوشی نصب کنید">
+  <span class="amx-tab-icowrap">
+    <img class="amx-tab-ico" src="https://app-alummetal.ir/img/icon-512.png" alt="" width="48" height="48">
+    <span class="amx-tab-dot" aria-hidden="true"></span>
+  </span>
+  <span class="amx-tab-txt">
+    <b>اپلیکیشن آلوم متال</b>
+    <small>محاسبه وزن و کاتالوگ آلومینیوم — رایگان</small>
+  </span>
+</a>
