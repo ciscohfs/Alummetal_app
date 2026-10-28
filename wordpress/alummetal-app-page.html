@@ -36,7 +36,7 @@
 .amx-glow{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(192,95,95,.48),transparent 70%);filter:blur(8px)}
 .amx-phone{position:relative;width:258px;flex:none;background:#101a20;border-radius:34px;padding:13px 8px 8px;box-shadow:0 34px 60px rgba(0,0,0,.52),0 0 0 1px rgba(255,255,255,.1);transform:rotate(-6deg);z-index:2}
 .amx-phone:before{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);width:34px;height:3px;border-radius:99px;background:#33454f}
-.amx-phone img{border-radius:24px;width:100%;display:block}
+.amx-phone img{border-radius:24px;width:100%;aspect-ratio:405/1000;object-fit:cover;object-position:right top;display:block}
 .amx-phone-back{position:absolute;width:228px;transform:rotate(9deg) translate(86px,24px);opacity:.92;z-index:1;filter:saturate(.9)}
 .amx-badge{position:absolute;z-index:4;display:flex;align-items:center;gap:7px;background:#fff;border-radius:99px;padding:8px 14px;font-size:11.5px;font-weight:700;color:#2f4650;box-shadow:0 14px 30px rgba(0,0,0,.26);white-space:nowrap}
 .amx-badge i{width:7px;height:7px;border-radius:50%;background:var(--amx-red);flex:none}
@@ -67,7 +67,7 @@
 .amx-shot{min-width:0;text-align:center}
 .amx-shot .amx-frame{background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:5px;box-shadow:0 10px 22px rgba(52,70,82,.08);transition:transform .22s,box-shadow .22s}
 .amx-shot:hover .amx-frame{transform:translateY(-4px);box-shadow:0 18px 32px rgba(52,70,82,.14)}
-.amx-shot img{border-radius:8px;width:100%}
+.amx-shot img{border-radius:8px;width:100%;aspect-ratio:405/1000;object-fit:cover;object-position:right top}
 .amx-shot b{display:block;margin-top:8px;font-size:11.5px;font-weight:700;color:#5d6e77}
 
 /* ---------- Install ---------- */
@@ -150,12 +150,12 @@
       <div class="amx-stage-inner">
         <div class="amx-glow"></div>
         <div class="amx-phone amx-phone-back" aria-hidden="true">
-          <img src="https://app-alummetal.ir/img/screenshots/land-catalog.png" alt="" loading="lazy">
+          <img src="https://app-alummetal.ir/img/screenshots/catalog.png" alt="" loading="lazy">
         </div>
         <span class="amx-badge amx-badge-one"><i></i> ۹۷ آلیاژ</span>
         <span class="amx-badge amx-badge-two"><i></i> ۴۶۰ ردیف کاتالوگ</span>
         <div class="amx-phone">
-          <img src="https://app-alummetal.ir/img/screenshots/land-home.png" alt="صفحهٔ اصلی اپلیکیشن آلوم متال آراک" width="405" height="1000">
+          <img src="https://app-alummetal.ir/img/screenshots/home.png" alt="صفحهٔ اصلی اپلیکیشن آلوم متال آراک" width="420" height="1000">
         </div>
       </div>
     </div>
@@ -216,12 +216,12 @@
     </div>
 
     <div class="amx-shots">
-      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/land-calculator.png" alt="محاسبهٔ وزن مقاطع" loading="lazy"></div><b>محاسبهٔ وزن</b></div>
-      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/land-catalog.png" alt="کاتالوگ محصولات" loading="lazy"></div><b>کاتالوگ محصولات</b></div>
-      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/land-element-lab.png" alt="عنصر بده، آلیاژ بگیر" loading="lazy"></div><b>عنصر بده، آلیاژ بگیر</b></div>
-      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/land-alloy-compare.png" alt="مقایسهٔ آلیاژها" loading="lazy"></div><b>مقایسهٔ آلیاژها</b></div>
-      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/land-use-lab.png" alt="انتخاب آلیاژ بر اساس کاربرد" loading="lazy"></div><b>انتخاب بر اساس کاربرد</b></div>
-      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/land-home.png" alt="صفحهٔ اصلی اپ" loading="lazy"></div><b>صفحهٔ اصلی</b></div>
+      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/calculator.png" alt="محاسبهٔ وزن مقاطع" loading="lazy"></div><b>محاسبهٔ وزن</b></div>
+      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/catalog.png" alt="کاتالوگ محصولات" loading="lazy"></div><b>کاتالوگ محصولات</b></div>
+      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/element-lab.png" alt="عنصر بده، آلیاژ بگیر" loading="lazy"></div><b>عنصر بده، آلیاژ بگیر</b></div>
+      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/alloy-compare.png" alt="مقایسهٔ آلیاژها" loading="lazy"></div><b>مقایسهٔ آلیاژها</b></div>
+      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/use-lab.png" alt="انتخاب آلیاژ بر اساس کاربرد" loading="lazy"></div><b>انتخاب بر اساس کاربرد</b></div>
+      <div class="amx-shot"><div class="amx-frame"><img src="https://app-alummetal.ir/img/screenshots/home.png" alt="صفحهٔ اصلی اپ" loading="lazy"></div><b>صفحهٔ اصلی</b></div>
     </div>
   </div>
 
