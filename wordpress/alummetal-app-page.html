@@ -88,6 +88,10 @@
 .amx-qr span{font-size:13px;line-height:1.75;color:var(--amx-ink);font-weight:700}
 .amx-qr span small{display:block;font-size:11.5px;color:var(--amx-grey);font-weight:400}
 
+/* ---------- Inline flow chevron ---------- */
+.amx-flow{display:inline-block;margin:0 5px;opacity:.55}
+.amx-flow svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1px}
+
 /* ---------- Responsive ---------- */
 @media(max-width:900px){
   .amx-hero{padding:34px 28px;grid-template-columns:1fr;gap:18px;min-height:0}
@@ -100,6 +104,30 @@
   .amx-shots::-webkit-scrollbar{height:5px}
   .amx-shots::-webkit-scrollbar-thumb{background:#cfd8dc;border-radius:99px}
   .amx-shot{flex:0 0 172px;scroll-snap-align:start}
+}
+/* ---------- Tool index (introduction) ---------- */
+.amx-tools{display:grid;grid-template-columns:290px minmax(0,1fr);gap:26px;align-items:start}
+.amx-tools-side{background:var(--amx-paper);border:1px solid var(--amx-line);border-top:3px solid var(--amx-red);border-radius:12px;padding:24px 22px}
+.amx-tools-side h2{font-size:19px!important;line-height:1.6!important;color:var(--amx-ink)!important;margin:0 0 8px!important;font-weight:800!important}
+.amx-tools-side p{font-size:13px;line-height:1.9;color:var(--amx-grey);margin:0}
+.amx-tools-stats{display:grid;gap:0;margin:18px 0}
+.amx-tools-stats div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #e8edee}
+.amx-tools-stats b{font-size:22px;font-weight:800;color:var(--amx-red);font-feature-settings:"tnum";line-height:1}
+.amx-tools-stats span{font-size:12px;color:var(--amx-grey)}
+.amx-tool-list{display:grid}
+.amx-tool{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:start;padding:18px 14px 18px 6px;border-bottom:1px solid var(--amx-line);transition:background .2s,padding-inline-start .2s}
+.amx-tool:first-child{border-top:1px solid var(--amx-line)}
+.amx-tool:hover{background:#fafbfc;padding-inline-start:14px}
+.amx-tool-n{font-size:26px;font-weight:800;line-height:1.1;color:#c8d2d7;font-feature-settings:"tnum";transition:color .2s}
+.amx-tool:hover .amx-tool-n{color:var(--amx-red)}
+.amx-tool h3{font-size:15.5px!important;line-height:1.65!important;color:var(--amx-ink)!important;margin:0 0 4px!important;font-weight:700!important}
+.amx-tool p{font-size:13.5px;line-height:1.9;color:var(--amx-grey);margin:0}
+@media(max-width:900px){
+  .amx-tools{grid-template-columns:1fr;gap:18px}
+  .amx-tools-stats{grid-template-columns:repeat(3,1fr);gap:0 14px;margin:16px 0 0}
+  .amx-tools-stats div{flex-direction:column;align-items:flex-start;gap:4px;border-bottom:0;border-inline-start:2px solid rgba(192,95,95,.35);padding:0 10px 0 0}
+  .amx-tool{padding:16px 6px;grid-template-columns:44px minmax(0,1fr);gap:12px}
+  .amx-tool-n{font-size:21px}
 }
 @media(max-width:560px){
   .amx-hero{padding:26px 18px;border-radius:16px}
@@ -137,7 +165,7 @@
           ورود به اپلیکیشن
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="amx-btn amx-btn-ghost" href="#amx-install">نصب روی گوشی</a>
+        <a class="amx-btn amx-btn-ghost" href="#amx-install">آموزش نصب</a>
       </div>
       <div class="amx-tags">
         <span><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg> رایگان</span>
@@ -244,7 +272,7 @@
           <b><i>۱</i> اندروید</b>
           <ol>
             <li>اپ را در <strong>Chrome</strong> باز کنید.</li>
-            <li>منوی سه‌نقطه ← <strong>نصب برنامه</strong>.</li>
+            <li>منوی سه‌نقطه <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>نصب برنامه</strong>.</li>
             <li>تأیید کنید تا آیکون اضافه شود.</li>
           </ol>
         </div>
@@ -252,7 +280,7 @@
           <b><i>۲</i> آیفون و آیپد</b>
           <ol>
             <li>اپ را در <strong>Safari</strong> باز کنید.</li>
-            <li>دکمهٔ اشتراک‌گذاری ← <strong>افزودن به صفحهٔ اصلی</strong>.</li>
+            <li>دکمهٔ اشتراک‌گذاری <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>افزودن به صفحهٔ اصلی</strong>.</li>
             <li>روی <strong>Add</strong> بزنید.</li>
           </ol>
         </div>
@@ -263,6 +291,186 @@
             <li>آیکون نصب کنار نوار آدرس را بزنید.</li>
             <li>نصب را تأیید کنید.</li>
           </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRODUCTION -->
+  <div class="amx-sec">
+    <div class="amx-head">
+      <div>
+        <span class="amx-eyebrow">معرفی نرم‌افزار</span>
+        <h2>آلومینیوم را هوشمندانه‌تر بشناسید، محاسبه کنید و انتخاب کنید</h2>
+        <p>وب‌اپلیکیشن تخصصی آلوم‌متال آراک؛ ابزاری کاربردی برای فعالان صنعت آلومینیوم</p>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(120deg,#344652 0%,#26343d 55%,#1b262e 100%);border-radius:16px;padding:34px 36px;color:#dfe9ed;margin-bottom:18px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:46px 46px;opacity:.6"></div>
+      <div style="position:relative;z-index:1;max-width:860px">
+        <p style="margin-bottom:16px;font-size:15.5px;line-height:2.05;color:#e6eef2">در صنعت آلومینیوم، دسترسی به اطلاعات فنی دقیق، محاسبه وزن مقاطع و شناخت ویژگی‌های آلیاژها می‌تواند تصمیم‌گیری را ساده‌تر و سریع‌تر کند.</p>
+        <p style="margin-bottom:16px;font-size:15.5px;line-height:2.05;color:#c9d6dc">وب‌اپلیکیشن آلوم‌متال آراک با هدف پاسخ‌گویی به نیازهای واقعی بازار آلومینیوم طراحی شده است؛ مجموعه‌ای از ابزارهای کاربردی و اطلاعات تخصصی که به فعالان بازار، مهندسان، کارشناسان خرید، تولیدکنندگان و علاقه‌مندان صنعت آلومینیوم کمک می‌کند اطلاعات موردنیاز خود را آسان‌تر در دسترس داشته باشند.</p>
+        <p style="margin-bottom:26px;font-size:15.5px;line-height:2.05;color:#c9d6dc">با آلوم‌متال، ابزارهای تخصصی آلومینیوم را در یک محیط آنلاین و از طریق گوشی موبایل، تبلت یا رایانه استفاده کنید.</p>
+        <div class="amx-cta" style="justify-content:flex-start">
+          <a class="amx-btn amx-btn-primary" href="https://app-alummetal.ir/" target="_blank" rel="noopener">
+            ورود به وب‌اپلیکیشن آلوم‌متال
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="amx-btn amx-btn-ghost" href="#amx-install">آموزش نصب روی گوشی</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="amx-sec" style="margin-top:28px">
+      <div class="amx-tools">
+        <aside class="amx-tools-side">
+          <span class="amx-eyebrow" style="display:block;font-size:11px;font-weight:700;color:var(--amx-red);letter-spacing:.4px;margin-bottom:6px">امکانات کاربردی</span>
+          <h2>شش ابزار، یک محیط</h2>
+          <p>هر بخش اپ برای یک تصمیم واقعی سرِ کار ساخته شده است؛ از برآورد وزن تا انتخاب نهایی آلیاژ.</p>
+          <div class="amx-tools-stats">
+            <div><b>۶</b><span>ابزار تخصصی</span></div>
+            <div><b>۹۷</b><span>آلیاژ معرفی‌شده</span></div>
+            <div><b>۴۶۰</b><span>ردیف کاتالوگ</span></div>
+          </div>
+          <a class="amx-btn amx-btn-primary" href="https://app-alummetal.ir/" target="_blank" rel="noopener" style="width:100%">
+            ورود به اپلیکیشن
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </aside>
+
+        <div class="amx-tool-list">
+          <div class="amx-tool">
+            <span class="amx-tool-n">۰۱</span>
+            <div>
+              <h3>محاسبه وزن مقاطع آلومینیومی</h3>
+              <p>با وارد کردن مقطع، آلیاژ و ابعاد، وزن تقریبی محصول را سریع و دقیق محاسبه کنید.</p>
+            </div>
+          </div>
+          <div class="amx-tool">
+            <span class="amx-tool-n">۰۲</span>
+            <div>
+              <h3>کاتالوگ محصولات آلومینیومی</h3>
+              <p>دسترسی به محصولات و مقاطع صنعتی و ساختمانی آلومینیومی در یک کاتالوگ منظم.</p>
+            </div>
+          </div>
+          <div class="amx-tool">
+            <span class="amx-tool-n">۰۳</span>
+            <div>
+              <h3>دانشنامه تخصصی آلیاژها</h3>
+              <p>بررسی ترکیب شیمیایی، خواص فنی، کاربرد و استاندارد هر آلیاژ آلومینیوم.</p>
+            </div>
+          </div>
+          <div class="amx-tool">
+            <span class="amx-tool-n">۰۴</span>
+            <div>
+              <h3>شناسایی آلیاژ بر اساس ترکیب عناصر</h3>
+              <p>با وارد کردن درصد عناصر، آلیاژهای احتمالی متناسب را شناسایی و بررسی کنید.</p>
+            </div>
+          </div>
+          <div class="amx-tool">
+            <span class="amx-tool-n">۰۵</span>
+            <div>
+              <h3>انتخاب آلیاژ بر اساس کاربرد</h3>
+              <p>پیشنهاد آلیاژ مناسب متناسب با کاربرد نهایی، شرایط محیطی و الزامات فنی.</p>
+            </div>
+          </div>
+          <div class="amx-tool">
+            <span class="amx-tool-n">۰۶</span>
+            <div>
+              <h3>مقایسه مشخصات فنی آلیاژها</h3>
+              <p>تا سه آلیاژ را کنار هم مقایسه کنید و با اطمینان بیشتری انتخاب نمایید.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="amx-sec" style="margin-top:28px">
+      <div class="amx-head">
+        <div>
+          <span class="amx-eyebrow">مناسب برای چه کسانی؟</span>
+          <h2>مناسب برای فعالان صنعت آلومینیوم</h2>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 18px rgba(52,70,82,.04)">
+          <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--amx-red)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></span>
+          <span style="font-weight:700;color:var(--amx-ink)">تولیدکنندگان و واحدهای صنعتی</span>
+        </div>
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 18px rgba(52,70,82,.04)">
+          <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--amx-red)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39A2 2 0 0 0 9.66 16h8.66a2 2 0 0 0 1.97-1.61L23 6H6"/></svg></span>
+          <span style="font-weight:700;color:var(--amx-ink)">فروشندگان و خریداران محصولات آلومینیومی</span>
+        </div>
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 18px rgba(52,70,82,.04)">
+          <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--amx-red)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>
+          <span style="font-weight:700;color:var(--amx-ink)">کارشناسان خرید و تأمین مواد اولیه</span>
+        </div>
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 18px rgba(52,70,82,.04)">
+          <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--amx-red)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
+          <span style="font-weight:700;color:var(--amx-ink)">مهندسان و کارشناسان فنی</span>
+        </div>
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 18px rgba(52,70,82,.04)">
+          <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--amx-red)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <span style="font-weight:700;color:var(--amx-ink)">فعالان حوزه اکستروژن و مقاطع آلومینیومی</span>
+        </div>
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 18px rgba(52,70,82,.04)">
+          <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:rgba(192,95,95,.1);color:var(--amx-red)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+          <span style="font-weight:700;color:var(--amx-ink)">دانشجویان و علاقه‌مندان مهندسی مواد و متالورژی</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="amx-sec" style="margin-top:28px">
+      <div class="amx-head">
+        <div>
+          <span class="amx-eyebrow">نصب و استفاده</span>
+          <h2>بدون نیاز به دانلود از فروشگاه‌های اپلیکیشن</h2>
+          <p>فقط با مرورگر وارد شوید و در صورت تمایل روی صفحه اصلی گوشی نصب کنید</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:14px;padding:22px 24px">
+          <h3 style="color:var(--amx-ink);font-size:16px!important;font-weight:800!important;margin:0 0 12px!important">روش استفاده</h3>
+          <ol style="padding:0 18px 0 0;margin:0;display:grid;gap:10px;line-height:1.9">
+            <li>به نشانی <a href="https://app-alummetal.ir" target="_blank" rel="noopener" style="color:var(--amx-red);font-weight:700">https://app-alummetal.ir</a> مراجعه کنید.</li>
+            <li>ابزار موردنیاز خود، مانند محاسبه وزن، کاتالوگ یا دانشنامه آلیاژها را انتخاب کنید.</li>
+            <li>برای دسترسی سریع‌تر، وب‌اپلیکیشن را به صفحه اصلی گوشی اضافه کنید.</li>
+          </ol>
+        </div>
+        <div style="background:#fff;border:1px solid var(--amx-line);border-radius:14px;padding:22px 24px">
+          <h3 style="color:var(--amx-ink);font-size:16px!important;font-weight:800!important;margin:0 0 12px!important">نصب روی گوشی</h3>
+          <div style="display:grid;gap:12px;line-height:1.9">
+            <div>
+              <strong style="color:var(--amx-ink)">اندروید (Chrome):</strong><br>
+              منوی سه‌نقطه <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>نصب برنامه</strong> یا <strong>Add to Home screen</strong> <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> تأیید
+            </div>
+            <div>
+              <strong style="color:var(--amx-ink)">آیفون و آیپد (Safari):</strong><br>
+              دکمه اشتراک‌گذاری <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>افزودن به صفحه اصلی</strong> <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>Add</strong>
+            </div>
+            <div>
+              <strong style="color:var(--amx-ink)">کامپیوتر (Chrome / Edge):</strong><br>
+              آیکون نصب کنار نوار آدرس <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> نصب را تأیید کنید
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="amx-sec" style="margin-top:28px">
+      <div style="background:linear-gradient(115deg,#2f4049,#1d2931);border-radius:16px;padding:28px 32px;color:#dfe9ed;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(192,95,95,.28),transparent 68%);bottom:-160px;right:-80px"></div>
+        <div style="position:relative;z-index:1">
+          <h2 style="color:#fff!important;font-size:clamp(20px,2.4vw,26px)!important;margin:0 0 10px!important;font-weight:800!important">آلوم‌متال؛ تخصص در آلیاژ، کیفیت در تولید</h2>
+          <p style="margin:0 0 22px;color:#b9c9d1;font-size:15px;line-height:2">محاسبه وزن، بررسی کاتالوگ محصولات، شناخت آلیاژها و مقایسه مشخصات فنی را در یک محیط آنلاین تجربه کنید.</p>
+          <div class="amx-cta" style="justify-content:center">
+            <a class="amx-btn amx-btn-primary" href="https://app-alummetal.ir/" target="_blank" rel="noopener">
+              ورود به وب‌اپلیکیشن آلوم‌متال
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="amx-btn amx-btn-ghost" href="https://www.alummetal.com" target="_blank" rel="noopener">مشاهده وب‌سایت رسمی آلوم‌متال</a>
+          </div>
         </div>
       </div>
     </div>
