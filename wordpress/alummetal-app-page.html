@@ -92,6 +92,19 @@
 .amx-flow{display:inline-block;margin:0 5px;opacity:.55}
 .amx-flow svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1px}
 
+/* ---------- Ad safety (Ad Inserter) ----------
+   اگر بلوک تبلیغاتی به‌اشتباه داخل محتوای این صفحه تزریق شود، نباید روی کارت‌ها بیفتد.
+   بلوک‌های واقعی Ad Inserter بیرون از .amx هستند و این قواعد به آن‌ها کاری ندارند. */
+.amx{isolation:isolate}
+.amx .code-block,.amx .bale-stack,.amx [class^="ai-"],.amx [class*=" ai-"],.amx [id^="ai-"],.amx [id*=" ai-"]{display:none!important}
+.amx .code-block img,.amx .bale-stack img,.amx [class^="ai-"] img{max-width:100%!important;height:auto!important}
+/* بلوک‌های اجتماعی پایین صفحه (اگر همان بلوک ۱۵ باشد) اندازهٔ مهارشده بگیرند */
+body:has(.amx) .entry-content > .code-block{max-width:100%;overflow:hidden;margin-top:26px}
+body:has(.amx) .entry-content > .code-block img{max-width:100%!important;height:auto!important}
+body:has(.amx) .bale-stack{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
+body:has(.amx) .bale-btn{flex:0 0 112px;width:112px;height:112px;overflow:hidden;border-radius:12px;display:block}
+body:has(.amx) .bale-btn img{width:100%!important;height:100%!important;object-fit:cover;display:block}
+
 /* ---------- Responsive ---------- */
 @media(max-width:900px){
   .amx-hero{padding:34px 28px;grid-template-columns:1fr;gap:18px;min-height:0}
