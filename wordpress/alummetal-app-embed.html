@@ -1,0 +1,60 @@
+<!--
+  ============================================================
+  کد iframe تمیز صفحهٔ اپلیکیشن آلوم متال
+  منبع: https://alummetal.com/alummetal-application/
+  ============================================================
+
+  این کد را در هر سایتی (وردپرس، المنتور، HTML خام، ...) داخل یک بلوک HTML بگذارید.
+  پارامتر ?embed=1 باعث می‌شود صفحه بدون هدر/فوتر، بدون دکمه‌های شناور
+  و بدون بلوک‌های تبلیغاتی نمایش داده شود.
+
+  نسخهٔ ۱ (پیشنهادی): ارتفاع خودکار — ارتفاع iframe خودش را با محتوا تنظیم می‌کند.
+  نسخهٔ ۲: ارتفاع ثابت با اسکرول داخلی (اگر اسکریپت در سایت مقصد مجاز نیست).
+-->
+
+<!-- ========== نسخهٔ ۱ — ارتفاع خودکار (پیشنهادی) ========== -->
+<div style="position:relative;width:100%;max-width:1200px;margin:0 auto">
+  <iframe
+    id="alummetal-app-frame"
+    src="https://alummetal.com/alummetal-application/?embed=1"
+    title="وب‌اپلیکیشن آلوم‌متال آراک — محاسبه وزن، کاتالوگ و دانشنامهٔ آلیاژها"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    style="display:block;width:100%;height:1000px;border:0;background:#fff;transition:height .2s ease">
+  </iframe>
+
+  <noscript>
+    <p style="text-align:center;font-family:Tahoma,sans-serif;font-size:14px">
+      <a href="https://alummetal.com/alummetal-application/" target="_blank" rel="noopener">
+        مشاهدهٔ صفحهٔ اپلیکیشن آلوم‌متال
+      </a>
+    </p>
+  </noscript>
+</div>
+
+<script>
+(function () {
+  var frame = document.getElementById('alummetal-app-frame');
+  if (!frame) return;
+  window.addEventListener('message', function (event) {
+    if (event.origin !== 'https://alummetal.com') return;
+    var data = event.data;
+    if (!data || data.type !== 'amx-resize' || !data.height) return;
+    frame.style.height = data.height + 'px';
+  });
+})();
+</script>
+
+
+<!-- ========== نسخهٔ ۲ — ارتفاع ثابت با اسکرول داخلی ========== -->
+<!--
+<div style="position:relative;width:100%;max-width:1200px;margin:0 auto">
+  <iframe
+    src="https://alummetal.com/alummetal-application/?embed=1"
+    title="وب‌اپلیکیشن آلوم‌متال آراک"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    style="display:block;width:100%;height:900px;border:0;background:#fff">
+  </iframe>
+</div>
+-->

@@ -1,4 +1,39 @@
 <style>
+/* ===== حالت iframe تمیز (embed) =====
+   وقتی صفحه داخل iframe باز شود (یا با ?embed=1) این قواعد فعال می‌شوند و
+   فقط خودِ محتوای اپ دیده می‌شود: بدون بلوک تبلیغاتی، بدون دکمه‌های شناور و
+   بدون فلش‌های پست قبلی/بعدی. */
+html.amx-embedded,html.amx-embedded body{background:#fff!important;margin:0!important;overflow-x:hidden}
+html.amx-embedded .bale-stack,html.amx-embedded .code-block,html.amx-embedded .avia-post-nav,
+html.amx-embedded #scroll-top-link,html.amx-embedded .amx-fab,html.amx-embedded #wpadminbar{display:none!important}
+html.amx-embedded #main{padding-top:0!important}
+html.amx-embedded .container{padding:0 12px!important;max-width:none!important}
+html.amx-embedded .content{padding:10px 0!important}
+html.amx-embedded .post-entry,html.amx-embedded .entry-content-wrapper{padding:0!important}
+html.amx-embedded .e-con-inner{padding:0!important}
+</style>
+<script>
+(function () {
+  try {
+    var forced = /[?&]embed=1(?:&|$)/.test(location.search);
+    if (window.self === window.top && !forced) return;
+    document.documentElement.classList.add('amx-embedded');
+    var last = -1;
+    function send() {
+      var h = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight));
+      if (Math.abs(h - last) < 2) return;
+      last = h;
+      try { parent.postMessage({ type: 'amx-resize', height: h }, '*'); } catch (e) {}
+    }
+    window.addEventListener('load', send);
+    window.addEventListener('resize', send);
+    if (window.ResizeObserver) { try { new ResizeObserver(send).observe(document.body); } catch (e) {} }
+    var n = 0, t = setInterval(function () { send(); if (++n > 20) clearInterval(t); }, 500);
+  } catch (e) {}
+})();
+</script>
+
+<style>
 /* ===== صفحهٔ معرفی اپ آلوم متال — بلوک HTML سفارشی قالب Enfold =====
    همهٔ انتخابگرها با .amx شروع می‌شوند تا با استایل قالب تداخل نکنند.
    رنگ‌ها از خود سایت: قرمز #c05f5f و سرمه‌ای #344652 */
