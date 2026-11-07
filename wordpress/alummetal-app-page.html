@@ -51,8 +51,12 @@ html.amx-embedded .e-con-inner{padding:0!important}
 .amx-hero:after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(192,95,95,.42),transparent 66%);top:-190px;left:-140px;z-index:-1}
 .amx-kicker{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#ffd8d8;background:rgba(192,95,95,.2);border:1px solid rgba(255,180,180,.28);border-radius:99px;padding:5px 13px;margin-bottom:14px}
 .amx-kicker i{width:6px;height:6px;border-radius:50%;background:#ff9c9c;display:block}
-.amx-hero h1{font-size:clamp(30px,3.6vw,44px)!important;line-height:1.42!important;color:#fff!important;margin:0 0 14px!important;font-weight:800!important}
-.amx-hero h1 em{font-style:normal;color:#f2aeae;position:relative;white-space:nowrap}
+.amx-hero h1,.amx-hero-title{font-size:clamp(30px,3.6vw,44px)!important;line-height:1.42!important;color:#fff!important;margin:0 0 14px!important;font-weight:800!important}
+.amx-hero h1 em,.amx-hero-title em{font-style:normal;color:#f2aeae;position:relative;white-space:nowrap}
+/* عنوان سئوی بالای صفحه */
+.amx-intro{padding:0 2px 20px}
+.amx-intro h1{font-size:clamp(20px,2.3vw,28px)!important;line-height:1.65!important;color:var(--amx-ink)!important;margin:0 0 8px!important;font-weight:800!important}
+.amx-intro h2{font-size:clamp(13px,1.5vw,16px)!important;line-height:1.9!important;color:var(--amx-grey)!important;margin:0!important;font-weight:600!important}
 .amx-hero-text{max-width:480px;font-size:15.5px;line-height:2.05;color:#c9d6dc;margin-bottom:24px}
 .amx-cta{display:flex;flex-wrap:wrap;gap:10px}
 .amx-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;border-radius:4px!important;padding:12px 26px!important;font-size:14px!important;font-weight:700!important;line-height:1.4!important;min-height:46px!important;text-align:center!important;box-shadow:none!important;text-shadow:none!important}
@@ -179,7 +183,7 @@ body:has(.amx) .bale-btn img{width:100%!important;height:100%!important;object-f
 }
 @media(max-width:560px){
   .amx-hero{padding:26px 18px;border-radius:16px}
-  .amx-hero h1{font-size:24px!important}
+  .amx-hero h1,.amx-hero-title{font-size:24px!important}
   .amx-hero-text{font-size:13.5px}
   .amx-btn{width:100%!important;padding:11px 18px!important}
   .amx-cta{flex-direction:column}
@@ -202,11 +206,16 @@ body:has(.amx) .bale-btn img{width:100%!important;height:100%!important;object-f
 
 <div class="amx">
 
+  <div class="amx-intro">
+    <h1>نرم افزار تخصصی آلومینیوم | وب اپلیکیشن آلوم متال</h1>
+    <h2>ابزارهای صنعت آلومینیوم، یکجا در دسترس شما</h2>
+  </div>
+
   <!-- HERO -->
   <div class="amx-hero">
     <div>
       <span class="amx-kicker"><i></i> اپلیکیشن رسمی آلوم متال آراک</span>
-      <h1>آلیاژ درست را<br><em>در چند ثانیه</em> پیدا کنید</h1>
+      <div class="amx-hero-title">آلیاژ درست را<br><em>در چند ثانیه</em> پیدا کنید</div>
       <p class="amx-hero-text">وزن مقاطع، دانشنامهٔ آلیاژها، کاتالوگ محصولات و انتخاب آلیاژ بر اساس کاربرد؛ همه در یک اپ سبک و فارسی.</p>
       <div class="amx-cta">
         <a class="amx-btn amx-btn-primary" href="https://app-alummetal.ir/" target="_blank" rel="noopener">
