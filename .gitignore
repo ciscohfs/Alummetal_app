@@ -22,3 +22,6 @@ deploy-web.zip
 *-check.png
 *.zip
 *.rar
+
+# Throwaway debug harnesses left in web/ (probe/audit/theme snapshots)
+web/__*.html
