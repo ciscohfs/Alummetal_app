@@ -14,13 +14,14 @@
 .amx-eyebrow{display:block;font-size:11.5px;font-weight:700;color:var(--amx-red);letter-spacing:.3px;margin-bottom:5px}
 .amx-intro{padding:0 2px 18px}
 .amx-intro h1{font-size:clamp(20px,2.2vw,28px);font-size:clamp(20px,2.2cqi,28px)!important;line-height:1.6!important;color:var(--amx-ink)!important;margin:0 0 8px!important;font-weight:800!important}
-.amx-intro h2{font-size:clamp(13px,1.5vw,16px);font-size:clamp(13px,1.5cqi,16px)!important;line-height:1.9!important;color:var(--amx-grey)!important;margin:0!important;font-weight:600!important}
+.amx-intro-sub{font-size:clamp(13px,1.5vw,16px);font-size:clamp(13px,1.5cqi,16px)!important;line-height:1.9!important;color:var(--amx-grey)!important;margin:0!important;font-weight:600!important}
+.amx-intro-sub strong{color:var(--amx-ink);font-weight:800}
 .amx-hero{position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(120deg,#344652 0%,#26343d 55%,#1b262e 100%);padding:44px 42px;display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,34%);gap:28px;align-items:center;isolation:isolate}
 .amx-hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:46px 46px;z-index:-1}
 .amx-hero:after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(192,95,95,.42),transparent 66%);top:-190px;left:-140px;z-index:-1}
 .amx-kicker{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#ffd8d8;background:rgba(192,95,95,.2);border:1px solid rgba(255,180,180,.28);border-radius:99px;padding:5px 13px;margin-bottom:14px}
 .amx-kicker i{width:6px;height:6px;border-radius:50%;background:#ff9c9c;display:block;flex:none}
-.amx-hero-title{font-size:clamp(26px,3.4vw,42px);font-size:clamp(26px,3.4cqi,42px);line-height:1.45;color:#fff!important;margin:0 0 14px!important;font-weight:800!important}
+.amx h1.amx-hero-title{font-size:clamp(26px,3.4vw,42px);font-size:clamp(26px,3.4cqi,42px)!important;line-height:1.45!important;color:#fff!important;margin:0 0 14px!important;font-weight:800!important;letter-spacing:0!important}
 .amx-hero-title em{font-style:normal;color:#f2aeae}
 .amx-hero-text{max-width:480px!important;font-size:clamp(13.5px,1.45vw,15.5px);font-size:clamp(13.5px,1.45cqi,15.5px);line-height:2.05;color:#c9d6dc;margin-bottom:22px}
 .amx-cta{display:flex;flex-wrap:wrap;gap:10px}
@@ -109,7 +110,7 @@
 .amx-tool:hover{background:#fafbfc;padding-inline-start:14px}
 .amx-tool-n{font-size:26px;font-weight:800;line-height:1.1;color:#64757e;font-feature-settings:"tnum";transition:color .2s}
 .amx-tool:hover .amx-tool-n{color:var(--amx-red)}
-.amx-tool h3{margin:0 0 4px!important;font-size:15.5px!important;line-height:1.65!important;color:var(--amx-ink)!important;margin:0 0 4px!important;font-weight:700!important}
+.amx-tool h3{margin:0 0 4px!important;font-size:15.5px!important;line-height:1.65!important;color:var(--amx-ink)!important;font-weight:700!important}
 .amx-tool p{font-size:13.5px!important;line-height:1.9!important;color:var(--amx-grey)!important;margin:0!important}
 .amx-audience{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
 .amx-aud{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--amx-line);border-radius:12px;padding:14px 16px;box-shadow:0 8px 18px rgba(52,70,82,.04)}
@@ -129,25 +130,8 @@
 .amx-panel-final h2{color:#fff!important;font-size:clamp(20px,2.4vw,26px);font-size:clamp(20px,2.4cqi,26px)!important;margin:0 0 10px!important;font-weight:800!important;line-height:1.55!important}
 .amx-panel-final p{color:#b9c9d1!important;font-size:15px!important;line-height:2!important;margin:0 0 20px!important}
 .amx-panel-final .amx-cta{justify-content:center}
-.amx-install,.amx-sec#amx-install{scroll-margin-top:96px}
+.amx-sec#amx-install{scroll-margin-top:96px}
 @container amx (max-width:860px){
-.amx-hero{padding:32px 26px;grid-template-columns:1fr;gap:22px}
-.amx-hero-text{max-width:none}
-.amx-stage{margin-top:2px}
-.amx-feats{grid-template-columns:repeat(2,minmax(0,1fr))}
-.amx-install{padding:26px 22px}
-.amx-head{flex-direction:column;align-items:flex-start}
-.amx-shots{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.amx-shots::-webkit-scrollbar{height:6px}
-.amx-shots::-webkit-scrollbar-thumb{background:#cfd8dc;border-radius:99px}
-.amx-shot{flex:0 0 168px;scroll-snap-align:start}
-.amx-tools{grid-template-columns:1fr;gap:18px}
-.amx-tools-stats{grid-template-columns:repeat(3,1fr);gap:0 14px;margin:16px 0 0}
-.amx-tools-stats div{flex-direction:column;align-items:flex-start;gap:4px;border-bottom:0;border-inline-start:2px solid rgba(178,82,82,.35);padding:0 10px 0 0}
-.amx-tool{padding:16px 6px;grid-template-columns:44px minmax(0,1fr);gap:12px}
-.amx-tool-n{font-size:21px}
-}
-@media(max-width:900px){
 .amx-hero{padding:32px 26px;grid-template-columns:1fr;gap:22px}
 .amx-hero-text{max-width:none}
 .amx-stage{margin-top:2px}
@@ -166,7 +150,7 @@
 }
 @container amx (max-width:560px){
 .amx-hero{padding:24px 16px;border-radius:16px}
-.amx-hero-title{font-size:clamp(21px,5.2vw,25px);font-size:clamp(21px,5.2cqi,25px)}
+.amx-hero-title{font-size:clamp(21px,5.2vw,25px);font-size:clamp(21px,5.2cqi,25px)!important}
 .amx-hero-text{font-size:13.5px}
 .amx-btn{width:100%!important;padding:11px 16px!important}
 .amx-cta{flex-direction:column}
@@ -192,40 +176,16 @@
 .amx-audience{gap:10px}
 .amx-info{grid-template-columns:1fr}
 }
-@media(max-width:560px){
-.amx-hero{padding:24px 16px;border-radius:16px}
-.amx-hero-title{font-size:clamp(21px,5.2vw,25px)}
-.amx-hero-text{font-size:13.5px}
-.amx-btn{width:100%!important;padding:11px 16px!important}
-.amx-cta{flex-direction:column}
-.amx-tags{gap:8px 12px;font-size:11.5px}
-.amx-feats{grid-template-columns:1fr;gap:10px}
-.amx-feat{padding:16px}
-.amx-sec{margin-top:30px}
-.amx-sec.amx-sec-tight{margin-top:22px}
-.amx-install{padding:22px 16px;border-radius:14px}
-.amx-install-top{display:block}
-.amx-steps{grid-template-columns:1fr}
-.amx-qr{margin-top:14px;justify-content:center;width:100%}
-.amx-qr img{width:92px;height:92px}
-.amx-step{padding:14px 14px 12px}
-.amx-shot{flex-basis:148px}
-.amx-badge{font-size:11px;padding:6px 10px}
-.amx-badge-one{right:-4px;top:-4px}
-.amx-badge-two{left:-6px}
-.amx-tools-side{padding:20px 18px}
-.amx-panel{padding:24px 18px}
-.amx-panel-final{padding:24px 18px}
-.amx-audience{gap:10px}
-.amx-info{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){
-.amx *{transition:none!important;animation:none!important}
-.amx-feat:hover,.amx-tool:hover,.amx-btn:hover,.amx-shot:hover .amx-frame{transform:none!important}
-}
+.amx-pane{overflow:hidden;border-radius:20px;background:linear-gradient(120deg,#344652 0%,#26343d 55%,#1b262e 100%);padding:clamp(24px,3.6cqi,34px);color:#dfe9ed;position:relative;isolation:isolate}
+.amx-pane:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:46px 46px;z-index:-1}
+.amx-pane-lead{font-size:clamp(14.5px,1.6cqi,16px)!important;line-height:2.1!important;color:#c9d6dc!important;margin:0 0 12px!important}
+.amx-pane h2{color:#fff!important;font-size:clamp(19px,2.2cqi,24px)!important;margin:0 0 10px!important;font-weight:800!important;line-height:1.6!important}
+.amx-pane p{margin:0 0 12px!important}
+.amx-pane .amx-cta{margin-top:16px}
+
 </style>
-<div class="amx" dir="rtl" lang="fa"><div class="amx-intro"><h1>نرم افزار تخصصی آلومینیوم | وب اپلیکیشن آلوم متال</h1><h2>ابزارهای صنعت آلومینیوم، یکجا در دسترس شما</h2></div>
-<div class="amx-hero"><div><span class="amx-kicker"><i></i> اپلیکیشن رسمی آلوم متال آراک</span><div class="amx-hero-title">آلیاژ درست را<br><em>در چند ثانیه</em> پیدا کنید</div>
+<div class="amx" dir="rtl" lang="fa"><div class="amx-intro"><p class="amx-intro-sub"><strong>نرم‌افزار تخصصی آلومینیوم | وب‌اپلیکیشن آلوم‌متال</strong> · ابزارهای صنعت آلومینیوم، یکجا در دسترس شما</p></div>
+<div class="amx-hero"><div><span class="amx-kicker"><i></i> اپلیکیشن رسمی آلوم متال آراک</span><h1 class="amx-hero-title">آلیاژ درست را<br><em>در چند ثانیه</em> پیدا کنید</h1>
 <p class="amx-hero-text">وزن مقاطع، دانشنامهٔ آلیاژها، کاتالوگ محصولات و انتخاب آلیاژ بر اساس کاربرد؛ همه در یک اپ سبک و فارسی.</p>
 <div class="amx-cta"><a class="amx-btn amx-btn-primary" href="https://app-alummetal.ir/" target="_blank" rel="noopener">ورود به اپلیکیشن<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="amx-flip" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="amx-btn amx-btn-ghost" href="#amx-install">آموزش نصب</a></div>
 <div class="amx-tags"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg> رایگان</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg> بدون ثبت‌نام</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg> بدون تبلیغات</span></div></div>
@@ -304,6 +264,9 @@
 <div class="amx-info-row"><div><strong>اندروید (Chrome):</strong><br>منوی سه‌نقطه <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>نصب برنامه</strong> یا <strong>Add to Home screen</strong> <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> تأیید</div>
 <div><strong>آیفون و آیپد (Safari):</strong><br>دکمه اشتراک‌گذاری <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>افزودن به صفحه اصلی</strong> <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> <strong>Add</strong></div>
 <div><strong>کامپیوتر (Chrome / Edge):</strong><br>آیکون نصب کنار نوار آدرس <span class="amx-flow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span> نصب را تأیید کنید</div></div></div></div></div>
+<div class="amx-sec amx-sec-tight"><div class="amx-pane"><span class="amx-kicker"><i></i> چرا آلوم‌متال؟</span><h2>چرا آلوم‌متال؟</h2>
+<p class="amx-pane-lead">آلوم‌متال با فعالیت در حوزه محصولات و آلیاژهای آلومینیوم، دانش فنی و ابزارهای دیجیتال را به نیازهای عملی بازار نزدیک‌تر می‌کند؛ یعنی دسترسی آسان‌تر به ابزارهای محاسباتی، اطلاعات فنی و امکاناتی که در شناخت و انتخاب محصولات آلومینیومی کاربرد دارند.</p>
+<p class="amx-pane-lead">هدف، ایجاد تجربه‌ای ساده‌تر و کاربردی‌تر برای افرادی است که در زمینه آلومینیوم فعالیت می‌کنند و به اطلاعات تخصصی این صنعت نیاز دارند.</p></div></div>
 <div class="amx-sec amx-sec-tight"><div class="amx-panel amx-panel-final"><div class="amx-panel-inner"><h2>آلوم‌متال؛ تخصص در آلیاژ، کیفیت در تولید</h2>
 <p>محاسبه وزن، بررسی کاتالوگ محصولات، شناخت آلیاژها و مقایسه مشخصات فنی را در یک محیط آنلاین تجربه کنید.</p>
 <div class="amx-cta"><a class="amx-btn amx-btn-primary" href="https://app-alummetal.ir/" target="_blank" rel="noopener">ورود به وب‌اپلیکیشن آلوم‌متال<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="amx-flip" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="amx-btn amx-btn-ghost" href="https://www.alummetal.com" target="_blank" rel="noopener">مشاهده وب‌سایت رسمی آلوم‌متال</a></div></div></div></div></div></div>
